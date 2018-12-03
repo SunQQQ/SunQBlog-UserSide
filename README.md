@@ -1,4 +1,8 @@
-# sunblog
+# SunQuan's blog
+孙权的个人博客，博客地址 http://www.sunq.xyz ，此项目为博客用户端代码
+用户端代码没有使用UI框架，
+
+
 
 ## Project setup
 ```
