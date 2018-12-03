@@ -55,15 +55,15 @@
                     <a class="BlueButton" href="https://github.com/SunQQQ">Follow Me</a>
                     <div class="BlogStatistic">
                         <div class="BlogStatisticItem">
-                            <div class="BlogStatisticItemNum">888</div>
+                            <div class="BlogStatisticItemNum">8</div>
                             <div class="BlogStatisticItemText AboutMeGitData">Followers</div>
                         </div>
                         <div class="BlogStatisticItem">
-                            <div class="BlogStatisticItemNum">888</div>
+                            <div class="BlogStatisticItemNum">13</div>
                             <div class="BlogStatisticItemText AboutMeGitData">Repos</div>
                         </div>
                         <div class="BlogStatisticItem">
-                            <div class="BlogStatisticItemNum">888</div>
+                            <div class="BlogStatisticItemNum">5</div>
                             <div class="BlogStatisticItemText AboutMeGitData">Following</div>
                         </div>
                     </div>
