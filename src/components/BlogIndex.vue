@@ -10,15 +10,24 @@
                         </div>
                         <div style="flex: 1">
                             <div class="ArticleTitle">
-                                <div class="ArticleTag">{{ item.ArticleTag }}</div>
+                                <!--<div class="ArticleTag">{{ item.ArticleTag }}</div>-->
                                 <div class="ArticleTitleText">{{ item.Title }}</div>
                             </div>
                             <div class="ArticleContent" v-html="item.Summary">
                                 {{ item.Summary }}
                             </div>
                             <div class="ArticleFooter">
-                                <div class="ArticleFooterItem">发表：{{ item.CreateDate }}</div>
-                                <div class="ArticleFooterItem" @click="UpdateRouter('BlogDetail',item._id)">评论：{{ item.CommentNum }}</div>
+                                <!--<div class="ArticleFooterItem">发表：{{ item.CreateDate }}</div>
+                                <div class="ArticleFooterItem" @click="UpdateRouter('BlogDetail',item._id)">评论：{{ item.CommentNum }}</div>-->
+                                <div class="ArticleFooterItem" style="border: none">
+                                    <i class="iconfont icon-fenlei iconBlogIndex"></i>{{ item.ArticleTag }}
+                                </div>
+                                <div class="ArticleFooterItem" style="border: none">
+                                    <i class="iconfont icon-shijianzhongbiao iconBlogIndex"></i>{{ item.CreateDate }}
+                                </div>
+                                <div class="ArticleFooterItem" style="border: none" v-show="item.CommentNum">
+                                    <i class="iconfont icon-pinglun iconBlogIndex"></i>{{ item.CommentNum }}
+                                </div>
                             </div>
                         </div>
                     </div>
