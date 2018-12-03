@@ -45,30 +45,54 @@
                     <div class="NoDataHint" v-if="MessageList.length == 0">暂无数据</div>
                 </div>
                 <div class="BlogIndexContentRight" style="border:1px solid #e9e9e9;border-radius: 3px">
-                    <div class="Module" style="padding: 0 0 0.5rem">
-                        <div class="TopBack"></div>
-                        <div class="ZhihuIcon">
-                            <img src="../static/img/ZhihuIcon.jpg">
+                    <div class="Module" style="padding: 0 0 0.5rem;background-color: transparent">
+                        <div class="GitPart">
+                            <div class="TopBackBlack"></div>
+                            <div class="GitPic">
+                                <img src="../static/img/ZhihuIcon.jpg">
+                            </div>
+                            <div class="GitBack">
+                                <i class="iconfont TopBackBlackGit icon-github1"></i>
+                            </div>
+                            <div class="Content">
+                                <div class="GitName">孙权的Github</div>
+                                <a class="BlueButton" href="https://github.com/SunQQQ">Follow Me</a>
+                                <div class="BlogStatistic">
+                                    <div class="BlogStatisticItem">
+                                        <div class="BlogStatisticItemNum">888</div>
+                                        <div class="BlogStatisticItemText AboutMeGitData">Followers</div>
+                                    </div>
+                                    <div class="BlogStatisticItem">
+                                        <div class="BlogStatisticItemNum">888</div>
+                                        <div class="BlogStatisticItemText AboutMeGitData">Repos</div>
+                                    </div>
+                                    <div class="BlogStatisticItem">
+                                        <div class="BlogStatisticItemNum">888</div>
+                                        <div class="BlogStatisticItemText AboutMeGitData">Following</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="TextCenter">
-                            博主的知乎
-                            <a class="BlueButton" href="https://www.zhihu.com/people/s-q-51-44-23/posts"
-                               target="_blank">查看知乎文章</a>
+                        <div class="BigBlock AboutMeMarginTop">
+                            <div class="TitleFontLine">Contacts</div>
+                            <div class="BlogStatistic" style="border-top: none;padding-bottom: 0">
+                                <div class="BlogStatisticItem">
+                                    <a href="https://github.com/SunQQQ" target="_blank"><i class="iconfont icon-github AboutMeIcon" style="color:#948aec"></i></a>
+                                </div>
+                                <div class="BlogStatisticItem">
+                                    <a href="https://www.zhihu.com/people/s-q-51-44-23/activities" target="_blank"><i class="iconfont icon-zhihu AboutMeIcon" style="color:#3dbd7d"></i></a>
+                                </div>
+                                <div class="BlogStatisticItem">
+                                    <a href="https://blog.csdn.net/sun_qqq" target="_blank"><i class="iconfont icon-CN_csdnnet AboutMeIcon" style="color:#f78e3d"></i></a>
+                                </div>
+                                <div class="BlogStatisticItem">
+                                    <i class="iconfont icon-youxiang AboutMeIcon" style="color:#49a9ee"></i>
+                                </div>
+                                <div class="BlogStatisticItem">
+                                    <a href="https://music.163.com/#/user/home?id=386558098" target="_blank"><i class="iconfont AboutMeIcon icon-CN_NetEasemusic" style="color:#f46e65"></i></a>
+                                </div>
+                            </div>
                         </div>
-                        <!--<div class="BlogStatistic">
-                            <div class="BlogStatisticItem">
-                                <div class="BlogStatisticItemNum">1</div>
-                                <div class="BlogStatisticItemText">博客文章</div>
-                            </div>
-                            <div class="BlogStatisticItem">
-                                <div class="BlogStatisticItemNum">10</div>
-                                <div class="BlogStatisticItemText">博客浏览量</div>
-                            </div>
-                            <div class="BlogStatisticItem">
-                                <div class="BlogStatisticItemNum">10</div>
-                                <div class="BlogStatisticItemText">博客留言</div>
-                            </div>
-                        </div>-->
                     </div>
                 </div>
             </div>
@@ -330,6 +354,7 @@
 </script>
 
 <style scoped lang="less">
+    @import "../static/css/AboutMe";
     @import "../static/css/BlogIndex";
     @import "../static/css/BlogDetail";
     /*pc端*/
