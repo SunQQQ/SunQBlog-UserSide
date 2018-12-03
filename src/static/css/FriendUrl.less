@@ -1,0 +1,232 @@
+@import './base.less';
+.FriendUrlTitleText{
+  color: @FontColorWhite;
+  font-size: 2.2rem;
+  font-family: Helvetica,STHeiti STXihei,Microsoft JhengHei,Microsoft YaHei,Tohoma,Arial;
+}
+.CreateFriendUrlButton{
+  background-color: @fore_color;
+  display: inline-block;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  padding: 0 1.5rem;
+  margin-top: 2.5rem;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.CreateFriendUrlButton:hover{
+  transform: scale(1.05);
+  transition: all 0.3s;
+}
+/*pc端*/
+@media only screen and (min-device-width: 768px) {
+  .UrlCardList{
+    width: 1000px;
+    margin: 0.5rem auto 0;
+    min-height: 29rem;
+  }
+  .UrlCardTd{
+    flex: 1;
+    margin: 0.5rem;
+    padding: 1rem;
+    background-color: @fore_color;
+    min-width: 20%;
+    cursor:pointer;
+  }
+  .UrlCardTd:hover{
+    transform: scale(0.95);
+    transition: all 0.3s;
+  }
+  .FriendUrlCreateWindowFadeIn{
+    width: 550px;
+    height: 340px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: @fore_color;
+    padding: 0rem 0 1rem;
+    animation: FadeIn 0.2s linear;
+  }
+  .FriendUrlCreateWindowFadeOut{
+    width: 550px;
+    height: 340px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: @fore_color;
+    padding: 0rem 0 1rem;
+    animation: FadeOut 0.2s linear;
+  }
+  .FriendUrlBac{
+    background: #64cccb;
+    background-image: -moz-linear-gradient(top,#336799,#64cccb);
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,#336799),color-stop(1,#64cccb));
+    height: 27rem;
+    position: relative;
+  }
+  .FriendUrlTitle{
+    margin: auto;
+    padding: 9rem 0 0 0;
+    width: 80%;
+    height: 20%;
+    text-align: center;
+  }
+  .FriendUrlCreateWindowFooter{
+    text-align: right;
+    margin-top: 2rem;
+  }
+}
+/*移动端*/
+@media only screen and (max-device-width: 768px) {
+  .UrlCardList{}
+  .UrlCardTd{
+    /*flex: 1;*/
+    width: 100%;
+    margin: 0.5rem 0.5rem 0rem 0.5rem;
+    padding: 1rem;
+    background-color: @fore_color;
+  }
+  .FriendUrlCreateWindowFadeIn{
+    width: 90%;
+    height: 330px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: @fore_color;
+    padding: 0rem 0 1rem;
+    animation:FadeIn 0.2s linear;
+  }
+  .FriendUrlCreateWindowFadeOut{
+    width: 90%;
+    height: 330px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: @fore_color;
+    padding: 0rem 0 1rem;
+    animation:FadeOut 0.2s linear;
+  }
+  .FriendUrlBac{
+    background: #64cccb;
+    background-image: -moz-linear-gradient(top,#336799,#64cccb);
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,#336799),color-stop(1,#64cccb));
+    height: 22rem;
+    position: relative;
+  }
+  .FriendUrlTitle{
+    margin: auto;
+    padding: 9rem 0 0 0;
+    width: 80%;
+    height: 20%;
+    text-align: center;
+  }
+  .FriendUrlCreateWindowFooter{
+    text-align: right;
+    margin-top: 1.5rem;
+  }
+}
+
+.UrlCardTr{
+  .myflex('center');
+  flex-wrap: wrap;
+}
+.UrlIconName{
+  .myflex('center');
+  margin-bottom: 1rem;
+}
+.UrlIconName img{
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 100%;
+}
+.UrlName{
+  margin-left: 1rem;
+  height: 2.5rem;
+  line-height: 2.5rem;
+}
+.UrlSummary{
+  color: #777;
+}
+.FriendUrlWrapper{
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: @Wrapper;
+  opacity: 0.6;
+}
+.FriendUrlCreateWindowHeader{
+  border-bottom: 1px solid @BorderColor;
+  padding:1rem 0rem 1rem 1rem;
+  margin-bottom: 1rem;
+}
+.FriendUrlCreateWindowHeader span{
+  float: right;
+  margin-right: 1rem;
+  cursor:pointer;
+}
+.FriendUrlCreateWindowItem{
+  .myflex(center);
+  padding: 0.5rem 1rem;
+}
+.FriendUrlCreateWindowItemLeft{
+  width: 7rem;
+  text-align: right;
+}
+.FriendUrlCreateWindowItemRight{
+  border: 1px solid @back_color;
+  flex: 1;
+}
+.FriendUrlCreateWindowItemRight input{
+  margin: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 2rem;
+  line-height: 2rem;
+}
+
+.FriendUrlSubmitButton{
+  display: inline-block;
+  background-color: @ThemeColor;
+  text-align: center;
+  margin-right: 1rem;
+  color: @FontColorWhite;
+  padding: 0.3rem 1.3rem;
+  border-radius: 3px;
+  cursor:pointer;
+}
+
+.FriendUrlCancelButton{
+  background-color: unset;
+  border: 1px solid @BorderColor;
+  color: @FontColorGray;
+}
+
+@keyframes FadeIn{
+  0% {transform: scale(0.9)}
+  20% {transform:scale(0.925)}
+  60% {transform:scale(0.95)}
+  80% {transform:scale(0.975)}
+  100% {transform:scale(1)}
+}
+
+@keyframes FadeOut{
+  0% {transform: scale(1)}
+  20% {transform:scale(0.975)}
+  60% {transform:scale(0.95)}
+  80% {transform:scale(0.925)}
+  100% {transform:scale(0.9)}
+}

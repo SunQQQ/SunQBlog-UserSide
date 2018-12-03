@@ -1,0 +1,223 @@
+@import "./base.less";
+
+/*pc端*/
+@media only screen and (min-device-width: 768px){
+  .ArticleDetailHeader {
+    background: #1f3747;
+    background-image: -webkit-linear-gradient(left, #1f3747, #293d31);
+    max-width: 1008px;
+    margin: 1rem auto 0;
+    height: 24rem;
+    position: relative;
+  }
+
+  .ArticleDetailHeader img{
+    width: 100%;
+    height: 100%;
+  }
+
+  .HeaderContent {
+    margin-left: 4.5rem;
+    color: @FontColorWhite;
+    position: absolute;
+    top: 4rem;
+    left: 0;
+  }
+
+  .ArticleDetailContent {
+    width: 1008px;
+    margin: 0rem auto 0;
+    background-color: @fore_color;
+  }
+  .ArticleDetailContentTab {
+    padding: 3rem 0;
+    margin: 0 6rem;
+  }
+
+  .CommentUserInfo input {
+    flex: 1;
+    margin: 0 0.5rem;
+  }
+  .CommentUserInfo input:last-child {
+    margin-right: 0;
+  }
+
+  .ArticleDetailCommentFirstLine {
+    .myflex('middle');
+    padding: 0.5rem 0;
+    margin-top: 2rem;
+  }
+
+  .CommentSubmitLine {
+    text-align: right;
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  .TopBarHeight{
+    height: 60px;
+  }
+}
+
+/*移动端*/
+@media only screen and (max-device-width: 768px) {
+  .ArticleDetailHeader {
+    background: #1f3747;
+    background-image: -webkit-linear-gradient(left, #1f3747, #293d31);
+    height: 14.5rem;
+    position: relative;
+  }
+
+  .ArticleDetailHeader img{
+    width: 100%;
+    height: 100%;
+  }
+
+  .HeaderContent {
+    margin-left: 2rem;
+    margin-right: 1rem;
+    color: @FontColorWhite;
+    position: absolute;
+    top: 2.5rem;
+    left:0;
+  }
+
+  .ArticleDetailContent {
+    background-color: @back_color;
+  }
+  .ArticleDetailContentTab {
+    padding: 0.5rem 1rem 1rem;
+  }
+
+  .CommentUserInfo input {
+    flex: 1;
+    margin: 0rem 0.5rem 0.5rem;
+  }
+
+  .ArticleDetailCommentFirstLine {
+    .myflex('middle');
+    padding: 0.5rem 0 0.5rem 0.5rem;
+  }
+
+  .CommentSubmitLine {
+    text-align: right;
+    margin-bottom: 2rem;
+    padding-right: 0.5rem;
+  }
+
+  .ArticleDetailCommentContent {
+    margin: 0 0.5rem;
+  }
+
+  .TopBarHeight{
+    height: 4.3rem;
+  }
+}
+
+.HeaderContent span:nth-child(1) {
+  font-size: 1.6rem;
+  display: block;
+}
+
+.HeaderContent span:nth-child(2) {
+  margin-top: 1rem;
+  font-size: 1rem;
+  display: block;
+}
+
+.ArticleCreateTime{
+  font-size: 13px;
+  margin-bottom: 2.5rem;
+}
+
+.ArticleDetailContentTab span:nth-child(0) {
+  margin: 1rem 0 3rem;
+  font-size: 1rem;
+}
+
+.ArticleDetailComment {
+  margin-top: 0rem;
+}
+
+.UserHeadIcon {
+
+}
+
+.UserHeadIcon img {
+  width: 2rem;
+  height: 2rem;
+}
+
+.CommentUserInfo {
+  .myflex('middle');
+  vertical-align: middle;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+.ArticleDetailCommentContent textarea {
+  width: 100%;
+  height: 6rem;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.CommentSubmitButton {
+  display: inline-block;
+  width: 4rem;
+  height: 1.6rem;
+  line-height: 1.6rem;
+  border: 1px solid @ThemeColor;
+  text-align: center;
+  margin: 0.5rem 0;
+  color: @ThemeColor;
+  cursor: pointer;
+}
+
+.CommentList :first-child{
+  border-top: 1px solid @BorderColor;
+}
+.CommentItem{
+  border-bottom: 1px solid @BorderColor;
+  border-left: 1px solid @BorderColor;
+  border-right: 1px solid @BorderColor;
+  .myflex('middle');
+  padding: 1rem;
+}
+.CommentItem :first-child{
+  border-top: none;
+}
+.CommentItemIcon{
+  margin-right: 0.5rem;
+}
+.CommentItemIcon img{
+  width: 3rem;
+  height: 3rem;
+  border-radius: 1rem;
+}
+.CommentItemContent{
+  font-size: 0.9rem;
+  flex: 1;
+}
+.ArticleCommentText{
+  font-size: 0.85rem;
+  word-break: break-all;
+}
+.CommentItemContent > div{
+  padding-bottom: 0.5rem;
+}
+
+.DateAnswer{
+  color: @FontColorGrayDeep;
+  .myflex('middle');
+  width: 100%;
+}
+.DateAnswerLeft{
+  flex: 1;
+}
+.DateAnswerRight{
+  flex: 1;
+  text-align: right;
+  cursor:pointer;
+}
+
