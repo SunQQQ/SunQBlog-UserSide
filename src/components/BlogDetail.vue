@@ -82,7 +82,7 @@
         this.SQFrontAjax({
           Url: '/api/ArticleReadOne/foreend',
           UploadData: {
-            /*_id: this.$route.params.ID*/
+            /*_id: this.$route.query.ID*/
             _id:this.$route.query.ID
           },
           Success:function(data){
@@ -106,7 +106,7 @@
           this.SQFrontAjax({
             Url: '/api/ArticleCommentCreate/foreend',
             UploadData: {
-              ArticleId: this.$route.params.ID,
+              ArticleId: this.$route.query.ID,
               ArticleCommentNickName: this.ArticleCommentNickName,
               ArticleCommentEmail: this.ArticleCommentEmail,
               ArticleCommentUrl: this.ArticleCommentUrl,
@@ -147,7 +147,7 @@
         this.SQFrontAjax({
           Url: '/api/ArticleCommentRead/foreend',
           UploadData: {
-            ArticleId: this.$route.params.ID
+            ArticleId: this.$route.query.ID
           },
           Success: function (data) {
             That.ArticleCommentList = data;
@@ -162,7 +162,7 @@
         this.SQFrontAjax({
           Url: '/api/ArticleCommentNumUpdate/foreend',
           UploadData: {
-            _id: this.$route.params.ID
+            _id: this.$route.query.ID
           },
           Success: function (data) {
 
