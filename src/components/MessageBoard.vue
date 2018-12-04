@@ -103,7 +103,7 @@
             </Pagination>
         </div>
         <!--回复留言弹框PageActive-->
-        <div style="position:fixed;top: 0;bottom: 0;left:0;right:0;" v-if="MessageAnswerFrame">
+        <div style="position:fixed;top: 0;bottom: 0;left:0;right:0;z-index: 1000" v-if="MessageAnswerFrame">
             <div class="MessageBoxWrapper" @click="CloseAnswerMessage()"></div>
             <div :class="FadeAnimate ? 'WriteMessageFrameFadeIn' : 'WriteMessageFrameFadeOut'"
                  style="top:0;bottom: 0;height: 8rem;z-index: 1500;opacity: 1;padding-top: 2rem">
