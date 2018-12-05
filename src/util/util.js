@@ -4,7 +4,23 @@ let CommonFunction = {}
 CommonFunction.install = function (Vue) {
   /*将UTC格式时间转为2018-09-09 下午 08：00*/
   Vue.prototype.DateFormat = function (UTCDate) {
-    return (new Date(UTCDate)).toLocaleString( );
+    function AddZero(Num) {
+      if(Num < 10){
+        return '0' + Num;
+      }else {
+        return Num;
+      }
+    }
+
+    var DataObject,Year,Month,Day,Hour,Minute;
+    DataObject = new Date(UTCDate);
+    Year = DataObject.getFullYear();
+    Month = DataObject.getMonth();
+    Day = DataObject.getDay();
+    Hour = DataObject.getHours();
+    Minute = DataObject.getMinutes();
+
+    return Year + '-' + AddZero(Month) + '-' + AddZero(Day) + ' ' + AddZero(Hour) + ':' + AddZero(Minute);
   }
 
   Vue.prototype.SQFrontAjax = function (Para) {
@@ -64,6 +80,10 @@ CommonFunction.install = function (Vue) {
       localStorage.setItem(StorageName,JSON.stringify(Object));
     }
   }
+}
+
+CommonFunction.DealTime = function () {
+
 }
 
 export default CommonFunction
