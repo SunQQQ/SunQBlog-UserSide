@@ -390,7 +390,7 @@
             width: 100%;
             height: 47rem;
             position: relative;
-            background: url(../static/img/MessageBoardCover2.jpg) no-repeat fixed center center;
+            background: url(../static/img/MessageBoardCover2.jpg) no-repeat center bottom;
         }
     }
 
