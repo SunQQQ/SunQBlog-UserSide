@@ -15,8 +15,8 @@ CommonFunction.install = function (Vue) {
     var DataObject,Year,Month,Day,Hour,Minute;
     DataObject = new Date(UTCDate);
     Year = DataObject.getFullYear();
-    Month = DataObject.getMonth();
-    Day = DataObject.getDay();
+    Month = DataObject.getMonth() + 1;
+    Day = DataObject.getDate();
     Hour = DataObject.getHours();
     Minute = DataObject.getMinutes();
 
