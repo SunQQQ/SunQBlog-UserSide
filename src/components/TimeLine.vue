@@ -106,7 +106,7 @@
         }
         .TimeFixedBac{
             width: 100%;
-            height: 40rem;
+            height: 95vh;
             position: absolute;
             left: 0;
             top: 0;
@@ -115,12 +115,12 @@
             background:url(../static/img/TimeLineBack.jpg) no-repeat center bottom;
         }
         .FriendUrlBac{
-            height: 40rem;
+            height: 83vh;
             background: transparent;
             z-index: 100;
         }
         .TimeLIneTitle{
-            margin-top: 2rem
+            margin-top: 12vh
         }
     }
 

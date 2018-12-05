@@ -367,7 +367,7 @@
             position: absolute;
             left: 0;
             right: 0;
-            top: 14rem;
+            top: 30vh;
             padding: 1.5rem 1.5rem 1.5rem 1rem;
             animation: FadeIn 0.2s linear;
         }
@@ -388,7 +388,7 @@
 
         .MessageBoardCover {
             width: 100%;
-            height: 47rem;
+            height: 95vh;
             position: relative;
             background: url(../static/img/MessageBoardCover2.jpg) no-repeat center bottom;
         }
