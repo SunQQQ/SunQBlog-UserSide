@@ -20,7 +20,7 @@
                                 <!--<div class="ArticleFooterItem">发表：{{ item.CreateDate }}</div>
                                 <div class="ArticleFooterItem" @click="UpdateRouter('BlogDetail',item._id)">评论：{{ item.CommentNum }}</div>-->
                                 <div class="ArticleFooterItem" style="border: none">
-                                    <i class="iconfont icon-fenlei iconBlogIndex"></i>{{ item.ArticleTag }}
+                                    <i class="iconfont icon-biaoqian iconBlogIndex"></i>{{ item.ArticleTag }}
                                 </div>
                                 <div class="ArticleFooterItem" style="border: none">
                                     <i class="iconfont icon-shijianzhongbiao iconBlogIndex"></i>{{ item.CreateDate }}
