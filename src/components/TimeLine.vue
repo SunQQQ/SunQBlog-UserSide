@@ -86,7 +86,7 @@
             top: 0;
             z-index: 100;
             background-attachment: fixed;
-            background:url(../static/img/TimeLineBack.jpg) no-repeat center center fixed;
+            background:url(../static/img/TimeLineBack.jpg) no-repeat center bottom;
         }
         .FriendUrlBac{
             height: 30rem;
