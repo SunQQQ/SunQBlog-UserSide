@@ -14,8 +14,8 @@
                 <div class="BigBlock AboutMeMarginTop">
                     <div class="TitleFontLine">Her Info</div>
                     <p><i class="iconfont AboutMeIcon icon-wangzhanxinxi" style="color:#f46e65"></i>本博客纯手工编写，木有使用第三方建站工具。前后端用到的东西都很基础，代码存放在github</p>
-                    <p><i class="iconfont AboutMeIcon icon-quanju_qianduanjiemian" style="color:#3dbd7d"></i>前端UI框架用到ElementUI、自己的UI组件，Js框架：Vue.js</p>
-                    <p><i class="iconfont AboutMeIcon icon-fuwuqi" style="color:#f78e3d"></i>后端语言使用node.js、框架使用Express</p>
+                    <p><i class="iconfont AboutMeIcon icon-quanju_qianduanjiemian" style="color:#3dbd7d"></i>管理端使用ElementUI + Vue.js，用户端自己UI组件 + Vue.js</p>
+                    <p><i class="iconfont AboutMeIcon icon-fuwuqi" style="color:#f78e3d"></i>服务端语言使用node.js、框架使用Express</p>
                     <p><i class="iconfont AboutMeIcon icon-dataBase" style="color:#49a9ee"></i>数据库使用Mongo db</p>
                 </div>
                 <div class="BigBlock AboutMeMarginTop">
