@@ -40,9 +40,22 @@
                 </div>
                 <div class="BlogIndexContentRight">
                     <div class="Module">
-                        <div class="TagListHead">文章分类<span style="color: #aaa;font-size: 0.8rem">（点击筛选呦）</span></div>
-                        <div class="TagListTr">
-                            <div :class="item.TagName != Tags.Active ? 'TagListTd' : 'TagListTdActive'" v-for="item in Tags" :key="item.id" @click="GetArticle(item.TagName)">{{ item.TagName }}</div>
+                        <div class="TagListHead">热门博文</div>
+                        <div class="HotArticle">
+                            <div class="HotArticleItem" v-for="(Item,Index) in HotArticleList">
+                                <div v-if="Index == 0" @click="UpdateRouter('BlogDetail',Item._id)">
+                                    <span style="color:#3dbd7d">No{{Index+1}} </span>{{Item.Title}}
+                                </div>
+                                <div v-if="Index == 1" @click="UpdateRouter('BlogDetail',Item._id)">
+                                    <span style="color:#f46e65">No{{Index+1}} </span>{{Item.Title}}
+                                </div>
+                                <div v-if="Index == 2" @click="UpdateRouter('BlogDetail',Item._id)">
+                                    <span style="color:#948aec">No{{Index+1}} </span>{{Item.Title}}
+                                </div>
+                                <div v-if="Index > 2" @click="UpdateRouter('BlogDetail',Item._id)">
+                                    <span>No{{Index+1}} </span>{{Item.Title}}
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="Module" style="padding: 0 0 0.5rem">
@@ -70,22 +83,9 @@
                         </div>
                     </div>
                     <div class="Module">
-                        <div class="TagListHead">热门博文</div>
-                        <div class="HotArticle">
-                            <div class="HotArticleItem" v-for="(Item,Index) in HotArticleList">
-                                <div v-if="Index == 0" @click="UpdateRouter('BlogDetail',Item._id)">
-                                    <span style="color:#3dbd7d">No{{Index+1}} </span>{{Item.Title}}
-                                </div>
-                                <div v-if="Index == 1" @click="UpdateRouter('BlogDetail',Item._id)">
-                                    <span style="color:#f46e65">No{{Index+1}} </span>{{Item.Title}}
-                                </div>
-                                <div v-if="Index == 2" @click="UpdateRouter('BlogDetail',Item._id)">
-                                    <span style="color:#948aec">No{{Index+1}} </span>{{Item.Title}}
-                                </div>
-                                <div v-if="Index > 2" @click="UpdateRouter('BlogDetail',Item._id)">
-                                    <span>No{{Index+1}} </span>{{Item.Title}}
-                                </div>
-                            </div>
+                        <div class="TagListHead">文章分类<span style="color: #aaa;font-size: 0.8rem">（点击筛选呦）</span></div>
+                        <div class="TagListTr">
+                            <div :class="item.TagName != Tags.Active ? 'TagListTd' : 'TagListTdActive'" v-for="item in Tags" :key="item.id" @click="GetArticle(item.TagName)">{{ item.TagName }}</div>
                         </div>
                     </div>
                 </div>
