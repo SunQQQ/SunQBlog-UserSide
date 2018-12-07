@@ -11,7 +11,7 @@
                         <div style="flex: 1">
                             <div class="ArticleTitle">
                                 <!--<div class="ArticleTag">{{ item.ArticleTag }}</div>-->
-                                <div class="ArticleTitleText">{{ item.Title }}</div>
+                                <h3 class="ArticleTitleText">{{ item.Title }}</h3>
                             </div>
                             <div class="ArticleContent" v-html="item.Summary">
                                 {{ item.Summary }}
@@ -69,6 +69,25 @@
                             </div>
                         </div>
                     </div>
+                    <div class="Module">
+                        <div class="TagListHead">热门博文</div>
+                        <div class="HotArticle">
+                            <div class="HotArticleItem" v-for="(Item,Index) in HotArticleList">
+                                <div v-if="Index == 0" @click="UpdateRouter('BlogDetail',Item._id)">
+                                    <span style="color:#3dbd7d">No{{Index+1}} </span>{{Item.Title}}
+                                </div>
+                                <div v-if="Index == 1" @click="UpdateRouter('BlogDetail',Item._id)">
+                                    <span style="color:#f46e65">No{{Index+1}} </span>{{Item.Title}}
+                                </div>
+                                <div v-if="Index == 2" @click="UpdateRouter('BlogDetail',Item._id)">
+                                    <span style="color:#948aec">No{{Index+1}} </span>{{Item.Title}}
+                                </div>
+                                <div v-if="Index > 2" @click="UpdateRouter('BlogDetail',Item._id)">
+                                    <span>No{{Index+1}} </span>{{Item.Title}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -97,6 +116,7 @@
         PageTotalNum:0,
         // 页数
         PageNum:0,
+        HotArticleList:[]
       }
     },
     methods:{
@@ -118,6 +138,8 @@
         this.GetLeaveMessageNum();
         // 渲染评论个数
         this.GetCommentNum();
+        //渲染热门博文
+        this.GetHotArticle();
       },
       // 获取文章列表
       GetArticle:function(ArticleTag){
@@ -235,10 +257,19 @@
           }
         });
       },
+      //获取热门文章
+      GetHotArticle:function () {
+        var That = this;
+        this.SQFrontAjax({
+          Url:'/api/HotArticleRead/foreend',
+          Success:function (data) {
+            That.HotArticleList = data;
+          }
+        });
+      }
     },
     mounted:function(){
       this.InitArticleTag(this);
-
       // 切换Topbar高亮
       this.bus.$emit('Topbar',{
         Active:0,

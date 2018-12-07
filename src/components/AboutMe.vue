@@ -7,7 +7,7 @@
                     <p><i class="iconfont icon-person AboutMeIcon" style="color:#49a9ee"></i>94年老男人，软件学院毕业，目前从事前端开发。</p>
                     <p><i class="iconfont icon-aihao1 AboutMeIcon" style="color:#f46e65"></i>年轻时喜欢篮球、跑步、泡沫剧。现在喜爱看车评、历史记录片、发发呆</p>
                     <p><i class="iconfont icon-tool AboutMeIcon" style="color:#3db8c1"></i>Layui、ElementUI、Vue.js、node</p>
-                    <p><i class="iconfont icon-biaoqian AboutMeIcon" style="color:#3dbd7d"></i>前阳光运动男生、前老实靠谱伙伴、傻大个</p>
+                    <p><i class="iconfont icon-biaoqian AboutMeIcon" style="color:#3dbd7d"></i>前阳光运动男生、靠谱伙伴、傻大个</p>
                     <p><i class="iconfont icon-xiazai20 AboutMeIcon" style="color:#948aec"></i>上海 徐汇</p>
                     <p><i class="iconfont icon-jianzhu AboutMeIcon" style="color:#f78e3d"></i>昂立 中学生</p>
                 </div>
