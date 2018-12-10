@@ -65,7 +65,7 @@
                         </div>
                         <div class="TextCenter">
                             孙权的小博客
-                            <div class="BlueButton">欢迎你呦</div>
+                            <a class="BlueButton" href="https://github.com/SunQQQ">欢迎你呦</a>
                         </div>
                         <div class="BlogStatistic">
                             <div class="BlogStatisticItem">
