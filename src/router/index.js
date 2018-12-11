@@ -1,22 +1,16 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import TopBar from '@/components/TopBar'
-import BlogDetail from '@/components/BlogDetail'
-import BlogIndex from '@/components/BlogIndex'
-import MessageBoard from '@/components/MessageBoard'
-import FriendUrl from '@/components/FriendUrl'
-import TimeLine from '@/components/TimeLine'
-import AboutMe from '@/components/AboutMe'
+import BlogDetail from '@/components/MainPage/BlogDetail'
+import BlogIndex from '@/components/MainPage/BlogIndex'
+import MessageBoard from '@/components/MainPage/MessageBoard'
+import FriendUrl from '@/components/MainPage/FriendUrl'
+import TimeLine from '@/components/MainPage/TimeLine'
+import AboutMe from '@/components/MainPage/AboutMe'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
-    {
-      path: '/TopBar',
-      name: 'TopBar',
-      component: TopBar
-    },
     {
       path: '/',
       name: 'BlogIndex',

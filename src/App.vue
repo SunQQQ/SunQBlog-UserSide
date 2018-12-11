@@ -10,12 +10,12 @@
     </div>
 </template>
 <script>
-  import TopBar from './components/TopBar'
-  import Footer from './components/Footer'
-  import Tips from './components/Common/Tips'
-  import Loading from './components/Common/Loading'
-  import CanvasBac from './components/Common/CanvasBac'
-  import AirPlane from './components/Common/Airplane'
+  import TopBar from './components/BrotherCompnent/TopBar'
+  import Footer from './components/BrotherCompnent/Footer'
+  import Tips from './components/BrotherCompnent/Tips'
+  import Loading from './components/BrotherCompnent/Loading'
+  import CanvasBac from './components/BrotherCompnent/CanvasBac'
+  import AirPlane from './components/BrotherCompnent/Airplane'
 
   export default {
     name: 'app',

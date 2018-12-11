@@ -61,7 +61,7 @@
                     <div class="Module" style="padding: 0 0 0.5rem">
                         <div class="TopBack"></div>
                         <div class="ZhihuIcon">
-                            <img src="../static/img/ZhihuIcon.jpg">
+                            <img src="../../static/img/ZhihuIcon.jpg">
                         </div>
                         <div class="TextCenter">
                             孙权的小博客
@@ -96,8 +96,8 @@
 </template>
 
 <script>
-  import Heartfelt from './Common/Heartfelt';
-  import Pagination from './Pagination';
+  import Heartfelt from '../SonCompnent/Heartfelt';
+  import Pagination from '../SonCompnent/Pagination';
   export default {
     name: "BlogIndex",
     data:function () {
@@ -276,6 +276,9 @@
         MobileMenuActive:0
       });
     },
+    created:function(){
+      document.documentElement.scrollTop = 0;
+    },
     components:{
       Heartfelt,
       Pagination
@@ -284,7 +287,7 @@
 </script>
 
 <style scoped lang="less">
-    @import "../static/css/BlogIndex";
+    @import "../../static/css/BlogIndex";
     .flip-list-move {
         transition: transform 1s;
     }
