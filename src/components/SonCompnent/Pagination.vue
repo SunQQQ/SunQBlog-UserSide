@@ -7,36 +7,35 @@
     name: "Pagination",
     data:function () {
       return{
-        // 当前选中页数
-        PageActive:0,
-        Pagination:false
+        OnScroll:true
       }
     },
     methods: {
-
+        DestoryUpdate:function () {
+          console.log('操作到子组件的方法');
+          this.OnScroll = false;
+        }
     },
     created:function(){
       var RefreshCount = 0, That = this;
 
-      if(That.OnScroll){
-        window.onscroll = function () {
-          var ScrollTop,ClientHeight,ScrollHeight;
-          ScrollTop = document.documentElement.scrollTop;
-          ClientHeight = document.documentElement.clientHeight;
-          ScrollHeight = document.documentElement.scrollHeight;
+      window.addEventListener('scroll',()=>{
+        var ScrollTop,ClientHeight,ScrollHeight;
+        ScrollTop = document.documentElement.scrollTop;
+        ClientHeight = document.documentElement.clientHeight;
+        ScrollHeight = document.documentElement.scrollHeight;
 
-          if(ScrollHeight == ScrollTop + ClientHeight){
-            console.log('到顶');
-            RefreshCount += 1;
-            That.$emit('PaginationToParent',RefreshCount);
-          }
+        console.log('ScrollHeight');
+        console.log(ScrollHeight);
+
+        if(ScrollHeight == ScrollTop + ClientHeight && That.OnScroll){
+          console.log('到顶');
+          RefreshCount += 1;
+          That.$emit('PaginationToParent',RefreshCount);
         }
-      }
-
-      console.log('That.OnScroll');
-      console.log(That.OnScroll);
+      })
     },
-    props:['OnScroll']
+    /*props:['OnScroll']*/
   }
 </script>
 

@@ -43,6 +43,7 @@
                         </div>
                     </div>
                     <div class="NoDataHint" v-if="MessageList.length == 0">暂无数据</div>
+                    <div style="background-color: #ffffff;padding: 1rem;text-align: center;border: 1px solid #e9e9e9;border-top: none" v-if="AticleBottom">你滑到我底线啦</div>
                 </div>
                 <div class="BlogIndexContentRight" style="border:1px solid #e9e9e9;border-radius: 3px">
                     <div class="Module" style="padding: 0 0 0.5rem;background-color: transparent">
@@ -96,7 +97,7 @@
                     </div>
                 </div>
             </div>
-            <Pagination v-on:PaginationToParent="ValueByPagition" v-bind:OnScroll='OnScroll'></Pagination>
+            <Pagination v-on:PaginationToParent="ValueByPagition" ref="Pagi"></Pagination>
         </div>
         <!--回复留言弹框PageActive-->
         <div style="position:fixed;top: 0;bottom: 0;left:0;right:0;z-index: 1000" v-if="MessageAnswerFrame">
@@ -154,8 +155,8 @@
         MessageAnswerFrame: false,
         // 弹框显隐动画
         FadeAnimate: false,
-
-        OnScroll:true
+        // 文章底线
+        AticleBottom:false
       }
     },
     methods: {
@@ -311,13 +312,14 @@
                 }
             },
             Success: function (data) {
-              if(data.length == 8){
-                data.forEach(function (Item) {
-                  Item.MessageLeaveDate = That.DateFormat(Item.MessageLeaveDate);
-                });
-                That.MessageList = That.MessageList.concat(data);
-              }else {
-                That.OnScroll = false;
+              data.forEach(function (Item) {
+                Item.MessageLeaveDate = That.DateFormat(Item.MessageLeaveDate);
+              });
+              That.MessageList = That.MessageList.concat(data);
+              if(data.length != 8){
+                That.AticleBottom = true;
+                // 停止分页器的滚动监听
+                That.$refs.Pagi.DestoryUpdate();
               }
             }
         });

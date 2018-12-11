@@ -18,14 +18,8 @@
                     <div class="UrlSummary">{{ item.FriendUrlDescript }}</div>
                 </div>
             </div>
-            <div style="padding: 0.5rem">
-                <Pagination v-bind:PageTotalNum=this.PageTotalNum
-                            v-bind:PageNum=this.PageNum
-                            v-on:PaginationToParent="ValueByPagition"
-                            ref="Pagin"
-                >
-                </Pagination>
-            </div>
+            <div style="background-color: #ffffff;padding: 1rem;text-align: center;border: 1px solid #e9e9e9;margin-top: 1rem" v-if="AticleBottom">你滑到我底线啦</div>
+            <Pagination v-on:PaginationToParent="ValueByPagition" ref="Pagi"></Pagination>
         </div>
         <div class="PopupWindow" v-show="Wrapper">
             <div class="FriendUrlWrapper" @click="ClosePopup"></div>
@@ -81,10 +75,8 @@
         // 弹框显隐动画
         FadeAnimate:false,
 
-        // 所有数据个数
-        PageTotalNum:0,
-        // 所有页数
-        PageNum:0,
+        // 文章底线
+        AticleBottom:false
       }
     },
     created:function(){
@@ -151,25 +143,10 @@
           UploadData:{
             PagnationData: {
               Skip: 0,
-              Limit: 17
+              Limit: 16
             }
           },
           Success:function (data) {
-            if (data.length > 16) {
-              data.pop();
-              // 显示分页器
-              // 显示分页器
-              That.$refs.Pagin.SwitchPagin(true);
-
-              That.SQFrontAjax({
-                Url: '/api/getfriendurlnum',
-                Success: function (data) {
-                  That.PageTotalNum = data;
-                  That.PageNum = Math.ceil(data / 16);
-                }
-              });
-            }
-
             That.FriendsUrlList = data;
           }
         });
@@ -185,7 +162,12 @@
             }
           },
           Success: function (data) {
-            That.FriendsUrlList = data;
+            That.FriendsUrlList = That.FriendsUrlList.concat(data);
+            if(data.length != 16){
+              That.AticleBottom = true;
+              // 停止分页器的滚动监听
+              That.$refs.Pagi.DestoryUpdate();
+            }
           }
         });
       }

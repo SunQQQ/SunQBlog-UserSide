@@ -32,11 +32,8 @@
                         </div>
                     </div>
                     <div class="NoDataHint" v-if="!ArticleList.length">暂无数据</div>
-                    <Pagination v-bind:PageTotalNum=this.PageTotalNum
-                                v-bind:PageNum=this.PageNum
-                                v-on:PaginationToParent="ValueByPagition"
-                                ref="Pagination"
-                    ></Pagination >
+                    <div style="background-color: #ffffff;padding: 1rem;text-align: center;border: 1px solid #e9e9e9;margin-top: 1rem" v-if="AticleBottom">你滑到我底线啦</div>
+                    <Pagination v-on:PaginationToParent="ValueByPagition" ref="Pagi"></Pagination>
                 </div>
                 <div class="BlogIndexContentRight">
                     <div class="Module">
@@ -112,11 +109,10 @@
         LeaveMessageNum:'',
         // 博客评论量
         CommentNum:'',
-        // 数据个数
-        PageTotalNum:0,
-        // 页数
-        PageNum:0,
-        HotArticleList:[]
+
+        HotArticleList:[],
+        // 文章底线
+        AticleBottom:false
       }
     },
     methods:{
@@ -150,32 +146,15 @@
           UploadData:{
             PagnationData: {
               Skip: 0,
-              Limit: 9
+              Limit: 8
             },
             ArticleTag:ArticleTag
           },
           Success:function (data) {
-            if (data.length > 8) {
-              data.pop();
-              // 显示分页器
-              That.$refs.Pagination.SwitchPagin(true);
-
-              That.SQFrontAjax({
-                Url: '/api/getarticlenum/foreend',
-                UploadData:{ArticleTag:ArticleTag},
-                Success: function (data) {
-                  That.PageTotalNum = data;
-                  That.PageNum = Math.ceil(data / 8);
-                }
-              });
-            }else {
-              That.$refs.Pagination.SwitchPagin(false);
-            }
-
             // 高亮
             That.Tags.Active = ArticleTag;
 
-            data.forEach(function (Item,I) {
+            data.forEach(function (Item) {
               Item.CreateDate = Item.CreateDate.slice(0,10);
             });
             That.ArticleList = data;
@@ -205,10 +184,15 @@
             ArticleTag:That.Tags.Active
           },
           Success: function (data) {
-            data.forEach(function (Item,I) {
-              Item.CreateDate = Item.CreateDate.slice(0,10);
+            data.forEach(function (Item) {
+              Item.MessageLeaveDate = That.DateFormat(Item.MessageLeaveDate);
             });
-            That.ArticleList = data;
+            That.ArticleList = That.ArticleList.concat(data);
+            if(data.length != 8){
+              That.AticleBottom = true;
+              // 停止分页器的滚动监听
+              That.$refs.Pagi.DestoryUpdate();
+            }
           }
         });
       },
