@@ -18,7 +18,7 @@
                     <div class="UrlSummary">{{ item.FriendUrlDescript }}</div>
                 </div>
             </div>
-            <div style="background-color: #ffffff;padding: 1rem;text-align: center;border: 1px solid #e9e9e9;margin-top: 1rem" v-if="AticleBottom">你滑到我底线啦</div>
+            <div class="ListBottom" v-if="AticleBottom">你滑到我底线啦</div>
             <Pagination v-on:PaginationToParent="ValueByPagition" ref="Pagi"></Pagination>
         </div>
         <div class="PopupWindow" v-show="Wrapper">
