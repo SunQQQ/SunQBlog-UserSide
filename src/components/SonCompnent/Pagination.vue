@@ -11,8 +11,8 @@
       }
     },
     methods: {
-        DestoryUpdate:function () {
-          this.OnScroll = false;
+        SetUpdate:function (Value) {
+          this.OnScroll = Value;
         }
     },
     created:function(){
@@ -26,7 +26,7 @@
         ScrollHeight = document.documentElement.scrollHeight;
 
         if(ScrollHeight - ScrollTop - ClientHeight < 130 && That.OnScroll){
-          console.log('到顶');
+          That.OnScroll = false;
           RefreshCount += 1;
           That.$emit('PaginationToParent',RefreshCount);
         }

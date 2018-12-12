@@ -299,9 +299,6 @@
       },
 
       ValueByPagition:function (SelectPage) {
-        console.log('SelectPage');
-        console.log(SelectPage);
-
         var That = this;
         this.SQFrontAjax({
             Url: '/api/MessageRead/foreend',
@@ -319,7 +316,9 @@
               if(data.length != 8){
                 That.AticleBottom = true;
                 // 停止分页器的滚动监听
-                That.$refs.Pagi.DestoryUpdate();
+                That.$refs.Pagi.SetUpdate(false);
+              }else {
+                That.$refs.Pagi.SetUpdate(true);
               }
             }
         });
