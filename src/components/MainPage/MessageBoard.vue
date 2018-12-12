@@ -25,7 +25,7 @@
         <div class="BlogIndexContent">
             <div class="BlogFlex">
                 <div class="BlogIndexContentLeft"
-                     style="background-color:#ffffff;margin: 1rem 0;border:1px solid #e9e9e9;border-radius: 3px">
+                     style="background-color:#ffffff;margin-top: 1rem;border:1px solid #e9e9e9;border-radius: 3px">
                     <div class="CommentList">
                         <div class="CommentItem" v-for="item in MessageList">
                             <div class="CommentItemIcon">
@@ -43,7 +43,7 @@
                         </div>
                     </div>
                     <div class="NoDataHint" v-if="MessageList.length == 0">暂无数据</div>
-                    <div class="ListBottom" v-if="AticleBottom">你滑到我底线啦</div>
+                    <div class="MessageBoardListBottom" v-if="AticleBottom">你滑到我底线啦</div>
                 </div>
                 <div class="BlogIndexContentRight" style="border:1px solid #e9e9e9;border-radius: 3px">
                     <div class="Module" style="padding: 0 0 0.5rem;background-color: transparent">
@@ -381,6 +381,15 @@
             position: relative;
             background: url(../../static/img/MessageBoardCover2.jpg) no-repeat center bottom;
         }
+
+        .MessageBoardListBottom{
+            background-color: @fore_color;
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid @BorderColor;
+            border-top: none;
+            font-size: 1rem;
+        }
     }
 
     /*移动端*/
@@ -414,6 +423,14 @@
             height: 95vh;
             position: relative;
             background: url(../../static/img/MessageBoardCover2.jpg) no-repeat center bottom;
+        }
+
+        .MessageBoardListBottom{
+            margin: 1rem 0;
+            text-align: center;
+            font-size: 0.8rem;
+            color:@FontColorGrayDeep;
+            border: 1px solid @back_color;
         }
     }
 

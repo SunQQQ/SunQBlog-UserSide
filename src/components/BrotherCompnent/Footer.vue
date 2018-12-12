@@ -37,7 +37,7 @@
             background-color: @TranslucentWhitleBackg;
             color: @footerColor;
             padding: 1.5rem;
-            margin-top: 0.3rem;
+            margin-top: 1rem;
         }
         .RecordNo{
             display: inline-block;

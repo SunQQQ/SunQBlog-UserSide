@@ -21,12 +21,10 @@
 
       window.addEventListener('scroll',()=>{
         var ScrollTop,ClientHeight,ScrollHeight;
-        ScrollTop = document.documentElement.scrollTop;
+        // safari要求 document.body.scrollTop
+        ScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
         ClientHeight = document.documentElement.clientHeight;
         ScrollHeight = document.documentElement.scrollHeight;
-
-        console.log('ScrollHeight');
-        console.log(ScrollHeight);
 
         if(ScrollHeight == ScrollTop + ClientHeight && That.OnScroll){
           console.log('到顶');
