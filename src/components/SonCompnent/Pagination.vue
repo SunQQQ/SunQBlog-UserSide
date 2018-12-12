@@ -12,7 +12,6 @@
     },
     methods: {
         DestoryUpdate:function () {
-          console.log('操作到子组件的方法');
           this.OnScroll = false;
         }
     },
@@ -26,14 +25,13 @@
         ClientHeight = document.documentElement.clientHeight;
         ScrollHeight = document.documentElement.scrollHeight;
 
-        if(ScrollHeight == ScrollTop + ClientHeight && That.OnScroll){
+        if(ScrollHeight - ScrollTop - ClientHeight < 130 && That.OnScroll){
           console.log('到顶');
           RefreshCount += 1;
           That.$emit('PaginationToParent',RefreshCount);
         }
       })
     },
-    /*props:['OnScroll']*/
   }
 </script>
 
