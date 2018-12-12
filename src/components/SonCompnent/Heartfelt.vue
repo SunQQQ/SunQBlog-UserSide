@@ -11,28 +11,45 @@
     data:function () {
       return{
         HeartfeltContent:'',
-        HeartfeltWritter:''
+        HeartfeltWritter:'',
+        LocalHeartFeltData: this.GetLocalStorage('SunqBlog') ? this.GetLocalStorage('SunqBlog').HeartFeltData : ''
       }
     },
     methods:{
       InitView:function () {
         var That = this;
-        this.SQFrontAjax({
-          Url: '/api/getheartfeltnum',
-          Success:function (data) {
-            That.GetHeartfelt(data);
-          }
-        });
+
+        if(That.LocalHeartFeltData){
+          That.GetHeartfelt(That.LocalHeartFeltData.length);
+        }else {
+          this.SQFrontAjax({
+            Url: '/api/getheartfeltnum',
+            Success:function (data) {
+              That.GetHeartfelt(data);
+            }
+          });
+        }
       },
       // 获取所有心声数据
       GetHeartfelt:function (HeartfeltNum) {
         var That = this;
-        this.SQFrontAjax({
-          Url: '/api/HeartfeltRead/foreend',
-          Success: function (data) {
-            That.ChangeView(data,HeartfeltNum);
-          }
-        });
+
+        if(That.LocalHeartFeltData){
+          That.ChangeView(That.LocalHeartFeltData,HeartfeltNum);
+        }else {
+          this.SQFrontAjax({
+            Url: '/api/HeartfeltRead/foreend',
+            Success: function (data) {
+              // 存下心声数据
+              That.SetLocalStorage('SunqBlog', {
+                Key: 'HeartFeltData',
+                Value: data
+              });
+
+              That.ChangeView(data,HeartfeltNum);
+            }
+          });
+        }
       },
       // 修改视图的数据
       ChangeView:function (Array,HeartfeltNum) {

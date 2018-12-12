@@ -298,7 +298,8 @@
         }, 200)
       },
 
-      ValueByPagition:function (SelectPage) {
+      // 上滑加载更多
+      ValueByPagition: function (SelectPage) {
         var That = this;
         this.SQFrontAjax({
             Url: '/api/MessageRead/foreend',

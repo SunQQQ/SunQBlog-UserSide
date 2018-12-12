@@ -261,6 +261,11 @@
         Active:0,
         MobileMenuActive:0
       });
+      // 删除心声缓存
+      this.SetLocalStorage('SunqBlog', {
+        Key: 'HeartFeltData',
+        Value: ''
+      });
     },
     created:function(){
       document.documentElement.scrollTop = 0;

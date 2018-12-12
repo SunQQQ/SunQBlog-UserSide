@@ -2,7 +2,7 @@ import axios from 'axios'
 
 let CommonFunction = {}
 CommonFunction.install = function (Vue) {
-  /*将UTC格式时间转为2018-09-09 下午 08：00*/
+  /*将UTC格式时间转为2018-09-09 08：00*/
   Vue.prototype.DateFormat = function (UTCDate) {
     function AddZero(Num) {
       if(Num < 10){
@@ -80,10 +80,6 @@ CommonFunction.install = function (Vue) {
       localStorage.setItem(StorageName,JSON.stringify(Object));
     }
   }
-}
-
-CommonFunction.DealTime = function () {
-
 }
 
 export default CommonFunction
