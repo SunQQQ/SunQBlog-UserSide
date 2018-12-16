@@ -9,6 +9,9 @@
                 <div style="flex: 1">
                     <div :class="OpenTextAreaCover ? 'WriteMessageFrameContent' : 'WriteMessageFrameContent WriteMessageFrameContentColorBorder'">
                         <textarea ref="LeaveMessageTextArea" placeholder="输入留言" v-model="MessageText"></textarea>
+                        <span class="EmotionButton" @click="OpenEmotions()">
+                            <i class="iconfont icon-face IconfontSize"></i>
+                        </span>
                         <div class="TextAreaCover" @click="OpenMessageSubmit()" v-if="OpenTextAreaCover">来都来啦，留个脚印吧
                         </div>
                     </div>
@@ -34,7 +37,7 @@
                             </div>
                             <div class="CommentItemContent">
                                 <div>{{ item.MessageLeaveName }}</div>
-                                <div class="ArticleCommentText">{{ item.MessageText }}</div>
+                                <div class="ArticleCommentText" v-html="item.MessageText">{{ item.MessageText }}</div>
                                 <div class="DateAnswer">
                                     <div class="DateAnswerLeft">{{ item.MessageLeaveDate }}</div>
                                     <div class="DateAnswerRight" @click="AnswerMessage(item.MessageLeaveName)">回复</div>
@@ -78,19 +81,23 @@
                             <div class="TitleFontLine">Contacts</div>
                             <div class="BlogStatistic" style="border-top: none;padding-bottom: 0">
                                 <div class="BlogStatisticItem">
-                                    <a href="https://github.com/SunQQQ" target="_blank"><i class="iconfont icon-github AboutMeIcon" style="color:#948aec"></i></a>
+                                    <a href="https://github.com/SunQQQ" target="_blank"><i
+                                            class="iconfont icon-github AboutMeIcon" style="color:#948aec"></i></a>
                                 </div>
                                 <div class="BlogStatisticItem">
-                                    <a href="https://www.zhihu.com/people/s-q-51-44-23/activities" target="_blank"><i class="iconfont icon-zhihu AboutMeIcon" style="color:#3dbd7d"></i></a>
+                                    <a href="https://www.zhihu.com/people/s-q-51-44-23/activities" target="_blank"><i
+                                            class="iconfont icon-zhihu AboutMeIcon" style="color:#3dbd7d"></i></a>
                                 </div>
                                 <div class="BlogStatisticItem">
-                                    <a href="https://blog.csdn.net/sun_qqq" target="_blank"><i class="iconfont icon-CN_csdnnet AboutMeIcon" style="color:#f78e3d"></i></a>
+                                    <a href="https://blog.csdn.net/sun_qqq" target="_blank"><i
+                                            class="iconfont icon-CN_csdnnet AboutMeIcon" style="color:#f78e3d"></i></a>
                                 </div>
                                 <div class="BlogStatisticItem">
                                     <i class="iconfont icon-youxiang AboutMeIcon" style="color:#49a9ee"></i>
                                 </div>
                                 <div class="BlogStatisticItem">
-                                    <a href="https://music.163.com/#/user/home?id=386558098" target="_blank"><i class="iconfont AboutMeIcon icon-CN_NetEasemusic" style="color:#f46e65"></i></a>
+                                    <a href="https://music.163.com/#/user/home?id=386558098" target="_blank"><i
+                                            class="iconfont AboutMeIcon icon-CN_NetEasemusic" style="color:#f46e65"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -110,14 +117,16 @@
                 </div>
                 <div style="flex: 1;position: relative">
                     <div class="WriteMessageFrameContent WriteMessageFrameContentColorBorder">
-                        <textarea ref="AnswerMessageContentDom" placeholder="输入留言"
-                                  v-model="AnswerMessageContent"></textarea>
+                        <textarea ref="AnswerMessageContentDom" placeholder="输入留言" v-model="MessageText"></textarea>
+                        <span class="EmotionButton" @click="OpenEmotions()">
+                            <i class="iconfont icon-face IconfontSize"></i>
+                        </span>
                     </div>
                     <div class="OpenMessageSubmit">
                         <div class="LeaveMessageName">
-                            <input placeholder="输入你的大名或昵称" v-model="AnswerMessageUserName">
+                            <input placeholder="输入你的大名或昵称" v-model="MessageLeaveName">
                         </div>
-                        <div class="OpenMessageSubmitButton" @click="AnswerMessageSubmit()">提交</div>
+                        <div class="OpenMessageSubmitButton" @click="MessageSubmit()">提交</div>
                     </div>
                     <div class="CloseAnswerMessage" @click="CloseAnswerMessage()">
                         <i class="iconfont icon-fork IconfontSize"></i>
@@ -125,11 +134,13 @@
                 </div>
             </div>
         </div>
+        <Emotion ref="EmotionB" @AppendInputValue="AppendMessageText"></Emotion>
     </div>
 </template>
 
 <script>
   import Pagination from '../SonCompnent/Pagination';
+  import Emotion from '../SonCompnent/Emotion';
 
   export default {
     name: "MessageBoard",
@@ -139,24 +150,22 @@
         OpenTextAreaCover: true,
         // 提交按钮显示
         OpenMessageSubmitValue: false,
+
         //textarea的留言文本
         MessageText: '',
         //留言人姓名
         MessageLeaveName: '',
+
         // 留言列表
         MessageList: '',
         // 写留言的时间
         MessageLeaveDate: '',
-        // 回复留言的内容
-        AnswerMessageContent: '',
-        //回复留言的用户名
-        AnswerMessageUserName: '',
         //回复留言弹框
         MessageAnswerFrame: false,
         // 弹框显隐动画
         FadeAnimate: false,
         // 文章底线
-        AticleBottom:false
+        AticleBottom: false,
       }
     },
     methods: {
@@ -179,10 +188,12 @@
       MessageSubmit: function () {
         var That = this;
         if (this.MessageText && this.MessageLeaveName) {
+          var MatchedMessageText = That.MatchEmotion(That.MessageText);
+
           this.SQFrontAjax({
             Url: '/api/MessageCreate/foreend',
             UploadData: {
-              MessageText: this.MessageText,
+              MessageText: MatchedMessageText,
               MessageLeaveName: this.MessageLeaveName,
               MessageLeaveDate: new Date()
             },
@@ -200,6 +211,9 @@
               });
               // 刷新留言列表
               That.MessageRead();
+
+              // 如果是回复留言，关闭留言弹框
+              That.MessageAnswerFrame = false
             }
           });
         } else {
@@ -224,7 +238,7 @@
           },
           Success: function (data) {
             // 渲染列表
-            data.forEach(function (Item, I) {
+            data.forEach(function (Item) {
               Item.MessageLeaveDate = That.DateFormat(Item.MessageLeaveDate);
             });
             That.MessageList = data;
@@ -233,7 +247,7 @@
         // 默认填写留言输入框的昵称
         var LocalCommonUser = this.GetLocalStorage('SunqBlog');
         if (LocalCommonUser.toString() != '{}') {
-          That.AnswerMessageUserName = LocalCommonUser.ArticleCommentNickName;
+          That.MessageLeaveName = LocalCommonUser.ArticleCommentNickName;
         }
       },
 
@@ -244,48 +258,13 @@
         this.FadeAnimate = true;
 
         // 填写@某人
-        this.AnswerMessageContent = '@' + AnswedPerson + ':';
+        this.MessageText = '@' + AnswedPerson + ':';
         That.$refs.AnswerMessageContentDom.focus();
 
         // 填写缓存中游客名
         var LocalCommonUser = this.GetLocalStorage('SunqBlog');
         if (LocalCommonUser.toString() != '{}') {
-          That.AnswerMessageUserName = LocalCommonUser.ArticleCommentNickName;
-        }
-      },
-
-      // 提交回复留言
-      AnswerMessageSubmit: function () {
-        var That = this;
-        if (this.AnswerMessageContent && this.AnswerMessageUserName) {
-          this.SQFrontAjax({
-            Url: '/api/MessageCreate/foreend',
-            UploadData: {
-              MessageText: this.AnswerMessageContent,
-              MessageLeaveName: this.AnswerMessageUserName,
-              MessageLeaveDate: new Date()
-            },
-            Success: function () {
-              That.bus.$emit('Tips', {
-                Show: true,
-                Title: '回复成功'
-              });
-
-              That.CloseAnswerMessage();
-              That.MessageRead();
-
-              // 存储用户名到本地
-              That.SetLocalStorage('SunqBlog', {
-                Key: 'ArticleCommentNickName',
-                Value: That.AnswerMessageUserName
-              });
-            }
-          });
-        } else {
-          That.bus.$emit('Tips', {
-            Show: true,
-            Title: '昵称和回复不能为空呦！'
-          });
+          That.MessageLeaveName = LocalCommonUser.ArticleCommentNickName;
         }
       },
 
@@ -293,6 +272,8 @@
       CloseAnswerMessage: function () {
         var That = this;
         this.FadeAnimate = false;
+        // 清空留言框
+        this.MessageText = '';
         setTimeout(function () {
           That.MessageAnswerFrame = false;
         }, 200)
@@ -302,30 +283,40 @@
       ValueByPagition: function (SelectPage) {
         var That = this;
         this.SQFrontAjax({
-            Url: '/api/MessageRead/foreend',
-            UploadData: {
-              PagnationData: {
-                  Skip:SelectPage * 8,
-                  Limit:8
-                }
-            },
-            Success: function (data) {
-              data.forEach(function (Item) {
-                Item.MessageLeaveDate = That.DateFormat(Item.MessageLeaveDate);
-              });
-              That.MessageList = That.MessageList.concat(data);
-              if(data.length != 8){
-                That.AticleBottom = true;
-                // 停止分页器的滚动监听
-                That.$refs.Pagi.SetUpdate(false);
-              }else {
-                That.$refs.Pagi.SetUpdate(true);
-              }
+          Url: '/api/MessageRead/foreend',
+          UploadData: {
+            PagnationData: {
+              Skip: SelectPage * 8,
+              Limit: 8
             }
+          },
+          Success: function (data) {
+            data.forEach(function (Item) {
+              Item.MessageLeaveDate = That.DateFormat(Item.MessageLeaveDate);
+            });
+            That.MessageList = That.MessageList.concat(data);
+            if (data.length != 8) {
+              That.AticleBottom = true;
+              // 停止分页器的滚动监听
+              That.$refs.Pagi.SetUpdate(false);
+            } else {
+              That.$refs.Pagi.SetUpdate(true);
+            }
+          }
         });
+      },
+
+      // 打开表情框
+      OpenEmotions: function () {
+        this.$refs.EmotionB.OpenEmotion(true);
+      },
+
+      // 点击表情，修改文本
+      AppendMessageText:function (EmotionChinese) {
+        this.MessageText += EmotionChinese;
       }
     },
-    created:function(){
+    created: function () {
       document.documentElement.scrollTop = 0;
     },
     mounted: function () {
@@ -336,8 +327,9 @@
         MobileMenuActive: 1
       });
     },
-    components:{
-      Pagination:Pagination
+    components: {
+      Pagination,
+      Emotion
     }
   }
 </script>
@@ -382,7 +374,7 @@
             background: url(../../static/img/MessageBoardCover2.jpg) no-repeat center bottom;
         }
 
-        .MessageBoardListBottom{
+        .MessageBoardListBottom {
             background-color: @fore_color;
             padding: 1rem;
             text-align: center;
@@ -425,11 +417,11 @@
             background: url(../../static/img/MessageBoardCover2.jpg) no-repeat center bottom;
         }
 
-        .MessageBoardListBottom{
+        .MessageBoardListBottom {
             margin: 1rem 0;
             text-align: center;
             font-size: 0.8rem;
-            color:@FontColorGrayDeep;
+            color: @FontColorGrayDeep;
             border: 1px solid @back_color;
         }
     }
@@ -486,7 +478,7 @@
     .WriteMessageFrameContent {
         flex: 1;
         height: 4.5rem;
-        line-height: 4.5rem;
+        /*line-height: 4.5rem;*/
         position: relative;
         padding: 0.5rem 0 0 0.5rem;
         border: 1px solid @BorderColor;
@@ -530,6 +522,13 @@
         border-radius: 2px;
         display: inline-block;
         text-align: center;
+        cursor: pointer;
+    }
+
+    .EmotionButton {
+        position: absolute;
+        right: 0.5rem;
+        bottom: 0.5rem;
         cursor: pointer;
     }
 
