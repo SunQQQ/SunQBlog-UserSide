@@ -19,8 +19,6 @@
 
   export default {
     name: 'app',
-    mounted: function () {
-    },
     components: {
       TopBar: TopBar,
       Footer:Footer,
