@@ -45,8 +45,8 @@
                     </div>
                     <div class="CommentUserInfo">
                         <input placeholder="昵称（必填）" v-model="ArticleCommentNickName"/>
-                        <input placeholder="邮箱（选填）" v-model="ArticleCommentEmail"/>
-                        <input placeholder="网址（选填）" v-model="ArticleCommentUrl"/>
+                        <input placeholder="邮箱（可以不填哦）" v-model="ArticleCommentEmail"/>
+                        <input placeholder="网址（可以不填哦）" v-model="ArticleCommentUrl"/>
                     </div>
                 </div>
                 <div class="ArticleDetailCommentContent">
