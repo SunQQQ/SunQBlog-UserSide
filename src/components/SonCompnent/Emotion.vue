@@ -1,8 +1,8 @@
 //表情包组件
 <template>
-    <div class="EmoticonListCover" v-show="Show" @click="OpenEmotion(false)">
+    <div class="EmoticonListCover" v-if="Show" @click="OpenEmotion(false)">
         <div class="EmoticonList">
-            <div class="PicItem" v-for="(item,i) in EmotionList" @click="ClickEmoticon(i)">
+            <div class="PicItem" v-for="(item,i) in EmotionList" @click="ClickEmoticon(i)" :key="i">
                 <img :src=" 'https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/' + i + '.gif'">
             </div>
         </div>

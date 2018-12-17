@@ -27,7 +27,7 @@
                             </div>
                             <div class="CommentItemContent">
                                 <div class="ArticleCommentNickName">{{ item.ArticleCommentNickName }}</div>
-                                <div class="ArticleCommentText">{{ item.ArticleCommentText }}</div>
+                                <div class="ArticleCommentText" v-html="item.ArticleCommentText">{{ item.ArticleCommentText }}</div>
                                 <div class="DateAnswer">
                                     <div class="DateAnswerLeft">{{ item.ArticleCommentDate }}</div>
                                     <div class="DateAnswerRight" @click="AnswerComment(item.ArticleCommentNickName)">
@@ -52,17 +52,22 @@
                 <div class="ArticleDetailCommentContent">
                     <textarea v-model="ArticleCommentText" ref="ArticleCommentText"
                               placeholder="欢迎评论吖，鼓励和板砖我都认真听取哦"></textarea>
+                    <span class="EmotionButton" @click="OpenEmotions()">
+                        <i class="iconfont icon-face IconfontSize"></i>
+                    </span>
                 </div>
                 <div class="CommentSubmitLine">
                     <div class="CommentSubmitButton" @click="CommentSubmit()">评论</div>
                 </div>
             </div>
         </div>
+        <Emotion ref="EmotionB" @AppendInputValue="AppendMessageText"></Emotion>
     </div>
 </template>
 
 <script>
-  import Marked from 'marked'
+  import Marked from 'marked';
+  import Emotion from '../SonCompnent/Emotion';
   export default {
     name: "BlogDetail",
     data: function () {
@@ -103,6 +108,8 @@
         var That = this;
 
         if (this.ArticleCommentNickName && this.ArticleCommentText) {
+          var MatchedMessageText = That.MatchEmotion(That.ArticleCommentText);
+
           this.SQFrontAjax({
             Url: '/api/ArticleCommentCreate/foreend',
             UploadData: {
@@ -110,7 +117,7 @@
               ArticleCommentNickName: this.ArticleCommentNickName,
               ArticleCommentEmail: this.ArticleCommentEmail,
               ArticleCommentUrl: this.ArticleCommentUrl,
-              ArticleCommentText: this.ArticleCommentText,
+              ArticleCommentText: MatchedMessageText,
               ArticleCommentDate: new Date()
             },
             Success: function () {
@@ -173,12 +180,23 @@
       AnswerComment: function (ComentNickName) {
         this.ArticleCommentText = '@' + ComentNickName + ':';
         this.$refs.ArticleCommentText.focus();
+      },
+      // 打开表情包弹框
+      OpenEmotions:function () {
+        this.$refs.EmotionB.OpenEmotion(true);
+      },
+      //表情选中后追加在input
+      AppendMessageText:function (EmotionChinese) {
+        this.ArticleCommentText += EmotionChinese;
       }
     },
     mounted: function () {
       this.InitPage(this);
       this.GetCommentList();
     },
+    components:{
+      Emotion
+    }
   }
 </script>
 
