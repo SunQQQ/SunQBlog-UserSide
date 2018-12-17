@@ -1,12 +1,14 @@
 //表情包组件
 <template>
-    <div class="EmoticonListCover" v-if="Show" @click="OpenEmotion(false)">
-        <div class="EmoticonList">
-            <div class="PicItem" v-for="(item,i) in EmotionList" @click="ClickEmoticon(i)" :key="i">
-                <img :src=" 'https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/' + i + '.gif'">
+    <transition name="Fade">
+        <div class="EmoticonListCover" v-if="Show" @click="OpenEmotion(false)">
+            <div class="EmoticonList">
+                <div class="PicItem" v-for="(item,i) in EmotionList" @click="ClickEmoticon(i)" :key="i">
+                    <img :src=" 'https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/' + i + '.gif'">
+                </div>
             </div>
         </div>
-    </div>
+    </transition>
 </template>
 
 <script>
@@ -35,7 +37,7 @@
       },
       OpenEmotion:function (Value) {
         this.Show = Value;
-      }
+      },
     }
   }
 </script>
@@ -81,5 +83,12 @@
         width: 24px;
         height: 24px;
         margin-top: 5px;
+    }
+
+    .Fade-enter-active, .fade-leave-active {
+        transition: opacity 0.8s;
+    }
+    .Fade-enter, .fade-leave-to {
+        opacity: 0;
     }
 </style>
