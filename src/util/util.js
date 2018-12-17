@@ -98,12 +98,13 @@ CommonFunction.install = function (Vue) {
       '拳头', '差劲', '爱你', 'NO', 'OK', '爱情', '飞吻', '跳跳', '发抖', '怄火', '转圈', '磕头', '回头', '跳绳', '挥手',
       '激动', '街舞', '献吻', '左太极', '右太极'];
 
-    //获取由所有双中括号的汉子组成的数组
-    var EmoticonChineseArray = data.match(/(?<=\[\[).*?(?=\]\])/g);  //如果匹配到返回数据，匹配不到返回null
-
+    //获取由所有双中括号的汉语组成的数组
+    var EmoticonChineseArray = data.match(/\[\[.*?\]\]/g);  //如果匹配到返回数据，匹配不到返回null,如[ '[[微笑]]','[[撇嘴]]' ]。因为es6不支持断言，只能处理成这样
+    // 将数组中的各项，替换为<img src='1.gif'>
     if(EmoticonChineseArray){
       EmoticonChineseArray.forEach(function (Item) {
-        data = data.replace(/\[\[.*?\]\]/,'<img src="https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/' + EmotionList.indexOf(Item) + '.gif">');
+        Item = Item.replace(/\[|\]/g,'');// 将字符串中的项如 '[[微笑]]'，替换为'微笑'
+        data = data.replace(/\[\[.*?\]\]/,'<img src="https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/' + EmotionList.indexOf(Item) + '.gif">'); //将'微笑'替换为<img src="https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/0.gif">
       });
     }
 
