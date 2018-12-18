@@ -1,6 +1,6 @@
-import axios from 'axios'
+import axios from 'axios';
 
-let CommonFunction = {}
+let CommonFunction = {};
 CommonFunction.install = function (Vue) {
   /*将UTC格式时间转为2018-09-09 08：00*/
   Vue.prototype.DateFormat = function (UTCDate) {
@@ -21,7 +21,7 @@ CommonFunction.install = function (Vue) {
     Minute = DataObject.getMinutes();
 
     return Year + '-' + AddZero(Month) + '-' + AddZero(Day) + ' ' + AddZero(Hour) + ':' + AddZero(Minute);
-  }
+  };
 
   Vue.prototype.SQFrontAjax = function (Para) {
     var That = this;
@@ -37,10 +37,10 @@ CommonFunction.install = function (Vue) {
       if(response.data.status == '0'){
         Para['Success'](response.data.data);
       }
-    }).catch(function (error) {
-      console.log(error);
+    }).catch(function () {
+
     });
-  }
+  };
 
   /**
    * 获取本地数据
@@ -55,7 +55,7 @@ CommonFunction.install = function (Vue) {
     }else {
       return {};
     }
-  }
+  };
 
   /**
    * 修改/存储 本地数据
@@ -79,7 +79,7 @@ CommonFunction.install = function (Vue) {
       Object[Data.Key] = Data.Value;
       localStorage.setItem(StorageName,JSON.stringify(Object));
     }
-  }
+  };
 
   /**
    * 正则表达匹配数据中是否有表情文字，将表情文字转成图片
@@ -109,7 +109,7 @@ CommonFunction.install = function (Vue) {
     }
 
     return data;
-  }
-}
+  };
+};
 
-export default CommonFunction
+export default CommonFunction;
