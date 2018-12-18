@@ -104,7 +104,7 @@ CommonFunction.install = function (Vue) {
     if(EmoticonChineseArray){
       EmoticonChineseArray.forEach(function (Item) {
         Item = Item.replace(/\[|\]/g,'');// 将字符串中的项如 '[[微笑]]'，替换为'微笑'
-        data = data.replace(/\[\[.*?\]\]/,'<img src="https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/' + EmotionList.indexOf(Item) + '.gif">'); //将'微笑'替换为<img src="https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/0.gif">
+        data = data.replace(/\[\[.*?\]\]/,'<img style="vertical-align:bottom" src="https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/' + EmotionList.indexOf(Item) + '.gif">'); //将'微笑'替换为<img src="https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/0.gif">
       });
     }
 
