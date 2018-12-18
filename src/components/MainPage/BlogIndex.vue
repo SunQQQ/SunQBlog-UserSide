@@ -185,7 +185,7 @@
           },
           Success: function (data) {
             data.forEach(function (Item) {
-              Item.MessageLeaveDate = That.DateFormat(Item.MessageLeaveDate);
+              Item.CreateDate = Item.CreateDate.slice(0,10);
             });
             That.ArticleList = That.ArticleList.concat(data);
             if(data.length != 8){
