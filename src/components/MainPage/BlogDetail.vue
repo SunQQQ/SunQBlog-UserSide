@@ -188,6 +188,8 @@
       //表情选中后追加在input
       AppendMessageText:function (EmotionChinese) {
         this.ArticleCommentText += EmotionChinese;
+		// 光标聚焦
+        this.$refs.ArticleCommentText.focus();
       }
     },
     mounted: function () {

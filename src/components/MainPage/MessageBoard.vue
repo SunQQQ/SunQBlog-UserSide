@@ -139,199 +139,210 @@
 </template>
 
 <script>
-  import Pagination from '../SonCompnent/Pagination';
-  import Emotion from '../SonCompnent/Emotion';
+	import Pagination from '../SonCompnent/Pagination';
+	import Emotion from '../SonCompnent/Emotion';
 
-  export default {
-    name: "MessageBoard",
-    data: function () {
-      return {
-        // textarea遮层
-        OpenTextAreaCover: true,
-        // 提交按钮显示
-        OpenMessageSubmitValue: false,
+	export default {
+		name: "MessageBoard",
+		data: function () {
+			return {
+				// textarea遮层
+				OpenTextAreaCover: true,
+				// 提交按钮显示
+				OpenMessageSubmitValue: false,
 
-        //textarea的留言文本
-        MessageText: '',
-        //留言人姓名
-        MessageLeaveName: '',
+				//textarea的留言文本
+				MessageText: '',
+				//留言人姓名
+				MessageLeaveName: '',
 
-        // 留言列表
-        MessageList: '',
-        // 写留言的时间
-        MessageLeaveDate: '',
-        //回复留言弹框
-        MessageAnswerFrame: false,
-        // 弹框显隐动画
-        FadeAnimate: false,
-        // 文章底线
-        AticleBottom: false,
-      }
-    },
-    methods: {
-      // 展示留言textarea
-      OpenMessageSubmit: function () {
-        // 隐藏textarea的遮层
-        this.OpenTextAreaCover = false;
-        //显示提交按钮
-        this.OpenMessageSubmitValue = true;
-        this.$refs['LeaveMessageTextArea'].focus();
+				// 留言列表
+				MessageList: '',
+				// 写留言的时间
+				MessageLeaveDate: '',
+				//回复留言弹框
+				MessageAnswerFrame: false,
+				// 弹框显隐动画
+				FadeAnimate: false,
+				// 文章底线
+				AticleBottom: false,
+			}
+		},
+		methods: {
+			// 展示留言textarea
+			OpenMessageSubmit: function () {
+				// 隐藏textarea的遮层
+				this.OpenTextAreaCover = false;
+				//显示提交按钮
+				this.OpenMessageSubmitValue = true;
+				this.$refs['LeaveMessageTextArea'].focus();
 
-        // 填写缓存中游客名
-        var LocalCommonUser = this.GetLocalStorage('SunqBlog');
-        if (LocalCommonUser.toString() != '{}') {
-          this.MessageLeaveName = LocalCommonUser.ArticleCommentNickName;
-        }
-      },
+				// 填写缓存中游客名
+				var LocalCommonUser = this.GetLocalStorage('SunqBlog');
+				if (LocalCommonUser.toString() != '{}') {
+					this.MessageLeaveName = LocalCommonUser.ArticleCommentNickName;
+				}
+			},
 
-      // 提交留言
-      MessageSubmit: function () {
-        var That = this;
-        if (this.MessageText && this.MessageLeaveName) {
-          var MatchedMessageText = That.MatchEmotion(That.MessageText);
+			// 提交留言
+			MessageSubmit: function () {
+				var That = this;
+				if (this.MessageText && this.MessageLeaveName) {
+					var MatchedMessageText = That.MatchEmotion(That.MessageText);
 
-          this.SQFrontAjax({
-            Url: '/api/MessageCreate/foreend',
-            UploadData: {
-              MessageText: MatchedMessageText,
-              MessageLeaveName: this.MessageLeaveName,
-              MessageLeaveDate: new Date()
-            },
-            Success: function () {
-              That.bus.$emit('Tips', {
-                Show: true,
-                Title: '留言成功'
-              });
-              // 清空留言框
-              That.MessageText = '';
-              // 存储用户名到本地
-              That.SetLocalStorage('SunqBlog', {
-                Key: 'ArticleCommentNickName',
-                Value: That.MessageLeaveName
-              });
-              // 刷新留言列表
-              That.MessageRead();
+					this.SQFrontAjax({
+						Url: '/api/MessageCreate/foreend',
+						UploadData: {
+							MessageText: MatchedMessageText,
+							MessageLeaveName: this.MessageLeaveName,
+							MessageLeaveDate: new Date()
+						},
+						Success: function () {
+							That.bus.$emit('Tips', {
+								Show: true,
+								Title: '留言成功'
+							});
+							// 清空留言框
+							That.MessageText = '';
+							// 存储用户名到本地
+							That.SetLocalStorage('SunqBlog', {
+								Key: 'ArticleCommentNickName',
+								Value: That.MessageLeaveName
+							});
+							// 刷新留言列表
+							That.MessageRead();
 
-              // 如果是回复留言，关闭留言弹框
-              That.MessageAnswerFrame = false
-            }
-          });
-        } else {
-          That.bus.$emit('Tips', {
-            Show: true,
-            Title: '昵称和留言不能为空呦！'
-          });
-        }
-      },
+							// 如果是回复留言，关闭留言弹框
+							That.MessageAnswerFrame = false;
+							// 初始TextArea框遮盖
+							That.OpenTextAreaCover = true;
+						}
+					});
+				} else {
+					That.bus.$emit('Tips', {
+						Show: true,
+						Title: '昵称和留言不能为空呦！'
+					});
+				}
+			},
 
-      // 渲染留言列表
-      MessageRead: function () {
-        var That = this;
+			// 渲染留言列表
+			MessageRead: function () {
+				var That = this;
 
-        this.SQFrontAjax({
-          Url: '/api/MessageRead/foreend',
-          UploadData: {
-            PagnationData: {
-              Skip: 0,
-              Limit: 8
-            }
-          },
-          Success: function (data) {
-            // 渲染列表
-            data.forEach(function (Item) {
-              Item.MessageLeaveDate = That.DateFormat(Item.MessageLeaveDate);
-            });
-            That.MessageList = data;
-          }
-        });
-        // 默认填写留言输入框的昵称
-        var LocalCommonUser = this.GetLocalStorage('SunqBlog');
-        if (LocalCommonUser.toString() != '{}') {
-          That.MessageLeaveName = LocalCommonUser.ArticleCommentNickName;
-        }
-      },
+				this.SQFrontAjax({
+					Url: '/api/MessageRead/foreend',
+					UploadData: {
+						PagnationData: {
+							Skip: 0,
+							Limit: 8
+						}
+					},
+					Success: function (data) {
+						// 渲染列表
+						data.forEach(function (Item) {
+							Item.MessageLeaveDate = That.DateFormat(Item.MessageLeaveDate);
+						});
+						That.MessageList = data;
+					}
+				});
+				// 默认填写留言输入框的昵称
+				var LocalCommonUser = this.GetLocalStorage('SunqBlog');
+				if (LocalCommonUser.toString() != '{}') {
+					That.MessageLeaveName = LocalCommonUser.ArticleCommentNickName;
+				}
+			},
 
-      // 打开回复留言弹框
-      AnswerMessage: function (AnswedPerson) {
-        var That = this;
-        this.MessageAnswerFrame = true;
-        this.FadeAnimate = true;
+			// 打开回复留言弹框
+			AnswerMessage: function (AnswedPerson) {
+				var That = this;
+				this.MessageAnswerFrame = true;
+				this.FadeAnimate = true;
 
-        // 填写@某人
-        this.MessageText = '@' + AnswedPerson + ':';
-        That.$refs.AnswerMessageContentDom.focus();
+				// 填写@某人
+				this.MessageText = '@' + AnswedPerson + ':';
+				// 等弹框Dom渲染完毕后再操作Dom
+				setTimeout(function () {
+					That.$refs['AnswerMessageContentDom'].focus();
+				}, 100);
 
-        // 填写缓存中游客名
-        var LocalCommonUser = this.GetLocalStorage('SunqBlog');
-        if (LocalCommonUser.toString() != '{}') {
-          That.MessageLeaveName = LocalCommonUser.ArticleCommentNickName;
-        }
-      },
+				// 填写缓存中游客名
+				var LocalCommonUser = this.GetLocalStorage('SunqBlog');
+				if (LocalCommonUser.toString() != '{}') {
+					That.MessageLeaveName = LocalCommonUser.ArticleCommentNickName;
+				}
+			},
 
-      // 关闭回复留言框
-      CloseAnswerMessage: function () {
-        var That = this;
-        this.FadeAnimate = false;
-        // 清空留言框
-        this.MessageText = '';
-        setTimeout(function () {
-          That.MessageAnswerFrame = false;
-        }, 200)
-      },
+			// 关闭回复留言框
+			CloseAnswerMessage: function () {
+				var That = this;
+				this.FadeAnimate = false;
+				// 清空留言框
+				this.MessageText = '';
+				setTimeout(function () {
+					That.MessageAnswerFrame = false;
+				}, 200)
+			},
 
-      // 上滑加载更多
-      ValueByPagition: function (SelectPage) {
-        var That = this;
-        this.SQFrontAjax({
-          Url: '/api/MessageRead/foreend',
-          UploadData: {
-            PagnationData: {
-              Skip: SelectPage * 8,
-              Limit: 8
-            }
-          },
-          Success: function (data) {
-            data.forEach(function (Item) {
-              Item.MessageLeaveDate = That.DateFormat(Item.MessageLeaveDate);
-            });
-            That.MessageList = That.MessageList.concat(data);
-            if (data.length != 8) {
-              That.AticleBottom = true;
-              // 停止分页器的滚动监听
-              That.$refs.Pagi.SetUpdate(false);
-            } else {
-              That.$refs.Pagi.SetUpdate(true);
-            }
-          }
-        });
-      },
+			// 上滑加载更多
+			ValueByPagition: function (SelectPage) {
+				var That = this;
+				this.SQFrontAjax({
+					Url: '/api/MessageRead/foreend',
+					UploadData: {
+						PagnationData: {
+							Skip: SelectPage * 8,
+							Limit: 8
+						}
+					},
+					Success: function (data) {
+						data.forEach(function (Item) {
+							Item.MessageLeaveDate = That.DateFormat(Item.MessageLeaveDate);
+						});
+						That.MessageList = That.MessageList.concat(data);
+						if (data.length != 8) {
+							That.AticleBottom = true;
+							// 停止分页器的滚动监听
+							That.$refs.Pagi.SetUpdate(false);
+						} else {
+							That.$refs.Pagi.SetUpdate(true);
+						}
+					}
+				});
+			},
 
-      // 打开表情框
-      OpenEmotions: function () {
-        this.$refs.EmotionB.OpenEmotion(true);
-      },
+			// 打开表情框
+			OpenEmotions: function () {
+				this.$refs.EmotionB.OpenEmotion(true);
+			},
 
-      // 点击表情，修改文本
-      AppendMessageText:function (EmotionChinese) {
-        this.MessageText += EmotionChinese;
-      }
-    },
-    created: function () {
-      document.documentElement.scrollTop = 0;
-    },
-    mounted: function () {
-      this.MessageRead();
-      // 切换Topbar高亮
-      this.bus.$emit('Topbar', {
-        Active: 1,
-        MobileMenuActive: 1
-      });
-    },
-    components: {
-      Pagination,
-      Emotion
-    }
-  }
+			// 点击表情，修改文本
+			AppendMessageText: function (EmotionChinese) {
+				this.MessageText += EmotionChinese;
+				// 回复弹框弹出时，即为回复留言
+				if (this.MessageAnswerFrame) {
+					this.$refs['AnswerMessageContentDom'].focus();
+				} else {
+					this.$refs['LeaveMessageTextArea'].focus();
+				}
+			}
+		},
+		created: function () {
+			document.documentElement.scrollTop = 0;
+		},
+		mounted: function () {
+			this.MessageRead();
+			// 切换Topbar高亮
+			this.bus.$emit('Topbar', {
+				Active: 1,
+				MobileMenuActive: 1
+			});
+		},
+		components: {
+			Pagination,
+			Emotion
+		}
+	}
 </script>
 
 <style scoped lang="less">
