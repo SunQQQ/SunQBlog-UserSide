@@ -53,7 +53,7 @@
                     </div>
                     <div class="Content">
                         <div class="GitName">孙权的Github</div>
-                        <a class="BlueButton" href="https://github.com/SunQQQ">Follow Me</a>
+                        <a class="BlueButton" href="https://github.com/SunQQQ" target="_blank">Follow Me</a>
                         <div class="BlogStatistic">
                             <div class="BlogStatisticItem">
                                 <div class="BlogStatisticItemNum">8</div>
