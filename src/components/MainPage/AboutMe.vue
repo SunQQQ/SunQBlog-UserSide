@@ -22,24 +22,24 @@
                 <div class="BigBlock AboutMeMarginTop">
                     <div class="TitleFontLine TitleFontLineThank">Thanks You All</div>
                     <div class="UrlCardTr AboutPage">
-                        <div class="UrlCardTd UrlCardTdBc">
+                        <a class="UrlCardTd UrlCardTdBc" href="https://jooger.me/" target="_blank">
                             <div class="UrlIconName UrlIconNameMargin">
                                 <img src="https://avatars1.githubusercontent.com/u/16385416?v=4">
                                 <div class="UrlName">Jooger</div>
                             </div>
-                        </div>
-                        <div class="UrlCardTd UrlCardTdBc">
+                        </a>
+                        <a class="UrlCardTd UrlCardTdBc" href="http://bh-lay.com/" target="_blank">
                             <div class="UrlIconName UrlIconNameMargin">
                                 <img src="http://bh-lay.com/touch-icon-ipad-retina.png">
                                 <div class="UrlName">小剧博客</div>
                             </div>
-                        </div>
-                        <div class="UrlCardTd UrlCardTdBc">
+                        </a>
+                        <a class="UrlCardTd UrlCardTdBc" href="https://github.com/SunQQQ" target="_blank">
                             <div class="UrlIconName UrlIconNameMargin">
                                 <img src="http://sunq.xyz/favicon.ico">
                                 <div class="UrlName">孙权的博客</div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>

@@ -14,6 +14,9 @@
 @FontColorGray: rgba(0,0,0,0.65);
 @FontColorGrayDeep:rgba(0,0,0,0.43);
 
+//默认字体颜色
+@DefaultFontColor:#333;
+
 @FontColorPagNation:#428bca;
 //footer
 @FontColorGrayWhite: #5e5e5e;
@@ -46,7 +49,7 @@ body {
   margin: 0;
   line-height: 24px;
   font: 14px Helvetica Neue,Helvetica,PingFang SC,Tahoma,Arial,sans-serif;
-  color: #333;
+  color: @DefaultFontColor;
   background-color: #efefee;
   font-size: 14px;
   -webkit-tap-highlight-color:transparent;
