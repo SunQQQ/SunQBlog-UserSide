@@ -8,6 +8,12 @@
         </div>
         <div class="UrlCardList">
             <div class="UrlCardTr">
+                <transition name="Fade">
+                    <img src="../../static/img/FriendUrlPlaceholder.png" class="FriendUrlPlaceholderPC" v-if="FriendUrlPlaceholder">
+                </transition>
+                <transition name="Fade">
+                    <img src="../../static/img/ArticleList.jpg" class="FriendUrlPlaceholderMobile" v-if="FriendUrlPlaceholder">
+                </transition>
                 <div class="UrlCardTd" v-for="item in FriendsUrlList" @click="OpenFriendUrl(item.FriendUrlAdress)">
                     <div class="UrlIconName">
                         <img v-bind:src="item.FriendUrlIcoUrl" v-if="item.FriendUrlIcoUrl">
@@ -76,7 +82,9 @@
         FadeAnimate:false,
 
         // 文章底线
-        AticleBottom:false
+        AticleBottom:false,
+
+       FriendUrlPlaceholder:true
       }
     },
     created:function(){
@@ -147,7 +155,8 @@
             }
           },
           Success:function (data) {
-            That.FriendsUrlList = data;
+           That.FriendUrlPlaceholder = false;
+           That.FriendsUrlList = data;
           }
         });
       },

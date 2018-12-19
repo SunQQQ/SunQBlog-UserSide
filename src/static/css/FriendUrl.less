@@ -88,6 +88,24 @@
     font-size: 1rem;
     margin: 0.5rem 0.5rem 0;
   }
+
+  .UrlCardTr{
+    .myflex('center');
+    flex-wrap: wrap;
+    position: relative;
+    min-height: 70vh;
+    margin-top: 1rem;
+  }
+  .FriendUrlPlaceholderPC{
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+  }
+  .FriendUrlPlaceholderMobile{
+    display: none;
+  }
 }
 /*移动端*/
 @media only screen and (max-device-width: 768px) {
@@ -149,11 +167,33 @@
     font-size: 0.8rem;
     color:@FontColorGrayDeep
   }
-}
 
-.UrlCardTr{
-  .myflex('center');
-  flex-wrap: wrap;
+  .UrlCardTr{
+    .myflex('center');
+    flex-wrap: wrap;
+    position: relative;
+    min-height: 70vh;
+  }
+  .FriendUrlPlaceholder{
+    display: none;
+  }
+
+  .UrlCardTr{
+    .myflex('center');
+    flex-wrap: wrap;
+    position: relative;
+    min-height: 70vh;
+  }
+  .FriendUrlPlaceholderPC{
+    display: none;
+  }
+  .FriendUrlPlaceholderMobile{
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+  }
 }
 .UrlIconName{
   .myflex('center');
