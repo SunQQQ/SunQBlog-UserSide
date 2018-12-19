@@ -5,9 +5,11 @@
             <div class="BlogFlex">
                 <div class="BlogIndexContentLeft">
                     <transition name="Fade">
-                        <img src="../../static/img/ArticleList.jpg" v-if="DefaultGraph.ArticleListPart" class="BlogIndexContentLeftDefaultGraph" >
+                        <img src="../../static/img/ArticleList.jpg" v-if="DefaultGraph.ArticleListPart"
+                             class="BlogIndexContentLeftDefaultGraph">
                     </transition>
-                    <div class="ArticleItem" v-for="(item,i) in ArticleList" v-bind:key="i" @click="UpdateRouter('BlogDetail',item._id)">
+                    <div class="ArticleItem" v-for="(item,i) in ArticleList" v-bind:key="i"
+                         @click="UpdateRouter('BlogDetail',item._id)">
                         <div class="ArticleItemCover" v-if="item.ArticleCover">
                             <img :src="item.ArticleCover">
                         </div>
@@ -91,7 +93,10 @@
                         </transition>
                         <div class="TagListHead">文章分类<span style="color: #aaa;font-size: 0.8rem">（点击筛选呦）</span></div>
                         <div class="TagListTr">
-                            <div :class="item.TagName != Tags.Active ? 'TagListTd' : 'TagListTdActive'" v-for="item in Tags" :key="item.id" @click="GetArticle(item.TagName)">{{ item.TagName }}</div>
+                            <div :class="item.TagName != Tags.Active ? 'TagListTd' : 'TagListTdActive'"
+                                 v-for="item in Tags" :key="item.id" @click="GetArticle(item.TagName)">{{ item.TagName
+                                }}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -102,198 +107,220 @@
 </template>
 
 <script>
-	import Heartfelt from '../SonCompnent/Heartfelt';
-	import Pagination from '../SonCompnent/Pagination';
-	export default {
-		name: "BlogIndex",
-		data:function () {
-			return{
-				// 标签量
-				Tags:[],
-				// 文章列表
-				ArticleList:[],
-				// 文章量
-				ArticleNum:0,
-				// 留言量
-				LeaveMessageNum:0,
-				// 博客评论量
-				CommentNum:0,
-                // 热门文章列表
-				HotArticleList:[],
-				// 文章底线
-				AticleBottom:false,
+  import Heartfelt from '../SonCompnent/Heartfelt';
+  import Pagination from '../SonCompnent/Pagination';
 
-                // 缺省图
-                DefaultGraph:{
-					ArticleListPart:true,
-                    HotArticlePart:true,
-                    ArticleTagPart:true
-                }
-			}
-		},
-		methods:{
-			InitArticleTag:function (That){
-				// 初始化标签列表
-				this.SQFrontAjax({
-					Url:'/api/TagRead/foreend',
-					Success:function (data) {
-						That.Tags = data;
-						That.Tags.Active = '';
-						That.DefaultGraph.ArticleTagPart = false;
-					}
-				});
+  export default {
+    name: "BlogIndex",
+    data: function () {
+      return {
+        // 标签量
+        Tags: [],
+        // 文章列表
+        ArticleList: [],
+        // 文章量
+        ArticleNum: 0,
+        // 留言量
+        LeaveMessageNum: 0,
+        // 博客评论量
+        CommentNum: 0,
+        // 热门文章列表
+        HotArticleList: [],
+        // 文章底线
+        AticleBottom: false,
 
-				// 获取文章列表
-				this.GetArticle('');
-				//渲染文章
-				this.GetArticleNum();
-				//渲染留言个数
-				this.GetLeaveMessageNum();
-				// 渲染评论个数
-				this.GetCommentNum();
-				//渲染热门博文
-				this.GetHotArticle();
-			},
-			// 获取文章列表
-			GetArticle:function(ArticleTag){
-				var That = this;
+        // 缺省图
+        DefaultGraph: {
+          ArticleListPart: true,
+          HotArticlePart: true,
+          ArticleTagPart: true
+        }
+      }
+    },
+    methods: {
+      InitArticleTag: function (That) {
+        // 初始化标签列表
+        this.SQFrontAjax({
+          Url: '/api/TagRead/foreend',
+          Success: function (data) {
+            That.Tags = data;
+            That.Tags.Active = '';
+            That.DefaultGraph.ArticleTagPart = false;
+          }
+        });
 
-				this.SQFrontAjax({
-					Url:'/api/ArticleRead/foreend',
-					UploadData:{
-						PagnationData: {
-							Skip: 0,
-							Limit: 8
-						},
-						ArticleTag:ArticleTag
-					},
-					Success:function (data) {
-						// 高亮
-						That.Tags.Active = ArticleTag;
+        // 获取文章列表
+        this.GetArticle('');
+        //渲染文章
+        this.GetArticleNum();
+        //渲染留言个数
+        this.GetLeaveMessageNum();
+        // 渲染评论个数
+        this.GetCommentNum();
+        //渲染热门博文
+        this.GetHotArticle();
+      },
+      // 获取文章列表
+      GetArticle: function (ArticleTag) {
+        var That = this;
 
-						data.forEach(function (Item) {
-							Item.CreateDate = Item.CreateDate.slice(0,10);
-						});
-						That.ArticleList = data;
-                        That.DefaultGraph.ArticleListPart = false;
-					}
-				});
-			},
-			// 获取留言数量
-			GetLeaveMessageNum:function(){
-				var That = this;
-				this.SQFrontAjax({
-					Url:'/api/getmessagenum',
-					Success:function (data) {
-						That.LeaveMessageNum = data;
-					}
-				});
-			},
-			//处理翻页
-			ValueByPagition:function (SelectPage) {
-				var That = this;
-				this.SQFrontAjax({
-					Url: '/api/ArticleRead/foreend',
-					UploadData: {
-						PagnationData: {
-							Skip:SelectPage * 8,
-							Limit:8
-						},
-						ArticleTag:That.Tags.Active
-					},
-					Success: function (data) {
-						data.forEach(function (Item) {
-							Item.CreateDate = Item.CreateDate.slice(0,10);
-						});
-						That.ArticleList = That.ArticleList.concat(data);
-						if(data.length != 8){
-							That.AticleBottom = true;
-							// 停止分页器的滚动监听
-							That.$refs.Pagi.SetUpdate(false);
-						}else {
-							That.$refs.Pagi.SetUpdate(true);
-						}
-					}
-				});
-			},
-			// 获取评论数量
-			GetCommentNum:function(){
-				var That = this;
-				this.SQFrontAjax({
-					Url:'/api/getcommentnum',
-					Success:function (data) {
-						That.CommentNum = data;
-					}
-				});
-			},
-			// 切换路由
-			UpdateRouter:function (RouterName,Id) {
-				if(Id){
-					/*this.$router.push({
-                      name:RouterName,
-                      params:{
-                        ID:Id
-                      }
-                    });*/
-					this.$router.push({
-						name:RouterName,
-						query:{
-							ID:Id
-						}
-					});
-				}else {
-					this.bus.$emit('TopBar', {
-						Active:1,
-						MobileMenuActive:1
-					});
-					this.$router.push({
-						name:RouterName
-					});
-				}
-			},
-			//获取文章数量
-			GetArticleNum:function () {
-				var That = this;
-				this.SQFrontAjax({
-					Url:'/api/getarticlenum/foreend',
-					Success:function (data) {
-						That.ArticleNum = data;
-					}
-				});
-			},
-			//获取热门文章
-			GetHotArticle:function () {
-				var That = this;
-				this.SQFrontAjax({
-					Url:'/api/HotArticleRead/foreend',
-					Success:function (data) {
-						That.HotArticleList = data;
-						That.DefaultGraph.HotArticlePart = false;
-					}
-				});
-			}
-		},
-		mounted:function(){
-			this.InitArticleTag(this);
-			// 切换Topbar高亮
-			this.bus.$emit('Topbar',{
-				Active:0,
-				MobileMenuActive:0
-			});
-			// 删除心声缓存
-			this.SetLocalStorage('SunqBlog', {
-				Key: 'HeartFeltData',
-				Value: ''
-			});
-		},
-		created:function(){
-			document.documentElement.scrollTop = 0;
-		},
-		components:{
-			Heartfelt,
-			Pagination
-		}
-	}
+        this.SQFrontAjax({
+          Url: '/api/ArticleRead/foreend',
+          UploadData: {
+            PagnationData: {
+              Skip: 0,
+              Limit: 8
+            },
+            ArticleTag: ArticleTag
+          },
+          Success: function (data) {
+            // 高亮
+            That.Tags.Active = ArticleTag;
+
+            data.forEach(function (Item) {
+              Item.CreateDate = Item.CreateDate.slice(0, 10);
+            });
+            That.ArticleList = data;
+
+            That.DefaultGraph.ArticleListPart = false;
+          }
+        });
+      },
+      // 获取留言数量
+      GetLeaveMessageNum: function () {
+        var That = this;
+        this.SQFrontAjax({
+          Url: '/api/getmessagenum',
+          Success: function (data) {
+
+            var NumInterval;
+            NumInterval = window.setInterval(function () {
+              That.LeaveMessageNum += 1;
+              if(data == That.LeaveMessageNum){
+                clearInterval(NumInterval);
+              }
+            }, 20);
+          }
+        });
+      },
+      //处理翻页
+      ValueByPagition: function (SelectPage) {
+        var That = this;
+        this.SQFrontAjax({
+          Url: '/api/ArticleRead/foreend',
+          UploadData: {
+            PagnationData: {
+              Skip: SelectPage * 8,
+              Limit: 8
+            },
+            ArticleTag: That.Tags.Active
+          },
+          Success: function (data) {
+            data.forEach(function (Item) {
+              Item.CreateDate = Item.CreateDate.slice(0, 10);
+            });
+            That.ArticleList = That.ArticleList.concat(data);
+            if (data.length != 8) {
+              That.AticleBottom = true;
+              // 停止分页器的滚动监听
+              That.$refs.Pagi.SetUpdate(false);
+            } else {
+              That.$refs.Pagi.SetUpdate(true);
+            }
+          }
+        });
+      },
+      // 获取评论数量
+      GetCommentNum: function () {
+        var That = this;
+        this.SQFrontAjax({
+          Url: '/api/getcommentnum',
+          Success: function (data) {
+
+            var NumInterval;
+            NumInterval = window.setInterval(function () {
+              That.CommentNum += 1;
+              if(data == That.CommentNum){
+                clearInterval(NumInterval);
+              }
+            }, 20);
+          }
+        });
+      },
+      // 切换路由
+      UpdateRouter: function (RouterName, Id) {
+        if (Id) {
+          /*this.$router.push({
+            name:RouterName,
+            params:{
+              ID:Id
+            }
+          });*/
+          this.$router.push({
+            name: RouterName,
+            query: {
+              ID: Id
+            }
+          });
+        } else {
+          this.bus.$emit('TopBar', {
+            Active: 1,
+            MobileMenuActive: 1
+          });
+          this.$router.push({
+            name: RouterName
+          });
+        }
+      },
+      //获取文章数量
+      GetArticleNum: function () {
+        var That = this;
+        this.SQFrontAjax({
+          Url: '/api/getarticlenum/foreend',
+          Success: function (data) {
+            var NumInterval;
+            NumInterval = window.setInterval(function () {
+              That.ArticleNum += 1;
+              if(data == That.ArticleNum){
+                clearInterval(NumInterval);
+              }
+            }, 20);
+          }
+        });
+      },
+      //获取热门文章
+      GetHotArticle: function () {
+        var That = this;
+        this.SQFrontAjax({
+          Url: '/api/HotArticleRead/foreend',
+          Success: function (data) {
+            That.HotArticleList = data;
+            That.DefaultGraph.HotArticlePart = false;
+          }
+        });
+      }
+    },
+    mounted: function () {
+      this.InitArticleTag(this);
+      // 切换Topbar高亮
+      this.bus.$emit('Topbar', {
+        Active: 0,
+        MobileMenuActive: 0
+      });
+      // 删除心声缓存
+      this.SetLocalStorage('SunqBlog', {
+        Key: 'HeartFeltData',
+        Value: ''
+      });
+    },
+    created: function () {
+      document.documentElement.scrollTop = 0;
+    },
+    components: {
+      Heartfelt,
+      Pagination
+    }
+  }
 </script>
 
 <style scoped lang="less">
