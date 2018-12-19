@@ -193,8 +193,7 @@
           Url: '/api/getmessagenum',
           Success: function (data) {
 
-            var NumInterval;
-            NumInterval = window.setInterval(function () {
+            var NumInterval = window.setInterval(function () {
               That.LeaveMessageNum += 1;
               if(data == That.LeaveMessageNum){
                 clearInterval(NumInterval);
@@ -237,8 +236,7 @@
           Url: '/api/getcommentnum',
           Success: function (data) {
 
-            var NumInterval;
-            NumInterval = window.setInterval(function () {
+            var NumInterval = window.setInterval(function () {
               That.CommentNum += 1;
               if(data == That.CommentNum){
                 clearInterval(NumInterval);
@@ -278,8 +276,7 @@
         this.SQFrontAjax({
           Url: '/api/getarticlenum/foreend',
           Success: function (data) {
-            var NumInterval;
-            NumInterval = window.setInterval(function () {
+            var NumInterval = window.setInterval(function () {
               That.ArticleNum += 1;
               if(data == That.ArticleNum){
                 clearInterval(NumInterval);
