@@ -20,7 +20,7 @@
                 </div>
                 <div class="BigBlock AboutMeMarginTop">
                     <div class="TitleFontLine TitleFontLineThank">Thanks You All</div>
-                    <div class="UrlCardTr">
+                    <div class="UrlCardTr AboutPage">
                         <div class="UrlCardTd UrlCardTdBc">
                             <div class="UrlIconName UrlIconNameMargin">
                                 <img src="https://avatars1.githubusercontent.com/u/16385416?v=4">
