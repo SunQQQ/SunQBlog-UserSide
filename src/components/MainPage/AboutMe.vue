@@ -1,4 +1,5 @@
 <template>
+    <transition name="Fade" mode="out-in">
     <div>
         <div class="FlexContent">
             <div class="LeftPart">
@@ -94,6 +95,7 @@
         </div>
         <Heartfelt></Heartfelt>
     </div>
+    </transition>
 </template>
 
 <script>
@@ -118,4 +120,5 @@
 
 <style scoped lang="less">
     @import "../../static/css/AboutMe";
+
 </style>

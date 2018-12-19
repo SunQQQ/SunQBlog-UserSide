@@ -1,39 +1,42 @@
 <template>
-    <div>
-        <div class="TimeFixedBac"></div>
-        <div class="FriendUrlBac">
-            <div class="FriendUrlTitle TimeLIneTitle">
-                <div class="FriendUrlTitleText" style="margin-bottom: 2rem">时间轴</div>
-                <div class="FriendUrlTitleSummary">梦每个人都有，但不是每个人都能一步一步的跟着时间往前走</div>
-                <div class="FriendUrlTitleSummary">我是个自律性不好的人，希望能守住初心</div>
-                <div class="FriendUrlTitleSummary">一步一个脚印的，不畏惧，不空想</div>
-                <div class="FriendUrlTitleSummary">坚持住，往前走</div>
-                <div class="FriendUrlTitleSummary">共勉</div>
-            </div>
-        </div>
-        <div class="UrlCardList">
-            <div v-for="(Item,Index) in TimeLineList">
-                <div class="TimeLineTr" v-if="Index%2 == 0">
-                    <div class="TimeLineTdLeft"></div>
-                    <div class="TimeLineTdCenter"></div>
-                    <div class="TimeLineTdRight">
-                        <div class="BubbleRight">
-                            <span class="TimeLineTime">{{ Item.CreateDate }}</span>{{ Item.TextContent }}
-                        </div>
-                    </div>
-                </div>
-                <div class="TimeLineTr" v-if="Index%2 != 0">
-                    <div class="TimeLineTdLeft">
-                        <div class="Bubble">
-                            <span class="TimeLineTime">{{ Item.CreateDate }}</span>{{ Item.TextContent }}
-                        </div>
-                    </div>
-                    <div class="TimeLineTdCenter"></div>
-                    <div class="TimeLineTdRight"></div>
+    <transition name="Fade" mode="out-in">
+        <div>
+            <div class="TimeFixedBac"></div>
+            <div class="FriendUrlBac">
+                <div class="FriendUrlTitle TimeLIneTitle">
+                    <div class="FriendUrlTitleText" style="margin-bottom: 2rem">时间轴</div>
+                    <div class="FriendUrlTitleSummary">梦每个人都有，但不是每个人都能一步一步的跟着时间往前走</div>
+                    <div class="FriendUrlTitleSummary">我是个自律性不好的人，希望能守住初心</div>
+                    <div class="FriendUrlTitleSummary">一步一个脚印的，不畏惧，不空想</div>
+                    <div class="FriendUrlTitleSummary">坚持住，往前走</div>
+                    <div class="FriendUrlTitleSummary">共勉</div>
                 </div>
             </div>
+            <div class="UrlCardList">
+                <div v-for="(Item,Index) in TimeLineList">
+                    <div class="TimeLineTr" v-if="Index%2 == 0">
+                        <div class="TimeLineTdLeft"></div>
+                        <div class="TimeLineTdCenter"></div>
+                        <div class="TimeLineTdRight">
+                            <div class="BubbleRight">
+                                <span class="TimeLineTime">{{ Item.CreateDate }}</span>{{ Item.TextContent }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="TimeLineTr" v-if="Index%2 != 0">
+                        <div class="TimeLineTdLeft">
+                            <div class="Bubble">
+                                <span class="TimeLineTime">{{ Item.CreateDate }}</span>{{ Item.TextContent }}
+                            </div>
+                        </div>
+                        <div class="TimeLineTdCenter"></div>
+                        <div class="TimeLineTdRight"></div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </transition>
+
 </template>
 
 <script>

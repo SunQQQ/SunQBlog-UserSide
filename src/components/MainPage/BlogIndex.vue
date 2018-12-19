@@ -1,4 +1,5 @@
 <template>
+    <transition name="Fade" mode="out-in">
     <div>
         <div class="TopBarHeight"></div>
         <div class="BlogIndexContent">
@@ -104,6 +105,7 @@
         </div>
         <Heartfelt></Heartfelt>
     </div>
+    </transition>
 </template>
 
 <script>

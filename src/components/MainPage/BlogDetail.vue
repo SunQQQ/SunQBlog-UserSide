@@ -1,4 +1,5 @@
 <template>
+    <transition name="Fade" mode="out-in">
     <div>
         <div class="TopBarHeight"></div>
         <div class="ArticleDetailHeader">
@@ -63,6 +64,7 @@
         </div>
         <Emotion ref="EmotionB" @AppendInputValue="AppendMessageText"></Emotion>
     </div>
+    </transition>
 </template>
 
 <script>

@@ -1,69 +1,71 @@
 <template>
-    <div>
-        <div class="FriendUrlBac">
-            <div class="FriendUrlTitle">
-                <div class="FriendUrlTitleText">前端朋友圈</div>
-                <div class="CreateFriendUrlButton" @click="OpenPopup">我也加入</div>
+    <transition name="fade" mode="out-in">
+        <div>
+            <div class="FriendUrlBac">
+                <div class="FriendUrlTitle">
+                    <div class="FriendUrlTitleText">前端朋友圈</div>
+                    <div class="CreateFriendUrlButton" @click="OpenPopup">我也加入</div>
+                </div>
             </div>
-        </div>
-        <div class="UrlCardList">
-            <div class="UrlCardTr">
-                <transition name="Fade">
-                    <img src="../../static/img/FriendUrlPlaceholder.png" class="FriendUrlPlaceholderPC" v-if="FriendUrlPlaceholder">
-                </transition>
-                <transition name="Fade">
-                    <img src="../../static/img/ArticleList.jpg" class="FriendUrlPlaceholderMobile" v-if="FriendUrlPlaceholder">
-                </transition>
-                <div class="UrlCardTd" v-for="item in FriendsUrlList" @click="OpenFriendUrl(item.FriendUrlAdress)">
-                    <div class="UrlIconName">
-                        <img v-bind:src="item.FriendUrlIcoUrl" v-if="item.FriendUrlIcoUrl">
-                        <img src="../../static/img/DefaultHeadIcon.jpg" v-if="!item.FriendUrlIcoUrl">
+            <div class="UrlCardList">
+                <div class="UrlCardTr">
+                    <transition name="Fade">
+                        <img src="../../static/img/FriendUrlPlaceholder.png" class="FriendUrlPlaceholderPC" v-if="FriendUrlPlaceholder">
+                    </transition>
+                    <transition name="Fade">
+                        <img src="../../static/img/ArticleList.jpg" class="FriendUrlPlaceholderMobile" v-if="FriendUrlPlaceholder">
+                    </transition>
+                    <div class="UrlCardTd" v-for="item in FriendsUrlList" @click="OpenFriendUrl(item.FriendUrlAdress)">
+                        <div class="UrlIconName">
+                            <img v-bind:src="item.FriendUrlIcoUrl" v-if="item.FriendUrlIcoUrl">
+                            <img src="../../static/img/DefaultHeadIcon.jpg" v-if="!item.FriendUrlIcoUrl">
 
-                        <div class="UrlName">{{ item.FriendUrlNickName }}</div>
+                            <div class="UrlName">{{ item.FriendUrlNickName }}</div>
+                        </div>
+                        <div class="UrlSummary">{{ item.FriendUrlDescript }}</div>
                     </div>
-                    <div class="UrlSummary">{{ item.FriendUrlDescript }}</div>
+                </div>
+                <div class="ListBottom" v-if="AticleBottom">你滑到我底线啦</div>
+                <Pagination v-on:PaginationToParent="ValueByPagition" ref="Pagi"></Pagination>
+            </div>
+            <div class="PopupWindow" v-show="Wrapper">
+                <div class="FriendUrlWrapper" @click="ClosePopup"></div>
+                <div :class="FadeAnimate ? 'FriendUrlCreateWindowFadeIn' : 'FriendUrlCreateWindowFadeOut'">
+                    <div class="FriendUrlCreateWindowHeader">
+                        加入朋友圈<span @click="ClosePopup"><i class="iconfont icon-fork IconfontSize"></i></span>
+                    </div>
+                    <div class="FriendUrlCreateWindowItem">
+                        <div class="FriendUrlCreateWindowItemLeft">姓名/昵称：</div>
+                        <div class="FriendUrlCreateWindowItemRight">
+                            <input v-model="FriendUrlNickName"/>
+                        </div>
+                    </div>
+                    <div class="FriendUrlCreateWindowItem">
+                        <div class="FriendUrlCreateWindowItemLeft">博客地址：</div>
+                        <div class="FriendUrlCreateWindowItemRight">
+                            <input v-model="FriendUrlAdress"/>
+                        </div>
+                    </div>
+                    <div class="FriendUrlCreateWindowItem">
+                        <div class="FriendUrlCreateWindowItemLeft">图标地址：</div>
+                        <div class="FriendUrlCreateWindowItemRight">
+                            <input v-model="FriendUrlIcoUrl" placeholder="可以不填哦"/>
+                        </div>
+                    </div>
+                    <div class="FriendUrlCreateWindowItem">
+                        <div class="FriendUrlCreateWindowItemLeft">个人描述：</div>
+                        <div class="FriendUrlCreateWindowItemRight">
+                            <input v-model="FriendUrlDescript"/>
+                        </div>
+                    </div>
+                    <div class="FriendUrlCreateWindowFooter">
+                        <div class="FriendUrlSubmitButton" @click="FriendUrlSubmit">提交</div>
+                        <div class="FriendUrlSubmitButton FriendUrlCancelButton" @click="ClosePopup">取消</div>
+                    </div>
                 </div>
             </div>
-            <div class="ListBottom" v-if="AticleBottom">你滑到我底线啦</div>
-            <Pagination v-on:PaginationToParent="ValueByPagition" ref="Pagi"></Pagination>
         </div>
-        <div class="PopupWindow" v-show="Wrapper">
-            <div class="FriendUrlWrapper" @click="ClosePopup"></div>
-            <div :class="FadeAnimate ? 'FriendUrlCreateWindowFadeIn' : 'FriendUrlCreateWindowFadeOut'">
-                <div class="FriendUrlCreateWindowHeader">
-                    加入朋友圈<span @click="ClosePopup"><i class="iconfont icon-fork IconfontSize"></i></span>
-                </div>
-                <div class="FriendUrlCreateWindowItem">
-                    <div class="FriendUrlCreateWindowItemLeft">姓名/昵称：</div>
-                    <div class="FriendUrlCreateWindowItemRight">
-                        <input v-model="FriendUrlNickName"/>
-                    </div>
-                </div>
-                <div class="FriendUrlCreateWindowItem">
-                    <div class="FriendUrlCreateWindowItemLeft">博客地址：</div>
-                    <div class="FriendUrlCreateWindowItemRight">
-                        <input v-model="FriendUrlAdress"/>
-                    </div>
-                </div>
-                <div class="FriendUrlCreateWindowItem">
-                    <div class="FriendUrlCreateWindowItemLeft">图标地址：</div>
-                    <div class="FriendUrlCreateWindowItemRight">
-                        <input v-model="FriendUrlIcoUrl" placeholder="可以不填哦"/>
-                    </div>
-                </div>
-                <div class="FriendUrlCreateWindowItem">
-                    <div class="FriendUrlCreateWindowItemLeft">个人描述：</div>
-                    <div class="FriendUrlCreateWindowItemRight">
-                        <input v-model="FriendUrlDescript"/>
-                    </div>
-                </div>
-                <div class="FriendUrlCreateWindowFooter">
-                    <div class="FriendUrlSubmitButton" @click="FriendUrlSubmit">提交</div>
-                    <div class="FriendUrlSubmitButton FriendUrlCancelButton" @click="ClosePopup">取消</div>
-                </div>
-            </div>
-        </div>
-    </div>
+    </transition>
 </template>
 
 <script>

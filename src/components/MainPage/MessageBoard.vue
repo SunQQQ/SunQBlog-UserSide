@@ -1,4 +1,5 @@
 <template>
+    <transition name="Fade" mode="out-in">
     <div style="position: relative">
         <div class="MessageBoardCover">
             <div class="WriteMessageFrameFadeIn">
@@ -136,6 +137,7 @@
         </div>
         <Emotion ref="EmotionB" @AppendInputValue="AppendMessageText"></Emotion>
     </div>
+    </transition>
 </template>
 
 <script>
