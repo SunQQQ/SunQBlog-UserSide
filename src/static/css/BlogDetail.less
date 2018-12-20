@@ -29,9 +29,24 @@
     margin: 0rem auto 0;
     background-color: @fore_color;
   }
+
   .ArticleDetailContentTab {
     padding: 3rem 0;
     margin: 0 6rem;
+    position: relative;
+    min-height: 50vh;
+  }
+
+  .BlogDetailSkeletonScreenPC{
+    width: 100%;
+    height: 80%;
+    position: absolute;
+    left: 0;
+    top:10%;
+  }
+
+  .BlogDetailSkeletonScreenMobile{
+    display: none;
   }
 
   .CommentUserInfo input {
@@ -87,10 +102,26 @@
   }
 
   .ArticleDetailContent {
-    background-color: @back_color;
+    background-color: @fore_color;
   }
+
   .ArticleDetailContentTab {
     padding: 0.5rem 1rem 1rem;
+    min-height: 80vh;
+    position: relative;
+  }
+
+  .BlogDetailSkeletonScreenPC{
+    display: none;
+  }
+
+  .BlogDetailSkeletonScreenMobile{
+    width: 90%;
+    margin: 0 1rem;
+    height: 90%;
+    position: absolute;
+    left: 0;
+    top: 1.8rem;
   }
 
   .CommentUserInfo input{
@@ -107,7 +138,6 @@
 
   .CommentSubmitLine {
     text-align: right;
-    margin-bottom: 2rem;
     padding-right: 0.5rem;
   }
 

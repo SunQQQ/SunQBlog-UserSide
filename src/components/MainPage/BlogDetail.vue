@@ -1,75 +1,90 @@
 <template>
     <transition name="Fade" mode="out-in">
-    <div>
-        <div class="TopBarHeight"></div>
-        <div class="ArticleDetailHeader">
-            <img :src="Article.ArticleCover">
-            <div class="HeaderContent" v-if="!Article.ArticleCover">
-                <span>{{ Article.Title }}</span>
-                <span>{{ Article.Summary }}</span>
+        <div>
+            <div class="TopBarHeight"></div>
+            <div class="ArticleDetailHeader">
+                <img :src="Article.ArticleCover">
+                <div class="HeaderContent" v-if="!Article.ArticleCover">
+                    <span>{{ Article.Title }}</span>
+                    <span>{{ Article.Summary }}</span>
+                </div>
             </div>
-        </div>
 
-        <div class="ArticleDetailContent">
-            <div class="ArticleDetailContentTab">
-                <h1>{{ Article.Title }}</h1>
-                <div class="ArticleCreateTime">发布时间：{{ Article.CreateDate }}</div>
-                <div class="markdown-body" v-html="Article.Content">{{ Article.Content }}</div>
+            <div class="ArticleDetailContent">
+                <div class="ArticleDetailContentTab">
+                    <transition name="Fade" mode="out-in">
+                        <img src="../../static/img/BlogDetailSkele_PC.jpg" class="BlogDetailSkeletonScreenPC"
+                             v-show="BlogDetailSkeletonScreen">
+                    </transition>
+
+                        <img src="../../static/img/BlogDetailSkele_Mobile.jpg" class="BlogDetailSkeletonScreenMobile"
+                             v-show="BlogDetailSkeletonScreen">
+
+                    <h1>{{ Article.Title }}</h1>
+                    <div class="ArticleCreateTime">发布时间：{{ Article.CreateDate }}</div>
+                    <div class="markdown-body" v-html="Article.Content">{{ Article.Content }}</div>
+                </div>
             </div>
-        </div>
-        <div class="ArticleDetailContent" style="margin-top: 1rem">
-            <div class="ArticleDetailContentTab" style="padding: 2rem 0;">
-                <div class="ArticleDetailComment">
-                    <div class="CommentList">
-                        <div class="CommentItem" v-for="item in ArticleCommentList" if="ArticleCommentList.length != 0">
-                            <div class="CommentItemIcon">
-                                <img src="../../static/img/DefaultHeadIcon.jpg" v-if="item.ArticleCommentNickName != 'sunq'">
-                                <img src="../../static/img/ZhihuIcon.jpg" v-if="item.ArticleCommentNickName == 'sunq'">
-                            </div>
-                            <div class="CommentItemContent">
-                                <div class="ArticleCommentNickName">{{ item.ArticleCommentNickName }}</div>
-                                <div class="ArticleCommentText" v-html="item.ArticleCommentText">{{ item.ArticleCommentText }}</div>
-                                <div class="DateAnswer">
-                                    <div class="DateAnswerLeft">{{ item.ArticleCommentDate }}</div>
-                                    <div class="DateAnswerRight" @click="AnswerComment(item.ArticleCommentNickName)">
-                                        回复
+            <div class="ArticleDetailContent" style="margin-top: 1rem">
+                <div class="ArticleDetailContentTab" style="padding: 1rem;min-height: unset">
+                    <div class="ArticleDetailComment">
+                        <div class="CommentList">
+                            <div class="CommentItem" v-for="item in ArticleCommentList"
+                                 if="ArticleCommentList.length != 0">
+                                <div class="CommentItemIcon">
+                                    <img src="../../static/img/DefaultHeadIcon.jpg"
+                                         v-if="item.ArticleCommentNickName != 'sunq'">
+                                    <img src="../../static/img/ZhihuIcon.jpg"
+                                         v-if="item.ArticleCommentNickName == 'sunq'">
+                                </div>
+                                <div class="CommentItemContent">
+                                    <div class="ArticleCommentNickName">{{ item.ArticleCommentNickName }}</div>
+                                    <div class="ArticleCommentText" v-html="item.ArticleCommentText">{{
+                                        item.ArticleCommentText }}
+                                    </div>
+                                    <div class="DateAnswer">
+                                        <div class="DateAnswerLeft">{{ item.ArticleCommentDate }}</div>
+                                        <div class="DateAnswerRight"
+                                             @click="AnswerComment(item.ArticleCommentNickName)">
+                                            回复
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="ArticleDetailCommentFirstLine">
-                    <div class="UserHeadIcon">
-                        <img src="../../static/img/DefaultHeadIcon.jpg">
+                    <div class="ArticleDetailCommentFirstLine">
+                        <div class="UserHeadIcon">
+                            <img src="../../static/img/DefaultHeadIcon.jpg">
+                        </div>
+                        <div class="CommentUserInfo">
+                            <input placeholder="昵称（必填）" v-model="ArticleCommentNickName"/>
+                            <input placeholder="邮箱（可以不填哦）" v-model="ArticleCommentEmail"/>
+                            <input placeholder="网址（可以不填哦）" v-model="ArticleCommentUrl"/>
+                        </div>
                     </div>
-                    <div class="CommentUserInfo">
-                        <input placeholder="昵称（必填）" v-model="ArticleCommentNickName"/>
-                        <input placeholder="邮箱（可以不填哦）" v-model="ArticleCommentEmail"/>
-                        <input placeholder="网址（可以不填哦）" v-model="ArticleCommentUrl"/>
-                    </div>
-                </div>
-                <div class="ArticleDetailCommentContent">
+                    <div class="ArticleDetailCommentContent">
                     <textarea v-model="ArticleCommentText" ref="ArticleCommentText"
                               placeholder="欢迎评论吖，鼓励和板砖我都认真听取哦"></textarea>
-                    <span class="EmotionButton" @click="OpenEmotions()">
+                        <span class="EmotionButton" @click="OpenEmotions()">
                         <i class="iconfont icon-face IconfontSize"></i>
                     </span>
-                </div>
-                <div class="CommentSubmitLine">
-                    <div class="CommentSubmitButton" @click="CommentSubmit()">评论</div>
+                    </div>
+                    <div class="CommentSubmitLine">
+                        <div class="CommentSubmitButton" @click="CommentSubmit()">评论</div>
+                    </div>
                 </div>
             </div>
+            <Emotion ref="EmotionB" @AppendInputValue="AppendMessageText"></Emotion>
         </div>
-        <Emotion ref="EmotionB" @AppendInputValue="AppendMessageText"></Emotion>
-    </div>
     </transition>
 </template>
 
 <script>
   import Marked from 'marked';
   import Emotion from '../SonCompnent/Emotion';
+
   export default {
     name: "BlogDetail",
     data: function () {
@@ -80,22 +95,27 @@
         ArticleCommentUrl: '',
         ArticleCommentText: '',
         ArticleCommentDate: '',
-        ArticleCommentList: ''
+        ArticleCommentList: '',
+        BlogDetailSkeletonScreen: true
       }
     },
     methods: {
       // 初始化页面
-      InitPage: function (that) {
+      InitPage: function () {
+        var That = this;
         this.SQFrontAjax({
           Url: '/api/ArticleReadOne/foreend',
           UploadData: {
             /*_id: this.$route.query.ID*/
-            _id:this.$route.query.ID
+            _id: this.$route.query.ID
           },
-          Success:function(data){
-            that.Article = data[0];
-            that.Article.CreateDate = that.DateFormat(that.Article.CreateDate);
-            that.Article.Content = Marked(that.Article.Content);
+          Success: function (data) {
+            // 关闭骨架屏
+            That.BlogDetailSkeletonScreen = false;
+
+            That.Article = data[0];
+            That.Article.CreateDate = That.DateFormat(that.Article.CreateDate);
+            That.Article.Content = Marked(that.Article.Content);
           }
         });
 
@@ -167,7 +187,7 @@
         });
       },
       // 文章评论数加一
-      UpdateArticleCommentNum:function(){
+      UpdateArticleCommentNum: function () {
         this.SQFrontAjax({
           Url: '/api/ArticleCommentNumUpdate/foreend',
           UploadData: {
@@ -184,21 +204,21 @@
         this.$refs.ArticleCommentText.focus();
       },
       // 打开表情包弹框
-      OpenEmotions:function () {
+      OpenEmotions: function () {
         this.$refs.EmotionB.OpenEmotion(true);
       },
       //表情选中后追加在input
-      AppendMessageText:function (EmotionChinese) {
+      AppendMessageText: function (EmotionChinese) {
         this.ArticleCommentText += EmotionChinese;
-		// 光标聚焦
+        // 光标聚焦
         this.$refs.ArticleCommentText.focus();
       }
     },
     mounted: function () {
-      this.InitPage(this);
+      this.InitPage();
       this.GetCommentList();
     },
-    components:{
+    components: {
       Emotion
     }
   }

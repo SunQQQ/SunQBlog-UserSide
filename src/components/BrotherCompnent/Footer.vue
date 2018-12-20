@@ -34,7 +34,7 @@
     @media only screen and (max-device-width : 768px) {
         .Footer{
             text-align: center;
-            background-color: @TranslucentWhitleBackg;
+            background-color: @FontColorGray;
             color: @footerColor;
             padding: 1.5rem;
             margin-top: 1rem;
