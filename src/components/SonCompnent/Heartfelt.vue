@@ -22,11 +22,6 @@
         var That = this,
           CurrentDate = (new Date()).getTime();
 
-
-        console.log('That.LocalHeartFeltData');
-        console.log(That.LocalHeartFeltData);
-
-
         if(That.LastLoginDate){
           That.IntervalTime = CurrentDate - That.LastLoginDate;
         }
