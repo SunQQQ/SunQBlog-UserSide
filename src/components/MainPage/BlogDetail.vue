@@ -39,8 +39,8 @@
                                 </div>
                                 <div class="CommentItemContent">
                                     <div class="ArticleCommentNickName">{{ item.ArticleCommentNickName }}</div>
-                                    <div class="ArticleCommentText" v-html="item.ArticleCommentText">{{
-                                        item.ArticleCommentText }}
+                                    <div class="ArticleCommentText" v-html="item.ArticleCommentText">
+                                        {{ item.ArticleCommentText }}
                                     </div>
                                     <div class="DateAnswer">
                                         <div class="DateAnswerLeft">{{ item.ArticleCommentDate }}</div>
@@ -114,8 +114,8 @@
             That.BlogDetailSkeletonScreen = false;
 
             That.Article = data[0];
-            That.Article.CreateDate = That.DateFormat(that.Article.CreateDate);
-            That.Article.Content = Marked(that.Article.Content);
+            That.Article.CreateDate = That.DateFormat(That.Article.CreateDate);
+            That.Article.Content = Marked(That.Article.Content); //Markdown格式字符串转html
           }
         });
 
