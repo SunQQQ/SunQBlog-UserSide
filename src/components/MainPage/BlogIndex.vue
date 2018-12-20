@@ -200,7 +200,7 @@
               if(data == That.LeaveMessageNum){
                 clearInterval(NumInterval);
               }
-            }, 20);
+            }, 30);
           }
         });
       },
@@ -243,7 +243,7 @@
               if(data == That.CommentNum){
                 clearInterval(NumInterval);
               }
-            }, 20);
+            }, 30);
           }
         });
       },
@@ -283,7 +283,7 @@
               if(data == That.ArticleNum){
                 clearInterval(NumInterval);
               }
-            }, 20);
+            }, 30);
           }
         });
       },
@@ -305,11 +305,6 @@
       this.bus.$emit('Topbar', {
         Active: 0,
         MobileMenuActive: 0
-      });
-      // 删除心声缓存
-      this.SetLocalStorage('SunqBlog', {
-        Key: 'HeartFeltData',
-        Value: ''
       });
     },
     created: function () {

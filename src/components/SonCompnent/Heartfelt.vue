@@ -12,16 +12,35 @@
       return{
         HeartfeltContent:'',
         HeartfeltWritter:'',
-        LocalHeartFeltData: this.GetLocalStorage('SunqBlog') ? this.GetLocalStorage('SunqBlog').HeartFeltData : ''
+        LocalHeartFeltData: this.GetLocalStorage('SunqBlog') ? this.GetLocalStorage('SunqBlog').HeartFeltData : '', //本地缓存的心声数据
+        LastLoginDate: this.GetLocalStorage('SunqBlog') ? this.GetLocalStorage('SunqBlog').LastLoginDate : '',      //最近一次登录时间
+        IntervalTime:-1
       }
     },
     methods:{
       InitView:function () {
-        var That = this;
+        var That = this,
+          CurrentDate = (new Date()).getTime();
 
-        if(That.LocalHeartFeltData){
-          That.GetHeartfelt(That.LocalHeartFeltData.length);
-        }else {
+
+        console.log('That.LocalHeartFeltData');
+        console.log(That.LocalHeartFeltData);
+
+
+        if(That.LastLoginDate){
+          That.IntervalTime = CurrentDate - That.LastLoginDate;
+        }
+
+        // 有缓存并且距最近登录时间小于1天。则使用缓存
+        if(That.LocalHeartFeltData && That.IntervalTime < 1000*60*60*24){
+          That.GetHeartfelt(That.LocalHeartFeltData.length,That.LocalHeartFeltData);
+        // 如果没有缓存(第一次登陆) 或者距最近登录时间大于1天。则重新请求数据，记下缓存
+        }else if(!That.LocalHeartFeltData || That.IntervalTime > 1000*60*60*24){
+          this.SetLocalStorage('SunqBlog', {
+            Key: 'LastLoginDate',
+            Value: (new Date()).getTime()
+          });
+
           this.SQFrontAjax({
             Url: '/api/getheartfeltnum',
             Success:function (data) {
@@ -31,11 +50,11 @@
         }
       },
       // 获取所有心声数据
-      GetHeartfelt:function (HeartfeltNum) {
+      GetHeartfelt:function (HeartfeltNum,LocalData) {
         var That = this;
 
-        if(That.LocalHeartFeltData){
-          That.ChangeView(That.LocalHeartFeltData,HeartfeltNum);
+        if(LocalData){
+          That.ChangeView(LocalData,HeartfeltNum);
         }else {
           this.SQFrontAjax({
             Url: '/api/HeartfeltRead/foreend',
@@ -44,6 +63,12 @@
               That.SetLocalStorage('SunqBlog', {
                 Key: 'HeartFeltData',
                 Value: data
+              });
+
+              //修改最近一次登录时间
+              That.SetLocalStorage('SunqBlog', {
+                Key: 'LastLoginDate',
+                Value: (new Date()).getTime()
               });
 
               That.ChangeView(data,HeartfeltNum);
