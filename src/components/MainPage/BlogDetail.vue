@@ -25,7 +25,7 @@
                     <div class="markdown-body" v-html="Article.Content">{{ Article.Content }}</div>
                 </div>
             </div>
-            <div class="ArticleDetailContent" style="margin-top: 1rem">
+            <div class="ArticleDetailContent" style="margin-top: 1rem" v-if="ArticleCommentList.length > 0">
                 <div class="ArticleDetailContentTab" style="padding: 1rem;min-height: unset">
                     <div class="ArticleDetailComment">
                         <div class="CommentList">
@@ -53,7 +53,11 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
 
+            <div class="ArticleDetailContent" style="margin-top: 1rem">
+                <div class="ArticleDetailContentTab" style="padding: 1rem;min-height: unset">
                     <div class="ArticleDetailCommentFirstLine">
                         <div class="UserHeadIcon">
                             <img src="../../static/img/DefaultHeadIcon.jpg">
@@ -76,6 +80,7 @@
                     </div>
                 </div>
             </div>
+
             <Emotion ref="EmotionB" @AppendInputValue="AppendMessageText"></Emotion>
         </div>
     </transition>
