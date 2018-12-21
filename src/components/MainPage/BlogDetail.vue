@@ -17,8 +17,8 @@
                              v-show="BlogDetailSkeletonScreen">
                     </transition>
 
-                        <img src="../../static/img/BlogDetailSkele_Mobile.jpg" class="BlogDetailSkeletonScreenMobile"
-                             v-show="BlogDetailSkeletonScreen">
+                    <img src="../../static/img/BlogDetailSkele_Mobile.jpg" class="BlogDetailSkeletonScreenMobile"
+                         v-show="BlogDetailSkeletonScreen">
 
                     <h1>{{ Article.Title }}</h1>
                     <div class="ArticleCreateTime">发布时间：{{ Article.CreateDate }}</div>
@@ -92,7 +92,10 @@
 
   export default {
     name: "BlogDetail",
-    data: function () {
+    components: {
+      Emotion
+    },
+    data () {
       return {
         Article: {},
         ArticleCommentNickName: '',
@@ -222,9 +225,6 @@
     mounted: function () {
       this.InitPage();
       this.GetCommentList();
-    },
-    components: {
-      Emotion
     }
   }
 </script>
