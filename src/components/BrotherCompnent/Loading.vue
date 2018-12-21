@@ -1,10 +1,12 @@
 <template>
+    <transition name="Fade" mode="out-in">
     <div class="Loading" v-show="Loading">
         <div class="Rotate">
             <i class="iconfont icon-loading1" style="color: white;font-size: 2rem;"></i>
         </div>
         <div>加载中</div>
     </div>
+    </transition>
 </template>
 
 <script>
@@ -24,7 +26,8 @@
   }
 </script>
 
-<style scoped>
+<style scoped lang="less">
+    @import "../../static/css/base";
     .Loading {
         width: 5.5rem;
         height: 5.5rem;

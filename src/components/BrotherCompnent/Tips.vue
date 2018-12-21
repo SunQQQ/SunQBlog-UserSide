@@ -1,8 +1,10 @@
 <template>
     <!-- 提示弹层 -->
+    <transition name="Fade" mode="out-in">
     <div class="tips" v-show="Tips.Show">
         <div class="tipContent">{{Tips.Title}}</div>
     </div>
+    </transition>
 </template>
 
 <script>
@@ -17,14 +19,18 @@
       }
     },
     created(){
+      var That = this;
       this.bus.$on('Tips',(data)=>{
-        this.Tips = data;
+        setTimeout(function () {
+          That.Tips = data;
+        },1500)
       });
     },
     watch:{
       Tips:function () {
         if(this.Tips.Show){
           setTimeout( ()=>{
+            // 显示两秒后自动关闭
             this.Tips.Show = false;
           },2000)
         }
