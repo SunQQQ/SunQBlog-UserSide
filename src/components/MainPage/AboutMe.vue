@@ -105,10 +105,6 @@
     components:{
       Heartfelt
     },
-    created:function(){
-      document.documentElement.scrollTop = 0;
-      window.pageYOffset = 0;
-    },
     mounted:function () {
       // 切换Topbar高亮
       this.bus.$emit('Topbar',{

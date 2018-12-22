@@ -61,10 +61,6 @@
         });
       }
     },
-    created:function(){
-      document.documentElement.scrollTop = 0;
-      window.pageYOffset = 0;
-    },
     mounted:function () {
       // topbar高亮设置
       this.bus.$emit('Topbar',{

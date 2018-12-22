@@ -177,11 +177,6 @@
         });
       }
     },
-    created:function(){
-      // 初始化返回顶部
-      document.documentElement.scrollTop = 0;
-      window.pageYOffset = 0;
-    },
     mounted:function(){
       this.GetFriendUrlList();
       // 切换Topbar高亮

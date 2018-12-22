@@ -338,10 +338,6 @@
         }
       }
     },
-    created: function () {
-      document.documentElement.scrollTop = 0;
-      window.pageYOffset = 0;
-    },
     mounted: function () {
       this.MessageRead();
       // 切换Topbar高亮

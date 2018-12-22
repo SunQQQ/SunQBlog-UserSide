@@ -1,15 +1,16 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import BlogDetail from '@/components/MainPage/BlogDetail'
-import BlogIndex from '@/components/MainPage/BlogIndex'
-import MessageBoard from '@/components/MainPage/MessageBoard'
-import FriendUrl from '@/components/MainPage/FriendUrl'
-import TimeLine from '@/components/MainPage/TimeLine'
-import AboutMe from '@/components/MainPage/AboutMe'
+import Vue from 'vue';
+import Router from 'vue-router';
+import BlogDetail from '@/components/MainPage/BlogDetail';
+import BlogIndex from '@/components/MainPage/BlogIndex';
+import MessageBoard from '@/components/MainPage/MessageBoard';
+import FriendUrl from '@/components/MainPage/FriendUrl';
+import TimeLine from '@/components/MainPage/TimeLine';
+import AboutMe from '@/components/MainPage/AboutMe';
 
 Vue.use(Router)
 
 export default new Router({
+  scrollBehavior:() => ({ y:0 }),
   routes: [
     {
       path: '/',
