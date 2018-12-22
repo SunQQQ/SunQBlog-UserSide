@@ -114,6 +114,10 @@
 
   export default {
     name: "BlogIndex",
+    components: {
+      Heartfelt,
+      Pagination
+    },
     data: function () {
       return {
         // 标签量
@@ -299,6 +303,14 @@
         });
       }
     },
+    created: function () {
+      // 初始化返回顶部
+      if(document.documentElement.scrollTop){
+        document.documentElement.scrollTop = 0;
+      }else {
+        window.pageYOffset = 0;
+      }
+    },
     mounted: function () {
       this.InitArticleTag(this);
       // 切换Topbar高亮
@@ -306,13 +318,6 @@
         Active: 0,
         MobileMenuActive: 0
       });
-    },
-    created: function () {
-      document.documentElement.scrollTop = 0;
-    },
-    components: {
-      Heartfelt,
-      Pagination
     }
   }
 </script>

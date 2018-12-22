@@ -14,13 +14,17 @@
     },
     methods:{
       BackTop:function () {
-        var ScrollHeigh = document.documentElement.scrollTop;
-        var Timer = setInterval(function () {
+        var ScrollHeigh = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop,
+        Timer = setInterval(function () {
           if(ScrollHeigh < 0){
             clearInterval(Timer);
           }
           ScrollHeigh -= 10;
-          document.documentElement.scrollTop = ScrollHeigh;
+          if(document.documentElement.scrollTop){
+            document.documentElement.scrollTop = ScrollHeigh;
+          }else {
+            window.pageYOffset = ScrollHeigh;
+          }
         },3);
       }
     },

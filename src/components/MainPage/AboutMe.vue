@@ -102,8 +102,15 @@
   import Heartfelt from '../SonCompnent/Heartfelt';
   export default {
     name: "AboutMe",
+    components:{
+      Heartfelt
+    },
     created:function(){
-      document.documentElement.scrollTop = 0;
+      if(document.documentElement.scrollTop){
+        document.documentElement.scrollTop = 0;
+      }else {
+        window.pageYOffset = 0;
+      }
     },
     mounted:function () {
       // 切换Topbar高亮
@@ -111,9 +118,6 @@
         Active:4,
         MobileMenuActive:4
       });
-    },
-    components:{
-      Heartfelt
     }
   }
 </script>

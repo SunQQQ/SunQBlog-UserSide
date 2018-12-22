@@ -72,6 +72,9 @@
   import Pagination from '../SonCompnent/Pagination';
   export default {
     name: "FriendUrl",
+    components:{
+      Pagination:Pagination
+    },
     data:function(){
       return{
         Wrapper:false,
@@ -88,17 +91,6 @@
 
        FriendUrlPlaceholder:true
       }
-    },
-    created:function(){
-      document.documentElement.scrollTop = 0;
-    },
-    mounted:function(){
-      this.GetFriendUrlList();
-      // 切换Topbar高亮
-      this.bus.$emit('Topbar',{
-        Active:3,
-        MobileMenuActive:3
-      });
     },
     methods:{
       // 关闭弹框
@@ -185,9 +177,22 @@
         });
       }
     },
-    components:{
-      Pagination:Pagination
-    }
+    created:function(){
+      // 初始化返回顶部
+      if(document.documentElement.scrollTop){
+        document.documentElement.scrollTop = 0;
+      }else {
+        window.pageYOffset = 0;
+      }
+    },
+    mounted:function(){
+      this.GetFriendUrlList();
+      // 切换Topbar高亮
+      this.bus.$emit('Topbar',{
+        Active:3,
+        MobileMenuActive:3
+      });
+    },
   }
 </script>
 

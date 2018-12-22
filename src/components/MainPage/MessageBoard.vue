@@ -1,350 +1,359 @@
 <template>
     <transition name="Fade" mode="out-in">
-    <div style="position: relative">
-        <div class="MessageBoardCover">
-            <div class="WriteMessageFrameFadeIn">
-                <div class="WriteMessageFrameLeft">
-                    <img src="../../static/img/DefaultHeadIcon.jpg">
-                    <div>欢迎你来</div>
-                </div>
-                <div style="flex: 1">
-                    <div :class="OpenTextAreaCover ? 'WriteMessageFrameContent' : 'WriteMessageFrameContent WriteMessageFrameContentColorBorder'">
-                        <textarea ref="LeaveMessageTextArea" placeholder="输入留言" v-model="MessageText"></textarea>
-                        <span class="EmotionButton" @click="OpenEmotions()">
+        <div style="position: relative">
+            <div class="MessageBoardCover">
+                <div class="WriteMessageFrameFadeIn">
+                    <div class="WriteMessageFrameLeft">
+                        <img src="../../static/img/DefaultHeadIcon.jpg">
+                        <div>欢迎你来</div>
+                    </div>
+                    <div style="flex: 1">
+                        <div :class="OpenTextAreaCover ? 'WriteMessageFrameContent' : 'WriteMessageFrameContent WriteMessageFrameContentColorBorder'">
+                            <textarea ref="LeaveMessageTextArea" placeholder="输入留言" v-model="MessageText"></textarea>
+                            <span class="EmotionButton" @click="OpenEmotions()">
                             <i class="iconfont icon-face IconfontSize"></i>
                         </span>
-                        <div class="TextAreaCover" @click="OpenMessageSubmit()" v-if="OpenTextAreaCover">来都来啦，留个脚印吧
+                            <div class="TextAreaCover" @click="OpenMessageSubmit()" v-if="OpenTextAreaCover">来都来啦，留个脚印吧
+                            </div>
                         </div>
-                    </div>
-                    <div class="OpenMessageSubmit" v-if="OpenMessageSubmitValue">
-                        <div class="LeaveMessageName">
-                            <input placeholder="输入你的大名或昵称" v-model="MessageLeaveName">
+                        <div class="OpenMessageSubmit" v-if="OpenMessageSubmitValue">
+                            <div class="LeaveMessageName">
+                                <input placeholder="输入你的大名或昵称" v-model="MessageLeaveName">
+                            </div>
+                            <div class="OpenMessageSubmitButton" @click="MessageSubmit()">提交</div>
                         </div>
-                        <div class="OpenMessageSubmitButton" @click="MessageSubmit()">提交</div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="BlogIndexContent">
-            <div class="BlogFlex">
-                <div class="BlogIndexContentLeft"
-                     style="background-color:#ffffff;margin-top: 1rem;border:1px solid #e9e9e9;border-radius: 3px">
-                    <div class="CommentList">
-                        <div class="CommentItem" v-for="item in MessageList">
-                            <div class="CommentItemIcon">
-                                <img src="../../static/img/DefaultHeadIcon.jpg" v-if="item.MessageLeaveName != 'sunq'">
-                                <img src="../../static/img/ZhihuIcon.jpg" v-if="item.MessageLeaveName=='sunq'">
+            <div class="BlogIndexContent">
+                <div class="BlogFlex">
+                    <div class="BlogIndexContentLeft"
+                         style="background-color:#ffffff;margin-top: 1rem;border:1px solid #e9e9e9;border-radius: 3px">
+                        <div class="CommentList">
+                            <div class="CommentItem" v-for="item in MessageList">
+                                <div class="CommentItemIcon">
+                                    <img src="../../static/img/DefaultHeadIcon.jpg"
+                                         v-if="item.MessageLeaveName != 'sunq'">
+                                    <img src="../../static/img/ZhihuIcon.jpg" v-if="item.MessageLeaveName=='sunq'">
+                                </div>
+                                <div class="CommentItemContent">
+                                    <div>{{ item.MessageLeaveName }}</div>
+                                    <div class="ArticleCommentText" v-html="item.MessageText">{{ item.MessageText }}
+                                    </div>
+                                    <div class="DateAnswer">
+                                        <div class="DateAnswerLeft">{{ item.MessageLeaveDate }}</div>
+                                        <div class="DateAnswerRight" @click="AnswerMessage(item.MessageLeaveName)">回复
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="CommentItemContent">
-                                <div>{{ item.MessageLeaveName }}</div>
-                                <div class="ArticleCommentText" v-html="item.MessageText">{{ item.MessageText }}</div>
-                                <div class="DateAnswer">
-                                    <div class="DateAnswerLeft">{{ item.MessageLeaveDate }}</div>
-                                    <div class="DateAnswerRight" @click="AnswerMessage(item.MessageLeaveName)">回复</div>
+                        </div>
+                        <div class="NoDataHint" v-if="MessageList.length == 0">暂无数据</div>
+                        <div class="MessageBoardListBottom" v-if="AticleBottom">你滑到我底线啦</div>
+                    </div>
+                    <div class="BlogIndexContentRight" style="border:1px solid #e9e9e9;border-radius: 3px">
+                        <div class="Module" style="padding: 0 0 0.5rem;background-color: transparent">
+                            <div class="GitPart">
+                                <div class="TopBackBlack"></div>
+                                <div class="GitPic">
+                                    <img src="../../static/img/ZhihuIcon.jpg">
+                                </div>
+                                <div class="GitBack">
+                                    <i class="iconfont TopBackBlackGit icon-github1"></i>
+                                </div>
+                                <div class="Content">
+                                    <div class="GitName">孙权的Github</div>
+                                    <a class="BlueButton" href="https://github.com/SunQQQ" target="_blank">Follow Me</a>
+                                    <div class="BlogStatistic">
+                                        <div class="BlogStatisticItem">
+                                            <div class="BlogStatisticItemNum">8</div>
+                                            <div class="BlogStatisticItemText AboutMeGitData">Followers</div>
+                                        </div>
+                                        <div class="BlogStatisticItem">
+                                            <div class="BlogStatisticItemNum">13</div>
+                                            <div class="BlogStatisticItemText AboutMeGitData">Repos</div>
+                                        </div>
+                                        <div class="BlogStatisticItem">
+                                            <div class="BlogStatisticItemNum">5</div>
+                                            <div class="BlogStatisticItemText AboutMeGitData">Following</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="BigBlock AboutMeMarginTop">
+                                <div class="TitleFontLine">Contacts</div>
+                                <div class="BlogStatistic" style="border-top: none;padding-bottom: 0">
+                                    <div class="BlogStatisticItem">
+                                        <a href="https://github.com/SunQQQ" target="_blank"><i
+                                                class="iconfont icon-github AboutMeIcon" style="color:#948aec"></i></a>
+                                    </div>
+                                    <div class="BlogStatisticItem">
+                                        <a href="https://www.zhihu.com/people/s-q-51-44-23/activities"
+                                           target="_blank"><i
+                                                class="iconfont icon-zhihu AboutMeIcon" style="color:#3dbd7d"></i></a>
+                                    </div>
+                                    <div class="BlogStatisticItem">
+                                        <a href="https://blog.csdn.net/sun_qqq" target="_blank"><i
+                                                class="iconfont icon-CN_csdnnet AboutMeIcon" style="color:#f78e3d"></i></a>
+                                    </div>
+                                    <div class="BlogStatisticItem">
+                                        <i class="iconfont icon-youxiang AboutMeIcon" style="color:#49a9ee"></i>
+                                    </div>
+                                    <div class="BlogStatisticItem">
+                                        <a href="https://music.163.com/#/user/home?id=386558098" target="_blank"><i
+                                                class="iconfont AboutMeIcon icon-CN_NetEasemusic"
+                                                style="color:#f46e65"></i></a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="NoDataHint" v-if="MessageList.length == 0">暂无数据</div>
-                    <div class="MessageBoardListBottom" v-if="AticleBottom">你滑到我底线啦</div>
                 </div>
-                <div class="BlogIndexContentRight" style="border:1px solid #e9e9e9;border-radius: 3px">
-                    <div class="Module" style="padding: 0 0 0.5rem;background-color: transparent">
-                        <div class="GitPart">
-                            <div class="TopBackBlack"></div>
-                            <div class="GitPic">
-                                <img src="../../static/img/ZhihuIcon.jpg">
-                            </div>
-                            <div class="GitBack">
-                                <i class="iconfont TopBackBlackGit icon-github1"></i>
-                            </div>
-                            <div class="Content">
-                                <div class="GitName">孙权的Github</div>
-                                <a class="BlueButton" href="https://github.com/SunQQQ" target="_blank">Follow Me</a>
-                                <div class="BlogStatistic">
-                                    <div class="BlogStatisticItem">
-                                        <div class="BlogStatisticItemNum">8</div>
-                                        <div class="BlogStatisticItemText AboutMeGitData">Followers</div>
-                                    </div>
-                                    <div class="BlogStatisticItem">
-                                        <div class="BlogStatisticItemNum">13</div>
-                                        <div class="BlogStatisticItemText AboutMeGitData">Repos</div>
-                                    </div>
-                                    <div class="BlogStatisticItem">
-                                        <div class="BlogStatisticItemNum">5</div>
-                                        <div class="BlogStatisticItemText AboutMeGitData">Following</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="BigBlock AboutMeMarginTop">
-                            <div class="TitleFontLine">Contacts</div>
-                            <div class="BlogStatistic" style="border-top: none;padding-bottom: 0">
-                                <div class="BlogStatisticItem">
-                                    <a href="https://github.com/SunQQQ" target="_blank"><i
-                                            class="iconfont icon-github AboutMeIcon" style="color:#948aec"></i></a>
-                                </div>
-                                <div class="BlogStatisticItem">
-                                    <a href="https://www.zhihu.com/people/s-q-51-44-23/activities" target="_blank"><i
-                                            class="iconfont icon-zhihu AboutMeIcon" style="color:#3dbd7d"></i></a>
-                                </div>
-                                <div class="BlogStatisticItem">
-                                    <a href="https://blog.csdn.net/sun_qqq" target="_blank"><i
-                                            class="iconfont icon-CN_csdnnet AboutMeIcon" style="color:#f78e3d"></i></a>
-                                </div>
-                                <div class="BlogStatisticItem">
-                                    <i class="iconfont icon-youxiang AboutMeIcon" style="color:#49a9ee"></i>
-                                </div>
-                                <div class="BlogStatisticItem">
-                                    <a href="https://music.163.com/#/user/home?id=386558098" target="_blank"><i
-                                            class="iconfont AboutMeIcon icon-CN_NetEasemusic" style="color:#f46e65"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <Pagination v-on:PaginationToParent="ValueByPagition" ref="Pagi"></Pagination>
             </div>
-            <Pagination v-on:PaginationToParent="ValueByPagition" ref="Pagi"></Pagination>
-        </div>
-        <!--回复留言弹框PageActive-->
-        <div style="position:fixed;top: 0;bottom: 0;left:0;right:0;z-index: 1000" v-if="MessageAnswerFrame">
-            <div class="MessageBoxWrapper" @click="CloseAnswerMessage()"></div>
-            <div :class="FadeAnimate ? 'WriteMessageFrameFadeIn' : 'WriteMessageFrameFadeOut'"
-                 style="top:0;bottom: 0;height: 8rem;z-index: 1500;opacity: 1;padding-top: 2rem">
-                <div class="WriteMessageFrameLeft">
-                    <img src="../../static/img/DefaultHeadIcon.jpg">
-                    <div>回复留言</div>
-                </div>
-                <div style="flex: 1;position: relative">
-                    <div class="WriteMessageFrameContent WriteMessageFrameContentColorBorder">
-                        <textarea ref="AnswerMessageContentDom" placeholder="输入留言" v-model="MessageText"></textarea>
-                        <span class="EmotionButton" @click="OpenEmotions()">
+            <!--回复留言弹框PageActive-->
+            <div style="position:fixed;top: 0;bottom: 0;left:0;right:0;z-index: 1000" v-if="MessageAnswerFrame">
+                <div class="MessageBoxWrapper" @click="CloseAnswerMessage()"></div>
+                <div :class="FadeAnimate ? 'WriteMessageFrameFadeIn' : 'WriteMessageFrameFadeOut'"
+                     style="top:0;bottom: 0;height: 8rem;z-index: 1500;opacity: 1;padding-top: 2rem">
+                    <div class="WriteMessageFrameLeft">
+                        <img src="../../static/img/DefaultHeadIcon.jpg">
+                        <div>回复留言</div>
+                    </div>
+                    <div style="flex: 1;position: relative">
+                        <div class="WriteMessageFrameContent WriteMessageFrameContentColorBorder">
+                            <textarea ref="AnswerMessageContentDom" placeholder="输入留言" v-model="MessageText"></textarea>
+                            <span class="EmotionButton" @click="OpenEmotions()">
                             <i class="iconfont icon-face IconfontSize"></i>
                         </span>
-                    </div>
-                    <div class="OpenMessageSubmit">
-                        <div class="LeaveMessageName">
-                            <input placeholder="输入你的大名或昵称" v-model="MessageLeaveName">
                         </div>
-                        <div class="OpenMessageSubmitButton" @click="MessageSubmit()">提交</div>
-                    </div>
-                    <div class="CloseAnswerMessage" @click="CloseAnswerMessage()">
-                        <i class="iconfont icon-fork IconfontSize"></i>
+                        <div class="OpenMessageSubmit">
+                            <div class="LeaveMessageName">
+                                <input placeholder="输入你的大名或昵称" v-model="MessageLeaveName">
+                            </div>
+                            <div class="OpenMessageSubmitButton" @click="MessageSubmit()">提交</div>
+                        </div>
+                        <div class="CloseAnswerMessage" @click="CloseAnswerMessage()">
+                            <i class="iconfont icon-fork IconfontSize"></i>
+                        </div>
                     </div>
                 </div>
             </div>
+            <Emotion ref="EmotionB" @AppendInputValue="AppendMessageText"></Emotion>
         </div>
-        <Emotion ref="EmotionB" @AppendInputValue="AppendMessageText"></Emotion>
-    </div>
     </transition>
 </template>
 
 <script>
-	import Pagination from '../SonCompnent/Pagination';
-	import Emotion from '../SonCompnent/Emotion';
+  import Pagination from '../SonCompnent/Pagination';
+  import Emotion from '../SonCompnent/Emotion';
 
-	export default {
-		name: "MessageBoard",
-		data: function () {
-			return {
-				// textarea遮层
-				OpenTextAreaCover: true,
-				// 提交按钮显示
-				OpenMessageSubmitValue: false,
+  export default {
+    name: "MessageBoard",
+    components: {
+      Pagination,
+      Emotion
+    },
+    data: function () {
+      return {
+        // textarea遮层
+        OpenTextAreaCover: true,
+        // 提交按钮显示
+        OpenMessageSubmitValue: false,
 
-				//textarea的留言文本
-				MessageText: '',
-				//留言人姓名
-				MessageLeaveName: '',
+        //textarea的留言文本
+        MessageText: '',
+        //留言人姓名
+        MessageLeaveName: '',
 
-				// 留言列表
-				MessageList: '',
-				// 写留言的时间
-				MessageLeaveDate: '',
-				//回复留言弹框
-				MessageAnswerFrame: false,
-				// 弹框显隐动画
-				FadeAnimate: false,
-				// 文章底线
-				AticleBottom: false,
-			}
-		},
-		methods: {
-			// 展示留言textarea
-			OpenMessageSubmit: function () {
-				// 隐藏textarea的遮层
-				this.OpenTextAreaCover = false;
-				//显示提交按钮
-				this.OpenMessageSubmitValue = true;
-				this.$refs['LeaveMessageTextArea'].focus();
+        // 留言列表
+        MessageList: '',
+        // 写留言的时间
+        MessageLeaveDate: '',
+        //回复留言弹框
+        MessageAnswerFrame: false,
+        // 弹框显隐动画
+        FadeAnimate: false,
+        // 文章底线
+        AticleBottom: false,
+      }
+    },
+    methods: {
+      // 展示留言textarea
+      OpenMessageSubmit: function () {
+        // 隐藏textarea的遮层
+        this.OpenTextAreaCover = false;
+        //显示提交按钮
+        this.OpenMessageSubmitValue = true;
+        this.$refs['LeaveMessageTextArea'].focus();
 
-				// 填写缓存中游客名
-				var LocalCommonUser = this.GetLocalStorage('SunqBlog');
-				if (LocalCommonUser.toString() != '{}') {
-					this.MessageLeaveName = LocalCommonUser.ArticleCommentNickName;
-				}
-			},
+        // 填写缓存中游客名
+        var LocalCommonUser = this.GetLocalStorage('SunqBlog');
+        if (LocalCommonUser.toString() != '{}') {
+          this.MessageLeaveName = LocalCommonUser.ArticleCommentNickName;
+        }
+      },
 
-			// 提交留言
-			MessageSubmit: function () {
-				var That = this;
-				if (this.MessageText && this.MessageLeaveName) {
-					var MatchedMessageText = That.MatchEmotion(That.MessageText);
+      // 提交留言
+      MessageSubmit: function () {
+        var That = this;
+        if (this.MessageText && this.MessageLeaveName) {
+          var MatchedMessageText = That.MatchEmotion(That.MessageText);
 
-					this.SQFrontAjax({
-						Url: '/api/MessageCreate/foreend',
-						UploadData: {
-							MessageText: MatchedMessageText,
-							MessageLeaveName: this.MessageLeaveName,
-							MessageLeaveDate: new Date()
-						},
-						Success: function () {
-							That.bus.$emit('Tips', {
-								Show: true,
-								Title: '留言成功'
-							});
-							// 清空留言框
-							That.MessageText = '';
-							// 存储用户名到本地
-							That.SetLocalStorage('SunqBlog', {
-								Key: 'ArticleCommentNickName',
-								Value: That.MessageLeaveName
-							});
-							// 刷新留言列表
-							That.MessageRead();
+          this.SQFrontAjax({
+            Url: '/api/MessageCreate/foreend',
+            UploadData: {
+              MessageText: MatchedMessageText,
+              MessageLeaveName: this.MessageLeaveName,
+              MessageLeaveDate: new Date()
+            },
+            Success: function () {
+              That.bus.$emit('Tips', {
+                Show: true,
+                Title: '留言成功'
+              });
+              // 清空留言框
+              That.MessageText = '';
+              // 存储用户名到本地
+              That.SetLocalStorage('SunqBlog', {
+                Key: 'ArticleCommentNickName',
+                Value: That.MessageLeaveName
+              });
+              // 刷新留言列表
+              That.MessageRead();
 
-							// 如果是回复留言，关闭留言弹框
-							That.MessageAnswerFrame = false;
-							// 初始TextArea框遮盖
-							That.OpenTextAreaCover = true;
-						}
-					});
-				} else {
-					That.bus.$emit('Tips', {
-						Show: true,
-						Title: '昵称和留言不能为空呦！'
-					});
-				}
-			},
+              // 如果是回复留言，关闭留言弹框
+              That.MessageAnswerFrame = false;
+              // 初始TextArea框遮盖
+              That.OpenTextAreaCover = true;
+            }
+          });
+        } else {
+          That.bus.$emit('Tips', {
+            Show: true,
+            Title: '昵称和留言不能为空呦！'
+          });
+        }
+      },
 
-			// 渲染留言列表
-			MessageRead: function () {
-				var That = this;
+      // 渲染留言列表
+      MessageRead: function () {
+        var That = this;
 
-				this.SQFrontAjax({
-					Url: '/api/MessageRead/foreend',
-					UploadData: {
-						PagnationData: {
-							Skip: 0,
-							Limit: 8
-						}
-					},
-					Success: function (data) {
-						// 渲染列表
-						data.forEach(function (Item) {
-							Item.MessageLeaveDate = That.DateFormat(Item.MessageLeaveDate);
-						});
-						That.MessageList = data;
-					}
-				});
-				// 默认填写留言输入框的昵称
-				var LocalCommonUser = this.GetLocalStorage('SunqBlog');
-				if (LocalCommonUser.toString() != '{}') {
-					That.MessageLeaveName = LocalCommonUser.ArticleCommentNickName;
-				}
-			},
+        this.SQFrontAjax({
+          Url: '/api/MessageRead/foreend',
+          UploadData: {
+            PagnationData: {
+              Skip: 0,
+              Limit: 8
+            }
+          },
+          Success: function (data) {
+            // 渲染列表
+            data.forEach(function (Item) {
+              Item.MessageLeaveDate = That.DateFormat(Item.MessageLeaveDate);
+            });
+            That.MessageList = data;
+          }
+        });
+        // 默认填写留言输入框的昵称
+        var LocalCommonUser = this.GetLocalStorage('SunqBlog');
+        if (LocalCommonUser.toString() != '{}') {
+          That.MessageLeaveName = LocalCommonUser.ArticleCommentNickName;
+        }
+      },
 
-			// 打开回复留言弹框
-			AnswerMessage: function (AnswedPerson) {
-				var That = this;
-				this.MessageAnswerFrame = true;
-				this.FadeAnimate = true;
+      // 打开回复留言弹框
+      AnswerMessage: function (AnswedPerson) {
+        var That = this;
+        this.MessageAnswerFrame = true;
+        this.FadeAnimate = true;
 
-				// 填写@某人
-				this.MessageText = '@' + AnswedPerson + ':';
-				// 等弹框Dom渲染完毕后再操作Dom
-				setTimeout(function () {
-					That.$refs['AnswerMessageContentDom'].focus();
-				}, 100);
+        // 填写@某人
+        this.MessageText = '@' + AnswedPerson + ':';
+        // 等弹框Dom渲染完毕后再操作Dom
+        setTimeout(function () {
+          That.$refs['AnswerMessageContentDom'].focus();
+        }, 100);
 
-				// 填写缓存中游客名
-				var LocalCommonUser = this.GetLocalStorage('SunqBlog');
-				if (LocalCommonUser.toString() != '{}') {
-					That.MessageLeaveName = LocalCommonUser.ArticleCommentNickName;
-				}
-			},
+        // 填写缓存中游客名
+        var LocalCommonUser = this.GetLocalStorage('SunqBlog');
+        if (LocalCommonUser.toString() != '{}') {
+          That.MessageLeaveName = LocalCommonUser.ArticleCommentNickName;
+        }
+      },
 
-			// 关闭回复留言框
-			CloseAnswerMessage: function () {
-				var That = this;
-				this.FadeAnimate = false;
-				// 清空留言框
-				this.MessageText = '';
-				setTimeout(function () {
-					That.MessageAnswerFrame = false;
-				}, 200)
-			},
+      // 关闭回复留言框
+      CloseAnswerMessage: function () {
+        var That = this;
+        this.FadeAnimate = false;
+        // 清空留言框
+        this.MessageText = '';
+        setTimeout(function () {
+          That.MessageAnswerFrame = false;
+        }, 200)
+      },
 
-			// 上滑加载更多
-			ValueByPagition: function (SelectPage) {
-				var That = this;
-				this.SQFrontAjax({
-					Url: '/api/MessageRead/foreend',
-					UploadData: {
-						PagnationData: {
-							Skip: SelectPage * 8,
-							Limit: 8
-						}
-					},
-					Success: function (data) {
-						data.forEach(function (Item) {
-							Item.MessageLeaveDate = That.DateFormat(Item.MessageLeaveDate);
-						});
-						That.MessageList = That.MessageList.concat(data);
-						if (data.length != 8) {
-							That.AticleBottom = true;
-							// 停止分页器的滚动监听
-							That.$refs.Pagi.SetUpdate(false);
-						} else {
-							That.$refs.Pagi.SetUpdate(true);
-						}
-					}
-				});
-			},
+      // 上滑加载更多
+      ValueByPagition: function (SelectPage) {
+        var That = this;
+        this.SQFrontAjax({
+          Url: '/api/MessageRead/foreend',
+          UploadData: {
+            PagnationData: {
+              Skip: SelectPage * 8,
+              Limit: 8
+            }
+          },
+          Success: function (data) {
+            data.forEach(function (Item) {
+              Item.MessageLeaveDate = That.DateFormat(Item.MessageLeaveDate);
+            });
+            That.MessageList = That.MessageList.concat(data);
+            if (data.length != 8) {
+              That.AticleBottom = true;
+              // 停止分页器的滚动监听
+              That.$refs.Pagi.SetUpdate(false);
+            } else {
+              That.$refs.Pagi.SetUpdate(true);
+            }
+          }
+        });
+      },
 
-			// 打开表情框
-			OpenEmotions: function () {
-				this.$refs.EmotionB.OpenEmotion(true);
-			},
+      // 打开表情框
+      OpenEmotions: function () {
+        this.$refs.EmotionB.OpenEmotion(true);
+      },
 
-			// 点击表情，修改文本
-			AppendMessageText: function (EmotionChinese) {
-				this.MessageText += EmotionChinese;
-				// 回复弹框弹出时，即为回复留言
-				if (this.MessageAnswerFrame) {
-					this.$refs['AnswerMessageContentDom'].focus();
-				} else {
-					this.$refs['LeaveMessageTextArea'].focus();
-				}
-			}
-		},
-		created: function () {
-			document.documentElement.scrollTop = 0;
-		},
-		mounted: function () {
-			this.MessageRead();
-			// 切换Topbar高亮
-			this.bus.$emit('Topbar', {
-				Active: 1,
-				MobileMenuActive: 1
-			});
-		},
-		components: {
-			Pagination,
-			Emotion
-		}
-	}
+      // 点击表情，修改文本
+      AppendMessageText: function (EmotionChinese) {
+        this.MessageText += EmotionChinese;
+        // 回复弹框弹出时，即为回复留言
+        if (this.MessageAnswerFrame) {
+          this.$refs['AnswerMessageContentDom'].focus();
+        } else {
+          this.$refs['LeaveMessageTextArea'].focus();
+        }
+      }
+    },
+    created: function () {
+      if(document.documentElement.scrollTop){
+        document.documentElement.scrollTop = 0;
+      }else {
+        window.pageYOffset = 0;
+      }
+    },
+    mounted: function () {
+      this.MessageRead();
+      // 切换Topbar高亮
+      this.bus.$emit('Topbar', {
+        Active: 1,
+        MobileMenuActive: 1
+      });
+    }
+  }
 </script>
 
 <style scoped lang="less">
