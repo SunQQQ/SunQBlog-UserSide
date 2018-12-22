@@ -62,11 +62,8 @@
       }
     },
     created:function(){
-      if(document.documentElement.scrollTop){
-        document.documentElement.scrollTop = 0;
-      }else {
-        window.pageYOffset = 0;
-      }
+      document.documentElement.scrollTop = 0;
+      window.pageYOffset = 0;
     },
     mounted:function () {
       // topbar高亮设置

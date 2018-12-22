@@ -20,11 +20,8 @@
             clearInterval(Timer);
           }
           ScrollHeigh -= 10;
-          if(document.documentElement.scrollTop){
-            document.documentElement.scrollTop = ScrollHeigh;
-          }else {
-            window.pageYOffset = ScrollHeigh;
-          }
+          document.documentElement.scrollTop = ScrollHeigh;
+          window.pageYOffset = ScrollHeigh;
         },3);
       }
     },

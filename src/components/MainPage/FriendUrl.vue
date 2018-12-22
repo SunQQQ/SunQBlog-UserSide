@@ -179,11 +179,8 @@
     },
     created:function(){
       // 初始化返回顶部
-      if(document.documentElement.scrollTop){
-        document.documentElement.scrollTop = 0;
-      }else {
-        window.pageYOffset = 0;
-      }
+      document.documentElement.scrollTop = 0;
+      window.pageYOffset = 0;
     },
     mounted:function(){
       this.GetFriendUrlList();
