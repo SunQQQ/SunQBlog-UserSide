@@ -50,15 +50,21 @@
                         <div class="HotArticle">
                             <div class="HotArticleItem" v-for="(Item,Index) in HotArticleList">
                                 <div v-if="Index == 0" @click="UpdateRouter('BlogDetail',Item._id)">
-                                    <span style="color:#3dbd7d">No{{Index+1}} </span>{{Item.Title}}
+                                    <span style="color:#f44e03;font-size: 15px">No{{Index+1}} </span>{{Item.Title}}
                                 </div>
                                 <div v-if="Index == 1" @click="UpdateRouter('BlogDetail',Item._id)">
-                                    <span style="color:#f46e65">No{{Index+1}} </span>{{Item.Title}}
+                                    <span style="color:#d41800;font-size: 15px">No{{Index+1}} </span>{{Item.Title}}
                                 </div>
                                 <div v-if="Index == 2" @click="UpdateRouter('BlogDetail',Item._id)">
-                                    <span style="color:#948aec">No{{Index+1}} </span>{{Item.Title}}
+                                    <span style="color:#f37e21;font-size: 15px">No{{Index+1}} </span>{{Item.Title}}
                                 </div>
-                                <div v-if="Index > 2" @click="UpdateRouter('BlogDetail',Item._id)">
+                                <div v-if="Index == 3" @click="UpdateRouter('BlogDetail',Item._id)">
+                                    <span style="color:#f3212d;font-size: 15px">No{{Index+1}} </span>{{Item.Title}}
+                                </div>
+                                <div v-if="Index == 4" @click="UpdateRouter('BlogDetail',Item._id)">
+                                    <span style="color:#212df3;font-size: 15px">No{{Index+1}} </span>{{Item.Title}}
+                                </div>
+                                <div v-if="Index > 4" @click="UpdateRouter('BlogDetail',Item._id)">
                                     <span>No{{Index+1}} </span>{{Item.Title}}
                                 </div>
                             </div>
