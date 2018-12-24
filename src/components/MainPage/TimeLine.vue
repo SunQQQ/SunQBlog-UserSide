@@ -4,7 +4,7 @@
             <div class="TimeFixedBac"></div>
             <div class="FriendUrlBac">
                 <div class="FriendUrlTitle TimeLIneTitle">
-                    <div class="FriendUrlTitleText" style="margin-bottom: 2rem">时间轴</div>
+                    <div class="FriendUrlTitleText" style="margin-bottom: 2rem;color:black;">时间轴</div>
                     <div class="FriendUrlTitleSummary">梦每个人都有，但不是每个人都能一步一步的跟着时间往前走</div>
                     <div class="FriendUrlTitleSummary">我是个自律性不好的人，希望能守住初心</div>
                     <div class="FriendUrlTitleSummary">一步一个脚印的，不畏惧，不空想</div>
@@ -12,7 +12,7 @@
                     <div class="FriendUrlTitleSummary">共勉</div>
                 </div>
             </div>
-            <div class="UrlCardList">
+            <div class="UrlCardList TimeLineCardList">
                 <div v-for="(Item,Index) in TimeLineList">
                     <div class="TimeLineTr" v-if="Index%2 == 0">
                         <div class="TimeLineTdLeft"></div>
@@ -145,7 +145,8 @@
         right: 0;
     }
     .FriendUrlTitleSummary{
-        color: @FontColorWhite;
+        /*color: @FontColorWhite;*/
+        color:black;
         font-size: 1rem;
         font-family: Helvetica,STHeiti STXihei,Microsoft JhengHei,Microsoft YaHei,Tohoma,Arial;
         margin-top: 1rem;
@@ -177,6 +178,7 @@
         background-color: @fore_color;
         border-radius: 5px;
         padding: 1rem;
+        border: 1px solid @ThemeColor;
     }
     .Bubble:before{
         content: "";
@@ -184,7 +186,7 @@
         width: 0;
         height: 0;
         display: inline-block;
-        border-left: 8px solid @fore_color;
+        border-left: 8px solid @ThemeColor;
 
         right: -16px;
         position: absolute;
@@ -200,7 +202,7 @@
         border: 0.25rem solid @fore_color;
 
         position: absolute;
-        right: -2.75rem;
+        right: -2.90rem;
         top: 1rem;
         z-index: 1000;
     }
@@ -211,6 +213,7 @@
         background-color: @fore_color;
         border-radius: 5px;
         padding: 1rem;
+        border: 1px solid @ThemeColor;
     }
     .BubbleRight:before{
         content: "";
@@ -218,8 +221,7 @@
         width: 0;
         height: 0;
         display: inline-block;
-        border-right: 8px solid @fore_color;
-
+        border-right: 8px solid @ThemeColor;
         left: -16px;
         position: absolute;
         top: 1.3rem;
@@ -234,7 +236,7 @@
          border: 0.2rem solid @ThemeColor;
 
          position: absolute;
-         left: -2.6rem;
+         left: -2.7rem;
          top: 1rem;
 
         z-index: 1000;

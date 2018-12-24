@@ -22,8 +22,17 @@
 @media only screen and (min-device-width: 768px) {
   .UrlCardList{
     width: 1000px;
-    margin: 0.5rem auto 0;
+    margin: 1rem auto 0;
     min-height: 29rem;
+    background-color: @fore_color;
+    padding: 2rem 2rem 0;
+  }
+  .TimeLineCardList{
+
+  }
+  .FriendUrlCard{
+    background-color: unset;
+    padding: 0;
   }
   .UrlCardTd{
     flex: 1;
@@ -109,7 +118,12 @@
 }
 /*移动端*/
 @media only screen and (max-device-width: 768px) {
-  .UrlCardList{}
+  .UrlCardList{
+    background-color: @fore_color;
+  }
+  .FriendUrlCard{
+    background-color: unset;
+  }
   .UrlCardTd{
     /*flex: 1;*/
     width: 100%;

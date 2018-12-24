@@ -7,7 +7,7 @@
                     <div class="CreateFriendUrlButton" @click="OpenPopup">我也加入</div>
                 </div>
             </div>
-            <div class="UrlCardList">
+            <div class="UrlCardList FriendUrlCard">
                 <div class="UrlCardTr">
                     <transition name="Fade">
                         <img src="../../static/img/FriendUrlPlaceholder.png" class="FriendUrlPlaceholderPC" v-if="FriendUrlPlaceholder">
