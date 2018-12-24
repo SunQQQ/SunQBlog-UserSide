@@ -148,6 +148,7 @@
 <script>
   import Pagination from '../SonCompnent/Pagination';
   import Emotion from '../SonCompnent/Emotion';
+  import axios from 'axios';
 
   export default {
     name: "MessageBoard",
