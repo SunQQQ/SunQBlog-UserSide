@@ -89,7 +89,10 @@
             top: 0;
             z-index: 100;
             background-attachment: fixed;
-            background:url(../../static/img/TimeLineBack.jpg) no-repeat center bottom;
+            background: url(../../static/img/TimeLineBack.jpg) no-repeat 50% #cef;
+            background-position: 50%;
+            background-repeat: no-repeat;
+            background-size: cover;
         }
         .FriendUrlBac{
             height: 85vh;
@@ -115,7 +118,10 @@
             top: 0;
             z-index: 100;
             background-attachment: fixed;
-            background:url(../../static/img/TimeLineBack.jpg) no-repeat center bottom;
+            background: url(../../static/img/TimeLineBack.jpg) no-repeat 50% #cef;
+            background-position: 50%;
+            background-repeat: no-repeat;
+            background-size: cover;
         }
         .FriendUrlBac{
             height: 83vh;
@@ -128,7 +134,9 @@
     }
 
     .TimeFixedBac:before{
-        background-color: rgba(0, 0, 0, 0.2);
+        /*background-color: rgba(0, 0, 0, 0.2);*/
+        /*background-color: rgba(0, 0, 0, 0.06);*/
+        /*background-color: #ffffff;*/
         content: "";
         position: absolute;
         top: 0;

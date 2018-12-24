@@ -387,7 +387,10 @@
             width: 100%;
             height: 95vh;
             position: relative;
-            background: url(../../static/img/MessageBoardCover2.jpg) no-repeat center bottom;
+            background: url(../../static/img/MessageBoardCover2.jpg) no-repeat 50% #cef;
+            background-position: 50%;
+            background-repeat: no-repeat;
+            background-size: cover;
         }
 
         .MessageBoardListBottom {
@@ -430,7 +433,10 @@
             width: 100%;
             height: 95vh;
             position: relative;
-            background: url(../../static/img/MessageBoardCover2.jpg) no-repeat center bottom;
+            background: url(../../static/img/MessageBoardCover2.jpg) no-repeat 50% #cef;
+            background-position: 50%;
+            background-repeat: no-repeat;
+            background-size: cover;
         }
 
         .MessageBoardListBottom {
