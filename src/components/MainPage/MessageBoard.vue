@@ -275,7 +275,11 @@
         this.MessageText = '@' + AnswedPerson + ':';
         // 等弹框Dom渲染完毕后再操作Dom
         setTimeout(function () {
-          That.$refs['AnswerMessageContentDom'].focus();
+          var DomObject = That.$refs['AnswerMessageContentDom'];
+          DomObject.focus();
+
+          // 调节光标到input已填字体后面
+          DomObject.setSelectionRange(DomObject.value.length, DomObject.value.length);
         }, 100);
 
         // 填写缓存中游客名
