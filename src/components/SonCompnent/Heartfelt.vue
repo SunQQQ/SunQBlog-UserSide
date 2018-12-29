@@ -78,7 +78,7 @@
 
         window.setInterval(function () {
           That.SetRandomNum(Array,HeartfeltNum);
-        },5000);
+        },15000);
       },
       // 设置随机值
       SetRandomNum:function (Array,HeartfeltNum) {
