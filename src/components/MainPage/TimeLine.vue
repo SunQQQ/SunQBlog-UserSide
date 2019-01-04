@@ -40,6 +40,7 @@
 </template>
 
 <script>
+  import Store from '../../store'
   export default {
     name: "TimeLine",
     data:function(){
@@ -63,10 +64,8 @@
     },
     mounted:function () {
       // topbar高亮设置
-      this.bus.$emit('Topbar',{
-        Active:2,
-        MobileMenuActive:2
-      });
+      Store.commit("ChangeActive", 2);
+
       this.GetTimeLineList();
     }
   }

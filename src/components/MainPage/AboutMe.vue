@@ -100,6 +100,8 @@
 
 <script>
   import Heartfelt from '../SonCompnent/Heartfelt';
+  import Store from '../../store'
+
   export default {
     name: "AboutMe",
     components:{
@@ -107,10 +109,7 @@
     },
     mounted:function () {
       // 切换Topbar高亮
-      this.bus.$emit('Topbar',{
-        Active:4,
-        MobileMenuActive:4
-      });
+      Store.commit("ChangeActive", 4);
     }
   }
 </script>

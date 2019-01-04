@@ -148,6 +148,7 @@
 <script>
   import Pagination from '../SonCompnent/Pagination';
   import Emotion from '../SonCompnent/Emotion';
+  import store from '../../store'
   import axios from 'axios';
 
   export default {
@@ -346,10 +347,7 @@
     mounted: function () {
       this.MessageRead();
       // 切换Topbar高亮
-      this.bus.$emit('Topbar', {
-        Active: 1,
-        MobileMenuActive: 1
-      });
+      store.commit("ChangeActive", 1);
     }
   }
 </script>

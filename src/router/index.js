@@ -7,7 +7,7 @@ import FriendUrl from '@/components/MainPage/FriendUrl';
 import TimeLine from '@/components/MainPage/TimeLine';
 import AboutMe from '@/components/MainPage/AboutMe';
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   scrollBehavior:() => ({ y:0 }),
@@ -43,4 +43,4 @@ export default new Router({
       component:AboutMe
     }
   ]
-})
+});

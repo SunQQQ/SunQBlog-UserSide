@@ -17,12 +17,17 @@
     "vue": "^2.5.17",
     "vue-canvas-nest": "^2.0.0",
     "vue-particles": "^1.0.9",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.3",
-    "@vue/cli-plugin-eslint": "^3.0.3",
+    "@vue/cli-plugin-eslint": "^3.2.2",
     "@vue/cli-service": "^3.0.3",
+    "@vue/eslint-config-standard": "^4.0.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.8.0",
+    "eslint-plugin-vue": "^5.0.0",
     "vue-template-compiler": "^2.5.17"
   },
   "eslintConfig": {
@@ -32,7 +37,8 @@
     },
     "extends": [
       "plugin:vue/essential",
-      "eslint:recommended"
+      "eslint:recommended",
+      "@vue/standard"
     ],
     "rules": {},
     "parserOptions": {

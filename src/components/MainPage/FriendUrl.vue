@@ -70,6 +70,8 @@
 
 <script>
   import Pagination from '../SonCompnent/Pagination';
+  import Store from '../../store'
+
   export default {
     name: "FriendUrl",
     components:{
@@ -180,10 +182,7 @@
     mounted:function(){
       this.GetFriendUrlList();
       // 切换Topbar高亮
-      this.bus.$emit('Topbar',{
-        Active:3,
-        MobileMenuActive:3
-      });
+      Store.commit("ChangeActive", 3);
     },
   }
 </script>

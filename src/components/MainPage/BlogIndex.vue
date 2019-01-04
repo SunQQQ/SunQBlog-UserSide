@@ -117,6 +117,7 @@
 <script>
   import Heartfelt from '../SonCompnent/Heartfelt';
   import Pagination from '../SonCompnent/Pagination';
+  import Store from '../../store'
 
   export default {
     name: "BlogIndex",
@@ -311,11 +312,9 @@
     },
     mounted: function () {
       this.InitArticleTag(this);
+
       // 切换Topbar高亮
-      this.bus.$emit('Topbar', {
-        Active: 0,
-        MobileMenuActive: 0
-      });
+      Store.commit("ChangeActive", 0);
     }
   }
 </script>
