@@ -41,6 +41,8 @@
 
         Store.commit('ChangeEmotionShow',false);
         Store.commit('AppendMessageText','[[' + That.EmotionList[EmoticonNo] + ']]');
+
+        That.$emit('AppendInputValue');
       },
       OpenEmotion:function (Value) {
         Store.commit('ChangeEmotionShow',Value);

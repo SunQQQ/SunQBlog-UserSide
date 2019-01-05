@@ -208,6 +208,9 @@
       MessageSubmit: function () {
         var That = this;
 
+        console.log('Store.getters.GetMessageText');
+        console.log(Store.getters.GetMessageText);
+
         if (Store.getters.GetMessageText && this.MessageLeaveName) {
           var MatchedMessageText = That.MatchEmotion(Store.getters.GetMessageText);
 

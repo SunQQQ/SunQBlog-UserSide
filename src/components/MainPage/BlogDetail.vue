@@ -229,7 +229,7 @@
         this.$refs.EmotionB.OpenEmotion(true);
       },
       //表情选中后追加在input
-      AppendMessageText: function (EmotionChinese) {
+      AppendMessageText: function () {
         // 光标聚焦
         this.$refs.MessageText.focus();
       }
