@@ -1,7 +1,7 @@
 //表情包组件
 <template>
     <transition name="Fade">
-        <div class="EmoticonListCover" v-if="Show" @click="OpenEmotion(false)">
+        <div class="EmoticonListCover" v-if="EmotionShow" @click="OpenEmotion(false)">
             <div class="EmoticonList">
                 <div class="PicItem" v-for="(item,i) in EmotionList" @click="ClickEmoticon(i)" :key="i">
                     <img :src=" 'https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/' + i + '.gif'">
@@ -12,11 +12,17 @@
 </template>
 
 <script>
+  import Store from '../../store'
   export default {
     name: "Emotion",
+    computed:{
+      EmotionShow(){
+        return Store.state.EmotionShow;
+      }
+    },
     data:function(){
       return {
-        Show:false,
+        // EmotionShow:false,
         EmotionList:['微笑', '撇嘴', '色', '发呆', '得意', '流泪', '害羞', '闭嘴', '睡', '大哭',
           '尴尬', '发怒', '调皮', '呲牙', '惊讶', '难过', '酷', '冷汗', '抓狂', '吐', '偷笑', '可爱',
           '白眼', '傲慢', '饥饿', '困', '惊恐', '流汗', '憨笑', '大兵', '奋斗', '咒骂', '疑问', '嘘',
@@ -32,13 +38,14 @@
       //选中表情
       ClickEmoticon:function (EmoticonNo) {
         var That = this;
-        That.Show = false;
-        That.$emit('AppendInputValue','[[' + That.EmotionList[EmoticonNo] + ']]');
+
+        Store.commit('ChangeEmotionShow',false);
+        Store.commit('AppendMessageText','[[' + That.EmotionList[EmoticonNo] + ']]');
       },
       OpenEmotion:function (Value) {
-        this.Show = Value;
+        Store.commit('ChangeEmotionShow',Value);
       },
-    }
+    },
   }
 </script>
 

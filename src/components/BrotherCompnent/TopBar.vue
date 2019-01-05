@@ -47,7 +47,7 @@
 </template>
 
 <script>
-  import store from '../../store';
+  import Store from '../../store';
   export default {
     name: "PcTopBar",
 
@@ -86,7 +86,7 @@
     },*/
     computed:{
       Active(){
-        return store.state.Active;
+        return Store.state.Active;
       }
     }
   }

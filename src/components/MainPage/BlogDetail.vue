@@ -69,7 +69,7 @@
                         </div>
                     </div>
                     <div class="ArticleDetailCommentContent">
-                    <textarea v-model="ArticleCommentText" ref="ArticleCommentText"
+                    <textarea v-model="MessageText" ref="MessageText"
                               placeholder="欢迎评论吖，鼓励和板砖我都认真听取哦"></textarea>
                         <span class="EmotionButton" @click="OpenEmotions()">
                         <i class="iconfont icon-face IconfontSize"></i>
@@ -89,11 +89,22 @@
 <script>
   import Marked from 'marked';
   import Emotion from '../SonCompnent/Emotion';
+  import Store from '../../store'
 
   export default {
     name: "BlogDetail",
     components: {
       Emotion
+    },
+    computed:{
+      MessageText:{
+        get(){
+          return Store.state.MessageText;
+        },
+        set(Value){
+          Store.commit('ChangeMessageText',Value);
+        }
+      }
     },
     data () {
       return {
@@ -101,7 +112,9 @@
         ArticleCommentNickName: '',
         ArticleCommentEmail: '',
         ArticleCommentUrl: '',
-        ArticleCommentText: '',
+
+        /*ArticleCommentText: '',*/
+
         ArticleCommentDate: '',
         ArticleCommentList: '',
         BlogDetailSkeletonScreen: true
@@ -137,8 +150,8 @@
       CommentSubmit: function () {
         var That = this;
 
-        if (this.ArticleCommentNickName && this.ArticleCommentText) {
-          var MatchedMessageText = That.MatchEmotion(That.ArticleCommentText);
+        if (this.ArticleCommentNickName && Store.getters.GetMessageText) {
+          var MatchedMessageText = That.MatchEmotion(Store.getters.GetMessageText);
 
           this.SQFrontAjax({
             Url: '/api/ArticleCommentCreate/foreend',
@@ -169,7 +182,7 @@
           });
 
           // 清空textarea
-          this.ArticleCommentText = "";
+          Store.commit('CleanMessageText');
         } else {
           this.bus.$emit('Tips', {
             Show: true,
@@ -208,8 +221,8 @@
       },
       // 回复评论
       AnswerComment: function (ComentNickName) {
-        this.ArticleCommentText = '@' + ComentNickName + ':';
-        this.$refs.ArticleCommentText.focus();
+        Store.commit('ChangeMessageText','@' + ComentNickName + ':');
+        this.$refs.MessageText.focus();
       },
       // 打开表情包弹框
       OpenEmotions: function () {
@@ -217,9 +230,8 @@
       },
       //表情选中后追加在input
       AppendMessageText: function (EmotionChinese) {
-        this.ArticleCommentText += EmotionChinese;
         // 光标聚焦
-        this.$refs.ArticleCommentText.focus();
+        this.$refs.MessageText.focus();
       }
     },
     mounted: function () {

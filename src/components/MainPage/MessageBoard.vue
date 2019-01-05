@@ -148,14 +148,23 @@
 <script>
   import Pagination from '../SonCompnent/Pagination';
   import Emotion from '../SonCompnent/Emotion';
-  import store from '../../store'
-  import axios from 'axios';
+  import Store from '../../store'
 
   export default {
     name: "MessageBoard",
     components: {
       Pagination,
       Emotion
+    },
+    computed:{
+      MessageText:{
+        get(){
+          return Store.state.MessageText;
+        },
+        set(Value){
+          Store.commit('ChangeMessageText',Value);
+        }
+      }
     },
     data: function () {
       return {
@@ -164,8 +173,6 @@
         // 提交按钮显示
         OpenMessageSubmitValue: false,
 
-        //textarea的留言文本
-        MessageText: '',
         //留言人姓名
         MessageLeaveName: '',
 
@@ -200,8 +207,9 @@
       // 提交留言
       MessageSubmit: function () {
         var That = this;
-        if (this.MessageText && this.MessageLeaveName) {
-          var MatchedMessageText = That.MatchEmotion(That.MessageText);
+
+        if (Store.getters.GetMessageText && this.MessageLeaveName) {
+          var MatchedMessageText = That.MatchEmotion(Store.getters.GetMessageText);
 
           this.SQFrontAjax({
             Url: '/api/MessageCreate/foreend',
@@ -216,7 +224,9 @@
                 Title: '留言成功'
               });
               // 清空留言框
-              That.MessageText = '';
+              // That.MessageText = '';
+              Store.commit('CleanMessageText');
+
               // 存储用户名到本地
               That.SetLocalStorage('SunqBlog', {
                 Key: 'ArticleCommentNickName',
@@ -273,7 +283,9 @@
         this.FadeAnimate = true;
 
         // 填写@某人
-        this.MessageText = '@' + AnswedPerson + ':';
+        // this.MessageText = '@' + AnswedPerson + ':';
+        Store.commit('ChangeMessageText','@' + AnswedPerson + ':');
+
         // 等弹框Dom渲染完毕后再操作Dom
         setTimeout(function () {
           var DomObject = That.$refs['AnswerMessageContentDom'];
@@ -295,7 +307,9 @@
         var That = this;
         this.FadeAnimate = false;
         // 清空留言框
-        this.MessageText = '';
+        // this.MessageText = '';
+        Store.commit('CleanMessageText');
+
         setTimeout(function () {
           That.MessageAnswerFrame = false;
         }, 200)
@@ -330,12 +344,17 @@
 
       // 打开表情框
       OpenEmotions: function () {
-        this.$refs.EmotionB.OpenEmotion(true);
+        // this.$refs.EmotionB.OpenEmotion(true);
+        Store.commit('ChangeEmotionShow',true);
       },
 
       // 点击表情，修改文本
       AppendMessageText: function (EmotionChinese) {
-        this.MessageText += EmotionChinese;
+
+        // this.MessageText += EmotionChinese;
+        // this.MessageText += EmotionChinese;
+
+
         // 回复弹框弹出时，即为回复留言
         if (this.MessageAnswerFrame) {
           this.$refs['AnswerMessageContentDom'].focus();
@@ -347,7 +366,7 @@
     mounted: function () {
       this.MessageRead();
       // 切换Topbar高亮
-      store.commit("ChangeActive", 1);
+      Store.commit("ChangeActive", 1);
     }
   }
 </script>
