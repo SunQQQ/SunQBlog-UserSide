@@ -370,6 +370,20 @@
       this.MessageRead();
       // 切换Topbar高亮
       Store.commit("ChangeActive", 1);
+
+      if ("geolocation" in navigator) {
+        console.log('地理位置可用');
+
+        navigator.geolocation.getCurrentPosition(function(position) {
+          console.log('position info');
+          console.log(position);
+        },function (error) {
+          console.log('location error');
+          console.log(error);
+        });
+      } else {
+        console.log('地理不可用');
+      }
     }
   }
 </script>
