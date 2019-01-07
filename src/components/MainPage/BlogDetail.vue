@@ -174,7 +174,7 @@
                 Value: That.ArticleCommentNickName
               });
 
-              That.bus.$emit('Tips', {
+              Store.commit('ChangeTip',{
                 Show: true,
                 Title: '回复成功'
               });
@@ -184,12 +184,11 @@
           // 清空textarea
           Store.commit('CleanMessageText');
         } else {
-          this.bus.$emit('Tips', {
+          Store.commit('ChangeTip',{
             Show: true,
-            Title: '昵称和评论不能为空呦！'
+            Title: '昵称和评论不能为空呦'
           });
         }
-
       },
       // 获取评论列表
       GetCommentList: function () {

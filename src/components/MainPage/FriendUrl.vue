@@ -121,7 +121,7 @@
               FriendUrlIcoUrl:this.FriendUrlIcoUrl
             },
             Success:function () {
-              That.bus.$emit('Tips', {
+              Store.commit('ChangeTip',{
                 Show: true,
                 Title: '提交成功'
               });
@@ -130,9 +130,9 @@
             }
           });
         }else {
-          That.bus.$emit('Tips',{
+          Store.commit('ChangeTip',{
             Show: true,
-            Title: '请完善网站信息哦！'
+            Title: '请完善网站信息哦'
           });
         }
       },
