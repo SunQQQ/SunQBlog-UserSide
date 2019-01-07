@@ -1,0 +1,4 @@
+RewriteEngine on
+    RewriteCond %{SERVER_PORT} !^443$
+    RewriteCond %{REQUEST_URI} !^/tz.php
+    RewriteRule (.*) https://%{SERVER_NAME}/$1 [R]
