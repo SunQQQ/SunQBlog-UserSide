@@ -3,6 +3,7 @@
 </template>
 
 <script>
+  /*分页组件*/
   export default {
     name: "Pagination",
     data:function () {
