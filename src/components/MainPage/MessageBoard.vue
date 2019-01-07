@@ -219,12 +219,15 @@
               MessageLeaveDate: new Date()
             },
             Success: function () {
-              That.bus.$emit('Tips', {
+              // That.bus.$emit('Tips', {
+              //   Show: true,
+              //   Title: '留言成功'
+              // });
+              Store.commit('ChangeTip',{
                 Show: true,
                 Title: '留言成功'
               });
               // 清空留言框
-              // That.MessageText = '';
               Store.commit('CleanMessageText');
 
               // 存储用户名到本地
@@ -242,9 +245,13 @@
             }
           });
         } else {
-          That.bus.$emit('Tips', {
+          // That.bus.$emit('Tips', {
+          //   Show: true,
+          //   Title: '昵称和留言不能为空呦！'
+          // });
+          Store.commit('ChangeTip',{
             Show: true,
-            Title: '昵称和留言不能为空呦！'
+            Title: '昵称和留言不能为空呦'
           });
         }
       },
@@ -350,11 +357,6 @@
 
       // 点击表情，修改文本
       AppendMessageText: function (EmotionChinese) {
-
-        // this.MessageText += EmotionChinese;
-        // this.MessageText += EmotionChinese;
-
-
         // 回复弹框弹出时，即为回复留言
         if (this.MessageAnswerFrame) {
           this.$refs['AnswerMessageContentDom'].focus();

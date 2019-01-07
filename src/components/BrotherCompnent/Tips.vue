@@ -8,27 +8,25 @@
 </template>
 
 <script>
+  import Store from '../../store'
   export default {
     name: "Tips",
-    data(){
-      return{
-        Tips:{
-          Show:false,
-          Title:''
-        }
+    computed:{
+      Tips:{
+        get(){
+          return Store.state.Tips;
+        },
+        set(Value){
+          Store.commit('ChangeTip',Value);
+        },
+      },
+      ListenTips(){
+        return Store.state.Tips.Show;
       }
     },
-    created(){
-      var That = this;
-      this.bus.$on('Tips',(data)=>{
-        setTimeout(function () {
-          That.Tips = data;
-        },1500)
-      });
-    },
     watch:{
-      Tips:function () {
-        if(this.Tips.Show){
+      ListenTips:function () {
+        if(Store.state.Tips.Show){
           setTimeout( ()=>{
             // 显示两秒后自动关闭
             this.Tips.Show = false;

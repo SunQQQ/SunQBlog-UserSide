@@ -17,6 +17,12 @@ export default new Vuex.Store({
 
     // Loading组件
     Loading:false,
+
+    // Tip组件
+    Tips:{
+      Show:false,
+      Title:''
+    }
   },
   getters: {
     GetMessageText: function (State) {
@@ -51,7 +57,13 @@ export default new Vuex.Store({
     // Loading组件
     ChangeLoading:function (State,Value) {
       State.Loading = Value;
-    }
+    },
+
+    // Tips组件
+    ChangeTip:function (State,Value) {
+      State.Tips.Show = Value.Show;
+      State.Tips.Title = Value.Title;
+    },
   },
   actions: {
 
