@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Store from '../store';
 
 let CommonFunction = {};
 CommonFunction.install = function (Vue) {
@@ -24,15 +25,14 @@ CommonFunction.install = function (Vue) {
   };
 
   Vue.prototype.SQFrontAjax = function (Para) {
-    var That = this;
-    this.bus.$emit('Loading',true);
+    Store.commit('ChangeLoading',true)
 
     if(!Para['UploadData']){
       Para['UploadData'] = {};
     }
 
     axios.post(Para['Url'], Para['UploadData']).then(function (response) {
-      That.bus.$emit('Loading',false);
+      Store.commit('ChangeLoading',false);
 
       if(response.data.status == '0'){
         Para['Success'](response.data.data);

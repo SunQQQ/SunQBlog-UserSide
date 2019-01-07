@@ -14,6 +14,9 @@ export default new Vuex.Store({
 
     // 留言组件
     MessageText:'',
+
+    // Loading组件
+    Loading:false,
   },
   getters: {
     GetMessageText: function (State) {
@@ -43,8 +46,12 @@ export default new Vuex.Store({
     },
     ChangeMessageText:function (State,Value) {
       State.MessageText = Value;
-    }
+    },
 
+    // Loading组件
+    ChangeLoading:function (State,Value) {
+      State.Loading = Value;
+    }
   },
   actions: {
 

@@ -10,18 +10,13 @@
 </template>
 
 <script>
+  import Store from '../../store'
   export default {
     name: "Loading",
-    data(){
-      return{
-        Loading:false
+    computed:{
+      Loading(){
+        return Store.state.Loading;
       }
-    },
-    created(){
-      var That = this;
-      this.bus.$on('Loading',function (data) {
-        That.Loading = !!data;
-      })
     }
   }
 </script>
