@@ -1,154 +1,160 @@
 <template>
-    <transition name="Fade" mode="out-in">
-        <div style="position: relative">
-            <div class="MessageBoardCover">
-                <div class="WriteMessageFrameFadeIn">
-                    <div class="WriteMessageFrameLeft">
-                        <img src="../../static/img/DefaultHeadIcon.jpg">
-                        <div>欢迎你来</div>
-                    </div>
-                    <div style="flex: 1">
-                        <div :class="OpenTextAreaCover ? 'WriteMessageFrameContent' : 'WriteMessageFrameContent WriteMessageFrameContentColorBorder'">
-                            <textarea ref="LeaveMessageTextArea" placeholder="输入留言" v-model="MessageText"></textarea>
-                            <span class="EmotionButton" @click="OpenEmotions()">
+  <transition name="Fade" mode="out-in">
+    <div style="position: relative">
+      <div class="MessageBoardCover">
+        <div class="WriteMessageFrameFadeIn">
+          <div class="WriteMessageFrameLeft">
+            <img src="../../static/img/DefaultHeadIcon.jpg">
+            <div>欢迎你来</div>
+          </div>
+          <div style="flex: 1">
+            <div
+              :class="OpenTextAreaCover ? 'WriteMessageFrameContent' : 'WriteMessageFrameContent WriteMessageFrameContentColorBorder'">
+              <textarea ref="LeaveMessageTextArea" placeholder="输入留言" v-model="MessageText"></textarea>
+              <span class="EmotionButton" @click="OpenEmotions()">
                             <i class="iconfont icon-face IconfontSize"></i>
                         </span>
-                            <div class="TextAreaCover" @click="OpenMessageSubmit()" v-if="OpenTextAreaCover">来都来啦，留个脚印吧
-                            </div>
-                        </div>
-                        <div class="OpenMessageSubmit" v-if="OpenMessageSubmitValue">
-                            <div class="LeaveMessageName">
-                                <input placeholder="输入你的大名或昵称" v-model="MessageLeaveName">
-                            </div>
-                            <div class="OpenMessageSubmitButton" @click="MessageSubmit()">提交</div>
-                        </div>
-                    </div>
-                </div>
+              <div class="TextAreaCover" @click="OpenMessageSubmit()" v-if="OpenTextAreaCover">来都来啦，留个脚印吧
+              </div>
             </div>
-
-            <div class="BlogIndexContent">
-                <div class="BlogFlex">
-                    <div class="BlogIndexContentLeft"
-                         style="background-color:#ffffff;margin-top: 1rem;border:1px solid #e9e9e9;border-radius: 3px">
-                        <div class="CommentList">
-                            <div class="CommentItem" v-for="item in MessageList">
-                                <div class="CommentItemIcon">
-                                    <img src="../../static/img/DefaultHeadIcon.jpg"
-                                         v-if="item.MessageLeaveName != 'sunq'">
-                                    <img src="../../static/img/ZhihuIcon.jpg" v-if="item.MessageLeaveName=='sunq'">
-                                </div>
-                                <div class="CommentItemContent">
-                                    <div>{{ item.MessageLeaveName }}</div>
-                                    <div class="ArticleCommentText" v-html="item.MessageText">{{ item.MessageText }}
-                                    </div>
-                                    <div class="DateAnswer">
-                                        <div class="DateAnswerLeft">{{ item.MessageLeaveDate }}</div>
-                                        <div class="DateAnswerRight" @click="AnswerMessage(item.MessageLeaveName)">回复
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="NoDataHint" v-if="MessageList.length == 0">暂无数据</div>
-                        <div class="MessageBoardListBottom" v-if="AticleBottom">你滑到我底线啦</div>
-                    </div>
-                    <div class="BlogIndexContentRight" style="border:1px solid #e9e9e9;border-radius: 3px">
-                        <div class="Module" style="padding: 0 0 0.5rem;background-color: transparent">
-                            <div class="GitPart">
-                                <div class="TopBackBlack"></div>
-                                <div class="GitPic">
-                                    <img src="../../static/img/ZhihuIcon.jpg">
-                                </div>
-                                <div class="GitBack">
-                                    <i class="iconfont TopBackBlackGit icon-github1"></i>
-                                </div>
-                                <div class="Content">
-                                    <div class="GitName">孙权的Github</div>
-                                    <a class="BlueButton" href="https://github.com/SunQQQ" target="_blank">Follow Me</a>
-                                    <div class="BlogStatistic">
-                                        <div class="BlogStatisticItem">
-                                            <div class="BlogStatisticItemNum">8</div>
-                                            <div class="BlogStatisticItemText AboutMeGitData">Followers</div>
-                                        </div>
-                                        <div class="BlogStatisticItem">
-                                            <div class="BlogStatisticItemNum">13</div>
-                                            <div class="BlogStatisticItemText AboutMeGitData">Repos</div>
-                                        </div>
-                                        <div class="BlogStatisticItem">
-                                            <div class="BlogStatisticItemNum">5</div>
-                                            <div class="BlogStatisticItemText AboutMeGitData">Following</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="BigBlock AboutMeMarginTop">
-                                <div class="TitleFontLine">Contacts</div>
-                                <div class="BlogStatistic" style="border-top: none;padding-bottom: 0">
-                                    <div class="BlogStatisticItem">
-                                        <a href="https://github.com/SunQQQ" target="_blank"><i
-                                                class="iconfont icon-github AboutMeIcon" style="color:#948aec"></i></a>
-                                    </div>
-                                    <div class="BlogStatisticItem">
-                                        <a href="https://www.zhihu.com/people/s-q-51-44-23/activities"
-                                           target="_blank"><i
-                                                class="iconfont icon-zhihu AboutMeIcon" style="color:#3dbd7d"></i></a>
-                                    </div>
-                                    <div class="BlogStatisticItem">
-                                        <a href="https://blog.csdn.net/sun_qqq" target="_blank"><i
-                                                class="iconfont icon-CN_csdnnet AboutMeIcon" style="color:#f78e3d"></i></a>
-                                    </div>
-                                    <div class="BlogStatisticItem">
-                                        <i class="iconfont icon-youxiang AboutMeIcon" style="color:#49a9ee"></i>
-                                    </div>
-                                    <div class="BlogStatisticItem">
-                                        <a href="https://music.163.com/#/user/home?id=386558098" target="_blank"><i
-                                                class="iconfont AboutMeIcon icon-CN_NetEasemusic"
-                                                style="color:#f46e65"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <Pagination v-on:PaginationToParent="ValueByPagition" ref="Pagi"></Pagination>
+            <div class="OpenMessageSubmit" v-if="OpenMessageSubmitValue">
+              <div class="LeaveMessageName">
+                <input placeholder="输入你的大名或昵称" v-model="MessageLeaveName">
+              </div>
+              <div class="OpenMessageSubmitButton" @click="MessageSubmit()">提交</div>
             </div>
-            <!--回复留言弹框PageActive-->
-            <div style="position:fixed;top: 0;bottom: 0;left:0;right:0;z-index: 1000" v-if="MessageAnswerFrame">
-                <div class="MessageBoxWrapper" @click="CloseAnswerMessage()"></div>
-                <div :class="FadeAnimate ? 'WriteMessageFrameFadeIn' : 'WriteMessageFrameFadeOut'"
-                     style="top:0;bottom: 0;height: 8rem;z-index: 1500;opacity: 1;padding-top: 2rem">
-                    <div class="WriteMessageFrameLeft">
-                        <img src="../../static/img/DefaultHeadIcon.jpg">
-                        <div>回复留言</div>
-                    </div>
-                    <div style="flex: 1;position: relative">
-                        <div class="WriteMessageFrameContent WriteMessageFrameContentColorBorder">
-                            <textarea ref="AnswerMessageContentDom" placeholder="输入留言" v-model="MessageText"></textarea>
-                            <span class="EmotionButton" @click="OpenEmotions()">
-                            <i class="iconfont icon-face IconfontSize"></i>
-                        </span>
-                        </div>
-                        <div class="OpenMessageSubmit">
-                            <div class="LeaveMessageName">
-                                <input placeholder="输入你的大名或昵称" v-model="MessageLeaveName">
-                            </div>
-                            <div class="OpenMessageSubmitButton" @click="MessageSubmit()">提交</div>
-                        </div>
-                        <div class="CloseAnswerMessage" @click="CloseAnswerMessage()">
-                            <i class="iconfont icon-fork IconfontSize"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <Emotion ref="EmotionB" @AppendInputValue="AppendMessageText"></Emotion>
+          </div>
         </div>
-    </transition>
+      </div>
+
+      <div class="BlogIndexContent">
+        <div class="BlogFlex">
+          <div class="BlogIndexContentLeft"
+               style="background-color:#ffffff;margin-top: 1rem;border:1px solid #e9e9e9;border-radius: 3px">
+            <div class="CommentList">
+              <div class="CommentItem" v-for="item in MessageList">
+                <div class="CommentItemIcon">
+                  <img src="../../static/img/DefaultHeadIcon.jpg"
+                       v-if="item.MessageLeaveName != 'sunq'">
+                  <img src="../../static/img/ZhihuIcon.jpg" v-if="item.MessageLeaveName=='sunq'">
+                </div>
+                <div class="CommentItemContent">
+                  <div>{{ item.MessageLeaveName }}
+                    <span v-if="item.LocationCityName">
+                      <i class='iconfont icon-buoumaotubiao23 LocationIconfont'></i>{{ item.LocationCityName }}
+                    </span>
+                  </div>
+                  <div class="ArticleCommentText" v-html="item.MessageText">{{ item.MessageText }}
+                  </div>
+                  <div class="DateAnswer">
+                    <div class="DateAnswerLeft">{{ item.MessageLeaveDate }}</div>
+                    <div class="DateAnswerRight" @click="AnswerMessage(item.MessageLeaveName)">回复
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="NoDataHint" v-if="MessageList.length == 0">暂无数据</div>
+            <div class="MessageBoardListBottom" v-if="AticleBottom">你滑到我底线啦</div>
+          </div>
+          <div class="BlogIndexContentRight" style="border:1px solid #e9e9e9;border-radius: 3px">
+            <div class="Module" style="padding: 0 0 0.5rem;background-color: transparent">
+              <div class="GitPart">
+                <div class="TopBackBlack"></div>
+                <div class="GitPic">
+                  <img src="../../static/img/ZhihuIcon.jpg">
+                </div>
+                <div class="GitBack">
+                  <i class="iconfont TopBackBlackGit icon-github1"></i>
+                </div>
+                <div class="Content">
+                  <div class="GitName">孙权的Github</div>
+                  <a class="BlueButton" href="https://github.com/SunQQQ" target="_blank">Follow Me</a>
+                  <div class="BlogStatistic">
+                    <div class="BlogStatisticItem">
+                      <div class="BlogStatisticItemNum">8</div>
+                      <div class="BlogStatisticItemText AboutMeGitData">Followers</div>
+                    </div>
+                    <div class="BlogStatisticItem">
+                      <div class="BlogStatisticItemNum">13</div>
+                      <div class="BlogStatisticItemText AboutMeGitData">Repos</div>
+                    </div>
+                    <div class="BlogStatisticItem">
+                      <div class="BlogStatisticItemNum">5</div>
+                      <div class="BlogStatisticItemText AboutMeGitData">Following</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="BigBlock AboutMeMarginTop">
+                <div class="TitleFontLine">Contacts</div>
+                <div class="BlogStatistic" style="border-top: none;padding-bottom: 0">
+                  <div class="BlogStatisticItem">
+                    <a href="https://github.com/SunQQQ" target="_blank"><i
+                      class="iconfont icon-github AboutMeIcon" style="color:#948aec"></i></a>
+                  </div>
+                  <div class="BlogStatisticItem">
+                    <a href="https://www.zhihu.com/people/s-q-51-44-23/activities"
+                       target="_blank"><i
+                      class="iconfont icon-zhihu AboutMeIcon" style="color:#3dbd7d"></i></a>
+                  </div>
+                  <div class="BlogStatisticItem">
+                    <a href="https://blog.csdn.net/sun_qqq" target="_blank"><i
+                      class="iconfont icon-CN_csdnnet AboutMeIcon" style="color:#f78e3d"></i></a>
+                  </div>
+                  <div class="BlogStatisticItem">
+                    <i class="iconfont icon-youxiang AboutMeIcon" style="color:#49a9ee"></i>
+                  </div>
+                  <div class="BlogStatisticItem">
+                    <a href="https://music.163.com/#/user/home?id=386558098" target="_blank"><i
+                      class="iconfont AboutMeIcon icon-CN_NetEasemusic"
+                      style="color:#f46e65"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <Pagination v-on:PaginationToParent="ValueByPagition" ref="Pagi"></Pagination>
+      </div>
+      <!--回复留言弹框PageActive-->
+      <div style="position:fixed;top: 0;bottom: 0;left:0;right:0;z-index: 1000" v-if="MessageAnswerFrame">
+        <div class="MessageBoxWrapper" @click="CloseAnswerMessage()"></div>
+        <div :class="FadeAnimate ? 'WriteMessageFrameFadeIn' : 'WriteMessageFrameFadeOut'"
+             style="top:0;bottom: 0;height: 8rem;z-index: 1500;opacity: 1;padding-top: 2rem">
+          <div class="WriteMessageFrameLeft">
+            <img src="../../static/img/DefaultHeadIcon.jpg">
+            <div>回复留言</div>
+          </div>
+          <div style="flex: 1;position: relative">
+            <div class="WriteMessageFrameContent WriteMessageFrameContentColorBorder">
+              <textarea ref="AnswerMessageContentDom" placeholder="输入留言" v-model="MessageText"></textarea>
+              <span class="EmotionButton" @click="OpenEmotions()">
+                            <i class="iconfont icon-face IconfontSize"></i>
+                        </span>
+            </div>
+            <div class="OpenMessageSubmit">
+              <div class="LeaveMessageName">
+                <input placeholder="输入你的大名或昵称" v-model="MessageLeaveName">
+              </div>
+              <div class="OpenMessageSubmitButton" @click="MessageSubmit()">提交</div>
+            </div>
+            <div class="CloseAnswerMessage" @click="CloseAnswerMessage()">
+              <i class="iconfont icon-fork IconfontSize"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <Emotion ref="EmotionB" @AppendInputValue="AppendMessageText"></Emotion>
+    </div>
+  </transition>
 </template>
 
 <script>
   import Pagination from '../SonCompnent/Pagination';
   import Emotion from '../SonCompnent/Emotion';
-  import Store from '../../store'
+  import Store from '../../store';
+  import Axios from 'axios'
 
   export default {
     name: "MessageBoard",
@@ -156,13 +162,13 @@
       Pagination,
       Emotion
     },
-    computed:{
-      MessageText:{
-        get(){
+    computed: {
+      MessageText: {
+        get() {
           return Store.state.MessageText;
         },
-        set(Value){
-          Store.commit('ChangeMessageText',Value);
+        set(Value) {
+          Store.commit('ChangeMessageText', Value);
         }
       }
     },
@@ -211,45 +217,44 @@
         if (Store.getters.GetMessageText && this.MessageLeaveName) {
           var MatchedMessageText = That.MatchEmotion(Store.getters.GetMessageText);
 
-          this.SQFrontAjax({
-            Url: '/api/MessageCreate/foreend',
-            UploadData: {
-              MessageText: MatchedMessageText,
-              MessageLeaveName: this.MessageLeaveName,
-              MessageLeaveDate: new Date()
-            },
-            Success: function () {
-              // That.bus.$emit('Tips', {
-              //   Show: true,
-              //   Title: '留言成功'
-              // });
-              Store.commit('ChangeTip',{
-                Show: true,
-                Title: '留言成功'
-              });
-              // 清空留言框
-              Store.commit('CleanMessageText');
+          this.GetLocation(function (LocationCityName) {
+            That.SQFrontAjax({
+              Url: '/api/MessageCreate/foreend',
+              UploadData: {
+                MessageText: MatchedMessageText,
+                MessageLeaveName: That.MessageLeaveName,
+                MessageLeaveDate: new Date(),
+                LocationCityName: LocationCityName
+              },
+              Success: function () {
+                Store.commit('ChangeTip', {
+                  Show: true,
+                  Title: '留言成功'
+                });
+                // 清空留言框
+                Store.commit('CleanMessageText');
 
-              // 存储用户名到本地
-              That.SetLocalStorage('SunqBlog', {
-                Key: 'ArticleCommentNickName',
-                Value: That.MessageLeaveName
-              });
-              // 刷新留言列表
-              That.MessageRead();
+                // 存储用户名到本地
+                That.SetLocalStorage('SunqBlog', {
+                  Key: 'ArticleCommentNickName',
+                  Value: That.MessageLeaveName
+                });
+                // 刷新留言列表
+                That.MessageRead();
 
-              // 如果是回复留言，关闭留言弹框
-              That.MessageAnswerFrame = false;
-              // 初始TextArea框遮盖
-              That.OpenTextAreaCover = true;
-            }
+                // 如果是回复留言，关闭留言弹框
+                That.MessageAnswerFrame = false;
+                // 初始TextArea框遮盖
+                That.OpenTextAreaCover = true;
+              }
+            });
           });
         } else {
           // That.bus.$emit('Tips', {
           //   Show: true,
           //   Title: '昵称和留言不能为空呦！'
           // });
-          Store.commit('ChangeTip',{
+          Store.commit('ChangeTip', {
             Show: true,
             Title: '昵称和留言不能为空呦'
           });
@@ -290,8 +295,7 @@
         this.FadeAnimate = true;
 
         // 填写@某人
-        // this.MessageText = '@' + AnswedPerson + ':';
-        Store.commit('ChangeMessageText','@' + AnswedPerson + ':');
+        Store.commit('ChangeMessageText', '@' + AnswedPerson + ':');
 
         // 等弹框Dom渲染完毕后再操作Dom
         setTimeout(function () {
@@ -352,7 +356,7 @@
       // 打开表情框
       OpenEmotions: function () {
         // this.$refs.EmotionB.OpenEmotion(true);
-        Store.commit('ChangeEmotionShow',true);
+        Store.commit('ChangeEmotionShow', true);
       },
 
       // 点击表情，修改文本
@@ -369,258 +373,244 @@
       this.MessageRead();
       // 切换Topbar高亮
       Store.commit("ChangeActive", 1);
-
-      if ("geolocation" in navigator) {
-        console.log('地理位置可用');
-
-        navigator.geolocation.getCurrentPosition(function(position) {
-          console.log('position info');
-          console.log(position);
-        },function (error) {
-          console.log('location error');
-          console.log(error);
-        });
-      } else {
-        console.log('地理不可用');
-      }
     }
   }
 </script>
 
 <style scoped lang="less">
-    @import "../../static/css/AboutMe";
-    @import "../../static/css/BlogIndex";
-    @import "../../static/css/BlogDetail";
-    /*pc端*/
-    @media only screen and (min-device-width: 768px) {
-        .WriteMessageFrameFadeIn {
-            background-color: @fore_color;
-            width: 42rem;
-            margin: auto;
-            .myflex(start);
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 30vh;
-            padding: 1.5rem 1.5rem 1.5rem 1rem;
-            animation: FadeIn 0.2s linear;
-        }
-
-        .WriteMessageFrameFadeOut {
-            background-color: @fore_color;
-            width: 42rem;
-            margin: auto;
-            .myflex(start);
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 14rem;
-            padding: 1.5rem 1.5rem 1.5rem 1rem;
-            animation: FadeOut 0.2s linear;
-            /*animation-delay: 1s;*/
-        }
-
-        .MessageBoardCover {
-            width: 100%;
-            height: 95vh;
-            position: relative;
-            background: url(../../static/img/MessageBoardCover2.jpg) no-repeat 50% #cef;
-            background-position: 50%;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-
-        .MessageBoardListBottom {
-            background-color: @fore_color;
-            padding: 1rem;
-            text-align: center;
-            border: 1px solid @BorderColor;
-            border-top: none;
-            font-size: 1rem;
-        }
+  @import "../../static/css/AboutMe";
+  @import "../../static/css/BlogIndex";
+  @import "../../static/css/BlogDetail";
+  /*pc端*/
+  @media only screen and (min-device-width: 768px) {
+    .WriteMessageFrameFadeIn {
+      background-color: @fore_color;
+      width: 42rem;
+      margin: auto;
+      .myflex(start);
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 30vh;
+      padding: 1.5rem 1.5rem 1.5rem 1rem;
+      animation: FadeIn 0.2s linear;
     }
 
-    /*移动端*/
-    @media only screen and (max-device-width: 768px) {
-        .WriteMessageFrameFadeIn {
-            background-color: @fore_color;
-            margin: auto 1rem;
-            .myflex(start);
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 30vh;
-            padding: 1.5rem 1.5rem 1.5rem 1rem;
-            animation: FadeIn 0.2s linear;
-        }
-
-        .WriteMessageFrameFadeOut {
-            background-color: @fore_color;
-            margin: auto 1rem;
-            .myflex(start);
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 30vh;
-            padding: 1.5rem 1.5rem 1.5rem 1rem;
-            animation: FadeOut 0.2s linear;
-        }
-
-        .MessageBoardCover {
-            width: 100%;
-            height: 95vh;
-            position: relative;
-            background: url(../../static/img/MessageBoardCover2.jpg) no-repeat 50% #cef;
-            background-position: 50%;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-
-        .MessageBoardListBottom {
-            margin: 1rem 0;
-            text-align: center;
-            font-size: 0.8rem;
-            color: @FontColorGrayDeep;
-            border: 1px solid @back_color;
-        }
+    .WriteMessageFrameFadeOut {
+      background-color: @fore_color;
+      width: 42rem;
+      margin: auto;
+      .myflex(start);
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 14rem;
+      padding: 1.5rem 1.5rem 1.5rem 1rem;
+      animation: FadeOut 0.2s linear;
+      /*animation-delay: 1s;*/
     }
 
-    @keyframes FadeIn {
-        0% {
-            transform: scale(0.9)
-        }
-        20% {
-            transform: scale(0.925)
-        }
-        60% {
-            transform: scale(0.95)
-        }
-        80% {
-            transform: scale(0.975)
-        }
-        100% {
-            transform: scale(1)
-        }
+    .MessageBoardCover {
+      width: 100%;
+      height: 95vh;
+      position: relative;
+      background: url(../../static/img/MessageBoardCover2.jpg) no-repeat 50% #cef;
+      background-position: 50%;
+      background-repeat: no-repeat;
+      background-size: cover;
     }
 
-    @keyframes FadeOut {
-        0% {
-            transform: scale(1)
-        }
-        20% {
-            transform: scale(0.975)
-        }
-        60% {
-            transform: scale(0.95)
-        }
-        80% {
-            transform: scale(0.925)
-        }
-        100% {
-            transform: scale(0.9)
-        }
+    .MessageBoardListBottom {
+      background-color: @fore_color;
+      padding: 1rem;
+      text-align: center;
+      border: 1px solid @BorderColor;
+      border-top: none;
+      font-size: 1rem;
+    }
+  }
+
+  /*移动端*/
+  @media only screen and (max-device-width: 768px) {
+    .WriteMessageFrameFadeIn {
+      background-color: @fore_color;
+      margin: auto 1rem;
+      .myflex(start);
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 30vh;
+      padding: 1.5rem 1.5rem 1.5rem 1rem;
+      animation: FadeIn 0.2s linear;
     }
 
-    .WriteMessageFrameLeft {
-        width: 4rem;
-        text-align: center;
-        margin-right: 0.5rem;
-        font-size: 0.8rem;
+    .WriteMessageFrameFadeOut {
+      background-color: @fore_color;
+      margin: auto 1rem;
+      .myflex(start);
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 30vh;
+      padding: 1.5rem 1.5rem 1.5rem 1rem;
+      animation: FadeOut 0.2s linear;
     }
 
-    .WriteMessageFrameLeft img {
-        width: 2.5rem;
-        height: 2.5rem;
-        border-radius: 5px;
+    .MessageBoardCover {
+      width: 100%;
+      height: 95vh;
+      position: relative;
+      background: url(../../static/img/MessageBoardCover2.jpg) no-repeat 50% #cef;
+      background-position: 50%;
+      background-repeat: no-repeat;
+      background-size: cover;
     }
 
-    .WriteMessageFrameContent {
-        flex: 1;
-        height: 4.5rem;
-        /*line-height: 4.5rem;*/
-        position: relative;
-        padding: 0.5rem 0 0 0.5rem;
-        border: 1px solid @BorderColor;
+    .MessageBoardListBottom {
+      margin: 1rem 0;
+      text-align: center;
+      font-size: 0.8rem;
+      color: @FontColorGrayDeep;
+      border: 1px solid @back_color;
     }
+  }
 
-    .WriteMessageFrameContentColorBorder {
-        border: 1px solid @ThemeColor;
+  @keyframes FadeIn {
+    0% {
+      transform: scale(0.9)
     }
+    20% {
+      transform: scale(0.925)
+    }
+    60% {
+      transform: scale(0.95)
+    }
+    80% {
+      transform: scale(0.975)
+    }
+    100% {
+      transform: scale(1)
+    }
+  }
 
-    .WriteMessageFrameContent textarea {
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        border: none;
-        outline: none;
+  @keyframes FadeOut {
+    0% {
+      transform: scale(1)
     }
+    20% {
+      transform: scale(0.975)
+    }
+    60% {
+      transform: scale(0.95)
+    }
+    80% {
+      transform: scale(0.925)
+    }
+    100% {
+      transform: scale(0.9)
+    }
+  }
 
-    .OpenMessageSubmit {
-        .myflex(center);
-        margin-top: 1rem;
-    }
+  .WriteMessageFrameLeft {
+    width: 4rem;
+    text-align: center;
+    margin-right: 0.5rem;
+    font-size: 0.8rem;
+  }
 
-    .LeaveMessageName {
-        flex: 1;
-    }
+  .WriteMessageFrameLeft img {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 5px;
+  }
 
-    .LeaveMessageName input {
-        width: 8rem;
-        height: 1.5rem;
-        border: 1px solid @ThemeColor;
-    }
+  .WriteMessageFrameContent {
+    flex: 1;
+    height: 4.5rem;
+    /*line-height: 4.5rem;*/
+    position: relative;
+    padding: 0.5rem 0 0 0.5rem;
+    border: 1px solid @BorderColor;
+  }
 
-    .OpenMessageSubmitButton {
-        background-color: @ThemeColor;
-        padding: 0.3rem 1rem;
-        color: @FontColorWhite;
-        width: 2rem;
-        font-size: 0.8rem;
-        border-radius: 2px;
-        display: inline-block;
-        text-align: center;
-        cursor: pointer;
-    }
+  .WriteMessageFrameContentColorBorder {
+    border: 1px solid @ThemeColor;
+  }
 
-    .EmotionButton {
-        position: absolute;
-        right: 0.5rem;
-        bottom: 0.5rem;
-        cursor: pointer;
-    }
+  .WriteMessageFrameContent textarea {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+  }
 
-    .TextAreaCover {
-        position: absolute;
-        left: 0;
-        top: 0;
-        height: 5rem;
-        line-height: 5rem;
-        width: 100%;
-        box-sizing: border-box;
-        padding-left: 1rem;
-        background-color: @fore_color;
-    }
+  .OpenMessageSubmit {
+    .myflex(center);
+    margin-top: 1rem;
+  }
 
-    .MessageBoxWrapper {
-        position: fixed;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        z-index: 1000;
-        opacity: .6;
-        filter: opacity(60);
-        background-color: #000;
-        transition: all 0s ease 0s;
-        transform: translate3d(0px, 0px, 0px);
-    }
+  .LeaveMessageName {
+    flex: 1;
+  }
 
-    .CloseAnswerMessage {
-        position: absolute;
-        right: -1rem;
-        top: -1.5rem;
-        cursor: pointer;
-    }
+  .LeaveMessageName input {
+    width: 8rem;
+    height: 1.5rem;
+    border: 1px solid @ThemeColor;
+  }
+
+  .OpenMessageSubmitButton {
+    background-color: @ThemeColor;
+    padding: 0.3rem 1rem;
+    color: @FontColorWhite;
+    width: 2rem;
+    font-size: 0.8rem;
+    border-radius: 2px;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .EmotionButton {
+    position: absolute;
+    right: 0.5rem;
+    bottom: 0.5rem;
+    cursor: pointer;
+  }
+
+  .TextAreaCover {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 5rem;
+    line-height: 5rem;
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 1rem;
+    background-color: @fore_color;
+  }
+
+  .MessageBoxWrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 1000;
+    opacity: .6;
+    filter: opacity(60);
+    background-color: #000;
+    transition: all 0s ease 0s;
+    transform: translate3d(0px, 0px, 0px);
+  }
+
+  .CloseAnswerMessage {
+    position: absolute;
+    right: -1rem;
+    top: -1.5rem;
+    cursor: pointer;
+  }
 </style>

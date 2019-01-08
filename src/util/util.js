@@ -110,6 +110,31 @@ CommonFunction.install = function (Vue) {
 
     return data;
   };
+
+
+  /**
+   * 根据IP获取用户所在城市
+   * @param func 获取成功后的回调函数，该参数将接受一个城市名称
+   * @constructor
+   */
+  Vue.prototype.GetLocation = function (func) {
+    this.SQFrontAjax({
+      Url: '/api/GetUserIp',
+      Success: function (data) {
+        axios({
+          url: 'https://restapi.amap.com/v3/ip',
+          method: 'post',
+          params: {
+            // ip: '101.88.147.146',
+            ip: data.IpAdress,
+            key:'ba5f9b69f0541123a4dbe142da230b4d'
+          },
+        }).then(function (resp) {
+          func(resp.data.city);
+        }).catch()
+      }
+    });
+  };
 };
 
 export default CommonFunction;

@@ -38,7 +38,12 @@
                                          v-if="item.ArticleCommentNickName == 'sunq'">
                                 </div>
                                 <div class="CommentItemContent">
-                                    <div class="ArticleCommentNickName">{{ item.ArticleCommentNickName }}</div>
+                                    <div class="ArticleCommentNickName">
+                                      {{ item.ArticleCommentNickName }}
+                                      <span v-if="item.LocationCityName">
+                                        <i class='iconfont icon-buoumaotubiao23 LocationIconfont'></i>{{ item.LocationCityName }}
+                                      </span>
+                                    </div>
                                     <div class="ArticleCommentText" v-html="item.ArticleCommentText">
                                         {{ item.ArticleCommentText }}
                                     </div>
@@ -153,32 +158,35 @@
         if (this.ArticleCommentNickName && Store.getters.GetMessageText) {
           var MatchedMessageText = That.MatchEmotion(Store.getters.GetMessageText);
 
-          this.SQFrontAjax({
-            Url: '/api/ArticleCommentCreate/foreend',
-            UploadData: {
-              ArticleId: this.$route.query.ID,
-              ArticleCommentNickName: this.ArticleCommentNickName,
-              ArticleCommentEmail: this.ArticleCommentEmail,
-              ArticleCommentUrl: this.ArticleCommentUrl,
-              ArticleCommentText: MatchedMessageText,
-              ArticleCommentDate: new Date()
-            },
-            Success: function () {
-              That.GetCommentList();
+          this.GetLocation(function (LocationCityName) {
+            That.SQFrontAjax({
+              Url: '/api/ArticleCommentCreate/foreend',
+              UploadData: {
+                ArticleId: That.$route.query.ID,
+                ArticleCommentNickName: That.ArticleCommentNickName,
+                ArticleCommentEmail: That.ArticleCommentEmail,
+                ArticleCommentUrl: That.ArticleCommentUrl,
+                ArticleCommentText: MatchedMessageText,
+                ArticleCommentDate: new Date(),
+                LocationCityName:LocationCityName
+              },
+              Success: function () {
+                That.GetCommentList();
 
-              That.UpdateArticleCommentNum();
+                That.UpdateArticleCommentNum();
 
-              // 存储用户名到本地
-              That.SetLocalStorage('SunqBlog', {
-                Key: 'ArticleCommentNickName',
-                Value: That.ArticleCommentNickName
-              });
+                // 存储用户名到本地
+                That.SetLocalStorage('SunqBlog', {
+                  Key: 'ArticleCommentNickName',
+                  Value: That.ArticleCommentNickName
+                });
 
-              Store.commit('ChangeTip',{
-                Show: true,
-                Title: '回复成功'
-              });
-            }
+                Store.commit('ChangeTip',{
+                  Show: true,
+                  Title: '回复成功'
+                });
+              }
+            });
           });
 
           // 清空textarea

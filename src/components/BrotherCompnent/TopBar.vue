@@ -53,7 +53,6 @@
 
     data: function () {
       return {
-        /*Active: 0,*/
         OpenMobileMenu: false //移动端菜单详情伸开、关闭
       }
     },
@@ -77,13 +76,6 @@
         this.OpenMobileMenu = !this.OpenMobileMenu;
       }
     },
-
-    /*mounted() {
-      var That = this;
-      this.bus.$on('Topbar', function (data) {
-        That.Active = data.Active;
-      });
-    },*/
     computed:{
       Active(){
         return Store.state.Active;
