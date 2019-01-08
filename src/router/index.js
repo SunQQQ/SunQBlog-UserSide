@@ -10,6 +10,7 @@ import AboutMe from '@/components/MainPage/AboutMe';
 Vue.use(Router);
 
 export default new Router({
+  mode: 'history',
   scrollBehavior:() => ({ y:0 }),
   routes: [
     {
