@@ -36,10 +36,18 @@ CommonFunction.install = function (Vue) {
 
       if(response.data.status == '0'){
         Para['Success'](response.data.data);
+      }else {
+        console.log('network statuscode error');
       }
-    }).catch(function () {
-
-    });
+    }).catch(function (error) {
+      if(error.response){
+        console.log(error.response);
+      }else if(error.request){
+        console.log(error.request);
+      }else {
+        console.log('SQFrontAjax Error:',error.message);
+      }
+  });
   };
 
   /**

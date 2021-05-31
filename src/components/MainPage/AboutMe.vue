@@ -5,12 +5,14 @@
             <div class="LeftPart">
                 <div class="BigBlock">
                     <div class="TitleFontLine">My Info</div>
-                    <p><i class="iconfont icon-person AboutMeIcon" style="color:#49a9ee"></i>94年老男人，软件学院毕业。做过两年前端开发，目前改行卖水果嘞</p>
-                    <p><i class="iconfont icon-aihao1 AboutMeIcon" style="color:#f46e65"></i>年轻时喜欢篮球、跑步、泡沫剧。现在喜爱看车评、历史记录片、发发呆</p>
+                    <p><i class="iconfont icon-person AboutMeIcon" style="color:#49a9ee"></i>94年选手，中原工学院软件本科毕业，三年前端开发经历，一年连锁品牌管理经验</p>
+                    <p><i class="iconfont icon-aihao1 AboutMeIcon" style="color:#f46e65"></i>爱好篮球、跑步、吉他。喜爱车评、历史记录片、交朋友</p>
                     <p><i class="iconfont icon-tool AboutMeIcon" style="color:#3db8c1"></i>Layui、ElementUI、Vue.js、node</p>
                     <p><i class="iconfont icon-biaoqian AboutMeIcon" style="color:#3dbd7d"></i>阳光大叔、靠谱伙伴、傻大个</p>
-                    <p><i class="iconfont icon-xiazai20 AboutMeIcon" style="color:#948aec"></i>郑州 二七区</p>
-                    <p><i class="iconfont icon-jianzhu AboutMeIcon" style="color:#f78e3d"></i>鲜丰水果 某门店</p>
+                    <p><i class="iconfont icon-xiazai20 AboutMeIcon" style="color:#948aec"></i>郑州 二七区 嵩山路西三环</p>
+<!--
+                    <p><i class="iconfont icon-jianzhu AboutMeIcon" style="color:#f78e3d"></i></p>
+-->
                 </div>
                 <div class="BigBlock AboutMeMarginTop">
                     <div class="TitleFontLine">Her Info</div>
@@ -36,7 +38,7 @@
                         </a>
                         <a class="UrlCardTd UrlCardTdBc" href="https://github.com/SunQQQ" target="_blank">
                             <div class="UrlIconName UrlIconNameMargin">
-                                <img src="http://sunq.xyz/favicon.ico">
+                                <img src="http://121.5.115.202/favicon.ico">
                                 <div class="UrlName">孙权的博客</div>
                             </div>
                         </a>

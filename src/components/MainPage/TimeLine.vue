@@ -54,8 +54,10 @@
         this.SQFrontAjax({
           Url:'/api/TimeLineRead/foreend',
           Success:function (data) {
-            data.forEach(function (Item,I) {
-              Item.CreateDate = Item.CreateDate.slice(0,10);
+            data.forEach(function (Item) {
+              if(Item.CreateDate){
+                Item.CreateDate = Item.CreateDate.slice(0,10);
+              }
             });
             That.TimeLineList = data;
           }
@@ -63,10 +65,9 @@
       }
     },
     mounted:function () {
+      this.GetTimeLineList();
       // topbar高亮设置
       Store.commit("ChangeActive", 2);
-
-      this.GetTimeLineList();
     }
   }
 </script>

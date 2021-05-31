@@ -18,7 +18,17 @@
     <div class="MobileTopBar">
       <div class="MobileTopBarLogo" @click="ChangeRouter('BlogIndex')">Sunq's Blog</div>
       <div class="MenuTopBarIcon" @click="OpenMenu()">
+<!--
         <i :class="OpenMobileMenu ? 'iconfont icon-fork IconfontSize' : 'iconfont icon-iconset0194 IconfontSize'"></i>
+-->
+        <div class="MobileMenuSwitch">
+          <span :class="OpenMobileMenu ? 'MenuButtonFirstGoOpen' : 'MenuButtonFirstGoClose'"></span>
+          <span :class="OpenMobileMenu ? 'MenuButtonSecondGoOpen' : 'MenuButtonSecondGoClose'"></span>
+          <span :class="OpenMobileMenu ? 'MenuButtonThirdGoOpen' : 'MenuButtonThirdGoClose'"></span>
+          <!--<span :class="OpenMobileMenu ? 'MenuButtonFirstGoOpen' : ''"></span>-->
+          <!--<span :class="OpenMobileMenu ? 'MenuButtonSecondGoOpen' : ''"></span>-->
+          <!--<span :class="OpenMobileMenu ? 'MenuButtonThirdGoOpen' : ''"></span>-->
+        </div>
       </div>
     </div>
 
@@ -149,6 +159,217 @@
     .MoveingLight {
       display: none;
     }
+
+
+    .MobileMenuSwitch{
+      box-sizing: border-box;
+      width:24px;
+      height: 24px;
+      margin-left: auto;
+    }
+    .MobileMenuSwitch span{
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: @FontColorGray;
+
+      margin: 0 auto 5px;
+      position: relative;
+      border-radius: 3px;
+    }
+
+    /*给移动端菜单按钮，第一个横杠设置动画*/
+    .MenuButtonFirstGoOpen{
+      animation: MenuButtonGoOpen 0.3s linear;
+      animation-fill-mode:forwards;
+    }
+    .MenuButtonFirstGoClose{
+      animation:MenuButtonGoClose 0.3s linear;
+      animation-fill-mode:forwards;
+    }
+    @keyframes MenuButtonGoOpen {
+      0% {
+        -ms-transform: rotate(-8deg); /* IE 9 */
+        transform: rotate(-8deg);
+        -moz-transform-origin: 100% 100%;
+        -webkit-transform-origin:100% 100%;
+        -o-transform-origin:100% 100%;
+      }
+      25% {
+        -ms-transform: rotate(-16deg); /* IE 9 */
+        transform: rotate(-16deg);
+        -moz-transform-origin: 100% 100%;
+        -webkit-transform-origin:100% 100%;
+        -o-transform-origin:100% 100%;
+      }
+      50% {
+        -ms-transform: rotate(-25deg); /* IE 9 */
+        transform: rotate(-25deg);
+        -moz-transform-origin: 100% 100%;
+        -webkit-transform-origin:100% 100%;
+        -o-transform-origin:100% 100%;
+      }
+      75% {
+        -ms-transform: rotate(-34deg); /* IE 9 */
+        transform: rotate(-34deg);
+        -moz-transform-origin: 100% 100%;
+        -webkit-transform-origin:100% 100%;
+        -o-transform-origin:100% 100%;
+      }
+      100% {
+        -ms-transform: rotate(-43deg); /* IE 9 */
+        transform: rotate(-43deg);
+        -moz-transform-origin: 100% 100%;
+        -webkit-transform-origin:100% 100%;
+        -o-transform-origin:100% 100%;
+      }
+
+
+    }
+    @keyframes MenuButtonGoClose {
+      0% {
+        -ms-transform: rotate(-43deg); /* IE 9 */
+        transform: rotate(-43deg);
+        -moz-transform-origin: 100% 100%;
+        -webkit-transform-origin:100% 100%;
+        -o-transform-origin:100% 100%;
+      }
+      25% {
+        -ms-transform: rotate(-34deg); /* IE 9 */
+        transform: rotate(-34deg);
+        -moz-transform-origin: 100% 100%;
+        -webkit-transform-origin:100% 100%;
+        -o-transform-origin:100% 100%;
+      }
+      50% {
+        -ms-transform: rotate(-25deg); /* IE 9 */
+        transform: rotate(-25deg);
+        -moz-transform-origin: 100% 100%;
+        -webkit-transform-origin:100% 100%;
+        -o-transform-origin:100% 100%;
+      }
+      75% {
+        -ms-transform: rotate(-16deg); /* IE 9 */
+        transform: rotate(-16deg);
+        -moz-transform-origin: 100% 100%;
+        -webkit-transform-origin:100% 100%;
+        -o-transform-origin:100% 100%;
+      }
+      100% {
+        -ms-transform: rotate(0deg); /* IE 9 */
+        transform: rotate(0deg);
+        -moz-transform-origin: 100% 100%;
+        -webkit-transform-origin:100% 100%;
+        -o-transform-origin:100% 100%;
+      }
+    }
+
+    .MenuButtonSecondGoOpen{
+      opacity: 0;
+    }
+    .MenuButtonSecondGoClose{
+      -webkit-animation: MenutionGoCloseSeFloor 0.5s linear;
+      -o-animation: MenutionGoCloseSeFloor 0.5s linear;
+      animation: MenutionGoCloseSeFloor 0.5s linear;
+      animation-fill-mode:forwards;
+    }
+    @keyframes MenutionGoCloseSeFloor{
+      0% {
+        /*background: white;*/
+        opacity: 0;
+      }
+      50%{
+        opacity: 0;
+      }
+      100%{
+        opacity: 1;
+      }
+    }
+
+    /*给移动端菜单按钮，第3个横杠设置动画*/
+    .MenuButtonThirdGoOpen{
+      animation: MenuButtonGoOpenThFloor 0.3s linear;
+      animation-fill-mode: forwards;
+    }
+    .MenuButtonThirdGoClose{
+      animation: MenuButtonGoCloseThFloor 0.3s linear;
+      animation-fill-mode:forwards;
+    }
+    @keyframes MenuButtonGoOpenThFloor{
+      0% {
+        -ms-transform: rotate(8deg); /* IE 9 */
+        transform: rotate(8deg);
+        -moz-transform-origin: 100% 100%;
+        -webkit-transform-origin:100% 100%;
+        -o-transform-origin:100% 100%;
+      }
+      25% {
+        -ms-transform: rotate(16deg); /* IE 9 */
+        transform: rotate(16deg);
+        -moz-transform-origin: 100% 100%;
+        -webkit-transform-origin:100% 100%;
+        -o-transform-origin:100% 100%;
+      }
+      50% {
+        -ms-transform: rotate(25deg); /* IE 9 */
+        transform: rotate(25deg);
+        -moz-transform-origin: 100% 100%;
+        -webkit-transform-origin:100% 100%;
+        -o-transform-origin:100% 100%;
+      }
+      75% {
+        -ms-transform: rotate(34deg); /* IE 9 */
+        transform: rotate(34deg);
+        -moz-transform-origin: 100% 100%;
+        -webkit-transform-origin:100% 100%;
+        -o-transform-origin:100% 100%;
+      }
+      100% {
+        -ms-transform: rotate(43deg); /* IE 9 */
+        transform: rotate(43deg);
+        -moz-transform-origin: top right;
+        -webkit-transform-origin:top right;
+        -o-transform-origin:top right;
+      }
+    }
+    @keyframes MenuButtonGoCloseThFloor{
+      0% {
+        -ms-transform: rotate(43deg); /* IE 9 */
+        transform: rotate(43deg);
+        -moz-transform-origin: 100% 100%;
+        -webkit-transform-origin:100% 100%;
+        -o-transform-origin:100% 100%;
+      }
+      25% {
+        -ms-transform: rotate(34deg); /* IE 9 */
+        transform: rotate(34deg);
+        -moz-transform-origin: 100% 100%;
+        -webkit-transform-origin:100% 100%;
+        -o-transform-origin:100% 100%;
+      }
+      50% {
+        -ms-transform: rotate(25deg); /* IE 9 */
+        transform: rotate(25deg);
+        -moz-transform-origin: 100% 100%;
+        -webkit-transform-origin:100% 100%;
+        -o-transform-origin:100% 100%;
+      }
+      75% {
+        -ms-transform: rotate(16deg); /* IE 9 */
+        transform: rotate(16deg);
+        -moz-transform-origin: 100% 100%;
+        -webkit-transform-origin:100% 100%;
+        -o-transform-origin:100% 100%;
+      }
+      100% {
+        -ms-transform: rotate(0deg); /* IE 9 */
+        transform: rotate(0deg);
+        -moz-transform-origin: top right;
+        -webkit-transform-origin:top right;
+        -o-transform-origin:top right;
+      }
+    }
+
   }
 
   .MobileTopBarLogo {
@@ -161,6 +382,9 @@
     margin-right: 1rem;
     flex: 1;
     cursor: pointer;
+
+    display: flex;
+    align-items: center;
   }
 
   .MediaIndexContent {

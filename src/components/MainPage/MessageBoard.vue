@@ -1,25 +1,28 @@
 <template>
   <transition name="Fade" mode="out-in">
     <div style="position: relative">
-      <div class="MessageBoardCover">
-        <div class="WriteMessageFrameFadeIn">
+      <div class="MessageBoardCover" @click="CloseMessageSubmit">
+        <div :class="OpenMessageSubmitValue ? 'WriteMessageFrameFadeIn' : 'WriteMessageFrameFadeOut'" >
           <div class="WriteMessageFrameLeft">
             <img src="../../static/img/DefaultHeadIcon.jpg">
             <div>欢迎你来</div>
           </div>
           <div style="flex: 1">
-            <div
-              :class="OpenTextAreaCover ? 'WriteMessageFrameContent' : 'WriteMessageFrameContent WriteMessageFrameContentColorBorder'">
-              <textarea ref="LeaveMessageTextArea" placeholder="输入留言" v-model="MessageText"></textarea>
+            <div :class="OpenTextAreaCover ? 'WriteMessageFrameContent' : 'WriteMessageFrameContent WriteMessageFrameContentColorBorder'">
+              <!--阻止触发CloseMessageSubmit-->
+              <textarea ref="LeaveMessageTextArea" placeholder="输入留言"
+                        v-model="MessageText"  @click.stop="">
+              </textarea>
               <span class="EmotionButton" @click="OpenEmotions()">
-                            <i class="iconfont icon-face IconfontSize"></i>
-                        </span>
-              <div class="TextAreaCover" @click="OpenMessageSubmit()" v-if="OpenTextAreaCover">来都来啦，留个脚印吧
-              </div>
+                <i class="iconfont icon-face IconfontSize"></i>
+              </span>
+              <!--需阻止冒泡，否则会冒泡到最上层，触发CloseMessageSubmit方法。该方法逻辑与此处方法操作相反-->
+              <div class="TextAreaCover" @click.stop="OpenMessageSubmit()" v-if="OpenTextAreaCover">来都来啦，留个脚印吧</div>
             </div>
-            <div class="OpenMessageSubmit" v-if="OpenMessageSubmitValue">
+            <div class="OpenMessageSubmit">
               <div class="LeaveMessageName">
-                <input placeholder="输入你的大名或昵称" v-model="MessageLeaveName">
+                <!--阻止触发CloseMessageSubmit-->
+                <input placeholder="输入你的大名或昵称" v-model="MessageLeaveName" @click.stop="">
               </div>
               <div class="OpenMessageSubmitButton" @click="MessageSubmit()">提交</div>
             </div>
@@ -120,8 +123,7 @@
       <!--回复留言弹框PageActive-->
       <div style="position:fixed;top: 0;bottom: 0;left:0;right:0;z-index: 1000" v-if="MessageAnswerFrame">
         <div class="MessageBoxWrapper" @click="CloseAnswerMessage()"></div>
-        <div :class="FadeAnimate ? 'WriteMessageFrameFadeIn' : 'WriteMessageFrameFadeOut'"
-             style="top:0;bottom: 0;height: 8rem;z-index: 1500;opacity: 1;padding-top: 2rem">
+        <div class="WriteMessageFrameFadeIn" style="position:fixed;top: 0;bottom: 0;left:0;right:0;z-index: 1000">
           <div class="WriteMessageFrameLeft">
             <img src="../../static/img/DefaultHeadIcon.jpg">
             <div>回复留言</div>
@@ -197,6 +199,7 @@
     methods: {
       // 展示留言textarea
       OpenMessageSubmit: function () {
+
         // 隐藏textarea的遮层
         this.OpenTextAreaCover = false;
         //显示提交按钮
@@ -208,6 +211,17 @@
         if (LocalCommonUser.toString() != '{}') {
           this.MessageLeaveName = LocalCommonUser.ArticleCommentNickName;
         }
+
+        console.log(this.OpenMessageSubmitValue);
+      },
+
+      CloseMessageSubmit: function(){
+        // 隐藏textarea的遮层
+        this.OpenTextAreaCover = true;
+        //隐藏提交按钮
+        this.OpenMessageSubmitValue = false;
+
+        console.log(this.OpenMessageSubmitValue);
       },
 
       // 提交留言
@@ -394,6 +408,9 @@
       top: 30vh;
       padding: 1.5rem 1.5rem 1.5rem 1rem;
       animation: FadeIn 0.2s linear;
+      animation-fill-mode: forwards;
+
+      overflow: hidden;
     }
 
     .WriteMessageFrameFadeOut {
@@ -442,6 +459,9 @@
       top: 30vh;
       padding: 1.5rem 1.5rem 1.5rem 1rem;
       animation: FadeIn 0.2s linear;
+      animation-fill-mode: forwards;
+
+      overflow: hidden;
     }
 
     .WriteMessageFrameFadeOut {
@@ -453,7 +473,10 @@
       right: 0;
       top: 30vh;
       padding: 1.5rem 1.5rem 1.5rem 1rem;
+
       animation: FadeOut 0.2s linear;
+      animation-fill-mode: forwards;
+      overflow: hidden;
     }
 
     .MessageBoardCover {
@@ -477,37 +500,47 @@
 
   @keyframes FadeIn {
     0% {
-      transform: scale(0.9)
+      transform: scale(0.9);
+      height: 4.5rem;
     }
     20% {
-      transform: scale(0.925)
+      transform: scale(0.925);
+      height: 5rem;
     }
     60% {
-      transform: scale(0.95)
+      transform: scale(0.95);
+      height: 6rem;
     }
     80% {
-      transform: scale(0.975)
+      transform: scale(0.975);
+      height: 7rem;
     }
     100% {
-      transform: scale(1)
+      transform: scale(1);
+      height: 7.5rem;
     }
   }
 
   @keyframes FadeOut {
     0% {
-      transform: scale(1)
+      transform: scale(0.9);
+      height: 7.5rem;
     }
     20% {
-      transform: scale(0.975)
+      transform: scale(0.925);
+      height: 7rem;
     }
     60% {
-      transform: scale(0.95)
+      transform: scale(0.95);
+      height: 6rem;
     }
     80% {
-      transform: scale(0.925)
+      transform: scale(0.975);
+      height: 5rem;
     }
     100% {
-      transform: scale(0.9)
+      transform: scale(1);
+      height: 4.5rem;
     }
   }
 
@@ -550,6 +583,31 @@
   .OpenMessageSubmit {
     .myflex(center);
     margin-top: 1rem;
+
+    animation: MessageSubmitDiv .3s linear;
+    animation-fill-mode:forwards;
+  }
+
+
+  @keyframes MessageSubmitDiv {
+    0%{
+      transform: translateY(-1rem);
+    }
+    20%{
+      transform: translateY(-0.8rem);
+    }
+    40%{
+      transform: translateY(-0.6rem);
+    }
+    60%{
+      transform: translateY(-0.4rem);
+    }
+    80%{
+      transform: translateY(-0.2rem);
+    }
+    100%{
+      transform: translateY(0rem);
+    }
   }
 
   .LeaveMessageName {
