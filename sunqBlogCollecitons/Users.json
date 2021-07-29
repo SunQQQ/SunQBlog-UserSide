@@ -1,0 +1,5 @@
+{"_id":{"$oid":"5bab44fdcf812a23a4cfef2a"},"CnName":"1","PassWord":"1","UserType":"Admin"}
+{"_id":{"$oid":"5bab4558cf812a23a4cfef2b"},"CnName":"12","PassWord":"12","UserType":"Admin"}
+{"_id":{"$oid":"5bab45b1cf812a23a4cfef2c"},"CnName":"12","PassWord":"12","UserType":"Admin"}
+{"_id":{"$oid":"5bab4645cf812a23a4cfef2d"},"CnName":"3","PassWord":"3","UserType":"Admin"}
+{"_id":{"$oid":"5bab6828899c4b186c3c0f2a"},"CnName":"34","PassWord":"34","UserType":"Admin"}

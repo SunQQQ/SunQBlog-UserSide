@@ -12,29 +12,34 @@ var querystring = require('querystring');
 
 // http库是node提供的api，可以直接上node的中文网，直接看到各种api
 let server = http.createServer((req, res) => {
-  var pathname = url.parse(req.url).pathname;
-  var UrlType = pathname.split('/');    //辨别请求是不是ajax，本应用ajax请求都有aqi标记，具体使用时需要根据情况修改此处
+  var pathname = url.parse(req.url).pathname,
+    UrlType = pathname.split('/'),    //辨别请求是不是ajax，本应用ajax请求都有aqi标记，具体使用时需要根据情况修改此处
+    ProxyedUrl = pathname.replace(/\/api/, 'http://39.104.22.73:8888');  //指向后后的url
 
   if (UrlType[1] == 'api') {
     var post = '';
     // 通过req的data事件监听函数，每当接受到请求体的数据，就累加到post变量中
-    req.on('data', function(chunk){
+    req.on('data', function (chunk) {
       post += chunk;
     });
 
-    req.on('end', function(){
+    req.on('end', function () {
 
     });
 
+    console.log('ProxyedUrl');
+    console.log(ProxyedUrl);
     axios.post(
-      pathname.replace(/\/api/, 'http://39.104.22.73:8888'),
-      {Skip: 0, Limit: 8}
+      ProxyedUrl
     ).then(function (response) {
-      console.log('response');
-      console.log(response);
+      res.write(data.toString());
+      res.end();
+
+      // console.log('response');
+      // console.log(response);
     }).catch(function (e) {
-      console.log('ajax error');
-      console.log(e);
+      // console.log('ajax error');
+      // console.log(e);
     });
 
   } else {
