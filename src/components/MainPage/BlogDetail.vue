@@ -151,7 +151,17 @@
           this.ArticleCommentNickName = LocalCommonUser.ArticleCommentNickName;
         }
       },
-      // 提交评论
+
+
+      /**
+       * 本方法用于提交评论
+       *
+       * 提交评论功能业务逻辑比较多：
+       * 1.先获取用户的定位信息，然后携带定位信息提交新增评论接口。
+       * 2.再刷新页面文章下的评论列表
+       * 3.再修改该评论id对应的文章数据的评论量字段
+       * 4.再将用户昵称存在浏览器
+       */
       CommentSubmit: function () {
         var That = this;
 
@@ -159,6 +169,7 @@
           var MatchedMessageText = That.MatchEmotion(Store.getters.GetMessageText);
 
           this.GetLocation(function (LocationCityName) {
+            // 新增评论
             That.SQFrontAjax({
               Url: '/api/ArticleCommentCreate/foreend',
               UploadData: {
@@ -173,6 +184,7 @@
               Success: function () {
                 That.GetCommentList();
 
+                // 修改被评论文章的评论数字段
                 That.UpdateArticleCommentNum();
 
                 // 存储用户名到本地
@@ -214,12 +226,14 @@
           }
         });
       },
-      // 文章评论数加一
+
+      // 传入文章id，在文章表里给对应文章评论数加一
       UpdateArticleCommentNum: function () {
         this.SQFrontAjax({
           Url: '/api/ArticleCommentNumUpdate/foreend',
           UploadData: {
-            _id: this.$route.query.ID
+            _id: this.$route.query.ID,
+            type: 'add'
           },
           Success: function (data) {
 
