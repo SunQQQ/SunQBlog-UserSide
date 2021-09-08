@@ -40,7 +40,7 @@
                                 <div class="CommentItemContent">
                                     <div class="ArticleCommentNickName">
                                       {{ item.ArticleCommentNickName }}
-                                      <span v-if="item.LocationCityName">
+                                      <span v-if="item.LocationCityName && item.LocationCityName.length >0">
                                         <i class='iconfont icon-buoumaotubiao23 LocationIconfont'></i>{{ item.LocationCityName }}
                                       </span>
                                     </div>
