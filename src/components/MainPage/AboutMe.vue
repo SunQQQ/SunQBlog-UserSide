@@ -24,10 +24,10 @@
                 <div class="BigBlock AboutMeMarginTop">
                     <div class="TitleFontLine TitleFontLineThank">Thanks You All</div>
                     <div class="UrlCardTr AboutPage">
-                        <a class="UrlCardTd UrlCardTdBc" href="https://jooger.me/" target="_blank">
+                        <a class="UrlCardTd UrlCardTdBc" href="https://www.ruanyifeng.com/blog/javascript/" target="_blank">
                             <div class="UrlIconName UrlIconNameMargin">
-                                <img src="https://avatars1.githubusercontent.com/u/16385416?v=4">
-                                <div class="UrlName">Jooger</div>
+                                <img src="../../static/img/DefaultHeadIcon.jpg">
+                                <div class="UrlName">阮一峰的个人网站</div>
                             </div>
                         </a>
                         <a class="UrlCardTd UrlCardTdBc" href="http://bh-lay.com/" target="_blank">
@@ -38,7 +38,7 @@
                         </a>
                         <a class="UrlCardTd UrlCardTdBc" href="https://github.com/SunQQQ" target="_blank">
                             <div class="UrlIconName UrlIconNameMargin">
-                                <img src="http://121.5.115.202/favicon.ico">
+                                <img src="http://39.104.22.73:67/favicon.jpg">
                                 <div class="UrlName">孙权的博客</div>
                             </div>
                         </a>
@@ -56,19 +56,19 @@
                     </div>
                     <div class="Content">
                         <div class="GitName">孙权的Github</div>
-                        <a class="BlueButton" href="https://github.com/SunQQQ" target="_blank">Follow Me</a>
+                        <a class="BlueButton" href="https://github.com/SunQQQ" target="_blank">源码在这里呦</a>
                         <div class="BlogStatistic">
                             <div class="BlogStatisticItem">
                                 <div class="BlogStatisticItemNum">8</div>
                                 <div class="BlogStatisticItemText AboutMeGitData">Followers</div>
                             </div>
                             <div class="BlogStatisticItem">
-                                <div class="BlogStatisticItemNum">13</div>
-                                <div class="BlogStatisticItemText AboutMeGitData">Repos</div>
+                                <div class="BlogStatisticItemNum">16</div>
+                                <div class="BlogStatisticItemText AboutMeGitData">Repositories</div>
                             </div>
                             <div class="BlogStatisticItem">
-                                <div class="BlogStatisticItemNum">5</div>
-                                <div class="BlogStatisticItemText AboutMeGitData">Following</div>
+                                <div class="BlogStatisticItemNum">83</div>
+                                <div class="BlogStatisticItemText AboutMeGitData">Star</div>
                             </div>
                         </div>
                     </div>

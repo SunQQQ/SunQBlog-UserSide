@@ -77,7 +77,7 @@
                         </div>
                         <div class="TextCenter">
                             孙权的小博客
-                            <a class="BlueButton" href="https://github.com/SunQQQ">欢迎你呦</a>
+                            <a class="BlueButton" href="https://github.com/SunQQQ" target="_blank">博客源码</a>
                         </div>
                         <div class="BlogStatistic">
                             <div class="BlogStatisticItem">
