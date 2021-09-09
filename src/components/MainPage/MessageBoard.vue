@@ -406,7 +406,7 @@
       left: 0;
       right: 0;
       top: 30vh;
-      padding: 1.5rem 1.5rem 1.5rem 1rem;
+      padding: 1.5rem 1.5rem 2rem 1rem;
       animation: FadeIn 0.2s linear;
       animation-fill-mode: forwards;
 
@@ -422,9 +422,11 @@
       left: 0;
       right: 0;
       top: 14rem;
-      padding: 1.5rem 1.5rem 1.5rem 1rem;
+      padding: 1.5rem 1.5rem 2rem 1rem;
       animation: FadeOut 0.2s linear;
+      animation-fill-mode: forwards;
       /*animation-delay: 1s;*/
+      overflow: hidden;
     }
 
     .MessageBoardCover {
@@ -472,7 +474,7 @@
       left: 0;
       right: 0;
       top: 30vh;
-      padding: 1.5rem 1.5rem 1.5rem 1rem;
+      padding: 1.5rem 1.5rem 2rem 1rem;
 
       animation: FadeOut 0.2s linear;
       animation-fill-mode: forwards;
@@ -582,7 +584,7 @@
 
   .OpenMessageSubmit {
     .myflex(center);
-    margin-top: 1rem;
+    margin-top: 1.4rem;
 
     animation: MessageSubmitDiv .3s linear;
     animation-fill-mode:forwards;
