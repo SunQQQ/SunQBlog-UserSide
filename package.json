@@ -18,7 +18,8 @@
     "vue-canvas-nest": "^2.0.0",
     "vue-particles": "^1.0.9",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "yarn": "^1.22.10"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.3",

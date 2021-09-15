@@ -154,17 +154,17 @@
             }
           },
           Success:function (data) {
+            // 将有order标记的数据，按order顺序排在前面
             for(let i=0;i<data.length;i++){
               if(data[i].order){
                 mvpUrl[data[i].order] = data[i];//根据数据order字段组成一个数组
                 data.splice(i,1);
               }
             }
-
             newArray = mvpUrl.concat(data);    //得到一个将有标记的值提前了的数组
 
-           That.FriendUrlPlaceholder = false;
-           That.FriendsUrlList = newArray;
+            That.FriendUrlPlaceholder = false;
+            That.FriendsUrlList = newArray;
           }
         });
       },
