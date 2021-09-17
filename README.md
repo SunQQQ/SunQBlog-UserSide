@@ -31,12 +31,12 @@ yarn run lint
 如果有吐槽或者建议、或者技术上的交流，请联系邮箱 1585437938@qq.com
 
 ## 预览
-![index](https://github.com/SunQQQ/SunQBlog-UserSide/tree/master/static/readme_img/index.png)
+![index](https://github.com/SunQQQ/SunQBlog-UserSide/blob/master/static/readme_img/index.png)
 
-![leaveMessage](https://github.com/SunQQQ/SunQBlog-UserSide/tree/master/static/readme_img/leaveMessage.png)
+![leaveMessage](https://github.com/SunQQQ/SunQBlog-UserSide/blob/master/static/readme_img/leaveMessage.png)
 
-![timeLine](https://github.com/SunQQQ/SunQBlog-UserSide/tree/master/static/readme_img/timeLine.png)
+![timeLine](https://github.com/SunQQQ/SunQBlog-UserSide/blob/master/static/readme_img/timeLine.png)
 
-![friendUrl](https://github.com/SunQQQ/SunQBlog-UserSide/tree/master/static/readme_img/friendUrl.png)
+![friendUrl](https://github.com/SunQQQ/SunQBlog-UserSide/blob/master/static/readme_img/friendUrl.png)
 
-![aboutMe](https://github.com/SunQQQ/SunQBlog-UserSide/tree/master/static/readme_img/aboutMe.png)
+![aboutMe](https://github.com/SunQQQ/SunQBlog-UserSide/blob/master/static/readme_img/aboutMe.png)
