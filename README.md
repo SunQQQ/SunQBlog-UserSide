@@ -1,5 +1,5 @@
 ## SunQuan's Blog
->此项目为孙权的博客客户端，博客地址 http://39.104.22.73:67/
+>此项目为孙权的博客客户端，演示地址 http://39.104.22.73:67/
 
 用户端基于Vue Cli 3开发，使用媒体查询适配PC端和移动端。
 
@@ -29,3 +29,10 @@ yarn run lint
 
 ## About Me
 如果有吐槽或者建议、或者技术上的交流，请联系邮箱 1585437938@qq.com
+
+## 预览
+![index](https://github.com/SunQQQ/SunQBlog-AdminSide/blob/master/static/ReadMeImg/index.png)
+
+![leaveMessage](https://github.com/SunQQQ/SunQBlog-AdminSide/blob/master/static/ReadMeImg/leaveMessage.png)
+
+![timeLine](https://github.com/SunQQQ/SunQBlog-AdminSide/blob/master/static/ReadMeImg/timeLine.png)
