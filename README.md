@@ -28,9 +28,12 @@ yarn run lint
 手动笔芯![Rose.png](https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/63.gif)![Kiss.png](https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/65.gif)![Heart.png](https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/66.gif)
 
 ## About Me
-如果有吐槽或者建议、或者技术上的交流，可在博客留言板联系我。我的邮箱地址：1585437938@qq.com，也欢迎交流。
+如果有吐槽或者建议、或者技术上的交流，可在博客留言板联系我。
 
-## 预览
+我的邮箱地址：1585437938@qq.com，也欢迎交流。
+
+我还用原生JS写了一个贪吃蛇小游戏，欢迎来玩：http://39.104.22.73:70/
+## 博客预览
 ![index](https://github.com/SunQQQ/SunQBlog-UserSide/blob/master/static/readme_img/index.png)
 
 ![leaveMessage](https://github.com/SunQQQ/SunQBlog-UserSide/blob/master/static/readme_img/leaveMessage.png)
