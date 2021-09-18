@@ -37,7 +37,10 @@ CommonFunction.install = function (Vue) {
       if(response.data.status == '0'){
         Para['Success'](response.data.data);
       }else {
-        console.log('network statuscode error');
+        Store.commit('ChangeTip', {
+          Show: true,
+          Title: response.data.data
+        });
       }
     }).catch(function (error) {
       if(error.response){

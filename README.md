@@ -28,7 +28,7 @@ yarn run lint
 手动笔芯![Rose.png](https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/63.gif)![Kiss.png](https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/65.gif)![Heart.png](https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/66.gif)
 
 ## About Me
-如果有吐槽或者建议、或者技术上的交流，请联系邮箱 1585437938@qq.com
+如果有吐槽或者建议、或者技术上的交流，可在博客留言板联系我。我的邮箱地址：1585437938@qq.com，也欢迎交流。
 
 ## 预览
 ![index](https://github.com/SunQQQ/SunQBlog-UserSide/blob/master/static/readme_img/index.png)
