@@ -37,8 +37,7 @@
             <div class="CommentList">
               <div class="CommentItem" v-for="item in MessageList">
                 <div class="CommentItemIcon">
-                  <img src="../../static/img/DefaultHeadIcon.jpg"
-                       v-if="item.MessageLeaveName != 'sunq'">
+                  <img :src="getIconAdress()" v-if="item.MessageLeaveName != 'sunq'">
                   <img src="../../static/img/ZhihuIcon.jpg" v-if="item.MessageLeaveName=='sunq'">
                 </div>
                 <div class="CommentItemContent">
@@ -180,10 +179,11 @@
         OpenTextAreaCover: true,
         // 提交按钮显示
         OpenMessageSubmitValue: false,
-
+        // 留言信息的默认头像地址
+        IconAdress: "../../static/img/default_headicon_" + Math.round(Math.random()*3) + ".jpg",
+        // IconAdress: getIconAdress,
         //留言人姓名
         MessageLeaveName: '',
-
         // 留言列表
         MessageList: '',
         // 写留言的时间
@@ -222,6 +222,10 @@
         this.OpenMessageSubmitValue = false;
 
         console.log(this.OpenMessageSubmitValue);
+      },
+
+      getIconAdress:function (){
+          return require("@/static/img/default_headicon_" + Math.round(Math.random()*4) + ".jpeg");
       },
 
       // 提交留言
