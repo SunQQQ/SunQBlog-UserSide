@@ -37,7 +37,8 @@
             <div class="CommentList">
               <div class="CommentItem" v-for="item in MessageList">
                 <div class="CommentItemIcon">
-                  <img :src="getIconAdress()" v-if="item.MessageLeaveName != 'sunq'">
+                  <!--如果用户名是sunq，直接展示我的专属头像。如果不是sunq，展示库里存的本条数据的头像，如果数据里该字段为空，展示默认头像-->
+                  <img :src="getIconAdress(item.iconNo)" v-if="item.MessageLeaveName != 'sunq'">
                   <img src="../../static/img/ZhihuIcon.jpg" v-if="item.MessageLeaveName=='sunq'">
                 </div>
                 <div class="CommentItemContent">
@@ -224,8 +225,9 @@
         console.log(this.OpenMessageSubmitValue);
       },
 
-      getIconAdress:function (){
-          return require("@/static/img/default_headicon_" + Math.round(Math.random()*4) + ".jpeg");
+      getIconAdress:function (iconNo){
+        if(iconNo) return require("@/static/img/default_headicon_" + iconNo + ".jpeg");
+        else return require("@/static/img/DefaultHeadIcon.jpg");
       },
 
       // 提交留言
