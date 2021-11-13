@@ -244,7 +244,8 @@
                 MessageText: MatchedMessageText,
                 MessageLeaveName: That.MessageLeaveName,
                 MessageLeaveDate: new Date(),
-                LocationCityName: LocationCityName
+                LocationCityName: LocationCityName,
+                iconNo:Math.round(Math.random()*4)
               },
               Success: function () {
                 Store.commit('ChangeTip', {
