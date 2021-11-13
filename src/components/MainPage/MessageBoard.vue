@@ -226,8 +226,7 @@
       },
 
       getIconAdress:function (iconNo){
-        if(iconNo) return require("@/static/img/default_headicon_" + iconNo + ".jpeg");
-        else return require("@/static/img/DefaultHeadIcon.jpg");
+        return require("@/static/img/default_headicon_" + iconNo.toString() + ".jpeg");
       },
 
       // 提交留言
