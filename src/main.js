@@ -5,12 +5,9 @@ import './static/css/base.less';
 import CommonFunction from './util/util';
 import './static/iconfont/iconfont.css';
 import store from './store';
-
-// 离子动画背景
-import VueParticles from 'vue-particles';
+import VueParticles from 'vue-particles'; // 离子动画背景
 
 Vue.use(VueParticles);
-
 Vue.config.productionTip = false;
 Vue.use(CommonFunction);
 Vue.prototype.bus = new Vue;

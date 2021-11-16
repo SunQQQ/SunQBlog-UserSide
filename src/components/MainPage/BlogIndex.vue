@@ -311,10 +311,26 @@
       }
     },
     mounted: function () {
-      this.InitArticleTag(this);
+      let that = this,
+        dateObject = new Date(),
+        month = dateObject.getMonth() + 1,
+        dateString = ''+dateObject.getFullYear()+'/'+month+'/'+dateObject.getDate()+' '+dateObject.getHours()+':'+dateObject.getMinutes()+':' + dateObject.getSeconds();
 
-      // 切换Topbar高亮
-      Store.commit("ChangeActive", 0);
+      this.InitArticleTag(this);
+      Store.commit("ChangeActive", 0); // 切换Topbar高亮
+      // 统计访问量
+      this.GetIp(function (ip){
+        that.SQFrontAjax({
+          Url: '/api/visitCreate/foreend',
+          UploadData: {
+            ip:ip,
+            time:dateString
+          },
+          Success: function () {
+            console.log('访问统计成功');
+          }
+        });
+      });
     }
   }
 </script>

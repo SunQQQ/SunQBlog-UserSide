@@ -146,6 +146,16 @@ CommonFunction.install = function (Vue) {
       }
     });
   };
+
+  // 获取IP
+  Vue.prototype.GetIp = function (f){
+    this.SQFrontAjax({
+      Url: '/api/GetUserIp',
+      Success: function (data) {
+        f(data.IpAdress);
+      }
+    });
+  };
 };
 
 export default CommonFunction;
