@@ -312,17 +312,16 @@
     },
     mounted: function () {
       let that = this,
-        dateObject = new Date(),
-        month = dateObject.getMonth() + 1,
-        dateString = ''+dateObject.getFullYear()+'/'+month+'/'+dateObject.getDate()+' '+dateObject.getHours()+':'+dateObject.getMinutes()+':' + dateObject.getSeconds();
+        dateString = this.getSQTime();
 
       this.InitArticleTag(this);
       Store.commit("ChangeActive", 0); // 切换Topbar高亮
       // 统计访问量
-      this.GetIp(function (ip){
+      this.GetLocation(function (LocationCityName,ip) {
         that.SQFrontAjax({
           Url: '/api/visitCreate/foreend',
           UploadData: {
+            location:LocationCityName,
             ip:ip,
             time:dateString
           },

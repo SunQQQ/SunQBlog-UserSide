@@ -141,8 +141,10 @@ CommonFunction.install = function (Vue) {
             key:'ba5f9b69f0541123a4dbe142da230b4d'
           },
         }).then(function (resp) {
-          func(resp.data.city);
-        }).catch()
+          func(resp.data.city,data.IpAdress);
+          console.log('留言城市',resp.data.city);
+          console.log('留言ip',data.IpAdress);
+        }).catch();
       }
     });
   };
@@ -155,6 +157,24 @@ CommonFunction.install = function (Vue) {
         f(data.IpAdress);
       }
     });
+  };
+
+  // 获取当前时间
+  Vue.prototype.getSQTime = function (){
+    let dateObject = new Date(),
+      year = dateObject.getFullYear(),
+      month = dateObject.getMonth() + 1,
+      day = dateObject.getDate(),
+      hour = dateObject.getHours(),
+      min = dateObject.getMinutes(),
+      second = dateObject.getSeconds(),
+      result = '';
+
+      if(min<10) min = '0' + min;
+      if(second<10) second = '0' + second;
+
+      result = ''+ year +'/'+month+'/'+ day +' '+ hour +':'+ min +':' + second;
+    return result;
   };
 };
 
