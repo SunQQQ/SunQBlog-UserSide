@@ -142,24 +142,15 @@ CommonFunction.install = function (Vue) {
           },
         }).then(function (resp) {
           func(resp.data.city,data.IpAdress);
-          console.log('留言城市',resp.data.city);
-          console.log('留言ip',data.IpAdress);
         }).catch();
       }
     });
   };
 
-  // 获取IP
-  Vue.prototype.GetIp = function (f){
-    this.SQFrontAjax({
-      Url: '/api/GetUserIp',
-      Success: function (data) {
-        f(data.IpAdress);
-      }
-    });
-  };
-
-  // 获取当前时间
+  /**
+   * 获取当前时间
+   * @returns {string:2021/11/18 16:45:39}
+   */
   Vue.prototype.getSQTime = function (){
     let dateObject = new Date(),
       year = dateObject.getFullYear(),
@@ -175,6 +166,36 @@ CommonFunction.install = function (Vue) {
 
       result = ''+ year +'/'+month+'/'+ day +' '+ hour +':'+ min +':' + second;
     return result;
+  };
+
+  /**
+   * 种cookie
+   * @param name cookie名称
+   * @param value cookie值
+   * @param exHour 过期时间,单位小时
+   */
+  Vue.prototype.setSQCookie = function (name,value,exHour){
+    var d = new Date();
+    d.setTime(d.getTime() + exHour*60*60*1000);
+    var expires = 'expires=' + d.toGMTString(); // cookie的语法要求是这个标志，和这个时间格式
+    document.cookie = name + '=' + value + '; ' + expires;
+    console.log('种下cookie',name + '=' + value + '; ' + expires);
+  };
+
+  /**
+   * 获取cookie
+   * @param name cookie的名称
+   */
+  Vue.prototype.getSQCookie = function (cookName){
+    let name = cookName + '=',
+      cookies = document.cookie.split(';');
+    for(let i=0;i<cookies.length;i++){
+      let cleanItem = cookies[i].trim();
+      if(cleanItem.indexOf(name) == 0){
+        return cleanItem.substring(name.length,cookies[i].length);
+      }
+    }
+    return '';
   };
 };
 

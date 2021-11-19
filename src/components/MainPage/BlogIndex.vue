@@ -312,24 +312,30 @@
     },
     mounted: function () {
       let that = this,
-        dateString = this.getSQTime();
+        dateString = this.getSQTime(),
+      cookie = '';
 
       this.InitArticleTag(this);
       Store.commit("ChangeActive", 0); // 切换Topbar高亮
       // 统计访问量
-      this.GetLocation(function (LocationCityName,ip) {
-        that.SQFrontAjax({
-          Url: '/api/visitCreate/foreend',
-          UploadData: {
-            location:LocationCityName,
-            ip:ip,
-            time:dateString
-          },
-          Success: function () {
-            console.log('访问统计成功');
-          }
+      cookie = this.getSQCookie('sunqBlog');
+      if(cookie){
+        console.log('cookie还在',cookie)
+      }else {
+        this.GetLocation(function (LocationCityName,ip) {
+          that.SQFrontAjax({
+            Url: '/api/visitCreate/foreend',
+            UploadData: {
+              location:LocationCityName,
+              ip:ip,
+              time:dateString
+            },
+            Success: function () {
+              that.setSQCookie('sunqBlog','统计访问量',12); // 12个小时内同一个浏览器算一个访问量
+            }
+          });
         });
-      });
+      }
     }
   }
 </script>
