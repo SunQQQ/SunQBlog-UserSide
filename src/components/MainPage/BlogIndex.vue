@@ -328,7 +328,8 @@
             UploadData: {
               location:LocationCityName,
               ip:ip,
-              time:dateString
+              time:dateString,
+              browser:that.getSQBrowser()
             },
             Success: function () {
               that.setSQCookie('sunqBlog','统计访问量',12); // 12个小时内同一个浏览器算一个访问量
