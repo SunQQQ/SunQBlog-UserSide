@@ -47,8 +47,7 @@
                       <i class='iconfont icon-buoumaotubiao23 LocationIconfont'></i>{{ item.LocationCityName }}
                     </span>
                   </div>
-                  <div class="ArticleCommentText" v-html="item.MessageText">{{ item.MessageText }}
-                  </div>
+                  <div class="ArticleCommentText" v-html="item.MessageText">{{ item.MessageText }}</div>
                   <div class="DateAnswer">
                     <div class="DateAnswerLeft">{{ item.MessageLeaveDate }}</div>
                     <div class="DateAnswerRight" @click="AnswerMessage(item.MessageLeaveName)">回复
