@@ -6,7 +6,8 @@ import CommonFunction from './util/util';
 import './static/iconfont/iconfont.css';
 import store from './store';
 import VueParticles from 'vue-particles'; // 离子动画背景
-import * as echarts from 'echarts'
+import * as echarts from 'echarts';
+// import './static/map/china'; // 引入中国地图数据
 
 Vue.use(VueParticles);
 Vue.config.productionTip = false;
