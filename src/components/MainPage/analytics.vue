@@ -14,7 +14,7 @@
             </div>
             <div class="quota-item">
               <p>一周访问量</p>
-              <p class="num">{{ yesterdayVisit }}</p>
+              <p class="num">{{ weekVisit }}</p>
             </div>
             <div class="quota-item">
               <p>历史访问量</p>
@@ -26,7 +26,7 @@
           <div class="line-chart" id="line-chart"></div>
         </div>
         <div class="block">
-<!--          <div class="block-name">分日报表</div>-->
+          <!--          <div class="block-name">分日报表</div>-->
           <div class="list">
             <div class="list-head">
               <div class="list-td">访问时间</div>
@@ -109,9 +109,10 @@ export default {
   name: "analytics",
   data: function () {
     return {
-      todayVisit:'0',
-      yesterdayVisit:'0',
-      allVisitNum:'0',
+      todayVisit: 0,
+      yesterdayVisit: 0,
+      allVisitNum: 0,
+      weekVisit:0,
       lineChartOption: {
         // title: {text: '数据趋势'},
         tooltip: {
@@ -126,18 +127,19 @@ export default {
           name: '博客访问量(人/天)', type: 'line', data: [],
           itemStyle: {normal: {label: {show: true}}}
         }],
-        grid:{
-          bottom:'20px' // 图表距离容器下方边距
+        grid: {
+          bottom: '20px' // 图表距离容器下方边距
         }
       },
       mapChartOption: {},
-      visitListData:[]
+      visitListData: []
     }
   },
   methods: {
     // 渲染折线图
     setLineChart: function () {
       let that = this,
+        totalVisit = 0,
         lineChart = that.$echarts.init(document.getElementById('line-chart'));
       this.SQFrontAjax({
         Url: '/api/visitCount/foreend',
@@ -153,24 +155,26 @@ export default {
           data.forEach(function (item) {
             dates.push(item.time);
             readings.push(item.reading);
+            totalVisit += item.reading;
           });
           that.lineChartOption.xAxis.data = dates.reverse();
           that.lineChartOption.series[0].data = readings.reverse();
+          that.weekVisit = totalVisit;
           lineChart.setOption(that.lineChartOption);
         }
       });
     },
-    setVisitList:function (){
+    setVisitList: function () {
       let that = this;
       this.SQFrontAjax({
         Url: '/api/visitRead/foreend',
         UploadData: {},
         Success: function (data) {
           that.allVisitNum = data.length;
-          data.forEach(function (item){
-            if(JSON.stringify(item.location) == '[]') item.location = '银河系';
-            if(!item.browser) item.browser = "secret";
-            item.ip = (item.ip).replace('::ffff:','');
+          data.forEach(function (item) {
+            if (JSON.stringify(item.location) == '[]') item.location = '银河系';
+            if (!item.browser) item.browser = "secret";
+            item.ip = (item.ip).replace('::ffff:', '');
           });
           that.visitListData = data;
         }
@@ -192,48 +196,58 @@ export default {
 
 .quota-content {
   .myflex(center);
-  color:rgba(0, 0, 0, 0.65);
+  color: rgba(0, 0, 0, 0.65);
 }
+
 .quota-item {
   flex: 1;
   text-align: center;
 }
-.quota-item .num{
-  font-size:1.2rem;
+
+.quota-item .num {
+  font-size: 1.2rem;
+  margin-bottom: 0;
 }
-.block{
+
+.block {
   background-color: #FFFFFF;
   margin-top: 1rem;
   padding: 1rem;
-  border-radius:2px;
+  border-radius: 2px;
 }
-.block-name{
+
+.block-name {
   padding: 0.5rem;
   border-bottom: 1px solid #f0f0f0;
 }
+
 .line-chart {
   height: 300px;
 }
-.list-head{
-  color:#8590a6;
+
+.list-head {
+  color: #8590a6;
   .myflex(center);
   border-bottom: 1px solid #f0f0f0;
   padding: 8px 0;
 }
 
-.list-tr{
+.list-tr {
   .myflex(center);
   //border-bottom: 1px solid #f0f0f0;
   padding: 8px 0;
 }
-.list-td{
+
+.list-td {
   flex: 1;
   padding-left: 1rem;
 }
-.list .single{
+
+.list .single {
   background: #f6f6f6;
 }
-.list .align{
+
+.list .align {
   text-align: right;
   padding-right: 1rem;
 }
