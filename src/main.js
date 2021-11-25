@@ -6,11 +6,13 @@ import CommonFunction from './util/util';
 import './static/iconfont/iconfont.css';
 import store from './store';
 import VueParticles from 'vue-particles'; // 离子动画背景
+import * as echarts from 'echarts'
 
 Vue.use(VueParticles);
 Vue.config.productionTip = false;
 Vue.use(CommonFunction);
 Vue.prototype.bus = new Vue;
+Vue.prototype.$echarts = echarts;
 
 new Vue({
   render:function (h) {

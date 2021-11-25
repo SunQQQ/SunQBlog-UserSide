@@ -6,6 +6,7 @@ import MessageBoard from '@/components/MainPage/MessageBoard';
 import FriendUrl from '@/components/MainPage/FriendUrl';
 import TimeLine from '@/components/MainPage/TimeLine';
 import AboutMe from '@/components/MainPage/AboutMe';
+import analytics from '@/components/MainPage/analytics';
 
 Vue.use(Router);
 
@@ -17,31 +18,30 @@ export default new Router({
       path: '/',
       name: 'BlogIndex',
       component: BlogIndex
-    },
-    {
+    }, {
       path: '/BlogDetail',
       name: 'BlogDetail',
       component: BlogDetail
-    },
-    {
+    }, {
       path: '/MessageBoard',
       name: 'MessageBoard',
       component: MessageBoard
-    },
-    {
+    }, {
       path: '/FriendUrl',
       name: 'FriendUrl',
       component: FriendUrl
-    },
-    {
+    }, {
       path:'/TimeLine',
       name:'TimeLine',
       component:TimeLine
-    },
-    {
+    }, {
       path:'/AboutMe',
       name:'AboutMe',
       component:AboutMe
+    },{
+      path:'/analytics',
+      name:'analytics',
+      component:analytics
     }
   ]
 });

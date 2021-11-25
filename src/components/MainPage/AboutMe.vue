@@ -110,8 +110,7 @@
       Heartfelt
     },
     mounted:function () {
-      // 切换Topbar高亮
-      Store.commit("ChangeActive", 4);
+      Store.commit("ChangeActive", 4);// 切换Topbar高亮
     }
   }
 </script>

@@ -235,7 +235,7 @@ CommonFunction.install = function (Vue) {
       return 'Edge';
     }
     if (isFF) {
-      return 'FF';
+      return 'FireFox';
     }
     if (isSafari) {
       return 'Safari';

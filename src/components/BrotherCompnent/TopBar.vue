@@ -7,6 +7,7 @@
           <span>Sunq's Blog</span>
         </div>
         <div class="MediaRight">
+          <div :class="Active == 5 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('analytics')">数据统计</div>
           <div :class="Active == 4 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('AboutMe')">关于</div>
           <div :class="Active == 3 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('FriendUrl')">圈子</div>
           <div :class="Active == 2 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('TimeLine')">时间轴</div>
@@ -405,7 +406,7 @@
   }
 
   .MediaLeft {
-    width: 60%;
+    width: 50%;
     font-size: 1.2rem;
     cursor: pointer;
   }
@@ -415,7 +416,7 @@
 
   .MediaRight {
     flex: 1px;
-    width: 40%;
+    width: 50%;
     .myflex('middle');
     text-align: right;
     flex-direction: row-reverse;
