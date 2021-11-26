@@ -51,6 +51,9 @@
         <div :class="Active == 4 ? 'MobileMenuDetailItemActive' : 'MobileMenuDetailItem'"
              @click="ChangeRouter('AboutMe')">关于
         </div>
+        <div :class="Active == 5 ? 'MobileMenuDetailItemActive' : 'MobileMenuDetailItem'"
+             @click="ChangeRouter('analytics')">数据统计
+        </div>
       </div>
       <div class="MoblieMenuDetailShade"></div>
     </div>

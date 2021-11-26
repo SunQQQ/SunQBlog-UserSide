@@ -31,14 +31,14 @@
             <div class="list-head">
               <div class="list-td">访问时间</div>
               <div class="list-td align">访问位置</div>
+              <div class="list-td align">访问来源</div>
               <div class="list-td align">访问浏览器</div>
-              <div class="list-td align">访问IP</div>
             </div>
             <div :class="i%2==0 ? 'list-tr single' : 'list-tr'" v-for="(item,i) in visitListData">
               <div class="list-td">{{ item.time }}</div>
               <div class="list-td align">{{ item.location }}</div>
+              <div class="list-td align">{{ item.fromUrl }}</div>
               <div class="list-td align">{{ item.browser }}</div>
-              <div class="list-td align">{{ item.ip }}</div>
             </div>
             <div class="list-item"></div>
           </div>

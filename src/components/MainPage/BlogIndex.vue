@@ -327,7 +327,7 @@
             Url: '/api/visitCreate/foreend',
             UploadData: {
               location:LocationCityName,
-              ip:ip,
+              fromUrl:document.referrer,
               time:dateString,
               browser:that.getSQBrowser()
             },
