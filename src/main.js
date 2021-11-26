@@ -1,6 +1,6 @@
 import Vue from 'vue';
-import router from './router';
 import App from './App.vue';
+import router from './router';
 import './static/css/base.less';
 import CommonFunction from './util/util';
 import './static/iconfont/iconfont.css';
@@ -19,7 +19,6 @@ new Vue({
   render:function (h) {
     return h(App);
   },
-
   store,
   router:router
 }).$mount('#app');

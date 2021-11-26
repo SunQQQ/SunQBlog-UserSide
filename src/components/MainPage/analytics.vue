@@ -26,18 +26,21 @@
           <div class="line-chart" id="line-chart"></div>
         </div>
         <div class="block">
+          <div class="map-chart" id="map"></div>
+        </div>
+        <div class="block">
           <!--          <div class="block-name">分日报表</div>-->
           <div class="list">
             <div class="list-head">
               <div class="list-td">访问时间</div>
               <div class="list-td align">访问位置</div>
-              <div class="list-td align">访问来源</div>
+              <!--              <div class="list-td align">访问来源</div>-->
               <div class="list-td align">访问浏览器</div>
             </div>
             <div :class="i%2==0 ? 'list-tr single' : 'list-tr'" v-for="(item,i) in visitListData">
               <div class="list-td">{{ item.time }}</div>
               <div class="list-td align">{{ item.location }}</div>
-              <div class="list-td align">{{ item.fromUrl }}</div>
+              <!--              <div class="list-td align">{{ item.fromUrl }}</div>-->
               <div class="list-td align">{{ item.browser }}</div>
             </div>
             <div class="list-item"></div>
@@ -104,6 +107,7 @@
 
 <script>
 import Store from "../../store";
+import china from '../../static/map/china.json'
 
 export default {
   name: "analytics",
@@ -112,7 +116,8 @@ export default {
       todayVisit: 0,
       yesterdayVisit: 0,
       allVisitNum: 0,
-      weekVisit:0,
+      weekVisit: 0,
+      // 折线图数据
       lineChartOption: {
         // title: {text: '数据趋势'},
         tooltip: {
@@ -131,53 +136,23 @@ export default {
           bottom: '20px' // 图表距离容器下方边距
         }
       },
-      mapChartOption: {},
       visitListData: [],
-      mapOption : {
+      // 地图参数
+      mapOption: {
         tooltip: {
           show: false
         },
         geo: {
           map: "china",
-          roam: false,// 一定要关闭拖拽
-          zoom: 1.23,
+          roam: true,// 一定要关闭拖拽
           center: [105, 36], // 调整地图位置
-          label: {
-            normal: {
-              show: false, //关闭省份名展示
-              fontSize: "10",
-              color: "rgba(0,0,0,0.7)"
-            },
-            emphasis: {
-              show: false
-            }
-          },
-          itemStyle: {
-            normal: {
-              areaColor: "#0d0059",
-              borderColor: "#389dff",
-              borderWidth: 1, //设置外层边框
-              shadowBlur: 5,
-              shadowOffsetY: 8,
-              shadowOffsetX: 0,
-              shadowColor: "#01012a"
-            },
-            emphasis: {
-              areaColor: "#184cff",
-              shadowOffsetX: 0,
-              shadowOffsetY: 0,
-              shadowBlur: 5,
-              borderWidth: 0,
-              shadowColor: "rgba(0, 0, 0, 0.5)"
-            }
-          }
         },
         series: [
           {
             type: "map",
             map: "china",
             roam: false,
-            zoom: 1.23,
+            zoom: 1.7,
             center: [105, 36],
             // geoIndex: 1,
             // aspectScale: 0.75, //长宽比
@@ -195,19 +170,81 @@ export default {
             },
             itemStyle: {
               normal: {
-                areaColor: "#0d0059",
+                areaColor: "white",
                 borderColor: "#389dff",
                 borderWidth: 0.5
               },
               emphasis: {
-                areaColor: "#17008d",
+                areaColor: "#cfcddb",
                 shadowOffsetX: 0,
                 shadowOffsetY: 0,
                 shadowBlur: 5,
-                borderWidth: 0,
-                shadowColor: "rgba(0, 0, 0, 0.5)"
+                borderWidth: 0
               }
-            }
+            }},
+          {
+            type: 'effectScatter',
+            coordinateSystem: 'geo',
+            data: [
+              {
+                "name": "大庆",
+                "value": [
+                  125.03,
+                  46.58,
+                  279
+                ]
+              },
+              {
+                "name": "武汉",
+                "value": [
+                  114.31,
+                  30.52,
+                  273
+                ]
+              },
+              {
+                "name": "合肥",
+                "value": [
+                  117.27,
+                  31.86,
+                  229
+                ]
+              },
+              {
+                "name": "菏泽",
+                "value": [
+                  115.480656,
+                  35.23375,
+                  194
+                ]
+              },
+              {
+                "name": "廊坊",
+                "value": [
+                  116.7,
+                  39.53,
+                  193
+                ]
+              },
+              {
+                "name": "衢州",
+                "value": [
+                  118.88,
+                  28.97,
+                  177
+                ]
+              }
+            ],
+            symbolSize: 5,
+            label: {
+              formatter: '{b}',
+              position: 'right',
+              show: true
+            },
+            itemStyle: {
+              shadowBlur: 10,
+              shadowColor: '#333'
+            },
           }
         ]
       }
@@ -253,16 +290,17 @@ export default {
           data.forEach(function (item) {
             if (JSON.stringify(item.location) == '[]') item.location = '银河系';
             if (!item.browser) item.browser = "secret";
-            item.ip = (item.ip).replace('::ffff:', '');
+            if (!item.fromUrl) item.fromUrl = '直接访问';
           });
           that.visitListData = data;
         }
       });
     },
     // 渲染地图
-    setMap:function (){
-      let map,that=this;
-      map = that.$echarts.init(document.getElementById('line-chart'));
+    setMap: function () {
+      let map, that = this;
+      map = that.$echarts.init(document.getElementById('map'));
+      that.$echarts.registerMap('china', china);
       map.setOption(that.mapOption);
     }
   },
@@ -271,7 +309,7 @@ export default {
 
     this.setLineChart();
     this.setVisitList();
-    // this.setMap();
+    this.setMap();
   }
 }
 </script>
@@ -309,6 +347,10 @@ export default {
 
 .line-chart {
   height: 300px;
+}
+
+.map-chart{
+  height: 400px;
 }
 
 .list-head {
