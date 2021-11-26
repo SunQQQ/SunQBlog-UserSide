@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "echarts": "^5.2.2",
     "eslint": "^5.9.0",
     "highlight.js": "^9.13.1",
     "less": "^3.8.1",
