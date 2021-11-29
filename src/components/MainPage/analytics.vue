@@ -34,13 +34,13 @@
             <div class="list-head">
               <div class="list-td">访问时间</div>
               <div class="list-td align">访问位置</div>
-              <!--              <div class="list-td align">访问来源</div>-->
+              <div class="list-td align">访问来源</div>
               <div class="list-td align">访问浏览器</div>
             </div>
             <div :class="i%2==0 ? 'list-tr single' : 'list-tr'" v-for="(item,i) in visitListData">
               <div class="list-td">{{ item.time }}</div>
               <div class="list-td align">{{ item.location }}</div>
-              <!--              <div class="list-td align">{{ item.fromUrl }}</div>-->
+              <div class="list-td align">{{ item.fromUrl }}</div>
               <div class="list-td align">{{ item.browser }}</div>
             </div>
             <div class="list-item"></div>
@@ -247,7 +247,11 @@ export default {
           data.forEach(function (item) {
             if (JSON.stringify(item.location) == '[]') item.location = '银河系';
             if (!item.browser) item.browser = "secret";
-            if (!item.fromUrl) item.fromUrl = '直接访问';
+            if (!item.fromUrl){
+              item.fromUrl = '直接访问';
+            }else {
+              item.fromUrl = item.fromUrl.split('/')[2];
+            }
           });
           that.visitListData = data;
         }
