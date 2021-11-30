@@ -15,5 +15,24 @@ module.exports = {
         }
       }
     }
+  },
+  chainWebpack:config=>{
+    config
+      .plugin('webpack-bundle-analyzer')
+      .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin);
+  },
+  productionSourceMap: false, // 关闭map文件的生成，map文件保存映射保证在程序报错时能找到资源文件
+  configureWebpack:config=>{
+    // GZip压缩
+    const CompressionPlugin = require('compression-webpack-plugin');
+    config.plugins.push(
+      new CompressionPlugin({
+        algorithm:'gzip',
+        test:/\.(js|css|woff|woff2|svg)$/,  // 要压缩的文件
+        threshold:10240, // 压缩超过10k的数据
+        deleteOriginalAssets:false, // 不删除压缩前的文件，如果浏览器不支持Gzip，则会加载源文件
+        minRatio:0.8 // 压缩比大于0.8的文件将不会被压缩
+      })
+    );
   }
 };

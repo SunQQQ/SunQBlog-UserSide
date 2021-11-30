@@ -109,6 +109,16 @@
 import Store from "../../store";
 import china from '../../static/map/china.json'
 import citys from '../../static/map/citys'
+import Vue from 'vue';
+
+let echarts = require('echarts/lib/echarts');
+require('echarts/lib/chart/line');
+require('echarts/lib/chart/map');
+require('echarts/lib/chart/scatter');
+
+require('echarts/lib/component/tooltip');
+require('echarts/lib/component/title');
+require('echarts/lib/component/legend');
 
 export default {
   name: "analytics",
@@ -295,6 +305,7 @@ export default {
   mounted: function () {
     Store.commit("ChangeActive", 5);// 切换Topbar高亮
 
+    Vue.prototype.$echarts = echarts;
     this.setLineChart();
     this.setVisitList();
     this.setMap();
