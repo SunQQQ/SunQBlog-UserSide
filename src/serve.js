@@ -7,15 +7,9 @@ var bodyParser = require("body-parser");
 
 var app = express();
 app.use(compression());
+app.use(bodyParser.json());
 
-var jsonParser = bodyParser.json();
-var urlencodedParser = bodyParser.urlencoded({ extended: false });
-
-//ip 的插件
-const ip = require('ip')
-const IP = ip.address();
-
-http.createServer(app).listen(443);
+http.createServer(app).listen(67);
 
 app.get('/', (req, res) => {
   res.sendFile('index.html', {root: __dirname});
@@ -28,13 +22,9 @@ app.get('/*', (req, res) => {
 app.post('/*', (req, res) => {
   let pathName = req.params[0],
     paramType = pathName.split('/')[0];
-
-  console.log(pathName);
-  console.log(req.query);
-  console.log(req.body);
   axios.post(
-    'http://39.104.22.73:8888' + pathName,
-    // JSON.parse(req.body)
+    'http://39.104.22.73:8888' + pathName.replace('api',''),
+    req.body
   ).then(function (response) {
     res.end(JSON.stringify(response.data));
   }).catch(function (e) {

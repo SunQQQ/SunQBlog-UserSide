@@ -140,7 +140,7 @@ export default {
         xAxis: {data: []},
         yAxis: {},
         series: [{
-          name: '博客访问量(人/天)', type: 'line', data: [],
+          name: '博客访问量(近7天)', type: 'line', data: [],
           itemStyle: {
             normal: {
               color:'#01aaed',
@@ -196,7 +196,7 @@ export default {
           }
         },
         series: [{
-          name: '博客访问来源', type: 'scatter', data: [],
+          name: '博客访问来源(今日)', type: 'scatter', data: [],
           itemStyle: {
             shadowBlur: 0,
             shadowColor: '#333',
