@@ -101,7 +101,7 @@
         </div>
       </div>
     </div>
-
+    <Heartfelt></Heartfelt>
   </div>
 </template>
 
@@ -110,6 +110,7 @@ import Store from "../../store";
 import china from '../../static/map/china.json'
 import citys from '../../static/map/citys'
 import Vue from 'vue';
+import Heartfelt from '../SonCompnent/Heartfelt';
 
 let echarts = require('echarts/lib/echarts');
 require('echarts/lib/chart/line');
@@ -122,6 +123,9 @@ require('echarts/lib/component/legend');
 
 export default {
   name: "analytics",
+  components:{
+    Heartfelt
+  },
   data: function () {
     return {
       todayVisit: 0,
@@ -135,12 +139,13 @@ export default {
           trigger: 'axis'
         },
         legend: {
-          type: 'plain'
+          type: 'plain',
+          data: ['博客访问量( 近7天 )']
         },
         xAxis: {data: []},
         yAxis: {},
         series: [{
-          name: '博客访问量(近7天)', type: 'line', data: [],
+          name: '博客访问量( 近7天 )', type: 'line', data: [],
           itemStyle: {
             normal: {
               color:'#01aaed',
@@ -158,7 +163,7 @@ export default {
       mapList: [],
       mapOption: {
         legend: {
-          data: ['博客访问来源']
+          data: ['博客访问来源( 今日 )']
         },
         tooltip: {
           show: false
@@ -196,7 +201,7 @@ export default {
           }
         },
         series: [{
-          name: '博客访问来源(今日)', type: 'scatter', data: [],
+          name: '博客访问来源( 今日 )', type: 'scatter', data: [],
           itemStyle: {
             shadowBlur: 0,
             shadowColor: '#333',
