@@ -45,6 +45,7 @@
             </div>
             <div class="list-item"></div>
           </div>
+          <Pagination v-on:PaginationToParent="ValueByPagition" ref="Pagi"></Pagination>
         </div>
       </div>
       <div class="RightPart">
@@ -111,6 +112,7 @@ import china from '../../static/map/china.json'
 import citys from '../../static/map/citys'
 import Vue from 'vue';
 import Heartfelt from '../SonCompnent/Heartfelt';
+import Pagination from '../SonCompnent/Pagination';
 
 let echarts = require('echarts/lib/echarts');
 require('echarts/lib/chart/line');
@@ -124,6 +126,7 @@ require('echarts/lib/component/legend');
 export default {
   name: "analytics",
   components:{
+    Pagination,
     Heartfelt
   },
   data: function () {
@@ -256,7 +259,12 @@ export default {
       let that = this;
       this.SQFrontAjax({
         Url: '/api/visitRead/foreend',
-        UploadData: {},
+        UploadData: {
+          PagnationData: {
+            Skip: 0,
+            Limit: 10
+          }
+        },
         Success: function (data) {
           that.allVisitNum = data.length;
           data.forEach(function (item) {
@@ -305,7 +313,30 @@ export default {
           map.setOption(that.mapOption);
         }
       });
-    }
+    },
+    //处理翻页
+    ValueByPagition: function (SelectPage) {
+      var That = this;
+      this.SQFrontAjax({
+        Url: '/api/visitRead/foreend',
+        UploadData: {
+          PagnationData: {
+            Skip: SelectPage * 10,
+            Limit: 10
+          }
+        },
+        Success: function (data) {
+          That.visitListData = That.visitListData.concat(data);
+          if (data.length != 10) {
+            That.AticleBottom = true;
+            // 停止分页器的滚动监听
+            That.$refs.Pagi.SetUpdate(false);
+          } else {
+            That.$refs.Pagi.SetUpdate(true);
+          }
+        }
+      });
+    },
   },
   mounted: function () {
     Store.commit("ChangeActive", 5);// 切换Topbar高亮
