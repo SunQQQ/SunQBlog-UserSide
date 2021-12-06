@@ -31,7 +31,6 @@
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
     "vue-template-compiler": "^2.5.17",
-    "compression-webpack-plugin": "^1.1.12",
     "webpack-bundle-analyzer": "^2.13.1"
   },
   "eslintConfig": {
