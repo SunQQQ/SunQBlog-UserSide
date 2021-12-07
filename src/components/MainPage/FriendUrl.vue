@@ -4,28 +4,12 @@
       <div class="FriendUrlBac">
         <div class="FriendUrlTitle">
           <div class="FriendUrlTitleText">我的试验田</div>
-          <div class="CreateFriendUrlButton" @click="OpenPopup">你只管努力，收获的季节终会到来</div>
+          <div class="CreateFriendUrlButton">你只管努力，收获的季节终会到来</div>
         </div>
       </div>
       <div class="UrlCardList FriendUrlCard">
         <div class="UrlCardTr">
-          <!--<transition name="Fade">-->
-            <!--<img src="../../static/img/FriendUrlPlaceholder.png" class="FriendUrlPlaceholderPC"-->
-                 <!--v-if="FriendUrlPlaceholder">-->
-          <!--</transition>-->
-          <!--<transition name="Fade">-->
-            <!--<img src="../../static/img/ArticleList.jpg" class="FriendUrlPlaceholderMobile" v-if="FriendUrlPlaceholder">-->
-          <!--</transition>-->
-          <!--<div class="UrlCardTd" v-for="item in FriendsUrlList" @click="OpenFriendUrl(item.FriendUrlAdress)">-->
-            <!--<div class="UrlIconName">-->
-              <!--<img v-bind:src="item.FriendUrlIcoUrl" v-if="item.FriendUrlIcoUrl">-->
-              <!--<img src="../../static/img/DefaultHeadIcon.jpg" v-if="!item.FriendUrlIcoUrl">-->
-
-              <!--<div class="UrlName">{{ item.FriendUrlNickName }}</div>-->
-            <!--</div>-->
-            <!--<div class="UrlSummary">{{ item.FriendUrlDescript }}</div>-->
-          <!--</div>-->
-          <div class="UrlCardTd" v-for="item in FriendsUrlList" @click="OpenFriendUrl(item.FriendUrlAdress)">
+          <div class="UrlCardTd" v-for="item in FriendsUrlList" @click="UpdateRouter('BlogDetail',item._id)">
             <div class="lab-cover">
               <img v-bind:src="item.ArticleCover" v-if="item.ArticleCover">
             </div>
@@ -36,7 +20,6 @@
           </div>
         </div>
         <div class="ListBottom" v-if="AticleBottom">你滑到我底线啦</div>
-        <!--<Pagination v-on:PaginationToParent="ValueByPagition" ref="Pagi"></Pagination>-->
       </div>
       <div class="PopupWindow" v-show="Wrapper">
         <div class="FriendUrlWrapper" @click="ClosePopup"></div>
@@ -169,28 +152,25 @@
           }
         });
       },
-      // ValueByPagition: function (SelectPage) {
-      //   var That = this;
-      //   this.SQFrontAjax({
-      //     Url: '/api/FriendUrlRead/foreend',
-      //     UploadData: {
-      //       PagnationData: {
-      //         Skip: SelectPage * 16,
-      //         Limit: 16
-      //       }
-      //     },
-      //     Success: function (data) {
-      //       That.FriendsUrlList = That.FriendsUrlList.concat(data);
-      //       if (data.length != 16) {
-      //         That.AticleBottom = true;
-      //         // 停止分页器的滚动监听
-      //         That.$refs.Pagi.SetUpdate(false);
-      //       } else {
-      //         That.$refs.Pagi.SetUpdate(true);
-      //       }
-      //     }
-      //   });
-      // }
+      // 切换路由
+      UpdateRouter: function (RouterName, Id) {
+        if (Id) {
+          this.$router.push({
+            name: RouterName,
+            query: {
+              ID: Id
+            }
+          });
+        } else {
+          this.bus.$emit('TopBar', {
+            Active: 1,
+            MobileMenuActive: 1
+          });
+          this.$router.push({
+            name: RouterName
+          });
+        }
+      },
     },
     mounted: function () {
       this.GetFriendUrlList();
