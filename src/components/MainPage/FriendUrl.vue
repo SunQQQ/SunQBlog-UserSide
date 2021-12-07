@@ -96,11 +96,6 @@
           That.Wrapper = false;
         }, 200)
       },
-      // 弹出弹框
-      OpenPopup: function () {
-        this.Wrapper = true;
-        this.FadeAnimate = true;
-      },
       // 提交友链
       FriendUrlSubmit: function () {
         var That = this;
@@ -128,9 +123,6 @@
             Title: '请完善网站信息哦'
           });
         }
-      },
-      OpenFriendUrl: function (Url) {
-        window.open(Url);
       },
       //初始化友链列表
       GetFriendUrlList: function () {
