@@ -16,11 +16,12 @@ module.exports = {
       }
     }
   },
-  chainWebpack:config=>{
-    config
-      .plugin('webpack-bundle-analyzer')
-      .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin);
-  },
+  // 包分析工具，可看到各种资源的体积
+  // chainWebpack:config=>{
+  //   config
+  //     .plugin('webpack-bundle-analyzer')
+  //     .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin);
+  // },
   productionSourceMap: false, // 关闭map文件的生成，map文件保存映射保证在程序报错时能找到资源文件
   configureWebpack:config=>{
     // GZip压缩

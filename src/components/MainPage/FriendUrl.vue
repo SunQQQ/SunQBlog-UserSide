@@ -88,42 +88,6 @@
       }
     },
     methods: {
-      // 关闭弹框
-      ClosePopup: function () {
-        var That = this;
-        this.FadeAnimate = false;
-        setTimeout(function () {
-          That.Wrapper = false;
-        }, 200)
-      },
-      // 提交友链
-      FriendUrlSubmit: function () {
-        var That = this;
-        if (this.FriendUrlNickName && this.FriendUrlAdress && this.FriendUrlDescript) {
-          this.SQFrontAjax({
-            Url: '/api/FriendUrlCreate/foreend',
-            UploadData: {
-              FriendUrlNickName: this.FriendUrlNickName,
-              FriendUrlAdress: this.FriendUrlAdress,
-              FriendUrlDescript: this.FriendUrlDescript,
-              FriendUrlIcoUrl: this.FriendUrlIcoUrl
-            },
-            Success: function () {
-              Store.commit('ChangeTip', {
-                Show: true,
-                Title: '提交成功'
-              });
-              That.ClosePopup();
-              That.GetFriendUrlList();
-            }
-          });
-        } else {
-          Store.commit('ChangeTip', {
-            Show: true,
-            Title: '请完善网站信息哦'
-          });
-        }
-      },
       //初始化友链列表
       GetFriendUrlList: function () {
         var That = this,
