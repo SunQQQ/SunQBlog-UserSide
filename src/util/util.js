@@ -6,14 +6,14 @@ CommonFunction.install = function (Vue) {
   /*将UTC格式时间转为2018-09-09 08：00*/
   Vue.prototype.DateFormat = function (UTCDate) {
     function AddZero(Num) {
-      if(Num < 10){
+      if (Num < 10) {
         return '0' + Num;
-      }else {
+      } else {
         return Num;
       }
     }
 
-    var DataObject,Year,Month,Day,Hour,Minute;
+    var DataObject, Year, Month, Day, Hour, Minute;
     DataObject = new Date(UTCDate);
     Year = DataObject.getFullYear();
     Month = DataObject.getMonth() + 1;
@@ -25,32 +25,32 @@ CommonFunction.install = function (Vue) {
   };
 
   Vue.prototype.SQFrontAjax = function (Para) {
-    Store.commit('ChangeLoading',true)
+    Store.commit('ChangeLoading', true)
 
-    if(!Para['UploadData']){
+    if (!Para['UploadData']) {
       Para['UploadData'] = {};
     }
 
     axios.post(Para['Url'], Para['UploadData']).then(function (response) {
-      Store.commit('ChangeLoading',false);
+      Store.commit('ChangeLoading', false);
 
-      if(response.data.status == '0'){
+      if (response.data.status == '0') {
         Para['Success'](response.data.data);
-      }else {
+      } else {
         Store.commit('ChangeTip', {
           Show: true,
           Title: response.data.data
         });
       }
     }).catch(function (error) {
-      if(error.response){
+      if (error.response) {
         console.log(error.response);
-      }else if(error.request){
+      } else if (error.request) {
         console.log(error.request);
-      }else {
-        console.log('SQFrontAjax Error:',error.message);
+      } else {
+        console.log('SQFrontAjax Error:', error.message);
       }
-  });
+    });
   };
 
   /**
@@ -61,9 +61,9 @@ CommonFunction.install = function (Vue) {
    */
   Vue.prototype.GetLocalStorage = function (StorageName) {
     var Storage = localStorage.getItem(StorageName);
-    if(Storage){
+    if (Storage) {
       return JSON.parse(Storage);
-    }else {
+    } else {
       return {};
     }
   };
@@ -74,21 +74,21 @@ CommonFunction.install = function (Vue) {
    * @param Value Object类型，需要Key，Value两个字段。
    * @constructor
    */
-  Vue.prototype.SetLocalStorage = function (StorageName,Data) {
+  Vue.prototype.SetLocalStorage = function (StorageName, Data) {
     var Storage = localStorage.getItem(StorageName);
     // 如果表存在，修改表中字段名
-    if(Storage){
+    if (Storage) {
       // 将表的值转为对象，并装入传入的字段
       var StorageObject = JSON.parse(Storage);
       StorageObject[Data.Key] = Data.Value;
       // 重新将存储
-      localStorage.setItem(StorageName,JSON.stringify(StorageObject));
+      localStorage.setItem(StorageName, JSON.stringify(StorageObject));
     }
     //如果表不存在直接存储
     else {
       var Object = {};
       Object[Data.Key] = Data.Value;
-      localStorage.setItem(StorageName,JSON.stringify(Object));
+      localStorage.setItem(StorageName, JSON.stringify(Object));
     }
   };
 
@@ -112,10 +112,10 @@ CommonFunction.install = function (Vue) {
     //获取由所有双中括号的汉语组成的数组
     var EmoticonChineseArray = data.match(/\[\[.*?\]\]/g);  //如果匹配到返回数据，匹配不到返回null,如[ '[[微笑]]','[[撇嘴]]' ]。因为es6不支持断言，只能处理成这样
     // 将数组中的各项，替换为<img src='1.gif'>
-    if(EmoticonChineseArray){
+    if (EmoticonChineseArray) {
       EmoticonChineseArray.forEach(function (Item) {
-        Item = Item.replace(/\[|\]/g,'');// 将字符串中的项如 '[[微笑]]'，替换为'微笑'
-        data = data.replace(/\[\[.*?\]\]/,'<img style="vertical-align:bottom" src="https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/' + EmotionList.indexOf(Item) + '.gif">'); //将'微笑'替换为<img src="https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/0.gif">
+        Item = Item.replace(/\[|\]/g, '');// 将字符串中的项如 '[[微笑]]'，替换为'微笑'
+        data = data.replace(/\[\[.*?\]\]/, '<img style="vertical-align:bottom" src="https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/' + EmotionList.indexOf(Item) + '.gif">'); //将'微笑'替换为<img src="https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/0.gif">
       });
     }
 
@@ -138,10 +138,10 @@ CommonFunction.install = function (Vue) {
           params: {
             // ip: '101.88.147.146',
             ip: data.IpAdress,
-            key:'ba5f9b69f0541123a4dbe142da230b4d'
+            key: 'ba5f9b69f0541123a4dbe142da230b4d'
           },
         }).then(function (resp) {
-          func(resp.data.city,data.IpAdress);
+          func(resp.data.city, data.IpAdress);
         }).catch();
       }
     });
@@ -151,7 +151,7 @@ CommonFunction.install = function (Vue) {
    * 获取当前时间
    * @returns {string:2021/11/18 16:45:39}
    */
-  Vue.prototype.getSQTime = function (){
+  Vue.prototype.getSQTime = function () {
     let dateObject = new Date(),
       year = dateObject.getFullYear(),
       month = dateObject.getMonth() + 1,
@@ -161,10 +161,13 @@ CommonFunction.install = function (Vue) {
       second = dateObject.getSeconds(),
       result = '';
 
-      if(min<10) min = '0' + min;
-      if(second<10) second = '0' + second;
+    if (month < 10) month = '0' + month;
+    if (day < 10) day = '0' + day;
+    if (hour < 10) hour = '0' + hour;
+    if (min < 10) min = '0' + min;
+    if (second < 10) second = '0' + second;
 
-      result = ''+ year +'/'+month+'/'+ day +' '+ hour +':'+ min +':' + second;
+    result = '' + year + '/' + month + '/' + day + ' ' + hour + ':' + min + ':' + second;
     return result;
   };
 
@@ -174,30 +177,30 @@ CommonFunction.install = function (Vue) {
    * @param value cookie值
    * @param exHour 过期时间,单位小时
    */
-  Vue.prototype.setSQCookie = function (name,value,exHour){
+  Vue.prototype.setSQCookie = function (name, value, exHour) {
     var d = new Date();
-    d.setTime(d.getTime() + exHour*60*60*1000);
+    d.setTime(d.getTime() + exHour * 60 * 60 * 1000);
     var expires = 'expires=' + d.toGMTString(); // cookie的语法要求是这个标志，和这个时间格式
     document.cookie = name + '=' + value + '; ' + expires;
-    console.log('种下cookie',name + '=' + value + '; ' + expires);
+    console.log('种下cookie', name + '=' + value + '; ' + expires);
   };
 
   /**
    * 获取cookie
    * @param name cookie的名称
    */
-  Vue.prototype.getSQCookie = function (cookName){
+  Vue.prototype.getSQCookie = function (cookName) {
     let name = cookName + '=',
       cookies = document.cookie.split(';');
-    for(let i=0;i<cookies.length;i++){
+    for (let i = 0; i < cookies.length; i++) {
       let cleanItem = cookies[i].trim();
-      if(cleanItem.indexOf(name) == 0){
-        return cleanItem.substring(name.length,cookies[i].length);
+      if (cleanItem.indexOf(name) == 0) {
+        return cleanItem.substring(name.length, cookies[i].length);
       }
     }
     return '';
   };
-  Vue.prototype.getSQBrowser = function (){
+  Vue.prototype.getSQBrowser = function () {
     var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
     var isOpera = userAgent.indexOf('Opera') > -1; //判断是否Opera浏览器
     var isIE = userAgent.indexOf('compatible') > -1
