@@ -21,42 +21,6 @@
         </div>
         <div class="ListBottom" v-if="AticleBottom">你滑到我底线啦</div>
       </div>
-      <div class="PopupWindow" v-show="Wrapper">
-        <div class="FriendUrlWrapper" @click="ClosePopup"></div>
-        <div :class="FadeAnimate ? 'FriendUrlCreateWindowFadeIn' : 'FriendUrlCreateWindowFadeOut'">
-          <div class="FriendUrlCreateWindowHeader">
-            加入朋友圈<span @click="ClosePopup"><i class="iconfont icon-fork IconfontSize"></i></span>
-          </div>
-          <div class="FriendUrlCreateWindowItem">
-            <div class="FriendUrlCreateWindowItemLeft">姓名/昵称：</div>
-            <div class="FriendUrlCreateWindowItemRight">
-              <input v-model="FriendUrlNickName"/>
-            </div>
-          </div>
-          <div class="FriendUrlCreateWindowItem">
-            <div class="FriendUrlCreateWindowItemLeft">博客地址：</div>
-            <div class="FriendUrlCreateWindowItemRight">
-              <input v-model="FriendUrlAdress"/>
-            </div>
-          </div>
-          <div class="FriendUrlCreateWindowItem">
-            <div class="FriendUrlCreateWindowItemLeft">图标地址：</div>
-            <div class="FriendUrlCreateWindowItemRight">
-              <input v-model="FriendUrlIcoUrl" placeholder="可以不填哦"/>
-            </div>
-          </div>
-          <div class="FriendUrlCreateWindowItem">
-            <div class="FriendUrlCreateWindowItemLeft">个人描述：</div>
-            <div class="FriendUrlCreateWindowItemRight">
-              <input v-model="FriendUrlDescript"/>
-            </div>
-          </div>
-          <div class="FriendUrlCreateWindowFooter">
-            <div class="FriendUrlSubmitButton" @click="FriendUrlSubmit">提交</div>
-            <div class="FriendUrlSubmitButton FriendUrlCancelButton" @click="ClosePopup">取消</div>
-          </div>
-        </div>
-      </div>
     </div>
   </transition>
 </template>
@@ -101,7 +65,10 @@
               Skip: 0,
               Limit: 8
             },
-            ArticleTag: '试验田'
+            ArticleTag: '试验田',
+            orderType:{  // 以优先级排序，需要传入此字段及值
+              order:1
+            }
           },
           Success: function (data) {
             That.FriendsUrlList = data;

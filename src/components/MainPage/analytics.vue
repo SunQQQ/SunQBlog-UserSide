@@ -238,8 +238,8 @@ export default {
           dayNum: 7
         },
         Success: function (data) {
-          that.todayVisit = data.dateCountList[0].reading;
-          that.yesterdayVisit = data.dateCountList[1].reading;
+          that.todayVisit = data.dateCountList[0].reading;     // 设置今日访问量
+          that.yesterdayVisit = data.dateCountList[1].reading; // 设置昨日访问量
 
           let dates = [], readings = [];
           data.dateCountList.forEach(function (item) {
@@ -249,7 +249,7 @@ export default {
           });
           that.lineChartOption.xAxis.data = dates.reverse();
           that.lineChartOption.series[0].data = readings.reverse();
-          that.weekVisit = totalVisit;
+          that.weekVisit = totalVisit; // 设置本周访问量
           lineChart.setOption(that.lineChartOption);
         }
       });
@@ -266,8 +266,8 @@ export default {
           }
         },
         Success: function (data) {
-          that.allVisitNum = data.length;
-          data.forEach(function (item) {
+          that.allVisitNum = data.totalNum;
+          data.list.forEach(function (item) {
             if (JSON.stringify(item.location) == '[]') item.location = '银河系';
             if (!item.browser) item.browser = "secret";
             if (!item.fromUrl){
@@ -276,7 +276,7 @@ export default {
               item.fromUrl = item.fromUrl.split('/')[2];
             }
           });
-          that.visitListData = data;
+          that.visitListData = data.list;
         }
       });
     },
@@ -326,8 +326,18 @@ export default {
           }
         },
         Success: function (data) {
-          That.visitListData = That.visitListData.concat(data);
-          if (data.length != 10) {
+          data.list.forEach(function (item) {
+            if (JSON.stringify(item.location) == '[]') item.location = '银河系';
+            if (!item.browser) item.browser = "secret";
+            if (!item.fromUrl){
+              item.fromUrl = '直接访问';
+            }else {
+              item.fromUrl = item.fromUrl.split('/')[2];
+            }
+          });
+          That.visitListData = That.visitListData.concat(data.list);
+
+          if (data.list.length != 10) {
             That.AticleBottom = true;
             // 停止分页器的滚动监听
             That.$refs.Pagi.SetUpdate(false);
