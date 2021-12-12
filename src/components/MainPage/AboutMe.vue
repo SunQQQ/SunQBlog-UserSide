@@ -126,8 +126,8 @@
 <style scoped lang="less">
   @import "../../static/css/AboutMe";
   .about-UrlName{
-    font-size: 1rem;
+    font-size: 14px;
     height: 1rem;
-    padding-right: .5rem;
+    padding-left: .5rem;
   }
 </style>
