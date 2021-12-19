@@ -7,7 +7,8 @@
           <span>Sunq's Blog</span>
         </div>
         <div class="MediaRight">
-          <div :class="Active == 5 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('analytics')">数据统计</div>
+          <div :class="Active == 6 ? 'MenuItemActive' : 'MenuItem'" @click="openUrl()">管理后台</div>
+          <div :class="Active == 5 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('analytics')">访问统计</div>
           <div :class="Active == 4 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('AboutMe')">关于</div>
           <div :class="Active == 3 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('FriendUrl')">试验田</div>
           <div :class="Active == 2 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('TimeLine')">时间轴</div>
@@ -52,7 +53,10 @@
              @click="ChangeRouter('AboutMe')">关于
         </div>
         <div :class="Active == 5 ? 'MobileMenuDetailItemActive' : 'MobileMenuDetailItem'"
-             @click="ChangeRouter('analytics')">数据统计
+             @click="ChangeRouter('analytics')">访问统计
+        </div>
+        <div :class="Active == 6 ? 'MobileMenuDetailItemActive' : 'MobileMenuDetailItem'"
+             @click="openUrl()">管理后台
         </div>
       </div>
       <div class="MoblieMenuDetailShade"></div>
@@ -83,6 +87,10 @@
         That.$router.push({
           name: url,
         });
+      },
+
+      openUrl:function(){
+        window.open('http://39.104.22.73:68/#/','_blank');
       },
 
       // 伸缩 移动端菜单详情
@@ -409,7 +417,7 @@
   }
 
   .MediaLeft {
-    width: 50%;
+    width: 40%;
     font-size: 1.2rem;
     cursor: pointer;
   }
@@ -419,7 +427,7 @@
 
   .MediaRight {
     flex: 1px;
-    width: 50%;
+    width: 60%;
     .myflex('middle');
     text-align: right;
     flex-direction: row-reverse;
