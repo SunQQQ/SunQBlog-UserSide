@@ -247,6 +247,11 @@ CommonFunction.install = function (Vue) {
       return 'Chrome';
     }
   };
+
+  Vue.prototype.dedupe = function(array){
+    return Array.from(new Set(array));
+  }
+
 };
 
 export default CommonFunction;
