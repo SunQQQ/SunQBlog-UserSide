@@ -147,6 +147,17 @@ CommonFunction.install = function (Vue) {
     });
   };
 
+  Vue.prototype.getIpLocation = function(func){
+    axios({
+      url: 'https://pv.sohu.com/cityjson?ie=utf-8',
+      method: 'post'
+    }).then(function (resp) {
+      resp.cip = resp.cip.replace('::ffff:','');
+      // resp.cname = resp.cname;
+      func(resp.cname, resp.cip);
+    }).catch();
+  };
+
   /**
    * 获取当前时间
    * @returns {string:2021/11/18 16:45:39}

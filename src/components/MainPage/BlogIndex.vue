@@ -118,6 +118,7 @@
   import Heartfelt from '../SonCompnent/Heartfelt';
   import Pagination from '../SonCompnent/Pagination';
   import Store from '../../store'
+  import axios from "axios";
 
   export default {
     name: "BlogIndex",
@@ -327,6 +328,7 @@
             Url: '/api/visitCreate/foreend',
             UploadData: {
               location:LocationCityName,
+              ip:ip,
               fromUrl:document.referrer,
               time:dateString,
               browser:that.getSQBrowser()

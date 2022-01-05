@@ -22,6 +22,12 @@ app.get('/*', (req, res) => {
 app.post('/*', (req, res) => {
   let pathName = req.params[0],
     paramType = pathName.split('/')[0];
+
+  req.body.clientIp = req.headers['x-forwarded-for'] ||
+    req.connection.remoteAddress ||
+    req.socket.remoteAddress ||
+    req.connection.socket.remoteAddress;
+
   axios.post(
     'http://39.104.22.73:8888' + pathName.replace('api',''),
     req.body
