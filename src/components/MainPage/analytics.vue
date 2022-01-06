@@ -47,19 +47,23 @@
           <div class="map-chart" id="map"></div>
         </div>
         <div class="block">
-          <!--          <div class="block-name">分日报表</div>-->
+          <div class="module-title">操作日志</div>
           <div class="list">
             <div class="list-head">
-              <div class="list-td">访问时间</div>
+              <div class="list-td">访问IP</div>
+              <div class="list-td align">操作内容</div>
               <div class="list-td align">访问位置</div>
-              <div class="list-td align">访问来源</div>
+              <!--              <div class="list-td align">访问来源</div>-->
               <div class="list-td align">访问浏览器</div>
+              <div class="list-td align">访问时间</div>
             </div>
             <div :class="i%2==0 ? 'list-tr single' : 'list-tr'" v-for="(item,i) in visitListData">
-              <div class="list-td">{{ item.time }}</div>
+              <div class="list-td">{{ item.clientIp ? item.clientIp : '中国' }}</div>
+              <div class="list-td align">{{ item.operateType ? item.operateType+item.operateContent : '' }}</div>
               <div class="list-td align">{{ item.location }}</div>
-              <div class="list-td align">{{ item.fromUrl }}</div>
+              <!--              <div class="list-td align">{{ item.fromUrl }}</div>-->
               <div class="list-td align">{{ item.browser }}</div>
+              <div class="list-td align">{{ item.time }}</div>
             </div>
             <div class="list-item"></div>
           </div>
@@ -264,10 +268,10 @@
           },
           Success: function (data) {
             let dates = [], readings = [];
-            
+
             if(!that.todayVisit) that.todayVisit = data.dateCountList[0].reading;     // 设置今日访问量
             if(!that.yesterdayVisit) that.yesterdayVisit = data.dateCountList[1].reading; // 设置昨日访问量
-            
+
             data.dateCountList.forEach(function (item) {
               dates.push(item.time);
               readings.push(item.reading);
@@ -391,6 +395,12 @@
       this.setLineChart(7);
       this.setVisitList();
       this.setMap(1);
+
+      // 创建日志
+      this.createLog({
+        moduleType:'menu',
+        operateType:'菜单6'
+      });
     }
   }
 </script>
@@ -436,6 +446,11 @@
     font-weight: 500;
     height: 18px;
     line-height: 18px;
+  }
+
+  .list{
+    border:1px solid #e9e9e9;
+    margin-top: 1.5rem;
   }
 
   .day-switch {

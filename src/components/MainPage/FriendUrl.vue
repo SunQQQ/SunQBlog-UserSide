@@ -99,6 +99,12 @@
       this.GetFriendUrlList();
       // 切换Topbar高亮
       Store.commit("ChangeActive", 3);
+
+      // 创建日志
+      this.createLog({
+        moduleType:'menu',
+        operateType:'菜单4'
+      });
     },
   }
 </script>

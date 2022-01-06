@@ -392,6 +392,12 @@
       this.MessageRead();
       // 切换Topbar高亮
       Store.commit("ChangeActive", 1);
+
+      // 创建日志
+      this.createLog({
+        moduleType:'munu',
+        operateType:'菜单2'
+      });
     }
   }
 </script>

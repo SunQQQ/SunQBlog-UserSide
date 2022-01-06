@@ -312,32 +312,39 @@
       }
     },
     mounted: function () {
-      let that = this,
-        dateString = this.getSQTime(),
-      cookie = '';
+      let that = this;
+        // dateString = this.getSQTime(),
+      // cookie = '';
 
       this.InitArticleTag(this);
       Store.commit("ChangeActive", 0); // 切换Topbar高亮
+
+      // 创建日志
+      that.createLog({
+        moduleType:'menu',
+        operateType:'菜单1'
+      });
       // 统计访问量
-      cookie = this.getSQCookie('sunqBlog');
-      if(cookie){
-        console.log('cookie还在',cookie)
-      }else {
-        this.GetLocation(function (LocationCityName) {
-          that.SQFrontAjax({
-            Url: '/api/visitCreate/foreend',
-            UploadData: {
-              location:LocationCityName,
-              fromUrl:document.referrer,
-              time:dateString,
-              browser:that.getSQBrowser()
-            },
-            Success: function () {
-              that.setSQCookie('sunqBlog','统计访问量',12); // 12个小时内同一个浏览器算一个访问量
-            }
-          });
-        });
-      }
+      // cookie = this.getSQCookie('sunqBlog');
+      // if(cookie){
+      //   console.log('cookie还在',cookie)
+      // }else {
+      //   this.GetLocation(function (LocationCityName) {
+      //     that.SQFrontAjax({
+      //       Url: '/api/visitCreate/foreend',
+      //       UploadData: {
+      //         location:LocationCityName,
+      //         fromUrl:document.referrer,
+      //         time:dateString,
+      //         browser:that.getSQBrowser(),
+      //         action:'menu1'
+      //       },
+      //       Success: function () {
+      //         that.setSQCookie('sunqBlog','统计访问量',12); // 12个小时内同一个浏览器算一个访问量
+      //       }
+      //     });
+      //   });
+      // }
     },
   }
 </script>

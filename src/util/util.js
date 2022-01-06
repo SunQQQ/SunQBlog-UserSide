@@ -124,37 +124,29 @@ CommonFunction.install = function (Vue) {
 
 
   /**
-   * 根据IP获取用户所在城市  ip非必传
+   * 根据IP获取用户所在城市 ip非必传
    * @param func 获取成功后的回调函数，该参数将接受一个城市名称
    * @constructor
    */
   Vue.prototype.GetLocation = function (func) {
-    axios({
-      url: 'https://restapi.amap.com/v3/ip',
-      method: 'post',
-      params: {
-        key: 'ba5f9b69f0541123a4dbe142da230b4d'
-      },
-    }).then(function (resp) {
-      func(resp.data.city);
-    }).catch();
+    let that = this,
+      locationCookie = this.getSQCookie('sunqBlogLocation');
 
-    // this.SQFrontAjax({
-    //   Url: '/api/GetUserIp',
-    //   Success: function (data) {
-    //     axios({
-    //       url: 'https://restapi.amap.com/v3/ip',
-    //       method: 'post',
-    //       params: {
-    //         // ip: '101.88.147.146',
-    //         ip: data.IpAdress,
-    //         key: 'ba5f9b69f0541123a4dbe142da230b4d'
-    //       },
-    //     }).then(function (resp) {
-    //       func(resp.data.city, data.IpAdress);
-    //     }).catch();
-    //   }
-    // });
+    // 如果用户多次访问，一周内不会重复请求定位接口
+    if(locationCookie){
+      func(locationCookie);
+    }else {
+      axios({
+        url: 'https://restapi.amap.com/v3/ip',
+        method: 'post',
+        params: {
+          key: 'ba5f9b69f0541123a4dbe142da230b4d'
+        },
+      }).then(function (resp) {
+        func(resp.data.city);
+        that.setSQCookie('sunqBlogLocation','',24*7); // 相隔一周同一浏览器再次访问时会重新定位
+      }).catch();
+    }
   };
 
   Vue.prototype.getIpLocation = function(func){
@@ -269,10 +261,37 @@ CommonFunction.install = function (Vue) {
     }
   };
 
+  /**
+   * 数组去重
+   * @param array
+   * @returns {any[]}
+   */
   Vue.prototype.dedupe = function(array){
     return Array.from(new Set(array));
-  }
+  };
 
+  Vue.prototype.createLog = function (log){
+    let that = this,
+      dateString = this.getSQTime();
+
+    that.GetLocation(function (LocationCityName) {
+      that.SQFrontAjax({
+        Url: '/api/visitCreate/foreend',
+        UploadData: {
+          location:LocationCityName,
+          fromUrl:document.referrer,
+          time:dateString,
+          browser:that.getSQBrowser(),
+          moduleType:log.moduleType,
+          operateType:log.operateType,
+          operateContent:log.operateContent ? log.operateContent : ''
+        },
+        Success: function () {
+          that.setSQCookie('sunqBlog','统计访问量',12); // 12个小时内同一个浏览器算一个访问量
+        }
+      });
+    });
+  };
 };
 
 export default CommonFunction;
