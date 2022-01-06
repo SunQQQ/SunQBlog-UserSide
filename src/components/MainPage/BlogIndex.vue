@@ -323,12 +323,11 @@
       if(cookie){
         console.log('cookie还在',cookie)
       }else {
-        this.GetLocation(function (LocationCityName,ip) {
+        this.GetLocation(function (LocationCityName) {
           that.SQFrontAjax({
             Url: '/api/visitCreate/foreend',
             UploadData: {
               location:LocationCityName,
-              ip:ip,
               fromUrl:document.referrer,
               time:dateString,
               browser:that.getSQBrowser()
