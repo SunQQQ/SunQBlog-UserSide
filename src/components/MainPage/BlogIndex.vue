@@ -197,8 +197,8 @@
 
             That.DefaultGraph.ArticleListPart = false;
 
-            // 创建日志
-            That.createLog({
+            // 创建日志 只有在筛选某个标签后，再记录日志
+            if(ArticleTag) That.createLog({
               moduleType:'button',
               operateType:'筛选文章分类',
               operateContent:ArticleTag
