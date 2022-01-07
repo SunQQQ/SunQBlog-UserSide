@@ -132,8 +132,7 @@
         this.SQFrontAjax({
           Url: '/api/ArticleReadOne/foreend',
           UploadData: {
-            /*_id: this.$route.query.ID*/
-            _id: this.$route.query.ID
+            _id: this.$route.query._id
           },
           Success: function (data) {
             // 关闭骨架屏
@@ -142,6 +141,13 @@
             That.Article = data[0];
             That.Article.CreateDate = That.DateFormat(That.Article.CreateDate);
             That.Article.Content = Marked(That.Article.Content); //Markdown格式字符串转html
+
+            // 创建日志
+            That.createLog({
+              moduleType:'button',
+              operateType:'浏览文章',
+              operateContent: That.$route.query.Title
+            });
           }
         });
 
@@ -151,8 +157,6 @@
           this.ArticleCommentNickName = LocalCommonUser.ArticleCommentNickName;
         }
       },
-
-
       /**
        * 本方法用于提交评论
        *
@@ -173,7 +177,7 @@
             That.SQFrontAjax({
               Url: '/api/ArticleCommentCreate/foreend',
               UploadData: {
-                ArticleId: That.$route.query.ID,
+                ArticleId: That.$route.query._id,
                 ArticleCommentNickName: That.ArticleCommentNickName,
                 ArticleCommentEmail: That.ArticleCommentEmail,
                 ArticleCommentUrl: That.ArticleCommentUrl,
@@ -216,7 +220,7 @@
         this.SQFrontAjax({
           Url: '/api/ArticleCommentRead/foreend',
           UploadData: {
-            ArticleId: this.$route.query.ID
+            ArticleId: this.$route.query._id
           },
           Success: function (data) {
             That.ArticleCommentList = data;
@@ -226,13 +230,12 @@
           }
         });
       },
-
       // 传入文章id，在文章表里给对应文章评论数加一
       UpdateArticleCommentNum: function () {
         this.SQFrontAjax({
           Url: '/api/ArticleCommentNumUpdate/foreend',
           UploadData: {
-            _id: this.$route.query.ID,
+            _id: this.$route.query._id,
             type: 'add'
           },
           Success: function (data) {

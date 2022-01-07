@@ -71,7 +71,7 @@
                 </div>
                 <div class="Content">
                   <div class="GitName">孙权的Github</div>
-                  <a class="BlueButton" href="https://github.com/SunQQQ" target="_blank">博客源码</a>
+                  <a class="BlueButton" href="https://github.com/SunQQQ" target="_blank" @click="readCode()">博客源码</a>
                   <div class="BlogStatistic">
                     <div class="BlogStatisticItem">
                       <div class="BlogStatisticItemNum">13</div>
@@ -92,25 +92,27 @@
                 <div class="TitleFontLine">Contacts</div>
                 <div class="BlogStatistic" style="border-top: none;padding-bottom: 0">
                   <div class="BlogStatisticItem">
-                    <a href="https://github.com/SunQQQ" target="_blank"><i
-                      class="iconfont icon-github AboutMeIcon" style="color:#948aec"></i></a>
+                    <a href="https://github.com/SunQQQ" target="_blank" @click="contact('github')">
+                      <i class="iconfont icon-github AboutMeIcon" style="color:#948aec"></i>
+                    </a>
                   </div>
                   <div class="BlogStatisticItem">
-                    <a href="https://www.zhihu.com/people/s-q-51-44-23/activities"
-                       target="_blank"><i
-                      class="iconfont icon-zhihu AboutMeIcon" style="color:#3dbd7d"></i></a>
+                    <a href="https://www.zhihu.com/people/s-q-51-44-23/activities" target="_blank" @click="contact('知乎')">
+                      <i class="iconfont icon-zhihu AboutMeIcon" style="color:#3dbd7d"></i>
+                    </a>
                   </div>
                   <div class="BlogStatisticItem">
-                    <a href="https://blog.csdn.net/sun_qqq" target="_blank"><i
-                      class="iconfont icon-CN_csdnnet AboutMeIcon" style="color:#f78e3d"></i></a>
+                    <a href="https://blog.csdn.net/sun_qqq" target="_blank" @click="contact('csdn')">
+                      <i class="iconfont icon-CN_csdnnet AboutMeIcon" style="color:#f78e3d"></i>
+                    </a>
                   </div>
                   <div class="BlogStatisticItem">
                     <i class="iconfont icon-youxiang AboutMeIcon" style="color:#49a9ee"></i>
                   </div>
                   <div class="BlogStatisticItem">
-                    <a href="https://music.163.com/#/user/home?id=386558098" target="_blank"><i
-                      class="iconfont AboutMeIcon icon-CN_NetEasemusic"
-                      style="color:#f46e65"></i></a>
+                    <a href="https://music.163.com/#/user/home?id=386558098" target="_blank" @click="contact('网易云')">
+                      <i class="iconfont AboutMeIcon icon-CN_NetEasemusic" style="color:#f46e65"></i>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -386,6 +388,25 @@
         } else {
           this.$refs['LeaveMessageTextArea'].focus();
         }
+      },
+
+      // 查看源码
+      readCode:function (){
+        // 创建日志
+        this.createLog({
+          moduleType:'button',
+          operateType:'查看源码',
+          operateContent:'留言板入口'
+        });
+      },
+
+      contact:function (operateContent){
+        // 创建日志
+        this.createLog({
+          moduleType:'button',
+          operateType:'点击联系途径',
+          operateContent:operateContent
+        });
       }
     },
     mounted: function () {

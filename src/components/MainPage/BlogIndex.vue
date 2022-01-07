@@ -10,7 +10,7 @@
                              class="BlogIndexContentLeftDefaultGraph">
                     </transition>
                     <div class="ArticleItem" v-for="(item,i) in ArticleList" v-bind:key="i"
-                         @click="UpdateRouter('BlogDetail',item._id)">
+                         @click="UpdateRouter('BlogDetail',item)">
                         <div class="ArticleItemCover" v-if="item.ArticleCover">
                             <img :src="item.ArticleCover">
                         </div>
@@ -49,22 +49,22 @@
                         <div class="TagListHead">热门博文</div>
                         <div class="HotArticle">
                             <div class="HotArticleItem" v-for="(Item,Index) in HotArticleList">
-                                <div v-if="Index == 0" @click="UpdateRouter('BlogDetail',Item._id)">
+                                <div v-if="Index == 0" @click="UpdateRouter('BlogDetail',Item)">
                                     <span style="color:#f44e03;font-size: 15px">No{{Index+1}} </span>{{Item.Title}}
                                 </div>
-                                <div v-if="Index == 1" @click="UpdateRouter('BlogDetail',Item._id)">
+                                <div v-if="Index == 1" @click="UpdateRouter('BlogDetail',Item)">
                                     <span style="color:#d41800;font-size: 15px">No{{Index+1}} </span>{{Item.Title}}
                                 </div>
-                                <div v-if="Index == 2" @click="UpdateRouter('BlogDetail',Item._id)">
+                                <div v-if="Index == 2" @click="UpdateRouter('BlogDetail',Item)">
                                     <span style="color:#f37e21;font-size: 15px">No{{Index+1}} </span>{{Item.Title}}
                                 </div>
-                                <div v-if="Index == 3" @click="UpdateRouter('BlogDetail',Item._id)">
+                                <div v-if="Index == 3" @click="UpdateRouter('BlogDetail',Item)">
                                     <span style="color:#f3212d;font-size: 15px">No{{Index+1}} </span>{{Item.Title}}
                                 </div>
-                                <div v-if="Index == 4" @click="UpdateRouter('BlogDetail',Item._id)">
+                                <div v-if="Index == 4" @click="UpdateRouter('BlogDetail',Item)">
                                     <span style="color:#212df3;font-size: 15px">No{{Index+1}} </span>{{Item.Title}}
                                 </div>
-                                <div v-if="Index > 4" @click="UpdateRouter('BlogDetail',Item._id)">
+                                <div v-if="Index > 4" @click="UpdateRouter('BlogDetail',Item)">
                                     <span>No{{Index+1}} </span>{{Item.Title}}
                                 </div>
                             </div>
@@ -77,7 +77,7 @@
                         </div>
                         <div class="TextCenter">
                             孙权的小博客
-                            <a class="BlueButton" href="https://github.com/SunQQQ" target="_blank">博客源码</a>
+                            <a class="BlueButton" href="https://github.com/SunQQQ" target="_blank" @click="readCode()">博客源码</a>
                         </div>
                         <div class="BlogStatistic">
                             <div class="BlogStatisticItem">
@@ -101,8 +101,7 @@
                         <div class="TagListHead">文章分类<span style="color: #aaa;font-size: 0.8rem">（点击筛选呦）</span></div>
                         <div class="TagListTr">
                             <div :class="item.TagName != Tags.Active ? 'TagListTd' : 'TagListTdActive'"
-                                 v-for="item in Tags" :key="item.id" @click="GetArticle(item.TagName)">{{ item.TagName
-                                }}
+                                 v-for="item in Tags" :key="item.id" @click="GetArticle(item.TagName)">{{ item.TagName }}
                             </div>
                         </div>
                     </div>
@@ -197,6 +196,13 @@
             That.ArticleList = data;
 
             That.DefaultGraph.ArticleListPart = false;
+
+            // 创建日志
+            That.createLog({
+              moduleType:'button',
+              operateType:'筛选文章分类',
+              operateContent:ArticleTag
+            });
           }
         });
       },
@@ -260,19 +266,11 @@
         });
       },
       // 切换路由
-      UpdateRouter: function (RouterName, Id) {
-        if (Id) {
-          /*this.$router.push({
-            name:RouterName,
-            params:{
-              ID:Id
-            }
-          });*/
+      UpdateRouter: function (RouterName, articleMessage) {
+        if (articleMessage._id) {
           this.$router.push({
             name: RouterName,
-            query: {
-              ID: Id
-            }
+            query: articleMessage
           });
         } else {
           this.bus.$emit('TopBar', {
@@ -309,6 +307,15 @@
             That.DefaultGraph.HotArticlePart = false;
           }
         });
+      },
+      // 查看源码
+      readCode:function (){
+        // 创建日志
+        this.createLog({
+          moduleType:'button',
+          operateType:'查看源码',
+          operateContent:'首页入口'
+        });
       }
     },
     mounted: function () {
@@ -324,27 +331,6 @@
         moduleType:'menu',
         operateType:'菜单1'
       });
-      // 统计访问量
-      // cookie = this.getSQCookie('sunqBlog');
-      // if(cookie){
-      //   console.log('cookie还在',cookie)
-      // }else {
-      //   this.GetLocation(function (LocationCityName) {
-      //     that.SQFrontAjax({
-      //       Url: '/api/visitCreate/foreend',
-      //       UploadData: {
-      //         location:LocationCityName,
-      //         fromUrl:document.referrer,
-      //         time:dateString,
-      //         browser:that.getSQBrowser(),
-      //         action:'menu1'
-      //       },
-      //       Success: function () {
-      //         that.setSQCookie('sunqBlog','统计访问量',12); // 12个小时内同一个浏览器算一个访问量
-      //       }
-      //     });
-      //   });
-      // }
     },
   }
 </script>

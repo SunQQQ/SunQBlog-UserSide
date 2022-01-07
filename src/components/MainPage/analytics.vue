@@ -5,7 +5,7 @@
         <div class="block" style="margin-top: 0">
           <div class="quota-content">
             <div class="quota-item">
-              <p>今日访问量</p>
+              <p>今日浏览量(PV)</p>
               <p class="num">{{ todayVisit }}</p>
             </div>
             <div class="quota-item">
@@ -24,7 +24,7 @@
         </div>
         <div class="block">
           <div class="title-part">
-            <div class="module-title">访问量趋势</div>
+            <div class="module-title">浏览量趋势</div>
             <div class="day-switch">
               <div :class="lineDateType == '7' ? 'item active' : 'item'" @click="setLineChart(7)">最近7天</div>
               <div :class="lineDateType == '14' ? 'item active' : 'item'" @click="setLineChart(14)">最近14天</div>
@@ -59,7 +59,7 @@
             </div>
             <div :class="i%2==0 ? 'list-tr single' : 'list-tr'" v-for="(item,i) in visitListData">
               <div class="list-td">{{ item.clientIp ? item.clientIp : '中国' }}</div>
-              <div class="list-td align">{{ item.operateType ? item.operateType+item.operateContent : '' }}</div>
+              <div class="list-td">{{ item.operateType ? item.operateType+ ':' +item.operateContent : '' }}</div>
               <div class="list-td align">{{ item.location }}</div>
               <!--              <div class="list-td align">{{ item.fromUrl }}</div>-->
               <div class="list-td align">{{ item.browser }}</div>
@@ -253,7 +253,7 @@
     },
     methods: {
       // 渲染折线图
-      setLineChart: function (dayNum) {
+      setLineChart: function (dayNum,init) {
         let that = this,
           totalVisit = 0;
 
@@ -282,6 +282,19 @@
             that.lineChartOption.xAxis.data = dates.reverse();
             that.lineChartOption.series[0].data = readings.reverse();
             that.lineChart.setOption(that.lineChartOption);
+
+            // 初始化时不创建日志,切换时间维度后，记日志并刷新日志列表
+            if(!init){
+              that.createLog({
+                moduleType:'menu',
+                operateType:'切换折线图时间维度',
+                operateContent: '近' + dayNum + '天'
+              });
+
+              setTimeout(function (){
+                that.setVisitList();
+              },1000);
+            }
           }
         });
       },
@@ -312,7 +325,7 @@
         });
       },
       // 渲染地图
-      setMap: function (dayNum) {
+      setMap: function (dayNum,init) {
         let that = this;
         that.mapDateType = dayNum;
 
@@ -338,10 +351,6 @@
               }
             });
 
-            console.log(that.mapList);
-            // that.mapList = that.dedupe(that.mapList);
-            console.log(that.mapList);
-
             if(!that.map) that.map = that.$echarts.init(document.getElementById('map'));
             if(dayNum == '1'){
               that.mapOption.series[0].label.show = true;
@@ -351,6 +360,19 @@
             that.mapOption.series[0].data = that.mapList;
             that.$echarts.registerMap('china', china);
             that.map.setOption(that.mapOption,true);
+
+            // 初始化时不创建日志。切换时间维度后，记日志并刷新日志列表
+            if(!init){
+              that.createLog({
+                moduleType:'menu',
+                operateType:'切换地图时间维度',
+                operateContent: '近' + dayNum + '天'
+              });
+
+              setTimeout(function (){
+                that.setVisitList();
+              },1000);
+            }
           }
         });
       },
@@ -392,9 +414,9 @@
       Store.commit("ChangeActive", 5);// 切换Topbar高亮
 
       Vue.prototype.$echarts = echarts;
-      this.setLineChart(7);
+      this.setLineChart(7,'init');
       this.setVisitList();
-      this.setMap(1);
+      this.setMap(1,'init');
 
       // 创建日志
       this.createLog({
