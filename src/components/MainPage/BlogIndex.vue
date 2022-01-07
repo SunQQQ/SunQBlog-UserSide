@@ -245,6 +245,13 @@
               That.$refs.Pagi.SetUpdate(false);
             } else {
               That.$refs.Pagi.SetUpdate(true);
+
+              // 创建日志
+              That.createLog({
+                moduleType:'pageTurn',
+                operateType:'下拉文章列表到',
+                operateContent:'第' + (SelectPage+1) + '页'
+              });
             }
           }
         });
@@ -329,7 +336,8 @@
       // 创建日志
       that.createLog({
         moduleType:'menu',
-        operateType:'菜单1'
+        operateType:'选择菜单',
+        operateContent:'博文'
       });
     },
   }

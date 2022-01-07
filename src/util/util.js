@@ -24,15 +24,25 @@ CommonFunction.install = function (Vue) {
     return Year + '-' + AddZero(Month) + '-' + AddZero(Day) + ' ' + AddZero(Hour) + ':' + AddZero(Minute);
   };
 
+  /**
+   * 封装ajax，统一处理请求异常/loading等逻辑
+   * @param Para
+   * Para.Url 地址
+   * Para.noLoading 非必传，参数值要求为任何非空字符串即可
+   * Para.UploadData 参数
+   * Para.Success 请求成功且反参正常的回调，回调函数接收response.data.data
+   * @constructor
+   */
   Vue.prototype.SQFrontAjax = function (Para) {
-    Store.commit('ChangeLoading', true)
+    // 如果设置了noLoading参数（有这个字段），则不再加载loading
+    if(!Para.noLoading) Store.commit('ChangeLoading', true);
 
     if (!Para['UploadData']) {
       Para['UploadData'] = {};
     }
 
     axios.post(Para['Url'], Para['UploadData']).then(function (response) {
-      Store.commit('ChangeLoading', false);
+      if(!Para.noLoading) Store.commit('ChangeLoading', false);
 
       if (response.data.status == '0') {
         Para['Success'](response.data.data);

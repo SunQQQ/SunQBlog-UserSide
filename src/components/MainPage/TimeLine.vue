@@ -72,7 +72,8 @@
       // 创建日志
       this.createLog({
         moduleType:'menu',
-        operateType:'菜单3'
+        operateType:'选择菜单',
+        operateContent:'时间轴'
       });
     }
   }

@@ -122,7 +122,8 @@
 
       this.createLog({
         moduleType:'menu',
-        operateType:'菜单5'
+        operateType:'选择菜单',
+        operateContent:'关于'
       });
     }
   }

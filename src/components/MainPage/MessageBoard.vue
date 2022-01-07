@@ -369,6 +369,12 @@
               That.$refs.Pagi.SetUpdate(false);
             } else {
               That.$refs.Pagi.SetUpdate(true);
+              // 创建日志
+              That.createLog({
+                moduleType:'pageTurn',
+                operateType:'下拉留言列表到',
+                operateContent:'第' + (SelectPage+1) + '页'
+              });
             }
           }
         });
@@ -417,7 +423,8 @@
       // 创建日志
       this.createLog({
         moduleType:'munu',
-        operateType:'菜单2'
+        operateType:'选择菜单',
+        operateContent:'留言'
       });
     }
   }

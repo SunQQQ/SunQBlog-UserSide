@@ -9,7 +9,7 @@
               <p class="num">{{ todayVisit }}</p>
             </div>
             <div class="quota-item">
-              <p>昨日访问量</p>
+              <p>昨日浏览量(PV)</p>
               <p class="num">{{ yesterdayVisit }}</p>
             </div>
             <div class="quota-item">
@@ -303,6 +303,7 @@
         let that = this;
         this.SQFrontAjax({
           Url: '/api/visitRead/foreend',
+          noLoading: 'yes',
           UploadData: {
             PagnationData: {
               Skip: 0,
@@ -405,6 +406,14 @@
               That.$refs.Pagi.SetUpdate(false);
             } else {
               That.$refs.Pagi.SetUpdate(true);
+
+              // 创建日志
+              That.createLog({
+                moduleType:'pageTurn',
+                operateType:'下拉访问日志列表到',
+                operateContent:'第' + (SelectPage+1) + '页'
+              });
+
             }
           }
         });
@@ -420,9 +429,14 @@
 
       // 创建日志
       this.createLog({
-        moduleType:'menu',
-        operateType:'菜单6'
+        moduleType: 'menu',
+        operateType: '选择菜单',
+        operateContent: '访问统计'
       });
+
+      setTimeout(function (){
+        that.setVisitList();
+      },1000);
     }
   }
 </script>
