@@ -55,28 +55,62 @@
           <div class="map-chart" id="map"></div>
         </div>
         <div class="block">
+          <div class="title-part">
+            <div class="module-title">用户行为</div>
+            <div class="day-switch">
+              <div :class="userActionDateType == '1' ? 'item active' : 'item'" @click="setUserAction(1)">今天</div>
+              <div :class="userActionDateType == '2' ? 'item active' : 'item'" @click="setUserAction(2)">最近2天</div>
+              <div :class="userActionDateType == '3' ? 'item active' : 'item'" @click="setUserAction(3)">最近3天</div>
+            </div>
+          </div>
+          <div class="list">
+            <div class="list-head">
+              <div class="list-td">访问IP</div>
+              <div class="list-td">操作内容</div>
+              <div class="list-td align">访问位置</div>
+              <!--              <div class="list-td align">访问来源</div>-->
+              <div class="list-td align">浏览器</div>
+              <div class="list-td align">访问时间</div>
+            </div>
+            <div :class="i%2==0 ? 'list-tr single' : 'list-tr'" v-for="(item,i) in userActionData">
+              <div class="list-td">{{ i }}</div>
+              <div class="list-td">
+<!--                {{ item.action ? item.action : ''}}-->
+                <ul>
+                  <li v-for="(item) in item.action">{{item}}</li>
+                </ul>
+              </div>
+              <div class="list-td align">{{ item.location }}</div>
+              <!--<div class="list-td align">{{ item.fromUrl }}</div>-->
+              <div class="list-td align">{{ item.browser }}</div>
+              <div class="list-td align">{{ item.time }}</div>
+            </div>
+            <div class="list-item"></div>
+          </div>
+        </div>
+        <!--<div class="block">
           <div class="module-title">操作日志</div>
           <div class="list">
             <div class="list-head">
               <div class="list-td">访问IP</div>
               <div class="list-td align">操作内容</div>
               <div class="list-td align">访问位置</div>
-              <!--              <div class="list-td align">访问来源</div>-->
-              <div class="list-td align">访问浏览器</div>
+              &lt;!&ndash;              <div class="list-td align">访问来源</div>&ndash;&gt;
+              <div class="list-td align">浏览器</div>
               <div class="list-td align">访问时间</div>
             </div>
             <div :class="i%2==0 ? 'list-tr single' : 'list-tr'" v-for="(item,i) in visitListData">
               <div class="list-td">{{ item.clientIp ? item.clientIp : '中国' }}</div>
               <div class="list-td">{{ item.operateType ? item.operateType + ':' + item.operateContent : '' }}</div>
               <div class="list-td align">{{ item.location }}</div>
-              <!--              <div class="list-td align">{{ item.fromUrl }}</div>-->
+              &lt;!&ndash;              <div class="list-td align">{{ item.fromUrl }}</div>&ndash;&gt;
               <div class="list-td align">{{ item.browser }}</div>
               <div class="list-td align">{{ item.time }}</div>
             </div>
             <div class="list-item"></div>
           </div>
           <Pagination v-on:PaginationToParent="ValueByPagition" ref="Pagi"></Pagination>
-        </div>
+        </div>-->
       </div>
       <div class="RightPart">
         <div class="GitPart">
@@ -161,8 +195,6 @@ export default {
   },
   data: function () {
     return {
-      lineDateType: '近7天',
-      mapDateType: '今天',
       todayVisit: 0, // 今日浏览量
       todayIpNum: 0, // 今日IP数
       dateVisit: 0, // 近7/14/30天访问量
@@ -170,6 +202,7 @@ export default {
       yesterdayIpNum: 0,
       allVisitNum: 0,
       // 折线图数据
+      lineDateType: '近7天',
       lineChartOption: {
         // title: {text: '数据趋势'},
         tooltip: {
@@ -209,6 +242,7 @@ export default {
       },
       visitListData: [],
       // 地图参数
+      mapDateType: '今天',
       mapList: [],
       mapOption: {
         legend: {
@@ -270,7 +304,9 @@ export default {
         }
         ]
       },
-
+      // 用户行为
+      userActionDateType: 1,
+      userActionData: '',
       // 折线图对象
       lineChart: '',
       // 地图对象
@@ -293,7 +329,7 @@ export default {
           dayNum: dayNum ? dayNum : 7
         },
         Success: function (data) {
-          let dates = [],readings = [],ipArray = [];
+          let dates = [], readings = [], ipArray = [];
 
           if (!that.todayVisit) that.todayVisit = data.dateCountList[0].reading;     // 设置今日浏览量PV
           if (!that.todayIpNum) that.todayIpNum = data.dateCountList[0].ipNum;     // 设置今日IP数
@@ -322,9 +358,9 @@ export default {
               operateContent: '近' + dayNum + '天'
             });
 
-            setTimeout(function () {
-              that.setVisitList();
-            }, 1000);
+            // setTimeout(function () {
+            //   that.setVisitList();
+            // }, 1000);
           }
         }
       });
@@ -360,7 +396,6 @@ export default {
     setMap: function (dayNum, init) {
       let that = this;
       that.mapDateType = dayNum;
-
       that.mapList = [];
 
       this.SQFrontAjax({
@@ -401,14 +436,31 @@ export default {
               operateContent: '近' + dayNum + '天'
             });
 
-            setTimeout(function () {
-              that.setVisitList();
-            }, 1000);
+            // setTimeout(function () {
+            //   that.setVisitList();
+            // }, 1000);
           }
         }
       });
     },
-    //处理翻页
+    // 渲染用户行为
+    setUserAction: function (dayNum) {
+      let that = this;
+      that.userActionDateType = dayNum;
+
+      this.SQFrontAjax({
+        Url: '/api/getUserAction/foreend',
+        UploadData: {
+          endTime: this.getSQTime().split(' ')[0],
+          dayNum: dayNum ? dayNum : 1
+        },
+        Success: function (data) {
+          console.log(data);
+          that.userActionData = data.userAction;
+        }
+      });
+    },
+    // 处理翻页
     ValueByPagition: function (SelectPage) {
       var That = this;
       this.SQFrontAjax({
@@ -451,12 +503,14 @@ export default {
     },
   },
   mounted: function () {
+    var that = this;
     Store.commit("ChangeActive", 5);// 切换Topbar高亮
 
     Vue.prototype.$echarts = echarts;
     this.setLineChart(7, 'init');
-    this.setVisitList();
     this.setMap(1, 'init');
+    this.setUserAction(1);
+    // this.setVisitList();
 
     // 创建日志
     this.createLog({
@@ -465,9 +519,9 @@ export default {
       operateContent: '访问统计'
     });
 
-    setTimeout(function () {
-      that.setVisitList();
-    }, 1000);
+    // setTimeout(function () {
+    //   that.setVisitList();
+    // }, 1000);
   }
 }
 </script>
@@ -571,11 +625,40 @@ export default {
   .myflex(center);
   //border-bottom: 1px solid #f0f0f0;
   padding: 8px 0;
+  border-bottom: 1px solid #e9e9e9;
 }
 
-.list-td {
+.list-td{
   flex: 1;
   padding-left: 1rem;
+  border-right: 1px solid #e9e9e9;
+}
+
+.list-td:nth-child(1){
+  flex: 18%;
+}
+
+.list-td:nth-child(2){
+  flex: 37%;
+}
+
+.list-td:nth-child(3){
+  flex: 10%;
+}
+
+.list-td:nth-child(4){
+  flex: 10%;
+}
+
+.list-td:nth-child(5){
+  flex: 25%;
+  border-right: none;
+}
+
+.list-td ul{
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+  padding-inline-start: 16px;
 }
 
 .list .single {
