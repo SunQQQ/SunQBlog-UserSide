@@ -327,8 +327,6 @@
     },
     mounted: function () {
       let that = this;
-        // dateString = this.getSQTime(),
-      // cookie = '';
 
       this.InitArticleTag(this);
       Store.commit("ChangeActive", 0); // 切换Topbar高亮
