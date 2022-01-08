@@ -67,9 +67,9 @@
             <div class="list-head">
               <div class="list-td">访问IP</div>
               <div class="list-td">操作内容</div>
-              <div class="list-td align">访问位置</div>
+              <div class="list-td">访问位置</div>
               <!--              <div class="list-td align">访问来源</div>-->
-              <div class="list-td align">浏览器</div>
+              <div class="list-td">浏览器</div>
               <div class="list-td align">访问时间</div>
             </div>
             <div :class="i%2==0 ? 'list-tr single' : 'list-tr'" v-for="(item,i) in userActionData">
@@ -80,9 +80,9 @@
                   <li v-for="(item) in item.action">{{item}}</li>
                 </ul>
               </div>
-              <div class="list-td align">{{ item.location }}</div>
+              <div class="list-td">{{ JSON.stringify(item.location)!='[]' ? item.location : '中国' }}</div>
               <!--<div class="list-td align">{{ item.fromUrl }}</div>-->
-              <div class="list-td align">{{ item.browser }}</div>
+              <div class="list-td">{{ item.browser }}</div>
               <div class="list-td align">{{ item.time }}</div>
             </div>
             <div class="list-item"></div>
@@ -631,7 +631,6 @@ export default {
 .list-td{
   flex: 1;
   padding-left: 1rem;
-  border-right: 1px solid #e9e9e9;
 }
 
 .list-td:nth-child(1){
