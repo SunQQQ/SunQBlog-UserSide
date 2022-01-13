@@ -31,6 +31,9 @@
                                 <div class="ArticleFooterItem" style="border: none">
                                     <i class="iconfont icon-shijianzhongbiao iconBlogIndex"></i>{{ item.CreateDate }}
                                 </div>
+                                <div class="ArticleFooterItem" style="border: none">
+                                  <i class="iconfont icon-shijianzhongbiao iconBlogIndex"></i>{{ item.reading }}
+                                </div>
                                 <div class="ArticleFooterItem" style="border: none" v-show="item.CommentNum">
                                     <i class="iconfont icon-pinglun iconBlogIndex"></i>{{ item.CommentNum }}
                                 </div>
