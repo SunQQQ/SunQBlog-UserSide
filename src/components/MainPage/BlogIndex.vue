@@ -1,116 +1,114 @@
 <template>
-    <transition name="Fade" mode="out-in">
+  <transition name="Fade" mode="out-in">
     <div>
-        <div class="TopBarHeight"></div>
-        <div class="BlogIndexContent">
-            <div class="BlogFlex">
-                <div class="BlogIndexContentLeft">
-                    <transition name="Fade">
-                        <img src="../../static/img/ArticleList.jpg" v-if="DefaultGraph.ArticleListPart"
-                             class="BlogIndexContentLeftDefaultGraph">
-                    </transition>
-                    <div class="ArticleItem" v-for="(item,i) in ArticleList" v-bind:key="i"
-                         @click="UpdateRouter('BlogDetail',item)">
-                        <div class="ArticleItemCover" v-if="item.ArticleCover">
-                            <img :src="item.ArticleCover">
-                        </div>
-                        <div style="flex: 1">
-                            <div class="ArticleTitle">
-                                <!--<div class="ArticleTag">{{ item.ArticleTag }}</div>-->
-                                <h3 class="ArticleTitleText">{{ item.Title }}</h3>
-                            </div>
-                            <div class="ArticleContent" v-html="item.Summary">
-                                {{ item.Summary }}
-                            </div>
-                            <div class="ArticleFooter">
-                                <!--<div class="ArticleFooterItem">发表：{{ item.CreateDate }}</div>
-                                <div class="ArticleFooterItem" @click="UpdateRouter('BlogDetail',item._id)">评论：{{ item.CommentNum }}</div>-->
-                                <div class="ArticleFooterItem" style="border: none">
-                                    <i class="iconfont icon-biaoqian iconBlogIndex"></i>{{ item.ArticleTag }}
-                                </div>
-                                <div class="ArticleFooterItem" style="border: none">
-                                    <i class="iconfont icon-shijianzhongbiao iconBlogIndex"></i>{{ item.CreateDate }}
-                                </div>
-                                <div class="ArticleFooterItem" style="border: none" v-show="item.CommentNum">
-                                    <i class="iconfont icon-pinglun iconBlogIndex"></i>{{ item.CommentNum }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="NoDataHint" v-if="!ArticleList.length">暂无数据</div>
-                    <div class="ListBottom" v-if="AticleBottom">你滑到我底线啦</div>
-                    <Pagination v-on:PaginationToParent="ValueByPagition" ref="Pagi"></Pagination>
+      <div class="TopBarHeight"></div>
+      <div class="BlogIndexContent">
+        <div class="BlogFlex">
+          <div class="BlogIndexContentLeft">
+            <img src="../../static/img/ArticleList.jpg" v-if="DefaultGraph.ArticleListPart"
+                 class="BlogIndexContentLeftDefaultGraph">
+            <div class="ArticleItem" v-for="(item,i) in ArticleList" v-bind:key="i"
+                 @click="UpdateRouter('BlogDetail',item)">
+              <div class="ArticleItemCover" v-if="item.ArticleCover">
+                <img :src="item.ArticleCover">
+              </div>
+              <div style="flex: 1">
+                <div class="ArticleTitle">
+                  <!--<div class="ArticleTag">{{ item.ArticleTag }}</div>-->
+                  <h3 class="ArticleTitleText">{{ item.Title }}</h3>
                 </div>
-                <div class="BlogIndexContentRight">
-                    <div class="Module HotArticleModule">
-                        <transition name="Fade">
-                            <img src="../../static/img/HotArticleList.jpg" v-if="DefaultGraph.HotArticlePart">
-                        </transition>
-                        <div class="TagListHead">热门博文</div>
-                        <div class="HotArticle">
-                            <div class="HotArticleItem" v-for="(Item,Index) in HotArticleList">
-                                <div v-if="Index == 0" @click="UpdateRouter('BlogDetail',Item)">
-                                    <span style="color:#f44e03;font-size: 15px">No{{Index+1}} </span>{{Item.Title}}
-                                </div>
-                                <div v-if="Index == 1" @click="UpdateRouter('BlogDetail',Item)">
-                                    <span style="color:#d41800;font-size: 15px">No{{Index+1}} </span>{{Item.Title}}
-                                </div>
-                                <div v-if="Index == 2" @click="UpdateRouter('BlogDetail',Item)">
-                                    <span style="color:#f37e21;font-size: 15px">No{{Index+1}} </span>{{Item.Title}}
-                                </div>
-                                <div v-if="Index == 3" @click="UpdateRouter('BlogDetail',Item)">
-                                    <span style="color:#f3212d;font-size: 15px">No{{Index+1}} </span>{{Item.Title}}
-                                </div>
-                                <div v-if="Index == 4" @click="UpdateRouter('BlogDetail',Item)">
-                                    <span style="color:#212df3;font-size: 15px">No{{Index+1}} </span>{{Item.Title}}
-                                </div>
-                                <div v-if="Index > 4" @click="UpdateRouter('BlogDetail',Item)">
-                                    <span>No{{Index+1}} </span>{{Item.Title}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="Module" style="padding: 0 0 0.5rem">
-                        <div class="TopBack"></div>
-                        <div class="ZhihuIcon">
-                            <img src="../../static/img/ZhihuIcon.jpg">
-                        </div>
-                        <div class="TextCenter">
-                            孙权的小博客
-                            <a class="BlueButton" href="https://github.com/SunQQQ" target="_blank" @click="readCode()">博客源码</a>
-                        </div>
-                        <div class="BlogStatistic">
-                            <div class="BlogStatisticItem">
-                                <div class="BlogStatisticItemNum">{{ ArticleNum }}</div>
-                                <div class="BlogStatisticItemText">博客文章</div>
-                            </div>
-                            <div class="BlogStatisticItem">
-                                <div class="BlogStatisticItemNum">{{ CommentNum }}</div>
-                                <div class="BlogStatisticItemText">博文评论</div>
-                            </div>
-                            <div class="BlogStatisticItem">
-                                <div class="BlogStatisticItemNum">{{ LeaveMessageNum }}</div>
-                                <div class="BlogStatisticItemText">留言量</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="Module ArticleTagModule">
-                        <transition name="Fade">
-                            <img src="../../static/img/Tag.jpg" v-if="DefaultGraph.ArticleTagPart">
-                        </transition>
-                        <div class="TagListHead">文章分类<span style="color: #aaa;font-size: 0.8rem">（点击筛选呦）</span></div>
-                        <div class="TagListTr">
-                            <div :class="item.TagName != Tags.Active ? 'TagListTd' : 'TagListTdActive'"
-                                 v-for="item in Tags" :key="item.id" @click="GetArticle(item.TagName)">{{ item.TagName }}
-                            </div>
-                        </div>
-                    </div>
+                <div class="ArticleContent" v-html="item.Summary">
+                  {{ item.Summary }}
                 </div>
+                <div class="ArticleFooter">
+                  <!--<div class="ArticleFooterItem">发表：{{ item.CreateDate }}</div>
+                  <div class="ArticleFooterItem" @click="UpdateRouter('BlogDetail',item._id)">评论：{{ item.CommentNum }}</div>-->
+                  <div class="ArticleFooterItem" style="border: none">
+                    <i class="iconfont icon-biaoqian iconBlogIndex"></i>{{ item.ArticleTag }}
+                  </div>
+                  <div class="ArticleFooterItem" style="border: none">
+                    <i class="iconfont icon-shijianzhongbiao iconBlogIndex"></i>{{ item.CreateDate }}
+                  </div>
+                  <div class="ArticleFooterItem" style="border: none" v-show="item.CommentNum">
+                    <i class="iconfont icon-pinglun iconBlogIndex"></i>{{ item.CommentNum }}
+                  </div>
+                </div>
+              </div>
             </div>
+            <div class="NoDataHint" v-if="!ArticleList.length">暂无数据</div>
+            <div class="ListBottom" v-if="AticleBottom">你滑到我底线啦</div>
+            <Pagination v-on:PaginationToParent="ValueByPagition" ref="Pagi"></Pagination>
+          </div>
+          <div class="BlogIndexContentRight">
+            <div class="Module HotArticleModule">
+              <transition name="Fade">
+                <img src="../../static/img/HotArticleList.jpg" v-if="DefaultGraph.HotArticlePart">
+              </transition>
+              <div class="TagListHead">热门博文</div>
+              <div class="HotArticle">
+                <div class="HotArticleItem" v-for="(Item,Index) in HotArticleList">
+                  <div v-if="Index == 0" @click="UpdateRouter('BlogDetail',Item)">
+                    <span style="color:#f44e03;font-size: 15px">No{{Index+1}} </span>{{Item.Title}}
+                  </div>
+                  <div v-if="Index == 1" @click="UpdateRouter('BlogDetail',Item)">
+                    <span style="color:#d41800;font-size: 15px">No{{Index+1}} </span>{{Item.Title}}
+                  </div>
+                  <div v-if="Index == 2" @click="UpdateRouter('BlogDetail',Item)">
+                    <span style="color:#f37e21;font-size: 15px">No{{Index+1}} </span>{{Item.Title}}
+                  </div>
+                  <div v-if="Index == 3" @click="UpdateRouter('BlogDetail',Item)">
+                    <span style="color:#f3212d;font-size: 15px">No{{Index+1}} </span>{{Item.Title}}
+                  </div>
+                  <div v-if="Index == 4" @click="UpdateRouter('BlogDetail',Item)">
+                    <span style="color:#212df3;font-size: 15px">No{{Index+1}} </span>{{Item.Title}}
+                  </div>
+                  <div v-if="Index > 4" @click="UpdateRouter('BlogDetail',Item)">
+                    <span>No{{Index+1}} </span>{{Item.Title}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="Module" style="padding: 0 0 0.5rem">
+              <div class="TopBack"></div>
+              <div class="ZhihuIcon">
+                <img src="../../static/img/ZhihuIcon.jpg">
+              </div>
+              <div class="TextCenter">
+                孙权的小博客
+                <a class="BlueButton" href="https://github.com/SunQQQ" target="_blank" @click="readCode()">博客源码</a>
+              </div>
+              <div class="BlogStatistic">
+                <div class="BlogStatisticItem">
+                  <div class="BlogStatisticItemNum">{{ ArticleNum }}</div>
+                  <div class="BlogStatisticItemText">博客文章</div>
+                </div>
+                <div class="BlogStatisticItem">
+                  <div class="BlogStatisticItemNum">{{ CommentNum }}</div>
+                  <div class="BlogStatisticItemText">博文评论</div>
+                </div>
+                <div class="BlogStatisticItem">
+                  <div class="BlogStatisticItemNum">{{ LeaveMessageNum }}</div>
+                  <div class="BlogStatisticItemText">留言量</div>
+                </div>
+              </div>
+            </div>
+            <div class="Module ArticleTagModule">
+              <transition name="Fade">
+                <img src="../../static/img/Tag.jpg" v-if="DefaultGraph.ArticleTagPart">
+              </transition>
+              <div class="TagListHead">文章分类<span style="color: #aaa;font-size: 0.8rem">（点击筛选呦）</span></div>
+              <div class="TagListTr">
+                <div :class="item.TagName != Tags.Active ? 'TagListTd' : 'TagListTdActive'"
+                     v-for="item in Tags" :key="item.id" @click="GetArticle(item.TagName)">{{ item.TagName }}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <Heartfelt></Heartfelt>
+      </div>
+      <Heartfelt></Heartfelt>
     </div>
-    </transition>
+  </transition>
 </template>
 
 <script>
@@ -193,15 +191,14 @@
             data.forEach(function (Item) {
               Item.CreateDate = Item.CreateDate.slice(0, 10);
             });
+            That.DefaultGraph.ArticleListPart = false;// 隐藏骨架屏
             That.ArticleList = data;
 
-            That.DefaultGraph.ArticleListPart = false;
-
             // 创建日志 只有在筛选某个标签后，再记录日志
-            if(ArticleTag) That.createLog({
-              moduleType:'button',
-              operateType:'筛选文章分类',
-              operateContent:ArticleTag
+            if (ArticleTag) That.createLog({
+              moduleType: 'button',
+              operateType: '筛选文章分类',
+              operateContent: ArticleTag
             });
           }
         });
@@ -215,7 +212,7 @@
 
             var NumInterval = window.setInterval(function () {
               That.LeaveMessageNum += 1;
-              if(data == That.LeaveMessageNum){
+              if (data == That.LeaveMessageNum) {
                 clearInterval(NumInterval);
               }
             }, 30);
@@ -248,9 +245,9 @@
 
               // 创建日志
               That.createLog({
-                moduleType:'pageTurn',
-                operateType:'下拉文章列表到',
-                operateContent:'第' + (SelectPage+1) + '页'
+                moduleType: 'pageTurn',
+                operateType: '下拉文章列表到',
+                operateContent: '第' + (SelectPage + 1) + '页'
               });
             }
           }
@@ -265,7 +262,7 @@
 
             var NumInterval = window.setInterval(function () {
               That.CommentNum += 1;
-              if(data == That.CommentNum){
+              if (data == That.CommentNum) {
                 clearInterval(NumInterval);
               }
             }, 30);
@@ -297,7 +294,7 @@
           Success: function (data) {
             var NumInterval = window.setInterval(function () {
               That.ArticleNum += 1;
-              if(data == That.ArticleNum){
+              if (data == That.ArticleNum) {
                 clearInterval(NumInterval);
               }
             }, 30);
@@ -316,12 +313,12 @@
         });
       },
       // 查看源码
-      readCode:function (){
+      readCode: function () {
         // 创建日志
         this.createLog({
-          moduleType:'button',
-          operateType:'查看源码',
-          operateContent:'首页入口'
+          moduleType: 'button',
+          operateType: '查看源码',
+          operateContent: '首页入口'
         });
       }
     },
@@ -333,14 +330,14 @@
 
       // 创建日志
       that.createLog({
-        moduleType:'menu',
-        operateType:'选择菜单',
-        operateContent:'博文'
+        moduleType: 'menu',
+        operateType: '选择菜单',
+        operateContent: '博文'
       });
     },
   }
 </script>
 
 <style scoped lang="less">
-    @import "../../static/css/BlogIndex";
+  @import "../../static/css/BlogIndex";
 </style>
