@@ -1,6 +1,39 @@
 import axios from 'axios';
 import Store from '../store';
 
+// 设置axios的超时重新请求，一共请求3次，每次请求间隔1秒
+axios.defaults.retry = 3;
+axios.defaults.retryDelay = 1000;
+axios.interceptors.response.use(undefined, function axiosRetryInterceptor(err) {
+  var config = err.config;
+  // If config does not exist or the retry option is not set, reject
+  if(!config || !config.retry) return Promise.reject(err);
+
+  // Set the variable for keeping track of the retry count
+  config.__retryCount = config.__retryCount || 0;
+
+  // Check if we've maxed out the total number of retries
+  if(config.__retryCount >= config.retry) {
+    // Reject with the error
+    return Promise.reject(err);
+  }
+
+  // Increase the retry count
+  config.__retryCount += 1;
+
+  // Create new promise to handle exponential backoff
+  var backoff = new Promise(function(resolve) {
+    setTimeout(function() {
+      resolve();
+    }, config.retryDelay || 1);
+  });
+
+  // Return the promise in which recalls axios to retry the request
+  return backoff.then(function() {
+    return axios(config);
+  });
+});
+
 let CommonFunction = {};
 CommonFunction.install = function (Vue) {
   /*将UTC格式时间转为2018-09-09 08：00*/
@@ -41,7 +74,7 @@ CommonFunction.install = function (Vue) {
       Para['UploadData'] = {};
     }
 
-    axios.post(Para['Url'], Para['UploadData']).then(function (response) {
+    axios.post(Para['Url'], Para['UploadData'],{timeout:5000}).then(function (response) {
       if(!Para.noLoading) Store.commit('ChangeLoading', false);
 
       if (response.data.status == '0') {
@@ -53,12 +86,35 @@ CommonFunction.install = function (Vue) {
         });
       }
     }).catch(function (error) {
-      if (error.response) {
-        console.log(error.response);
-      } else if (error.request) {
-        console.log(error.request);
+      if(!Para.noLoading) Store.commit('ChangeLoading', false);
+
+      if (error.response) { // 请求超时时，前端会终止http请求。故请求是没有响应值的，error.response为空
+        if(error.response.status == '500'){
+          Store.commit('ChangeTip', {
+            Show: true,
+            Title: '网络异常，请检查网络'
+          });
+        }else if(error.response.status == '404'){ // 404时也是有response的
+          Store.commit('ChangeTip', {
+            Show: true,
+            Title: '您访问的接口不存在...'
+          });
+        }else { // 500和404之外的状态码直接弹框展示statusText
+          Store.commit('ChangeTip', {
+            Show: true,
+            Title: error.response.statusText
+          });
+        }
+      }else if (error.request && error.request.readyState==4 && error.request.status==0){
+        Store.commit('ChangeTip', {
+          Show: true,
+          Title: '接口访问超时'
+        });
       } else {
-        console.log('SQFrontAjax Error:', error.message);
+        Store.commit('ChangeTip', {
+          Show: true,
+          Title: error.message
+        });
       }
     });
   };
