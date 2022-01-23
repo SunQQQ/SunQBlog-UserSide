@@ -74,7 +74,7 @@ CommonFunction.install = function (Vue) {
       Para['UploadData'] = {};
     }
 
-    axios.post(Para['Url'], Para['UploadData'],{timeout:5000}).then(function (response) {
+    axios.post(Para['Url'], Para['UploadData'],{timeout:10000}).then(function (response) {
       if(!Para.noLoading) Store.commit('ChangeLoading', false);
 
       if (response.data.status == '0') {
