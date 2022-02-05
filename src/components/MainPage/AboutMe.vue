@@ -5,7 +5,7 @@
         <div class="LeftPart">
           <div class="BigBlock">
             <div class="TitleFontLine">My Info</div>
-            <p><i class="iconfont icon-person AboutMeIcon" style="color:#49a9ee"></i>94年选手，中原工学院软件本科毕业，从事前端开发岗位
+            <p><i class="iconfont icon-person AboutMeIcon" style="color:#49a9ee"></i>博主是94年人，软件工程本科毕业，从事前端开发岗位
             </p>
             <p><i class="iconfont icon-aihao1 AboutMeIcon" style="color:#f46e65"></i>爱好篮球、跑步、吉他。喜爱车评、历史记录片、交朋友</p>
             <p><i class="iconfont icon-tool AboutMeIcon" style="color:#3db8c1"></i>Layui、ElementUI、Vue.js、node</p>

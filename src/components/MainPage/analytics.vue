@@ -72,12 +72,12 @@
               <div class="list-td align">浏览器</div>
               <div class="list-td align">访问时间</div>
             </div>
-            <div :class="i%2==0 ? 'list-tr single' : 'list-tr'" v-for="(item,i) in userActionData">
+            <div :class="i%2==0 ? 'list-tr single' : 'list-tr'" v-for="(item,i) in userActionData" v-bind:key="i">
               <div class="list-td">{{ i }}</div>
               <div class="list-td">
                 <!--{{ item.action ? item.action : ''}}-->
                 <ul>
-                  <li v-for="(item) in item.action">{{item}}</li>
+                  <li v-for="(item,i) in item.action" v-bind:key="i">{{item}}</li>
                 </ul>
               </div>
               <div class="list-td align">{{ item.location }}</div>

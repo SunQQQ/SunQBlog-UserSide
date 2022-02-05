@@ -52,7 +52,7 @@
               </transition>
               <div class="TagListHead">热门博文</div>
               <div class="HotArticle">
-                <div class="HotArticleItem" v-for="(Item,Index) in HotArticleList">
+                <div class="HotArticleItem" v-for="(Item,Index) in HotArticleList" v-bind:key="Index">
                   <div v-if="Index == 0" @click="UpdateRouter('BlogDetail',Item)">
                     <span style="color:#f44e03;font-size: 15px">No{{Index+1}} </span>{{Item.Title}}
                   </div>

@@ -35,7 +35,7 @@
           <div class="BlogIndexContentLeft"
                style="background-color:#ffffff;margin-top: 1rem;border:1px solid #e9e9e9;border-radius: 3px">
             <div class="CommentList">
-              <div class="CommentItem" v-for="item in MessageList">
+              <div class="CommentItem" v-for="(item,i) in MessageList" v-bind:key="i">
                 <div class="CommentItemIcon">
                   <!--如果用户名是sunq，直接展示我的专属头像。如果不是sunq，展示库里存的本条数据的头像，如果数据里该字段为空，展示默认头像-->
                   <img :src="getIconAdress(item.iconNo)" v-if="item.MessageLeaveName != 'sunq'">

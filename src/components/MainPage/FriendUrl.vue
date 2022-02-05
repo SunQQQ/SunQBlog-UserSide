@@ -9,7 +9,7 @@
       </div>
       <div class="UrlCardList FriendUrlCard">
         <div class="UrlCardTr">
-          <div class="UrlCardTd" v-for="item in FriendsUrlList" @click="UpdateRouter('BlogDetail',item._id)">
+          <div class="UrlCardTd" v-for="(item,i) in FriendsUrlList" v-bind:key="i" @click="UpdateRouter('BlogDetail',item)">
             <div class="lab-cover">
               <img v-bind:src="item.ArticleCover" v-if="item.ArticleCover">
             </div>
@@ -76,13 +76,11 @@
         });
       },
       // 切换路由
-      UpdateRouter: function (RouterName, Id) {
-        if (Id) {
+      UpdateRouter: function (RouterName, articleMessage) {
+        if (articleMessage._id) {
           this.$router.push({
             name: RouterName,
-            query: {
-              ID: Id
-            }
+            query: articleMessage
           });
         } else {
           this.bus.$emit('TopBar', {

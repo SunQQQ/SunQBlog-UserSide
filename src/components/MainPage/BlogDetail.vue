@@ -29,7 +29,7 @@
                 <div class="ArticleDetailContentTab" style="padding: 1rem;min-height: unset">
                     <div class="ArticleDetailComment">
                         <div class="CommentList">
-                            <div class="CommentItem" v-for="item in ArticleCommentList"
+                            <div class="CommentItem" v-for="(item,i) in ArticleCommentList" v-bind:key="i"
                                  if="ArticleCommentList.length != 0">
                                 <div class="CommentItemIcon">
                                     <img src="../../static/img/DefaultHeadIcon.jpg"
