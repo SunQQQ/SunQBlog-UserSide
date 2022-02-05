@@ -1,5 +1,6 @@
 module.exports = {
   baseUrl:'./',
+  outputDir:'blog-user',
   devServer: {
     // 设置代理
     proxy: {
