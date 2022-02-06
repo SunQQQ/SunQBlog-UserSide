@@ -280,7 +280,7 @@
         if (articleMessage._id) {
           this.$router.push({
             name: RouterName,
-            query: articleMessage
+            query: {_id:articleMessage._id}
           });
         } else {
           this.bus.$emit('TopBar', {
