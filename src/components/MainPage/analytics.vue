@@ -25,8 +25,8 @@
               <p class="num">{{ dateVisit }}</p>
             </div>
             <div class="quota-item">
-              <p>历史浏览量</p>
-              <p class="num">{{ allVisitNum }}</p>
+              <p>近{{ lineDateType }}天IP数</p>
+              <p class="num">{{ allVisitIp }}</p>
             </div>
           </div>
         </div>
@@ -200,7 +200,7 @@
         dateVisit: 0, // 近7/14/30天访问量
         yesterdayVisit: 0,
         yesterdayIpNum: 0,
-        allVisitNum: 0,
+        allVisitIp: 0,
         // 折线图数据
         lineDateType: '近7天',
         lineChartOption: {
@@ -317,7 +317,8 @@
       // 渲染折线图
       setLineChart: function (dayNum, init) {
         let that = this,
-          totalVisit = 0;
+          totalVisit = 0,
+          totalIp = 0;
 
         // 切换时间维度高亮，并修改指标区第三个指标名称
         that.lineDateType = dayNum;
@@ -342,9 +343,11 @@
               readings.push(item.reading);
               ipArray.push(item.ipNum);
               totalVisit += item.reading;
+              totalIp += item.ipNum;
             });
 
             that.dateVisit = totalVisit; // 设置选中时间维度下的访问量
+            that.allVisitIp = totalIp;
             that.lineChartOption.xAxis.data = dates.reverse();
             that.lineChartOption.series[0].data = readings.reverse();
             that.lineChartOption.series[1].data = ipArray.reverse();
@@ -357,41 +360,11 @@
                 operateType: '切换折线图时间维度',
                 operateContent: '近' + dayNum + '天'
               });
-
-              // setTimeout(function () {
-              //   that.setVisitList();
-              // }, 1000);
             }
           }
         });
       },
-      // 渲染列表
-      setVisitList: function () {
-        let that = this;
-        this.SQFrontAjax({
-          Url: '/api/visitRead/foreend',
-          noLoading: 'yes',
-          UploadData: {
-            PagnationData: {
-              Skip: 0,
-              Limit: 10
-            }
-          },
-          Success: function (data) {
-            that.allVisitNum = data.totalNum;
-            data.list.forEach(function (item) {
-              if (JSON.stringify(item.location) == '[]') item.location = '银河系';
-              if (!item.browser) item.browser = "secret";
-              if (!item.fromUrl) {
-                item.fromUrl = '直接访问';
-              } else {
-                item.fromUrl = item.fromUrl.split('/')[2];
-              }
-            });
-            that.visitListData = data.list;
-          }
-        });
-      },
+    
       // 渲染地图
       setMap: function (dayNum, init) {
         let that = this;
@@ -435,10 +408,6 @@
                 operateType: '切换地图时间维度',
                 operateContent: '近' + dayNum + '天'
               });
-
-              // setTimeout(function () {
-              //   that.setVisitList();
-              // }, 1000);
             }
           }
         });
@@ -518,10 +487,6 @@
         operateType: '选择菜单',
         operateContent: '访问统计'
       });
-
-      // setTimeout(function () {
-      //   that.setVisitList();
-      // }, 1000);
     }
   }
 </script>
