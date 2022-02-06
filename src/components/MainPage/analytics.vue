@@ -596,7 +596,6 @@
   .list-td{
     flex: 1;
     padding-left: 1rem;
-    border-right: 1px solid #e9e9e9;
   }
 
   .list-td:nth-child(1){
