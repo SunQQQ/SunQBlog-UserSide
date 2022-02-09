@@ -80,7 +80,10 @@
         if (articleMessage._id) {
           this.$router.push({
             name: RouterName,
-            query: {_id:articleMessage._id}
+            query: {
+              _id:articleMessage._id,
+              Title:articleMessage.Title
+            }
           });
         } else {
           this.bus.$emit('TopBar', {
