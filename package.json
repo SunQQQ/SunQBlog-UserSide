@@ -21,7 +21,7 @@
     "vue-particles": "1.0.9",
     "vue-router": "3.0.1",
     "vuex": "3.0.1",
-    "yarn": "1.22.10"
+    "yarn": "^1.22.17"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "3.0.3",
