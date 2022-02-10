@@ -332,11 +332,12 @@
           Success: function (data) {
             let dates = [], readings = [], ipArray = [];
 
+            Store.commit('ChangeLoading', true);
+
             if (!that.todayVisit) that.todayVisit = data.dateCountList[0].reading;     // 设置今日浏览量PV
             if (!that.todayIpNum) that.todayIpNum = data.dateCountList[0].ipNum;     // 设置今日IP数
             if (!that.yesterdayVisit) that.yesterdayVisit = data.dateCountList[1].reading; // 设置昨日浏览量PV
             if (!that.yesterdayIpNum) that.yesterdayIpNum = data.dateCountList[1].ipNum; // 设置昨日IP数
-
 
             data.dateCountList.forEach(function (item) {
               dates.push(item.time);
@@ -352,6 +353,8 @@
             that.lineChartOption.series[0].data = readings.reverse();
             that.lineChartOption.series[1].data = ipArray.reverse();
             that.lineChart.setOption(that.lineChartOption);
+
+            Store.commit('ChangeLoading', false);
 
             // 初始化时不创建日志,切换时间维度后，记日志并刷新日志列表
             if (!init) {
