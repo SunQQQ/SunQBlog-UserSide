@@ -82,7 +82,8 @@
             name: RouterName,
             query: {
               _id:articleMessage._id,
-              Title:articleMessage.Title
+              Title:articleMessage.Title,
+              from:'试验田'
             }
           });
         } else {

@@ -145,7 +145,7 @@
             // 创建日志
             That.createLog({
               moduleType:'button',
-              operateType:'浏览文章',
+              operateType:'浏览文章('+ That.$route.query.from +'入口)',
               operateContent: That.$route.query.Title
             });
           }

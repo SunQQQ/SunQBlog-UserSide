@@ -282,7 +282,8 @@
             name: RouterName,
             query: {
               _id:articleMessage._id,
-              Title:articleMessage.Title
+              Title:articleMessage.Title,
+              from:'首页'
             }
           });
         } else {
