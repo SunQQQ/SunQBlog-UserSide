@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 871976 */
-  src: url('iconfont.woff2?t=1642949320634') format('woff2'),
-       url('iconfont.woff?t=1642949320634') format('woff'),
-       url('iconfont.ttf?t=1642949320634') format('truetype');
+  src: url('iconfont.woff2?t=1644463792616') format('woff2'),
+       url('iconfont.woff?t=1644463792616') format('woff'),
+       url('iconfont.ttf?t=1644463792616') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,10 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-weixin:before {
+  content: "\e603";
 }
 
 .icon-love:before {
