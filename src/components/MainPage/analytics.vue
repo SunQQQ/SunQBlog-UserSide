@@ -32,18 +32,6 @@
         </div>
         <div class="block">
           <div class="title-part">
-            <div class="module-title">流量趋势</div>
-            <div class="day-switch">
-              <div :class="lineDateType == '7' ? 'item active' : 'item'" @click="setLineChart(7)">最近7天</div>
-              <div :class="lineDateType == '14' ? 'item active' : 'item'" @click="setLineChart(14)">最近14天</div>
-              <div :class="lineDateType == '30' ? 'item active' : 'item'" @click="setLineChart(30)">最近30天</div>
-              <div :class="lineDateType == '60' ? 'item active' : 'item'" @click="setLineChart(60)">最近60天</div>
-            </div>
-          </div>
-          <div class="line-chart" id="line-chart"></div>
-        </div>
-        <div class="block">
-          <div class="title-part">
             <div class="module-title">访客来源</div>
             <div class="day-switch">
               <div :class="mapDateType == '1' ? 'item active' : 'item'" @click="setMap(1)">今天</div>
@@ -53,6 +41,18 @@
             </div>
           </div>
           <div class="map-chart" id="map"></div>
+        </div>
+        <div class="block">
+          <div class="title-part">
+            <div class="module-title">流量趋势</div>
+            <div class="day-switch">
+              <div :class="lineDateType == '7' ? 'item active' : 'item'" @click="setLineChart(7)">最近7天</div>
+              <div :class="lineDateType == '14' ? 'item active' : 'item'" @click="setLineChart(14)">最近14天</div>
+              <div :class="lineDateType == '30' ? 'item active' : 'item'" @click="setLineChart(30)">最近30天</div>
+              <div :class="lineDateType == '60' ? 'item active' : 'item'" @click="setLineChart(60)">最近60天</div>
+            </div>
+          </div>
+          <div class="line-chart" id="line-chart"></div>
         </div>
         <div class="block">
           <div class="title-part">
@@ -331,9 +331,6 @@
           },
           Success: function (data) {
             let dates = [], readings = [], ipArray = [];
-
-            Store.commit('ChangeLoading', true);
-
             if (!that.todayVisit) that.todayVisit = data.dateCountList[0].reading;     // 设置今日浏览量PV
             if (!that.todayIpNum) that.todayIpNum = data.dateCountList[0].ipNum;     // 设置今日IP数
             if (!that.yesterdayVisit) that.yesterdayVisit = data.dateCountList[1].reading; // 设置昨日浏览量PV
@@ -353,9 +350,6 @@
             that.lineChartOption.series[0].data = readings.reverse();
             that.lineChartOption.series[1].data = ipArray.reverse();
             that.lineChart.setOption(that.lineChartOption);
-
-            Store.commit('ChangeLoading', false);
-
             // 初始化时不创建日志,切换时间维度后，记日志并刷新日志列表
             if (!init) {
               that.createLog({
@@ -376,6 +370,7 @@
 
         this.SQFrontAjax({
           Url: '/api/visitCount/foreend',
+          noLoading:'yes',
           UploadData: {
             endTime: this.getSQTime().split(' ')[0],
             dayNum: dayNum
@@ -422,6 +417,7 @@
 
         this.SQFrontAjax({
           Url: '/api/getUserAction/foreend',
+          noLoading:'yes',
           UploadData: {
             endTime: this.getSQTime().split(' ')[0],
             dayNum: dayNum ? dayNum : 1
