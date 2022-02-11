@@ -1,6 +1,6 @@
 .DS_Store
 node_modules
-/dist
+/blog-user
 
 # local env files
 .env.local

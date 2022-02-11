@@ -314,7 +314,11 @@
       }
     },
     methods: {
-      // 渲染折线图
+      /**
+       * 渲染折线图
+       * dayNum: 加载数据的周期 比如：1/7/14天
+       * init: 判断是初始化状态，或是时间周期的切换；  初始状态时只有折线图弹出loading，且不记录操作日志
+       */
       setLineChart: function (dayNum, init) {
         let that = this,
           totalVisit = 0,
@@ -362,7 +366,11 @@
         });
       },
     
-      // 渲染地图
+      /**
+       * 渲染地图
+       * dayNum: 加载数据的周期 比如：1/7/14天
+       * init: 判断是初始化状态，或是时间周期的切换；  初始状态时只有折线图弹出loading，且不记录操作日志。切换日期时弹出loading并记录日志
+       */
       setMap: function (dayNum, init) {
         let that = this;
         that.mapDateType = dayNum;
@@ -370,7 +378,7 @@
 
         this.SQFrontAjax({
           Url: '/api/visitCount/foreend',
-          noLoading:'yes',
+          noLoading: init ? 'yes' : '',
           UploadData: {
             endTime: this.getSQTime().split(' ')[0],
             dayNum: dayNum
@@ -410,14 +418,19 @@
           }
         });
       },
-      // 渲染用户行为
-      setUserAction: function (dayNum) {
+      
+      /**
+       * 记录用户轨迹
+       * dayNum: 加载数据的周期 比如：1/7/14天
+       * init: 判断是初始化状态，或是时间周期的切换；  初始状态时只有折线图弹出loading，且不记录操作日志。切换日期时弹出loading并记录日志
+       */
+      setUserAction: function (dayNum,init) {
         let that = this;
         that.userActionDateType = dayNum;
 
         this.SQFrontAjax({
           Url: '/api/getUserAction/foreend',
-          noLoading:'yes',
+          noLoading: init ? 'yes' : '',
           UploadData: {
             endTime: this.getSQTime().split(' ')[0],
             dayNum: dayNum ? dayNum : 1
@@ -477,7 +490,7 @@
       Vue.prototype.$echarts = echarts;
       this.setLineChart(7, 'init');
       this.setMap(1, 'init');
-      this.setUserAction(1);
+      this.setUserAction(1,'init');
       // this.setVisitList();
 
       // 创建日志
