@@ -336,7 +336,9 @@
           Success: function (data) {
             let dates = [], readings = [], ipArray = [];
 
+            // 因处理数据耗时较长，添加loading，并提前渲染折线图，缓解页面空白太久
             Store.commit('ChangeLoading', true);
+            that.lineChart.setOption(that.lineChartOption);
 
             if (!that.todayVisit) that.todayVisit = data.dateCountList[0].reading;     // 设置今日浏览量PV
             if (!that.todayIpNum) that.todayIpNum = data.dateCountList[0].ipNum;     // 设置今日IP数
