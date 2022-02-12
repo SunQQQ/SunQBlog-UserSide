@@ -56,7 +56,7 @@
         </div>
         <div class="block">
           <div class="title-part">
-            <div class="module-title">用户行为</div>
+            <div class="module-title">用户轨迹</div>
             <div class="day-switch">
               <div :class="userActionDateType == '1' ? 'item active' : 'item'" @click="setUserAction(1)">今天</div>
               <div :class="userActionDateType == '2' ? 'item active' : 'item'" @click="setUserAction(2)">最近2天</div>
@@ -432,7 +432,8 @@
        * init: 判断是初始化状态，或是时间周期的切换；  初始状态时只有折线图弹出loading，且不记录操作日志。切换日期时弹出loading并记录日志
        */
       setUserAction: function (dayNum,init) {
-        let that = this;
+        let that = this,
+          userActionObject = {};
         that.userActionDateType = dayNum;
 
         this.SQFrontAjax({
@@ -443,7 +444,14 @@
             dayNum: dayNum ? dayNum : 1
           },
           Success: function (data) {
-            console.log(data);
+            userActionObject = data.userAction;
+
+            for(let i in userActionObject){
+              if(JSON.stringify(userActionObject[i].location) === '[]'){
+                userActionObject[i].location = '地球';
+              }
+            }
+
             that.userActionData = data.userAction;
           }
         });
