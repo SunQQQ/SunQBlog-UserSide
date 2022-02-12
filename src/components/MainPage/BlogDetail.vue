@@ -213,6 +213,13 @@
             Title: '昵称和评论不能为空呦'
           });
         }
+
+        // 创建日志
+        this.createLog({
+          moduleType:'button',
+          operateType:'评论文章',
+          operateContent: That.Article.Title
+        });
       },
       // 获取评论列表
       GetCommentList: function () {

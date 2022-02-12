@@ -280,6 +280,13 @@
             Title: '昵称和留言不能为空呦'
           });
         }
+
+        // 创建日志
+        this.createLog({
+          moduleType:'button',
+          operateType:'留言',
+          operateContent: MatchedMessageText
+        });
       },
 
       // 渲染留言列表
