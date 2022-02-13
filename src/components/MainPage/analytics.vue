@@ -447,8 +447,18 @@
             userActionObject = data.userAction;
 
             for(let i in userActionObject){
-              if(JSON.stringify(userActionObject[i].location) === '[]'){
-                userActionObject[i].location = '地球';
+              // 保护用户隐私，马赛克掉ip最后一组数字
+              let array = i.split('.'),
+                  currentIp = array[0] + '.' + array[1] + '.' + array[2] + '.***',
+                  item = userActionObject[i];
+
+              // 为用户IP打码
+              userActionObject[currentIp] = item;
+              delete userActionObject[i];
+
+              // 因为对象当前本来的属性名已经被删掉了，所以得修改新的属性名对应的属性值
+              if(JSON.stringify(userActionObject[currentIp].location) === '[]'){
+                userActionObject[currentIp].location = '地球';
               }
             }
 
