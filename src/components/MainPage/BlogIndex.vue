@@ -35,9 +35,9 @@
                   <div class="ArticleFooterItem" style="border: none" v-show="item.CommentNum">
                     <i class="iconfont icon-pinglun iconBlogIndex"></i>{{ item.CommentNum }}
                   </div>
-                  <!--<div class="ArticleFooterItem" style="border: none">
-                    <i class="iconfont icon-love iconBlogIndex"></i>{{ item.CommentNum }}
-                  </div>-->
+                  <div class="ArticleFooterItem" style="border: none">
+                    <i class="iconfont icon-yueduliang iconBlogIndex"></i>{{ item.articleReadNum ? item.articleReadNum : 0 }}
+                  </div>
                 </div>
               </div>
             </div>
@@ -131,20 +131,13 @@
     },
     data: function () {
       return {
-        // 标签量
-        Tags: [],
-        // 文章列表
-        ArticleList: [],
-        // 文章量
-        ArticleNum: 0,
-        // 留言量
-        LeaveMessageNum: 0,
-        // 博客评论量
-        CommentNum: 0,
-        // 热门文章列表
-        HotArticleList: [],
-        // 文章底线
-        AticleBottom: false,
+        Tags: [],// 标签量
+        ArticleList: [],// 文章列表        
+        ArticleNum: 0,// 文章量     
+        LeaveMessageNum: 0,// 留言量        
+        CommentNum: 0,// 博客评论量
+        HotArticleList: [],// 热门文章列表
+        AticleBottom: false,// 文章底线
 
         // 缺省图
         DefaultGraph: {
