@@ -364,7 +364,7 @@
             // 初始化时不创建日志,切换时间维度后，记日志并刷新日志列表
             if (!init) {
               that.createLog({
-                moduleType: 'menu',
+                moduleType: 'button',
                 operateType: '切换折线图时间维度',
                 operateContent: '近' + dayNum + '天'
               });
@@ -417,7 +417,7 @@
             // 初始化时不创建日志。切换时间维度后，记日志并刷新日志列表
             if (!init) {
               that.createLog({
-                moduleType: 'menu',
+                moduleType: 'button',
                 operateType: '切换地图时间维度',
                 operateContent: '近' + dayNum + '天'
               });
@@ -465,6 +465,14 @@
             that.userActionData = data.userAction;
           }
         });
+        // 初始化时不创建日志。切换时间维度后，记日志并刷新日志列表
+        if (!init) {
+            that.createLog({
+              moduleType: 'button',
+              operateType: '切换用户轨迹时间维度',
+              operateContent: '近' + dayNum + '天'
+            });
+          }
       },
       // 处理翻页
       ValueByPagition: function (SelectPage) {
