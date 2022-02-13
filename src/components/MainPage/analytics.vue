@@ -62,6 +62,7 @@
               <div :class="userActionDateType == '2' ? 'item active' : 'item'" @click="setUserAction(2)">最近2天</div>
               <div :class="userActionDateType == '3' ? 'item active' : 'item'" @click="setUserAction(3)">最近3天</div>
             </div>
+            <div class="day-switch total-number">轨迹总数：{{ totalUserAction }}条</div>
           </div>
           <div class="list">
             <div class="list-head">
@@ -307,6 +308,7 @@
         // 用户行为
         userActionDateType: 1,
         userActionData: '',
+        totalUserAction: 0,
         // 折线图对象
         lineChart: '',
         // 地图对象
@@ -444,7 +446,8 @@
             dayNum: dayNum ? dayNum : 1
           },
           Success: function (data) {
-            userActionObject = data.userAction;
+            that.userActionObject = data.userAction;
+            that.totalUserAction = data.dateList.length;
 
             for(let i in userActionObject){
               // 保护用户隐私，马赛克掉ip最后一组数字
@@ -592,6 +595,14 @@
     vertical-align: middle;
     margin-left: 1rem;
     cursor: pointer;
+  }
+
+  .total-number{
+    color: @DefaultFontColor;
+    flex: 1;
+    text-align: right;
+    cursor:auto;
+    display: block;
   }
 
   .item {
