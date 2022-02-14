@@ -446,7 +446,7 @@
             dayNum: dayNum ? dayNum : 1
           },
           Success: function (data) {
-            that.userActionObject = data.userAction;
+            userActionObject = data.userAction;
             that.totalUserAction = data.dateList.length;
 
             for(let i in userActionObject){
@@ -465,7 +465,7 @@
               }
             }
 
-            that.userActionData = data.userAction;
+            that.userActionData = userActionObject;
           }
         });
         // 初始化时不创建日志。切换时间维度后，记日志并刷新日志列表

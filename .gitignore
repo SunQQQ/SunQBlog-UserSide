@@ -1,6 +1,6 @@
 .DS_Store
-node_modules
-/blog-user
+node_modules/
+/blog-user/
 blog-user
 
 # local env files
@@ -20,4 +20,4 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw*
-blog-user/index.html
+/blog-user/index.html
