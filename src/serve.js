@@ -1,9 +1,10 @@
 //引入express中间件
-var express = require('express');
-var compression = require('compression');
+let express = require('express');
+let compression = require('compression');
 let axios = require('axios');
 const http = require('http');
-var bodyParser = require("body-parser");
+let bodyParser = require("body-parser");
+let fromUrl = '';
 
 var app = express();
 app.use(compression());
@@ -13,6 +14,7 @@ http.createServer(app).listen(67);
 
 app.get('/', (req, res) => {
   res.sendFile('index.html', {root: __dirname});
+  fromUrl = req.headers['referer'];
 });
 
 app.get('/*', (req, res) => {
@@ -28,6 +30,7 @@ app.post('/*', (req, res) => {
 
   // 转发时带着原请求的ip信息
   req.body.clientIp = clientIp.replace('::ffff:','');
+  req.body.fromUrl = fromUrl;
 
   axios.post(
     'http://39.104.22.73:8888' + pathName.replace('api',''),
@@ -35,7 +38,7 @@ app.post('/*', (req, res) => {
   ).then(function (response) {
     res.end(JSON.stringify(response.data));
   }).catch(function (e) {
-    console.log('ajax error');
+    console.log('转发 ajax error');
   });
 });
 
