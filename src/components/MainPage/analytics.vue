@@ -69,7 +69,7 @@
               <div class="list-td">访问IP</div>
               <div class="list-td">操作内容</div>
               <div class="list-td align">访问位置</div>
-              <!--              <div class="list-td align">访问来源</div>-->
+              <div class="list-td align">访问来源</div>
               <div class="list-td align">浏览器</div>
               <div class="list-td align">访问时间</div>
             </div>
@@ -82,7 +82,7 @@
                 </ul>
               </div>
               <div class="list-td align">{{ item.location }}</div>
-              <!--<div class="list-td align">{{ item.fromUrl }}</div>-->
+              <div class="list-td align">{{ item.fromUrl }}</div>
               <div class="list-td align">{{ item.browser }}</div>
               <div class="list-td align">{{ item.time }}</div>
             </div>
@@ -455,6 +455,12 @@
                   currentIp = array[0] + '.' + array[1] + '.' + array[2] + '.***',
                   item = userActionObject[i];
 
+              if(userActionObject[i].fromUrl){
+                userActionObject[i].fromUrl = userActionObject[i].fromUrl.split('/')[2];
+              }else{
+                userActionObject[i].fromUrl = '直接打开';
+              }     
+
               // 为用户IP打码
               userActionObject[currentIp] = item;
               delete userActionObject[i];
@@ -652,6 +658,7 @@
   .list-td{
     flex: 1;
     padding-left: 1rem;
+    overflow: hidden;
   }
 
   .list-td:nth-child(1){
@@ -667,11 +674,16 @@
   }
 
   .list-td:nth-child(4){
-    flex: 10%;
+    flex: 15%;
   }
 
   .list-td:nth-child(5){
-    flex: 25%;
+    flex: 7%;
+    border-right: none;
+  }
+
+  .list-td:nth-child(6){
+    flex: 13%;
     border-right: none;
   }
 
