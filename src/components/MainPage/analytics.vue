@@ -678,12 +678,12 @@
   }
 
   .list-td:nth-child(5){
-    flex: 7%;
+    flex: 8%;
     border-right: none;
   }
 
   .list-td:nth-child(6){
-    flex: 13%;
+    flex: 12%;
     border-right: none;
   }
 
