@@ -70,7 +70,7 @@
               <div class="list-td">操作内容</div>
               <div class="list-td align">访问位置</div>
               <div class="list-td align">访问来源</div>
-              <div class="list-td align">浏览器</div>
+              <div class="list-td align">访问设备</div>
               <div class="list-td align">访问时间</div>
             </div>
             <div :class="i%2==0 ? 'list-tr single' : 'list-tr'" v-for="(item,i) in userActionData" v-bind:key="i">
