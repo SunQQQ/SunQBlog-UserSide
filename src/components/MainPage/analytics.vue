@@ -682,7 +682,7 @@
   .list-td:nth-child(5){
     flex: 10%;
     border-right: none;
-    text-align: center;
+    text-align: center !important;
   }
 
   .list-td:nth-child(6){
