@@ -83,7 +83,9 @@
               </div>
               <div class="list-td align">{{ item.location }}</div>
               <div class="list-td align">{{ item.fromUrl }}</div>
-              <div class="list-td align">{{ item.browser }}</div>
+              <div class="list-td align" v-html="item.browser">
+                {{ item.browser }}
+              </div>
               <div class="list-td align">{{ item.time }}</div>
             </div>
             <div class="list-item"></div>

@@ -335,11 +335,10 @@ CommonFunction.install = function (Vue) {
   Vue.prototype.dedupe = function(array){
     return Array.from(new Set(array));
   };
-
+  
   Vue.prototype.createLog = function (log){
     let that = this,
       dateString = this.getSQTime();
-
     that.GetLocation(function (LocationCityName) {
       that.SQFrontAjax({
         Url: '/api/visitCreate/foreend',
@@ -347,10 +346,10 @@ CommonFunction.install = function (Vue) {
           location:LocationCityName,
           fromUrl:document.referrer,
           time:dateString,
-          browser:that.getSQBrowser(),
+          browser: window.navigator.platform + '\n' + that.getSQBrowser() + '\n' + window.screen.width + " * " + window.screen.height,
           moduleType:log.moduleType,
           operateType:log.operateType,
-          operateContent:log.operateContent ? log.operateContent : ''
+          operateContent:log.operateContent ? log.operateContent : '',
         },
         Success: function () {
           that.setSQCookie('sunqBlog','统计访问量',12); // 12个小时内同一个浏览器算一个访问量
