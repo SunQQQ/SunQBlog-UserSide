@@ -346,7 +346,7 @@ CommonFunction.install = function (Vue) {
           location:LocationCityName,
           fromUrl:document.referrer,
           time:dateString,
-          browser: window.navigator.platform + '\n' + that.getSQBrowser() + '\n' + window.screen.width + " * " + window.screen.height,
+          browser: window.navigator.platform + '\n' + that.getSQBrowser() + '\n' + window.screen.width + "*" + window.screen.height,
           moduleType:log.moduleType,
           operateType:log.operateType,
           operateContent:log.operateContent ? log.operateContent : '',

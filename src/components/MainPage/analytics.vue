@@ -680,12 +680,13 @@
   }
 
   .list-td:nth-child(5){
-    flex: 8%;
+    flex: 10%;
     border-right: none;
+    text-align: center;
   }
 
   .list-td:nth-child(6){
-    flex: 12%;
+    flex: 10%;
     border-right: none;
   }
 
