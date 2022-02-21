@@ -69,7 +69,6 @@
               <div class="list-td">访问IP</div>
               <div class="list-td">操作内容</div>
               <div class="list-td align">访问位置</div>
-              <div class="list-td align">访问来源</div>
               <div class="list-td align">访问设备</div>
               <div class="list-td align">访问时间</div>
             </div>
@@ -82,7 +81,6 @@
                 </ul>
               </div>
               <div class="list-td align">{{ item.location }}</div>
-              <div class="list-td align">{{ item.fromUrl }}</div>
               <div class="list-td align" v-html="item.browser">
                 {{ item.browser }}
               </div>
@@ -672,21 +670,17 @@
   }
 
   .list-td:nth-child(3){
-    flex: 10%;
+    flex: 13%;
   }
 
   .list-td:nth-child(4){
-    flex: 15%;
-  }
-
-  .list-td:nth-child(5){
     flex: 10%;
     border-right: none;
     text-align: center !important;
   }
 
-  .list-td:nth-child(6){
-    flex: 10%;
+  .list-td:nth-child(5){
+    flex: 22%;
     border-right: none;
   }
 
