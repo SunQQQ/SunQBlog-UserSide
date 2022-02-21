@@ -81,7 +81,7 @@
                 </ul>
               </div>
               <div class="list-td align">{{ item.location }}</div>
-              <div class="list-td align" v-html="item.browser">
+              <div class="list-td align line-heigh" v-html="item.browser">
                 {{ item.browser }}
               </div>
               <div class="list-td align">{{ item.time }}</div>
@@ -659,6 +659,10 @@
     flex: 1;
     padding-left: 1rem;
     overflow: hidden;
+  }
+
+  .line-heigh{
+    line-height: 1.1rem;
   }
 
   .list-td:nth-child(1){
