@@ -1,11 +1,13 @@
 <template>
     <transition name="Fade" mode="out-in">
-    <div class="Loading" v-show="Loading">
-        <div class="Rotate">
-            <i class="iconfont icon-loading1" style="color: white;font-size: 2rem;"></i>
+        <div class="cover" v-show="Loading">
+            <div class="Loading">
+                <div class="Rotate">
+                    <i class="iconfont icon-loading1" style="color: white;font-size: 2rem;"></i>
+            </div>
+            <div>加载中</div>
         </div>
-        <div>加载中</div>
-    </div>
+        </div>
     </transition>
 </template>
 
@@ -23,6 +25,13 @@
 
 <style scoped lang="less">
     @import "../../static/css/base";
+    .cover{
+        position: fixed;
+        top: 0;
+        height: 100%;
+        left: 0;
+        right: 0;
+    }
     .Loading {
         width: 5.5rem;
         height: 5.5rem;
