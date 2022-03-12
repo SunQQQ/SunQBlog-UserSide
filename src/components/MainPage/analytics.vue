@@ -393,10 +393,10 @@
             dayNum: dayNum
           },
           Success: function (data) {
-            data.dateList.forEach(function (item) {
-              let location = item.location, formatLocation;
-              if (typeof (location) == 'string') {
-                formatLocation = location.replace('市', ''); // 数据库存放的城市名称包含'市'字，但是所有城市维度数据中城市名称没有
+            data.cityList.forEach(function (item) {
+              let formatLocation;
+              if (typeof (item) == 'string') {
+                formatLocation = item.replace('市', ''); // 数据库存放的城市名称包含'市'字，但是所有城市维度数据中城市名称没有
                 if (citys[formatLocation]) {
                   that.mapList.push({
                     name: formatLocation,
@@ -405,6 +405,8 @@
                 }
               }
             });
+
+            console.log(that.mapList);
 
             if (!that.map) that.map = that.$echarts.init(document.getElementById('map'));
             if (dayNum == '1') {
@@ -447,7 +449,7 @@
           },
           Success: function (data) {
             userActionObject = data.userAction;
-            that.totalUserAction = data.dateList.length;
+            that.totalUserAction = data.dateListTotal;
 
             for(let i in userActionObject){
               // 保护用户隐私，马赛克掉ip最后一组数字
