@@ -19,10 +19,22 @@
     margin-left: 0.5rem;
     border-radius: 2px;
   }
+  .BigBlock{
+    padding: 1rem 1rem 2rem 1rem;
+    background-color: @FontColorWhite;
+  }
+  .main-text{
+    padding-left: 4.5rem;
+    padding-right: 4.5rem;
+  }
 }
 
 /*mobile*/
 @media only screen and (max-device-width : 768px) {
+  .BigBlock{
+    padding: 1rem 2rem 2rem 2rem;
+    background-color: @FontColorWhite;
+  }
   .FlexContent{
     margin: 88px auto 0;
   }
@@ -37,11 +49,6 @@
   }
 }
 
-
-.BigBlock{
-  padding: 1rem 4.5rem 2rem 4.5rem;
-  background-color: @FontColorWhite;
-}
 .BigBlock p{
   margin: 2rem 0;
 }
