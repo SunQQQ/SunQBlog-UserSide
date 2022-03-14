@@ -61,29 +61,28 @@
               <div :class="userActionDateType == '2' ? 'item active' : 'item'" @click="setUserAction(2)">最近2天</div>
               <div :class="userActionDateType == '3' ? 'item active' : 'item'" @click="setUserAction(3)">最近3天</div>
             </div>
-            <div class="day-switch total-number">轨迹总数：{{ totalUserAction }}条</div>
+            <div class="day-switch total-number give-up">轨迹总数：{{ totalUserAction }}条</div>
           </div>
           <div class="list">
             <div class="list-head">
               <div class="list-td">访问IP</div>
               <div class="list-td">操作内容</div>
-              <div class="list-td align">访问位置</div>
-              <div class="list-td align">访问设备</div>
-              <div class="list-td align">访问时间</div>
+              <div class="list-td align give-up">访问位置</div>
+              <div class="list-td align give-up">访问设备</div>
+              <div class="list-td align give-up">访问时间</div>
             </div>
             <div :class="i%2==0 ? 'list-tr single' : 'list-tr'" v-for="(item,i) in userActionData" v-bind:key="i">
               <div class="list-td">{{ i }}</div>
-              <div class="list-td">
-                <!--{{ item.action ? item.action : ''}}-->
+              <div class="list-td action-padding">
                 <ul>
                   <li v-for="(item,i) in item.action" v-bind:key="i">{{item}}</li>
                 </ul>
               </div>
-              <div class="list-td align">{{ item.location }}</div>
-              <div class="list-td align line-heigh" v-html="item.browser">
+              <div class="list-td align give-up">{{ item.location }}</div>
+              <div class="list-td align line-heigh give-up" v-html="item.browser">
                 {{ item.browser }}
               </div>
-              <div class="list-td align">{{ item.time }}</div>
+              <div class="list-td align give-up">{{ item.time }}</div>
             </div>
             <div class="list-item"></div>
           </div>
@@ -472,9 +471,26 @@
 <style scoped lang="less">
   @import "../../static/css/base";
   @import "../../static/css/AboutMe";
-  .content{
-    width: 1088px;
-    margin: 74px auto 0;
+
+  /*pc*/
+  @media only screen and (min-device-width : 768px) {
+    .content{
+      width: 1088px;
+      margin: 74px auto 0;
+    }
+  }
+
+  /*mobile*/
+  @media only screen and (max-device-width : 768px) {
+    .content{
+      margin: 88px auto 0;
+    }
+    .give-up{
+      display: none !important;
+    }
+    .action-padding{
+      padding-right: 1rem;
+    }
   }
 
   .quota-content {
