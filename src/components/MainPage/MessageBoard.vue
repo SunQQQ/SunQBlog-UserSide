@@ -74,16 +74,16 @@
                   <a class="BlueButton" href="https://github.com/SunQQQ" target="_blank" @click="readCode()">博客源码</a>
                   <div class="BlogStatistic">
                     <div class="BlogStatisticItem">
-                      <div class="BlogStatisticItemNum">13</div>
+                      <div class="BlogStatisticItemNum">17</div>
                       <div class="BlogStatisticItemText AboutMeGitData">Followers</div>
+                    </div>
+                    <div class="BlogStatisticItem">
+                      <div class="BlogStatisticItemNum">75</div>
+                      <div class="BlogStatisticItemText AboutMeGitData">Star</div>
                     </div>
                     <div class="BlogStatisticItem">
                       <div class="BlogStatisticItemNum">17</div>
                       <div class="BlogStatisticItemText AboutMeGitData">Repositories</div>
-                    </div>
-                    <div class="BlogStatisticItem">
-                      <div class="BlogStatisticItemNum">88</div>
-                      <div class="BlogStatisticItemText AboutMeGitData">Star</div>
                     </div>
                   </div>
                 </div>

@@ -1,8 +1,7 @@
 <template>
   <div>
-    <div class="FlexContent">
-      <div class="LeftPart">
-        <div class="block" style="margin-top: 0">
+    <div class="content">
+      <div class="block" style="margin-top: 0">
           <div class="quota-content">
             <div class="quota-item">
               <p>今日浏览量(PV)</p>
@@ -29,8 +28,8 @@
               <p class="num">{{ allVisitIp }}</p>
             </div>
           </div>
-        </div>
-        <div class="block">
+      </div>
+      <div class="block">
           <div class="title-part">
             <div class="module-title">访客来源</div>
             <div class="day-switch">
@@ -41,8 +40,8 @@
             </div>
           </div>
           <div class="map-chart" id="map"></div>
-        </div>
-        <div class="block">
+      </div>  
+      <div class="block">
           <div class="title-part">
             <div class="module-title">流量趋势</div>
             <div class="day-switch">
@@ -53,8 +52,8 @@
             </div>
           </div>
           <div class="line-chart" id="line-chart"></div>
-        </div>
-        <div class="block">
+      </div>  
+      <div class="block">
           <div class="title-part">
             <div class="module-title">用户轨迹</div>
             <div class="day-switch">
@@ -88,60 +87,6 @@
             </div>
             <div class="list-item"></div>
           </div>
-        </div>
-      </div>
-      <div class="RightPart">
-        <div class="GitPart">
-          <div class="TopBackBlack"></div>
-          <div class="GitPic">
-            <img src="../../static/img/ZhihuIcon.jpg">
-          </div>
-          <div class="GitBack">
-            <i class="iconfont TopBackBlackGit icon-github1"></i>
-          </div>
-          <div class="Content">
-            <div class="GitName">孙权的Github</div>
-            <a class="BlueButton" href="https://github.com/SunQQQ" target="_blank">博客源码</a>
-            <div class="BlogStatistic">
-              <div class="BlogStatisticItem">
-                <div class="BlogStatisticItemNum">17</div>
-                <div class="BlogStatisticItemText AboutMeGitData">Followers</div>
-              </div>
-              <div class="BlogStatisticItem">
-                <div class="BlogStatisticItemNum">75</div>
-                <div class="BlogStatisticItemText AboutMeGitData">myStar</div>
-              </div>
-              <div class="BlogStatisticItem">
-                <div class="BlogStatisticItemNum">17</div>
-                <div class="BlogStatisticItemText AboutMeGitData">Repositories</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="BigBlock AboutMeMarginTop">
-          <div class="TitleFontLine">Contacts</div>
-          <div class="BlogStatistic" style="border-top: none;padding-bottom: 0">
-            <div class="BlogStatisticItem">
-              <a href="https://github.com/SunQQQ" target="_blank"><i class="iconfont icon-github AboutMeIcon"
-                                                                     style="color:#948aec"></i></a>
-            </div>
-            <div class="BlogStatisticItem">
-              <a href="https://www.zhihu.com/people/s-q-51-44-23/activities" target="_blank"><i
-                class="iconfont icon-zhihu AboutMeIcon" style="color:#3dbd7d"></i></a>
-            </div>
-            <div class="BlogStatisticItem">
-              <a href="https://blog.csdn.net/sun_qqq" target="_blank"><i class="iconfont icon-CN_csdnnet AboutMeIcon"
-                                                                         style="color:#f78e3d"></i></a>
-            </div>
-            <div class="BlogStatisticItem">
-              <i class="iconfont icon-youxiang AboutMeIcon" style="color:#49a9ee"></i>
-            </div>
-            <div class="BlogStatisticItem">
-              <a href="https://music.163.com/#/user/home?id=386558098" target="_blank"><i
-                class="iconfont AboutMeIcon icon-CN_NetEasemusic" style="color:#f46e65"></i></a>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
     <Heartfelt></Heartfelt>
@@ -527,6 +472,10 @@
 <style scoped lang="less">
   @import "../../static/css/base";
   @import "../../static/css/AboutMe";
+  .content{
+    width: 1088px;
+    margin: 74px auto 0;
+  }
 
   .quota-content {
     .myflex(center);
