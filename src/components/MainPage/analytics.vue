@@ -89,29 +89,6 @@
             <div class="list-item"></div>
           </div>
         </div>
-        <!--<div class="block">
-          <div class="module-title">操作日志</div>
-          <div class="list">
-            <div class="list-head">
-              <div class="list-td">访问IP</div>
-              <div class="list-td align">操作内容</div>
-              <div class="list-td align">访问位置</div>
-              &lt;!&ndash;              <div class="list-td align">访问来源</div>&ndash;&gt;
-              <div class="list-td align">浏览器</div>
-              <div class="list-td align">访问时间</div>
-            </div>
-            <div :class="i%2==0 ? 'list-tr single' : 'list-tr'" v-for="(item,i) in visitListData">
-              <div class="list-td">{{ item.clientIp ? item.clientIp : '中国' }}</div>
-              <div class="list-td">{{ item.operateType ? item.operateType + ':' + item.operateContent : '' }}</div>
-              <div class="list-td align">{{ item.location }}</div>
-              &lt;!&ndash;              <div class="list-td align">{{ item.fromUrl }}</div>&ndash;&gt;
-              <div class="list-td align">{{ item.browser }}</div>
-              <div class="list-td align">{{ item.time }}</div>
-            </div>
-            <div class="list-item"></div>
-          </div>
-          <Pagination v-on:PaginationToParent="ValueByPagition" ref="Pagi"></Pagination>
-        </div>-->
       </div>
       <div class="RightPart">
         <div class="GitPart">
@@ -127,16 +104,16 @@
             <a class="BlueButton" href="https://github.com/SunQQQ" target="_blank">博客源码</a>
             <div class="BlogStatistic">
               <div class="BlogStatisticItem">
-                <div class="BlogStatisticItemNum">13</div>
+                <div class="BlogStatisticItemNum">17</div>
                 <div class="BlogStatisticItemText AboutMeGitData">Followers</div>
+              </div>
+              <div class="BlogStatisticItem">
+                <div class="BlogStatisticItemNum">75</div>
+                <div class="BlogStatisticItemText AboutMeGitData">myStar</div>
               </div>
               <div class="BlogStatisticItem">
                 <div class="BlogStatisticItemNum">17</div>
                 <div class="BlogStatisticItemText AboutMeGitData">Repositories</div>
-              </div>
-              <div class="BlogStatisticItem">
-                <div class="BlogStatisticItemNum">88</div>
-                <div class="BlogStatisticItemText AboutMeGitData">Star</div>
               </div>
             </div>
           </div>
