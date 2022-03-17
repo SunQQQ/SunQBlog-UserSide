@@ -75,7 +75,7 @@
               <div class="list-td">{{ i }}</div>
               <div class="list-td action-padding">
                 <ul>
-                  <li v-for="(item,i) in item.action" v-bind:key="i">{{item}}</li>
+                  <li v-for="(item,i) in item.action" v-bind:key="i" v-html="item">{{item}}</li>
                 </ul>
               </div>
               <div class="list-td align give-up">{{ item.location }}</div>
