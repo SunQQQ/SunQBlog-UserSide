@@ -260,17 +260,7 @@
   text-align: center;
   margin: 1.5rem;
 }
-.BlueButton{
-  background-color: @ThemeColor;
-  color: @FontColorWhite;
-  width: 8rem;
-  margin: 0.8rem auto;
-  border-radius: 0.3rem;
-  padding: 0.5rem;
-  text-align: center;
-  display: block;
-  text-decoration: none;
-}
+
 .BlogStatistic{
   .myflex(center);
   color:@FontColorGrayWhite;
@@ -347,4 +337,42 @@
 }
 .Fade-enter, .Fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
+}
+
+.BlueButton{
+  color: @FontColorWhite;
+  width: 8rem;
+  margin: 0.8rem auto;
+  border-radius: 0.3rem;
+  padding: 0.5rem;
+  text-align: center;
+  display: block;
+  text-decoration: none;
+
+  background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+  background-size: 400%;
+}
+.BlueButton:hover {
+  animation: animate 8s linear infinite;
+}
+
+.open_animate{
+  animation: animate 8s linear infinite;
+}
+
+@keyframes animate {
+  0% {
+    background-position: 0%;
+  }
+  100% {
+    background-position: 400%;
+  }
+}
+
+.BlueButton::before {
+  background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+  background-size: 400%;
+  border-radius: 0.3rem;
+  opacity: 0;
+  transition: 0.5s;
 }

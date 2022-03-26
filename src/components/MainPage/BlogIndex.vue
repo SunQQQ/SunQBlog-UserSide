@@ -74,14 +74,14 @@
                 </div>
               </div>
             </div>
-            <div class="Module" style="padding: 0 0 0.5rem">
+            <div class="Module" style="padding: 0 0 0.5rem" @mouseenter="enter(true)" @mouseleave="enter(false)">
               <div class="TopBack"></div>
               <div class="ZhihuIcon">
                 <img src="../../static/img/ZhihuIcon.jpg">
               </div>
               <div class="TextCenter">
                 孙权的小博客
-                <a class="BlueButton" href="https://github.com/SunQQQ" target="_blank" @click="readCode()">博客源码</a>
+                <a class="BlueButton" :class="buttonAnimate ? 'open_animate' : ''" href="https://github.com/SunQQQ" target="_blank" @click="readCode()">博客源码</a>
               </div>
               <div class="BlogStatistic">
                 <div class="BlogStatisticItem">
@@ -138,7 +138,7 @@
         CommentNum: 0,// 博客评论量
         HotArticleList: [],// 热门文章列表
         AticleBottom: false,// 文章底线
-
+        buttonAnimate: false, // 首页源码入口动画效果
         // 缺省图
         DefaultGraph: {
           ArticleListPart: true,
@@ -323,6 +323,10 @@
           operateType: '查看源码',
           operateContent: '首页入口'
         });
+      },
+      // 监控gitHub模块DOM的鼠标滑入划出事件，鼠标悬停时打开源码按钮动画效果，移出时关闭动画
+      enter: function(status){
+        this.buttonAnimate = status;
       }
     },
     mounted: function () {
