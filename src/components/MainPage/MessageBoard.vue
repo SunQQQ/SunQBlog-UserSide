@@ -61,7 +61,7 @@
           </div>
           <div class="BlogIndexContentRight" style="border:1px solid #e9e9e9;border-radius: 3px">
             <div class="Module" style="padding: 0 0 0.5rem;background-color: transparent">
-              <div class="GitPart">
+              <div class="GitPart" @mouseenter="setButtonAnimate(true)" @mouseleave="setButtonAnimate(false)">
                 <div class="TopBackBlack"></div>
                 <div class="GitPic">
                   <img src="../../static/img/ZhihuIcon.jpg">
@@ -71,7 +71,7 @@
                 </div>
                 <div class="Content">
                   <div class="GitName">孙权的Github</div>
-                  <a class="BlueButton" href="https://github.com/SunQQQ" target="_blank" @click="readCode()">博客源码</a>
+                  <a class="BlueButton" :class="buttonAnimate ? 'open_animate' : ''" href="https://github.com/SunQQQ" target="_blank" @click="readCode()">博客源码</a>
                   <div class="BlogStatistic">
                     <div class="BlogStatisticItem">
                       <div class="BlogStatisticItemNum">17</div>
@@ -161,8 +161,7 @@
 
   export default {
     name: "MessageBoard",
-    components: {
-      Pagination,
+    components: {      Pagination,
       Emotion
     },
     computed: {
@@ -177,25 +176,16 @@
     },
     data: function () {
       return {
-        // textarea遮层
-        OpenTextAreaCover: true,
-        // 提交按钮显示
-        OpenMessageSubmitValue: false,
-        // 留言信息的默认头像地址
-        IconAdress: "../../static/img/default_headicon_" + Math.round(Math.random()*3) + ".jpg",
-        // IconAdress: getIconAdress,
-        //留言人姓名
-        MessageLeaveName: '',
-        // 留言列表
-        MessageList: '',
-        // 写留言的时间
-        MessageLeaveDate: '',
-        //回复留言弹框
-        MessageAnswerFrame: false,
-        // 弹框显隐动画
-        FadeAnimate: false,
-        // 文章底线
-        AticleBottom: false,
+        OpenTextAreaCover: true,// textarea遮层
+        OpenMessageSubmitValue: false,// 提交按钮显示
+        IconAdress: "../../static/img/default_headicon_" + Math.round(Math.random()*3) + ".jpg",// 留言信息的默认头像地址
+        MessageLeaveName: '', //留言人姓名
+        MessageList: '', // 留言列表
+        MessageLeaveDate: '', // 写留言的时间
+        MessageAnswerFrame: false,//回复留言弹框
+        FadeAnimate: false,// 弹框显隐动画
+        AticleBottom: false,// 文章底线
+        buttonAnimate: false // 博客入口按钮动画
       }
     },
     methods: {
@@ -420,6 +410,11 @@
           operateType:'点击联系途径',
           operateContent:operateContent
         });
+      },
+
+      // 设置按钮动画的开始与停止
+      setButtonAnimate: function(status){
+        this.buttonAnimate = status;
       }
     },
     mounted: function () {

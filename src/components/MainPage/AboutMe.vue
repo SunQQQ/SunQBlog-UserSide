@@ -12,9 +12,6 @@
             <p><i class="iconfont icon-biaoqian AboutMeIcon" style="color:#3dbd7d"></i>别人评价较多：阳光开朗、靠谱伙伴、待人亲切</p>
             <p><i class="iconfont icon-xiazai20 AboutMeIcon" style="color:#948aec"></i>家庭住址：郑州市 二七区 南三环</p>
             <p><i class="iconfont icon-weixin AboutMeIcon" style="color:#f78e3d"></i>微信：13213074006，欢迎商业合作与技术交流</p>
-            <!--
-                                <p><i class="iconfont icon-jianzhu AboutMeIcon" style="color:#f78e3d"></i></p>
-            -->
           </div>
           <div class="BigBlock AboutMeMarginTop main-text">
             <div class="TitleFontLine">博客技术</div>
@@ -60,7 +57,7 @@
           </div>
         </div>
         <div class="RightPart">
-          <div class="GitPart">
+          <div class="GitPart" @mouseenter="setButtonAnimate(true)" @mouseleave="setButtonAnimate(false)">
             <div class="TopBackBlack"></div>
             <div class="GitPic">
               <img src="../../static/img/ZhihuIcon.jpg">
@@ -70,7 +67,7 @@
             </div>
             <div class="Content">
               <div class="GitName">孙权的Github</div>
-              <a class="BlueButton" href="https://github.com/SunQQQ" target="_blank">博客源码</a>
+              <a class="BlueButton" :class="buttonAnimate ? 'open_animate' : ''" href="https://github.com/SunQQQ" target="_blank">博客源码</a>
               <div class="BlogStatistic">
                 <div class="BlogStatisticItem">
                   <div class="BlogStatisticItemNum">17</div>
@@ -124,8 +121,19 @@
 
   export default {
     name: "AboutMe",
+    data: function () {
+      return {
+        buttonAnimate: false
+      }
+    },
     components: {
       Heartfelt
+    },
+    methods: {
+      // 设置按钮动画的开始与停止
+      setButtonAnimate: function(status){
+        this.buttonAnimate = status;
+      }
     },
     mounted: function () {
       Store.commit("ChangeActive", 4);// 切换Topbar高亮
