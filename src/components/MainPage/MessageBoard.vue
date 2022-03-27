@@ -203,8 +203,6 @@
         if (LocalCommonUser.toString() != '{}') {
           this.MessageLeaveName = LocalCommonUser.ArticleCommentNickName;
         }
-
-        console.log(this.OpenMessageSubmitValue);
       },
 
       CloseMessageSubmit: function(){
@@ -212,8 +210,6 @@
         this.OpenTextAreaCover = true;
         //隐藏提交按钮
         this.OpenMessageSubmitValue = false;
-
-        console.log(this.OpenMessageSubmitValue);
       },
 
       getIconAdress:function (iconNo){
@@ -225,7 +221,8 @@
         var That = this;
 
         if (Store.getters.GetMessageText && this.MessageLeaveName) {
-          var MatchedMessageText = That.MatchEmotion(Store.getters.GetMessageText);
+          let MatchedMessageText = That.MatchEmotion(Store.getters.GetMessageText),
+              iconNo = this.GetLocalStorage('SunqBlog').ArticleCommentIcon ? this.GetLocalStorage('SunqBlog').ArticleCommentIcon : Math.round(Math.random()*4);
 
           this.GetLocation(function (LocationCityName) {
             That.SQFrontAjax({
@@ -235,7 +232,7 @@
                 MessageLeaveName: That.MessageLeaveName,
                 MessageLeaveDate: new Date(),
                 LocationCityName: LocationCityName,
-                iconNo:Math.round(Math.random()*4)
+                iconNo: iconNo
               },
               Success: function () {
                 Store.commit('ChangeTip', {
@@ -250,6 +247,12 @@
                   Key: 'ArticleCommentNickName',
                   Value: That.MessageLeaveName
                 });
+                // 存储用户的随机头像放到本地
+                That.SetLocalStorage('SunqBlog', {
+                  Key: 'ArticleCommentIcon',
+                  Value: iconNo
+                });
+
                 // 刷新留言列表
                 That.MessageRead();
 
