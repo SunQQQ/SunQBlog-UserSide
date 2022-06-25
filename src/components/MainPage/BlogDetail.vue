@@ -178,6 +178,7 @@
               Url: '/api/ArticleCommentCreate/foreend',
               UploadData: {
                 ArticleId: That.$route.query._id,
+                ArticleName: That.Article.Title,
                 ArticleCommentNickName: That.ArticleCommentNickName,
                 ArticleCommentEmail: That.ArticleCommentEmail,
                 ArticleCommentUrl: That.ArticleCommentUrl,
@@ -266,7 +267,9 @@
       }
     },
     mounted: function () {
+      // 初始化文章内容
       this.InitPage();
+      // 初始化评论列表
       this.GetCommentList();
     }
   }
