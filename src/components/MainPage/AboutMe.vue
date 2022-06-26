@@ -49,7 +49,7 @@
               </a>
               <a class="UrlCardTd UrlCardTdBc about-url-card" href="https://smohan.net/" target="_blank">
                 <div class="UrlIconName UrlIconNameMargin">
-                  <img src="https://smohan.net/static/img/favicon.ico">
+                  <img src="http://bh-lay.com/touch-icon-ipad-retina.png">
                   <div class="about-UrlName">水墨寒的博客</div>
                 </div>
               </a>
