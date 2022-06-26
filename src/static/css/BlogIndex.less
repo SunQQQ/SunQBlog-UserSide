@@ -37,21 +37,22 @@
     .myflex(start);
     border-radius: 2px;
     cursor: pointer;
-    animation: DrawBorder 4s infinite linear;
+    background-color: @fore_color;
+
+    transition: ease-in .3s;
+    background: linear-gradient(0, @ThemeColor 1px, @ThemeColor 1px) no-repeat,  
+    linear-gradient(-90deg, @ThemeColor 1px, @ThemeColor 1px) no-repeat,
+    linear-gradient(-180deg, @ThemeColor 1px, @ThemeColor 1px) no-repeat,
+    linear-gradient(-270deg, @ThemeColor 1px, @ThemeColor 1px) no-repeat;
+    background-size: 100% 1px, 1px 100%, 100% 1px, 1px 100%;
+    background-position: left top, right top, right bottom, left bottom;
+    background-color: @fore_color;
+    background-size: 0 1px, 1px 0, 0 1px, 1px 0;
   }
 
   .ArticleItem:hover{
-    cursor: pointer;
-    border: 1px solid @ThemeColor;
-    animation: DrawBorder 4s infinite linear;
-  }
-
-  @keyframes DrawBorder{
-    0% { clip:react(0,0,0,0) }
-    25% {clip:react(0,0,172,30)}
-    50% {clip:react(0,0,344,60)}
-    75% {clip:react(0,0,516,120)}
-    100% {clip:react(0,0,688.8,154)}
+    cursor: pointer;    
+    background-size: 100% 1px, 1px 100%, 100% 1px, 1px 100%;
   }
 
   .ArticleItemCover{
