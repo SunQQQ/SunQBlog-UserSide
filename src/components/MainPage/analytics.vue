@@ -55,7 +55,7 @@
       </div>
       <div class="block padding-bottom-10">
         <div class="title-part">
-          <div class="module-title">占比情况</div>
+          <div class="module-title">数据占比</div>
           <div class="day-switch">
             <div :class="pieDateType == '1' ? 'item active' : 'item'" @click="setPie(1)">今天</div>
             <div :class="pieDateType == '14' ? 'item active' : 'item'" @click="setPie(14)">最近14天</div>
@@ -466,13 +466,13 @@ export default {
         }
       });
       // 初始化时不创建日志。切换时间维度后，记日志并刷新日志列表
-      // if (!init) {
-      //   that.createLog({
-      //     moduleType: 'button',
-      //     operateType: '切换用户轨迹时间维度',
-      //     operateContent: '近' + dayNum + '天'
-      //   });
-      // }
+      if (!init) {
+        that.createLog({
+          moduleType: 'button',
+          operateType: '切换数据占比时间维度',
+          operateContent: '近' + dayNum + '天'
+        });
+      }
     },
 
     /**
