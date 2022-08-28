@@ -257,7 +257,7 @@ export default {
         color: ['#fac858','#91cc75','#5470c6','#ee6666', '#73c0de', '#3ba272', '#fc8452', '#9a60b4', '#ea7ccc'],
         series: [
           {
-            name: 'pie',
+            name: '',
             type: 'pie',
             selectedMode: 'single',
             selectedOffset: 30,
@@ -411,24 +411,40 @@ export default {
       });
     },
 
+    /**
+     * 使用用户轨迹接口，
+     * 通过统计用户使用设备的尺寸来展示设备占比
+     * 通过统计用户在网页上的动作，展示操作占比
+     */
     setPie: function (dayNum,init) {
       let that = this,
         userActionObject = {},
         // 统计移动用户、Pc用户、其他设备用户
         mobileUser = 0,
         pcUser = 0,
-        otherUser = 0;
+        // 各种操作
+        pie2Object = {
+          选择菜单: 0, 
+          下拉文章列表到: 0, 
+          切换折线图时间维度: 0,
+          下拉留言列表到: 0, 
+          评论文章: 0, 
+          切换地图时间维度: 0,
+          切换用户轨迹时间维度: 0, 
+          筛选文章分类: 0,
+          留言: 0, 
+          查看源码: 0, 
+          点击联系途径: 0, 
+          切换数据占比时间维度: 0,
+          浏览文章: 0,
+          其他: 0      // 这里预防博客功能拓展，这里代码没有及时更新
+        },
+        pie2Array = [
 
-      that.pieDateType = dayNum;      
-      that.pie2 = that.$echarts.init(document.getElementById('pie-chart2'));
-      that.pieChartOption.series[0].data = [
-              { value: 50, name: '留言' },
-              { value: 30, name: '翻页' },
-              { value: 20, name: '浏览文章' },
-              { value: 20, name: '评论' },
-            ],
+        ];
 
-      that.pie2.setOption(that.pieChartOption, true);
+
+      that.pieDateType = dayNum;     
 
       this.SQFrontAjax({
         Url: '/api/getUserAction/foreend',
@@ -448,10 +464,7 @@ export default {
             }else{
               mobileUser += 1;
             }
-            otherUser += 1;
-          }
-          console.log('ip total: ' + otherUser);
-    
+          }    
           that.pieArray = [{
             value: pcUser,
             name: 'PC'
@@ -460,11 +473,62 @@ export default {
             name: '移动设备'
           }];
 
+          // 渲染设备占比饼图
           that.pie1 = that.$echarts.init(document.getElementById('pie-chart1'));
           that.pieChartOption.series[0].data = that.pieArray;
+          that.pieChartOption.title.text = '访问设备占比';
+          that.pieChartOption.series[0].name = '访问设备';
           that.pie1.setOption(that.pieChartOption, true);  
         }
       });
+
+      this.SQFrontAjax({
+        Url: '/api/visitReadByDay/foreend',
+        noLoading: init ? 'yes' : '',
+        UploadData: {
+          endTime: this.getSQTime().split(' ')[0],
+          dayNum: dayNum ? dayNum : 1
+        },
+        Success: function (data) {
+          console.log('所有记录',data);
+
+          // 统计各项操作行为的次数
+          data.list.forEach(function(item){
+            if(pie2Object.hasOwnProperty(item)){
+              pie2Object[item] += 1;
+            }else{
+              // 库中浏览文章动作，是以下面三种文本记录
+              if(item == '浏览文章(首页入口)' || item=='浏览文章(试验田入口)' || item=='浏览文章(undefined入口)'){
+                pie2Object['浏览文章'] += 1;
+              }else{
+                pie2Object['其他'] += 1;
+              }
+            }
+          });
+
+          // 如果其他操作没有，删掉其他这项
+          if(pie2Object['其他'] <= 0){
+            delete pie2Object['其他'];
+          }
+
+          // 转成饼图需要的数据格式
+          for(let key in pie2Object){
+            pie2Array.push({
+              value: pie2Object[key], 
+              name: key
+            });
+          }
+
+          that.pie2 = that.$echarts.init(document.getElementById('pie-chart2'));
+          that.pieChartOption.series[0].data = pie2Array;
+          that.pieChartOption.title.text = '用户操作占比';
+          that.pieChartOption.series[0].name = '用户操作';
+          that.pie2.setOption(that.pieChartOption, true);
+
+          console.log('所有行为统计',pie2Object);
+        }
+      });
+
       // 初始化时不创建日志。切换时间维度后，记日志并刷新日志列表
       if (!init) {
         that.createLog({
@@ -623,6 +687,15 @@ export default {
 
   .give-up {
     display: none !important;
+  }
+
+  .pie-content {
+    text-align: center;
+  }
+
+  .pie-item {
+    flex: 1;
+    height: 250px;
   }
 
   .action-padding {
