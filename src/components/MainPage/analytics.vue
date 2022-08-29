@@ -276,8 +276,9 @@ export default {
           // normal:{
             position: 'inner',
             show: true,
+            fontSize: 11,
             formatter:function(data){
-              return data.name + ': ' + data.value;
+              return data.name + ':' + data.value;
             },
           // }
         }
@@ -531,13 +532,9 @@ export default {
           that.pieChartOption.series[0].data = pie2Array;
           that.pieChartOption.title.text = '用户行为占比';
           that.pieChartOption.series[0].name = '用户操作';
-          that.pieChartOption.label = {
-            position: 'inner',
-            show: true,
-            formatter:function(data){
-              return data.name;
-            },
-          }
+          // that.pieChartOption.label.formatter = function(data){
+          //     return data.name;
+          // };
           that.pie2.setOption(that.pieChartOption, true);
         }
       });
@@ -569,13 +566,9 @@ export default {
           that.pieChartOption.series[0].data = pie3Array;
           that.pieChartOption.title.text = '菜单点击比例';
           that.pieChartOption.series[0].name = '点击菜单';
-          that.pieChartOption.label = {
-            position: 'inner',
-            show: true,
-            formatter:function(data){
-              return data.name;
-            },
-          }
+          // that.pieChartOption.label.formatter = function(data){
+          //     return data.name;
+          // }; 
           that.pie3.setOption(that.pieChartOption, true);
         }
       });
@@ -732,10 +725,10 @@ export default {
     flex: 40%;
   }
   .scal-center{
-    flex: 25%;
+    flex: 27%;
   }
   .scal-right{
-    flex: 35%;
+    flex: 33%;
   }
 }
 
