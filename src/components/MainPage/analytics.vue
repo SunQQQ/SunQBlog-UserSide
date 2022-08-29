@@ -64,8 +64,9 @@
           </div>
         </div>
         <div class="pie-content">
-          <div class="pie-item" id="pie-chart1"></div>
-          <div class="pie-item" id="pie-chart2"></div>
+          <div class="pie-item scal-left" id="pie-chart2"></div>
+          <div class="pie-item scal-center" id="pie-chart1"></div>
+          <div class="pie-item scal-right" id="pie-chart3"></div>
         </div>
       </div>
       <div class="block">
@@ -422,7 +423,7 @@ export default {
         // 统计移动用户、Pc用户、其他设备用户
         mobileUser = 0,
         pcUser = 0,
-        // 各种操作
+        // 各种操作统计
         pie2Object = {
           选择菜单: 0, 
           下拉文章列表到: 0, 
@@ -439,9 +440,18 @@ export default {
           浏览文章: 0,
           其他: 0      // 这里预防博客功能拓展，这里代码没有及时更新
         },
-        pie2Array = [
-
-        ];
+        pie2Array = [],
+        // 菜单点击统计
+        pie3Object = {
+          博文: 0,
+          留言: 0,
+          时间轴: 0,
+          试验田: 0,
+          关于: 0,
+          访问统计: 0,
+          管理后台: 0
+        },
+        pie3Array = [];
 
 
       that.pieDateType = dayNum;     
@@ -490,8 +500,6 @@ export default {
           dayNum: dayNum ? dayNum : 1
         },
         Success: function (data) {
-          console.log('所有记录',data);
-
           // 统计各项操作行为的次数
           data.list.forEach(function(item){
             if(pie2Object.hasOwnProperty(item)){
@@ -521,11 +529,54 @@ export default {
 
           that.pie2 = that.$echarts.init(document.getElementById('pie-chart2'));
           that.pieChartOption.series[0].data = pie2Array;
-          that.pieChartOption.title.text = '用户操作占比';
+          that.pieChartOption.title.text = '用户行为占比';
           that.pieChartOption.series[0].name = '用户操作';
+          that.pieChartOption.label = {
+            position: 'inner',
+            show: true,
+            formatter:function(data){
+              return data.name;
+            },
+          }
           that.pie2.setOption(that.pieChartOption, true);
+        }
+      });
 
-          console.log('所有行为统计',pie2Object);
+      this.SQFrontAjax({
+        Url: '/api/menuClickByDay/foreend',
+        noLoading: init ? 'yes' : '',
+        UploadData: {
+          endTime: this.getSQTime().split(' ')[0],
+          dayNum: dayNum ? dayNum : 1
+        },
+        Success: function (data) {
+          // 统计各项操作行为的次数
+          data.list.forEach(function(item){
+            if(pie3Object.hasOwnProperty(item)){
+              pie3Object[item] += 1;
+            }
+          });
+
+          // 转成饼图需要的数据格式
+          for(let key in pie3Object){
+            pie3Array.push({
+              value: pie3Object[key], 
+              name: key
+            });
+          }
+
+          that.pie3 = that.$echarts.init(document.getElementById('pie-chart3'));
+          that.pieChartOption.series[0].data = pie3Array;
+          that.pieChartOption.title.text = '菜单点击比例';
+          that.pieChartOption.series[0].name = '点击菜单';
+          that.pieChartOption.label = {
+            position: 'inner',
+            show: true,
+            formatter:function(data){
+              return data.name;
+            },
+          }
+          that.pie3.setOption(that.pieChartOption, true);
         }
       });
 
@@ -674,8 +725,17 @@ export default {
   }
 
   .pie-item {
-    flex: 1;
+    
     height: 250px;
+  }
+  .scal-left{
+    flex: 40%;
+  }
+  .scal-center{
+    flex: 25%;
+  }
+  .scal-right{
+    flex: 35%;
   }
 }
 
