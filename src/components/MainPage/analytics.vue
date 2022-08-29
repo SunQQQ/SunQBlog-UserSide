@@ -481,7 +481,7 @@ export default {
             name: 'PC'
           },{
             value: mobileUser,
-            name: '移动设备'
+            name: '手机'
           }];
 
           // 渲染设备占比饼图
@@ -532,6 +532,7 @@ export default {
           that.pieChartOption.series[0].data = pie2Array;
           that.pieChartOption.title.text = '用户行为占比';
           that.pieChartOption.series[0].name = '用户操作';
+          that.pieChartOption.label.fontSize = 10;
           // that.pieChartOption.label.formatter = function(data){
           //     return data.name;
           // };
@@ -725,10 +726,10 @@ export default {
     flex: 40%;
   }
   .scal-center{
-    flex: 27%;
+    flex: 25%;
   }
   .scal-right{
-    flex: 33%;
+    flex: 35%;
   }
 }
 
