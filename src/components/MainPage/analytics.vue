@@ -457,6 +457,7 @@ export default {
 
       that.pieDateType = dayNum;     
 
+      // 设备占比饼图
       this.SQFrontAjax({
         Url: '/api/getUserAction/foreend',
         noLoading: init ? 'yes' : '',
@@ -493,6 +494,7 @@ export default {
         }
       });
 
+      // 各项操作占比
       this.SQFrontAjax({
         Url: '/api/visitReadByDay/foreend',
         noLoading: init ? 'yes' : '',
@@ -515,17 +517,14 @@ export default {
             }
           });
 
-          // 如果其他操作没有，删掉其他这项
-          if(pie2Object['其他'] <= 0){
-            delete pie2Object['其他'];
-          }
-
-          // 转成饼图需要的数据格式
+          // 转成饼图需要的数据格式，由对象转成数组
           for(let key in pie2Object){
-            pie2Array.push({
-              value: pie2Object[key], 
-              name: key
-            });
+            if(pie2Object[key] > 0){     // 某项如果为0，不再饼图里展示
+              pie2Array.push({
+                value: pie2Object[key], 
+                name: key
+              });
+            }
           }
 
           that.pie2 = that.$echarts.init(document.getElementById('pie-chart2'));
@@ -540,6 +539,7 @@ export default {
         }
       });
 
+      // 菜单点击比例饼图
       this.SQFrontAjax({
         Url: '/api/menuClickByDay/foreend',
         noLoading: init ? 'yes' : '',
@@ -548,7 +548,7 @@ export default {
           dayNum: dayNum ? dayNum : 1
         },
         Success: function (data) {
-          // 统计各项操作行为的次数
+          // 统计各个菜单点击次数
           data.list.forEach(function(item){
             if(pie3Object.hasOwnProperty(item)){
               pie3Object[item] += 1;
