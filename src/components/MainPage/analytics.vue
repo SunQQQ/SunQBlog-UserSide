@@ -179,6 +179,8 @@ export default {
           bottom: '20px' // 图表距离容器下方边距
         },
       },
+      // pieBackColor: ['#fac858','#91cc75','#5470c6','#ee6666', '#73c0de', '#3ba272', '#fc8452', '#9a60b4', '#ea7ccc'],
+      pieBackColor: ['#fac858','#91cc75','#5470c6','#ee6666', '#73c0de', '#3ba272', '#fc8452', '#9a60b4'],
       visitListData: [],
       // 地图参数
       mapDateType: '今天',
@@ -255,7 +257,6 @@ export default {
           bottom: '0px'
         },
         tooltip: {},
-        color: ['#fac858','#91cc75','#5470c6','#ee6666', '#73c0de', '#3ba272', '#fc8452', '#9a60b4', '#ea7ccc'],
         series: [
           {
             name: '',
@@ -509,6 +510,8 @@ export default {
           that.pieChartOption.series[0].data = that.pieArray;
           that.pieChartOption.title.text = '访问设备占比';
           that.pieChartOption.series[0].name = '访问设备';
+          that.pieChartOption.color = ['#91cc75', '#fc8452'];
+          that.pieChartOption.series[0].clockwise = false;
           that.pie1.setOption(that.pieChartOption, true);  
         }
       });
@@ -551,6 +554,8 @@ export default {
           that.pieChartOption.title.text = '用户行为占比';
           that.pieChartOption.series[0].name = '用户操作';
           that.pieChartOption.label.fontSize = 10;
+          that.pieChartOption.color = that.pieBackColor.reverse();
+          that.pieChartOption.series[0].clockwise = true;
           // that.pieChartOption.label.formatter = function(data){
           //     return data.name;
           // };
@@ -586,6 +591,8 @@ export default {
           that.pieChartOption.series[0].data = pie3Array;
           that.pieChartOption.title.text = '菜单点击比例';
           that.pieChartOption.series[0].name = '点击菜单';
+          that.pieChartOption.color = that.pieBackColor.reverse();
+          that.pieChartOption.series[0].clockwise = true;
           // that.pieChartOption.label.formatter = function(data){
           //     return data.name;
           // }; 
