@@ -56,7 +56,7 @@
              @click="ChangeRouter('analytics')">访问统计
         </div>
         <div :class="Active == 6 ? 'MobileMenuDetailItemActive' : 'MobileMenuDetailItem'"
-             @click="openUrl()">管理后台
+             @click="openUrl()">开放式后台
         </div>
       </div>
       <div class="MoblieMenuDetailShade"></div>

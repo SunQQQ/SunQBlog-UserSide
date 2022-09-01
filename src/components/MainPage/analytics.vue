@@ -53,8 +53,8 @@
         </div>
         <div class="map-chart" id="map"></div>
       </div>
-      <div class="block padding-bottom-10">
-        <div class="title-part">
+      <div class="block padding-bottom-10 block-nopadding">
+        <div class="title-part padding-left-right">
           <div class="module-title">数据占比</div>
           <div class="day-switch">
             <div :class="pieDateType == '1' ? 'item active' : 'item'" @click="setPie(1)">今天</div>
@@ -801,6 +801,14 @@ export default {
 .block-name {
   padding: 0.5rem;
   border-bottom: 1px solid #f0f0f0;
+}
+
+.block-nopadding{
+  padding: 0 !important
+}
+
+.padding-left-right{
+  padding: 1.5rem;
 }
 
 .title-part {
