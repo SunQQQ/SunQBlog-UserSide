@@ -64,9 +64,14 @@
           </div>
         </div>
         <div class="pie-content">
-          <div class="pie-item scal-left" id="pie-chart2"></div>
-          <div class="pie-item scal-center" id="pie-chart1"></div>
+          <!-- <div class="pie-item scal-left" id="pie-chart2"></div>
+          <div class="pie-item scal-center" id="pie-chart1"></div> -->
+          <div class="pie-item scal-right" id="pie-chart2"></div>
+          <div class="pie-item scal-right" id="pie-chart1"></div>
+        </div>
+        <div class="pie-content">
           <div class="pie-item scal-right" id="pie-chart3"></div>
+          <div class="pie-item scal-right" id="pie-chart4"></div>
         </div>
       </div>
       <div class="block">
@@ -590,6 +595,41 @@ export default {
           //     return data.name;
           // }; 
           that.pie3.setOption(that.pieChartOption, true);
+        }
+      });
+
+      // 老用户占比
+      this.SQFrontAjax({
+        Url: '/api/menuClickByDay/foreend',
+        noLoading: init ? 'yes' : '',
+        UploadData: {
+          endTime: this.getSQTime().split(' ')[0],
+          dayNum: dayNum ? dayNum : 1
+        },
+        Success: function (data) {
+          // 统计各个菜单点击次数
+          data.list.forEach(function(item){
+            if(pie3Object.hasOwnProperty(item)){
+              pie3Object[item] += 1;
+            }
+          });
+
+          // 转成饼图需要的数据格式
+          for(let key in pie3Object){
+            pie3Array.push({
+              value: pie3Object[key], 
+              name: key
+            });
+          }
+
+          that.pie4 = that.$echarts.init(document.getElementById('pie-chart4'));
+          that.pieChartOption.series[0].data = pie3Array;
+          that.pieChartOption.title.text = '老用户占比';
+          that.pieChartOption.series[0].name = '用户类型';
+          // that.pieChartOption.label.formatter = function(data){
+          //     return data.name;
+          // }; 
+          that.pie4.setOption(that.pieChartOption, true);
         }
       });
 
