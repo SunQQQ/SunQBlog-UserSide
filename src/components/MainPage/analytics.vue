@@ -63,15 +63,15 @@
             <div :class="pieDateType == '60' ? 'item active' : 'item'" @click="setPie(60)">最近60天</div>
           </div>
         </div>
-        <div class="pie-content">
+        <div class="pie-content" style="padding-bottom: 20px">
           <!-- <div class="pie-item scal-left" id="pie-chart2"></div>
           <div class="pie-item scal-center" id="pie-chart1"></div> -->
-          <div class="pie-item scal-right" id="pie-chart2"></div>
+          <div class="pie-item scal-right" id="pie-chart4"></div>
           <div class="pie-item scal-right" id="pie-chart1"></div>
         </div>
-        <div class="pie-content">
+        <div class="pie-content" style="padding-bottom: 20px">
           <div class="pie-item scal-right" id="pie-chart3"></div>
-          <div class="pie-item scal-right" id="pie-chart4"></div>
+          <div class="pie-item scal-right" id="pie-chart2"></div>
         </div>
       </div>
       <div class="block">
@@ -477,8 +477,13 @@ export default {
           访问统计: 0,
           管理后台: 0
         },
-        pie3Array = [];
-
+        pie3Array = [],
+        // 老用户占比
+        regularUserMap = {
+          regularUser: '老用户',
+          newUser: '新用户'
+        },
+        regularUserArray = [];
 
       that.pieDateType = dayNum;     
 
@@ -513,7 +518,7 @@ export default {
           // 渲染设备占比饼图
           that.pie1 = that.$echarts.init(document.getElementById('pie-chart1'));
           that.pieChartOption.series[0].data = that.pieArray;
-          that.pieChartOption.title.text = '访问设备占比';
+          that.pieChartOption.title.text = '访问设备比例';
           that.pieChartOption.series[0].name = '访问设备';
           that.pieChartOption.color = ['#91cc75', '#fc8452'];
           that.pieChartOption.series[0].clockwise = false;
@@ -607,32 +612,26 @@ export default {
 
       // 老用户占比
       this.SQFrontAjax({
-        Url: '/api/menuClickByDay/foreend',
+        Url: '/api/regularUserByDay/foreend',
         noLoading: init ? 'yes' : '',
         UploadData: {
           endTime: this.getSQTime().split(' ')[0],
           dayNum: dayNum ? dayNum : 1
         },
         Success: function (data) {
-          // 统计各个菜单点击次数
-          data.list.forEach(function(item){
-            if(pie3Object.hasOwnProperty(item)){
-              pie3Object[item] += 1;
-            }
-          });
-
           // 转成饼图需要的数据格式
-          for(let key in pie3Object){
-            pie3Array.push({
-              value: pie3Object[key], 
-              name: key
+          for(let key in data){
+            regularUserArray.push({
+              value: data[key], 
+              name: regularUserMap[key]
             });
           }
 
           that.pie4 = that.$echarts.init(document.getElementById('pie-chart4'));
-          that.pieChartOption.series[0].data = pie3Array;
-          that.pieChartOption.title.text = '老用户占比';
+          that.pieChartOption.series[0].data = regularUserArray;
+          that.pieChartOption.title.text = '新老用户比例';
           that.pieChartOption.series[0].name = '用户类型';
+          that.pieChartOption.color = ['#5470c6','#ee6666'];
           // that.pieChartOption.label.formatter = function(data){
           //     return data.name;
           // }; 
