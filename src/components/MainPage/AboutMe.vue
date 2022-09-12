@@ -73,11 +73,11 @@
               <a class="BlueButton" :class="buttonAnimate ? 'open_animate' : ''" href="https://github.com/SunQQQ" target="_blank">博客源码</a>
               <div class="BlogStatistic">
                 <div class="BlogStatisticItem">
-                  <div class="BlogStatisticItemNum">17</div>
+                  <div class="BlogStatisticItemNum">38</div>
                   <div class="BlogStatisticItemText AboutMeGitData">Followers</div>
                 </div>
                 <div class="BlogStatisticItem">
-                  <div class="BlogStatisticItemNum">75</div>
+                  <div class="BlogStatisticItemNum">139</div>
                   <div class="BlogStatisticItemText AboutMeGitData">Star</div>
                 </div>
                 <div class="BlogStatisticItem">
