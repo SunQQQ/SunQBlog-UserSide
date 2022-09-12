@@ -4,27 +4,27 @@
       <div class="block" style="margin-top: 0">
         <div class="quota-content">
           <div class="quota-item">
-            <p>今日浏览量(PV)</p>
+            <p style="color:#01aaed">今日浏览量(PV)</p>
             <p class="num">{{ todayVisit }}</p>
           </div>
           <div class="quota-item">
-            <p>今日IP数</p>
+            <p style="color:#F72C5B">今日IP</p>
             <p class="num">{{ todayIpNum }}</p>
           </div>
           <div class="quota-item">
-            <p>昨日浏览量(PV)</p>
+            <p>今日留言</p>
             <p class="num">{{ yesterdayVisit }}</p>
           </div>
           <div class="quota-item">
-            <p>昨日IP数</p>
+            <p>今日评论</p>
             <p class="num">{{ yesterdayIpNum }}</p>
           </div>
           <div class="quota-item">
-            <p>近{{ lineDateType }}天浏览量</p>
+            <p>近{{ lineDateType }}天PV</p>
             <p class="num">{{ dateVisit }}</p>
           </div>
           <div class="quota-item">
-            <p>近{{ lineDateType }}天IP数</p>
+            <p>近{{ lineDateType }}天IP</p>
             <p class="num">{{ allVisitIp }}</p>
           </div>
         </div>
