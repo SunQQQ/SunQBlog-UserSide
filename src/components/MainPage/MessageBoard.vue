@@ -727,22 +727,6 @@ export default {
       height: 16vh;
       opacity: 1;
     }
-    // 20% {
-    //   width: 58vh;
-    //   height: 15vh;
-    // }
-    // 40% {
-    //   width: 54vh;
-    //   height: 14vh;
-    // }
-    // 60% {
-    //   width: 50vh;
-    //   height: 13vh;
-    // }
-    // 80% {
-    //   width: 46vh;
-    //   height: 12vh;
-    // }
     100% {
       width: 0vh;
       height: 0vh;

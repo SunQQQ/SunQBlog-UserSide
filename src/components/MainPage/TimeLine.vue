@@ -2,6 +2,12 @@
     <transition name="Fade" mode="out-in">
         <div>
             <div class="TimeFixedBac"></div>
+            <div class="clockDev">
+                <img src="../../static/img/clock.png"/>
+            </div>
+            <div class="needleDiv">
+                <img src="../../static/img/needle.png"/>
+            </div>
             <div class="FriendUrlBac">
                 <div class="FriendUrlTitle TimeLIneTitle">
                     <div class="FriendUrlTitleText" style="margin-bottom: 2rem;color:black;">时间轴</div>
@@ -96,10 +102,21 @@
             top: 0;
             z-index: 100;
             background-attachment: fixed;
-            background: url(../../static/img/TimeLineBack.jpg) no-repeat 50% #cef;
+            background: url(../../static/img/flower.jpg) no-repeat 50% #cef;
             background-position: 50%;
             background-repeat: no-repeat;
             background-size: cover;
+        }
+        .needleDiv{
+            z-index: 1000;
+            position: absolute;
+            top: 15vh;
+            right: 5vw;
+        }
+
+        .needleDiv img{
+            width: 353px;
+            height: 246px;
         }
         .FriendUrlBac{
             height: 85vh;
@@ -109,6 +126,10 @@
         .TimeLIneTitle{
             margin-top:10vh;
         }
+        .clickDev{
+            display: none;
+        }
+
     }
 
     /*PC端*/
@@ -125,7 +146,7 @@
             top: 0;
             z-index: 100;
             background-attachment: fixed;
-            background: url(../../static/img/TimeLineBack.jpg) no-repeat 50% #cef;
+            background: url(../../static/img/flower.jpg) no-repeat 50% #cef;
             background-position: 50%;
             background-repeat: no-repeat;
             background-size: cover;
@@ -135,15 +156,48 @@
             background: transparent;
             z-index: 100;
         }
+        .needleDiv{
+            z-index: 1000;
+            position: absolute;
+            top: -2.4vw;
+            left: -0.8vw;
+            animation: needleRound 60s linear;
+            animation-iteration-count: infinite;
+            width: 14.5vw;
+            height: 10vw;
+        }
+        .needleDiv img{
+            width: 100%;
+            height: 100%;
+        }
         .TimeLIneTitle{
             margin-top: 12vh
+        }
+        .clockDev{
+            position: absolute;
+            left: 0;
+            top: -8vw;
+            z-index: 800;
+            width: 35vw;
+            height: 39vw;
+        }
+        .clockDev img{
+            width: 100%;
+            height: 100%;
+        }
+    }
+    @keyframes needleRound{
+        0% {
+            transform:rotate(0deg);
+            transform-origin: 9vw 6.2vw;
+        }
+        100% {
+            transform:rotate(360deg);
+            transform-origin: 9vw 6.2vw;
         }
     }
 
     .TimeFixedBac:before{
-        /*background-color: rgba(0, 0, 0, 0.2);*/
-        /*background-color: rgba(0, 0, 0, 0.06);*/
-        /*background-color: #ffffff;*/
         content: "";
         position: absolute;
         top: 0;
