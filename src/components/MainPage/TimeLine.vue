@@ -108,16 +108,9 @@
             background-size: cover;
         }
         .needleDiv{
-            z-index: 1000;
-            position: absolute;
-            top: 15vh;
-            right: 5vw;
+            display: none;
         }
-
-        .needleDiv img{
-            width: 353px;
-            height: 246px;
-        }
+        
         .FriendUrlBac{
             height: 85vh;
             background: transparent;
@@ -126,7 +119,7 @@
         .TimeLIneTitle{
             margin-top:10vh;
         }
-        .clickDev{
+        .clockDev{
             display: none;
         }
 
