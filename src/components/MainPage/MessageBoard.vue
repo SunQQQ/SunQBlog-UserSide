@@ -621,7 +621,7 @@ export default {
     position: absolute;
     left: 0;
     right: 0;
-    top: 30vh;
+    top: 25vh;
     padding: 1.5rem 1.5rem 2rem 1rem;
     animation: FadeIn 0.2s linear;
     animation-fill-mode: forwards;
@@ -637,7 +637,7 @@ export default {
     position: absolute;
     left: 0;
     right: 0;
-    top: 14rem;
+    top: 25vh;
     padding: 1.5rem 1.5rem 2rem 1rem;
     animation: FadeOut 0.2s linear;
     animation-fill-mode: forwards;
