@@ -152,12 +152,12 @@
         .needleDiv{
             z-index: 1000;
             position: absolute;
-            top: -2.4vw;
-            left: -0.8vw;
+            top: 1.4vw;
+            left:4.2vw;
             animation: needleRound 60s linear;
             animation-iteration-count: infinite;
-            width: 14.5vw;
-            height: 10vw;
+            width: 15.5vw;
+            height: 10.6vw;
         }
         .needleDiv img{
             width: 100%;
@@ -182,11 +182,11 @@
     @keyframes needleRound{
         0% {
             transform:rotate(0deg);
-            transform-origin: 9vw 6.2vw;
+            transform-origin: 3.9vw 2.7vw;
         }
         100% {
             transform:rotate(360deg);
-            transform-origin: 9vw 6.2vw;
+            transform-origin: 3.9vw 2.7vw;
         }
     }
 
