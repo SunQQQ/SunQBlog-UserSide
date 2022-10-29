@@ -1,13 +1,18 @@
 <template>
     <transition name="Fade" mode="out-in">
         <div>
-            <div class="TimeFixedBac"></div>
+            <div class="TimeFixedBac">
+                <div class="flower">
+                    <img src="../../static/img/flower.png"/>
+                </div>
+            </div>
             <div class="clockDev">
                 <img src="../../static/img/clock.png"/>
             </div>
             <div class="needleDiv">
                 <img src="../../static/img/needle.png"/>
             </div>
+            
             <div class="FriendUrlBac">
                 <div class="FriendUrlTitle TimeLIneTitle">
                     <div class="FriendUrlTitleText" style="margin-bottom: 2rem;color:black;">时间轴</div>
@@ -102,7 +107,7 @@
             top: 0;
             z-index: 100;
             background-attachment: fixed;
-            background: url(../../static/img/flower.jpg) no-repeat 50% #cef;
+            background: url(../../static/img/timeLine-bac.jpg) no-repeat 50% #cef;
             background-position: 50%;
             background-repeat: no-repeat;
             background-size: cover;
@@ -140,6 +145,18 @@
             z-index: 100;
             margin-top: 0;
         }
+        .flower{
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 35vw;
+            height: 24.8vw;
+            z-index: 800;
+        }
+        .flower img{
+            width: 100%;
+            height: 100%;
+        }
         .TimeLIneTitle{
             padding-top: 25vh;
         }
@@ -159,7 +176,7 @@
             top: 0;
             z-index: 100;
             background-attachment: fixed;
-            background: url(../../static/img/flower.jpg) no-repeat 50% #cef;
+            background: url(../../static/img/timeLine-bac.jpg) no-repeat 50% #cef;
             background-position: 50%;
             background-repeat: no-repeat;
             background-size: cover;
@@ -180,6 +197,18 @@
             height: 10.6vw;
         }
         .needleDiv img{
+            width: 100%;
+            height: 100%;
+        }
+        .flower{
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 28vw;
+            height: 19.8vw;
+            z-index: 800;
+        }
+        .flower img{
             width: 100%;
             height: 100%;
         }
