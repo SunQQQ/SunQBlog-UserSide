@@ -778,7 +778,17 @@ export default {
   }
 
   .boat {
-    display: none;
+    display: block;
+    position: absolute;
+    width: 30vw;
+    height: 15vw;
+    top: 58vh;
+    left: 18vw;
+  }
+
+  .boat img {
+    width: 100%;
+    height: 100%;
   }
 
   .MessageBoardListBottom {
