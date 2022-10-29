@@ -717,14 +717,14 @@ export default {
     animation-delay: 2s;
     -webkit-animation-delay: 2s;
     width: 62vh;
-    height: 16vh;
+    height: 32vh;
   }
 
   // 船缩小的动画
   @keyframes boatSmall{
     0% {
       width: 62vh;
-      height: 16vh;
+      height: 32vh;
       opacity: 1;
     }
     100% {
