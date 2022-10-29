@@ -4,11 +4,11 @@
       <div class="block" style="margin-top: 0">
         <div class="quota-content">
           <div class="quota-item">
-            <p style="color:#01aaed">今日浏览量(PV)</p>
+            <p>今日浏览量(PV)</p>
             <p class="num">{{ todayVisit }}</p>
           </div>
           <div class="quota-item">
-            <p style="color:#F72C5B">今日IP</p>
+            <p>今日IP</p>
             <p class="num">{{ todayIpNum }}</p>
           </div>
           <div class="quota-item">

@@ -769,7 +769,7 @@ export default {
 
   .MessageBoardCover {
     width: 100%;
-    height: 95vh;
+    height: 80vh;
     position: relative;
     background: url(../../static/img/LeaveMessageBack.jpg) no-repeat 50% #cef;
     background-position: 50%;

@@ -96,7 +96,7 @@
         }
         .TimeFixedBac{
             width: 100%;
-            height: 95vh;
+            height: 80vh;
             position: absolute;
             left: 0;
             top: 0;
@@ -107,22 +107,42 @@
             background-repeat: no-repeat;
             background-size: cover;
         }
-        .needleDiv{
-            display: none;
-        }
-        
-        .FriendUrlBac{
-            height: 85vh;
-            background: transparent;
-            z-index: 100;
-        }
-        .TimeLIneTitle{
-            margin-top:10vh;
-        }
         .clockDev{
-            display: none;
+            position: absolute;
+            left: 0;
+            top: 4.3rem;
+            z-index: 800;
+            width: 120px;
+            height: 134px;
+        }
+        .clockDev img{
+            width: 100%;
+            height: 100%;
         }
 
+        .needleDiv{
+            z-index: 1000;
+            position: absolute;
+            top: 100px;
+            left:15px;
+            animation: needleRound 60s linear;
+            animation-iteration-count: infinite;
+            width: 60px;
+            height: 41px;
+        }
+        .needleDiv img{
+            width: 100%;
+            height: 100%;
+        }
+        .FriendUrlBac{
+            height: 80vh;
+            background: transparent;
+            z-index: 100;
+            margin-top: 0;
+        }
+        .TimeLIneTitle{
+            padding-top: 25vh;
+        }
     }
 
     /*PC端*/
