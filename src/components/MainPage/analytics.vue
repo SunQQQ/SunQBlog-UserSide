@@ -12,11 +12,11 @@
             <p class="num">{{ todayIpNum }}</p>
           </div>
           <div class="quota-item">
-            <p>今日留言</p>
+            <p>昨日浏览量</p>
             <p class="num">{{ yesterdayVisit }}</p>
           </div>
           <div class="quota-item">
-            <p>今日评论</p>
+            <p>昨日IP</p>
             <p class="num">{{ yesterdayIpNum }}</p>
           </div>
           <div class="quota-item">

@@ -160,13 +160,13 @@
                   >
                   <div class="BlogStatistic">
                     <div class="BlogStatisticItem">
-                      <div class="BlogStatisticItemNum">17</div>
+                      <div class="BlogStatisticItemNum">49</div>
                       <div class="BlogStatisticItemText AboutMeGitData">
                         Followers
                       </div>
                     </div>
                     <div class="BlogStatisticItem">
-                      <div class="BlogStatisticItemNum">75</div>
+                      <div class="BlogStatisticItemNum">160</div>
                       <div class="BlogStatisticItemText AboutMeGitData">
                         Star
                       </div>
