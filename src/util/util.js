@@ -196,11 +196,12 @@ CommonFunction.install = function (Vue) {
    */
   Vue.prototype.GetLocation = function (func) {
     let that = this,
-      locationCookie = this.getSQCookie('sunqBlogLocation');
+      locationCookie = this.getSQCookie('sunqBlogLocation'),
+      sunqBlogLocationCode = this.getSQCookie('sunqBlogLocationCode');
 
     // 如果用户多次访问，一周内不会重复请求定位接口
     if(locationCookie){
-      func(locationCookie);
+      func(locationCookie,sunqBlogLocationCode);
     }else {
       axios({
         url: 'https://restapi.amap.com/v3/ip',
@@ -209,8 +210,9 @@ CommonFunction.install = function (Vue) {
           key: 'ba5f9b69f0541123a4dbe142da230b4d'
         },
       }).then(function (resp) {
-        func(resp.data.city);
-        that.setSQCookie('sunqBlogLocation',resp.data.city,24*7); // 相隔一周同一浏览器再次访问时会重新定位
+        func(resp.data.city,resp.data.adcode);
+        that.setSQCookie('sunqBlogLocation',resp.data.city,24*1); // 相隔1天同一浏览器再次访问时会重新定位
+        that.setSQCookie('sunqBlogLocationCode',resp.data.adcode,24*1);
       }).catch();
     }
   };
