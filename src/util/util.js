@@ -211,8 +211,8 @@ CommonFunction.install = function (Vue) {
         },
       }).then(function (resp) {
         func(resp.data.city,resp.data.adcode);
-        that.setSQCookie('sunqBlogLocation',resp.data.city,24*1); // 相隔1天同一浏览器再次访问时会重新定位
-        that.setSQCookie('sunqBlogLocationCode',resp.data.adcode,24*1);
+        that.setSQCookie('sunqBlogLocation',resp.data.city,3); // 相隔3小时同一浏览器再次访问时会重新定位
+        that.setSQCookie('sunqBlogLocationCode',resp.data.adcode,3);
       }).catch();
     }
   };

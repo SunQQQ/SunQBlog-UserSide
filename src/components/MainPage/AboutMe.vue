@@ -288,9 +288,10 @@ export default {
     setButtonAnimate: function (status) {
       this.buttonAnimate = status;
     },
+
+    // 设置天气预报模块
     setWeathe: function () {
-      // let sunqBlogWeather = this.getSQCookie("sunqBlogWeather");
-      let sunqBlogWeather = "";
+      let sunqBlogWeather = this.getSQCookie("sunqBlogWeather"); // 3小时内不再刷新
 
       if (sunqBlogWeather) {
         this.renderWeathDom(sunqBlogWeather);
@@ -316,8 +317,8 @@ export default {
           that.setSQCookie(
             "sunqBlogWeather",
             resp.data,
-            24 * 1
-          ); // 相隔1天同一浏览器再次访问时会重新定位
+            3
+          ); // 相隔3小时同一浏览器再次访问时会重新获取天气
         })
         .catch();
     },
