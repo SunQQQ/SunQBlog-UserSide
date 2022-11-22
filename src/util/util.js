@@ -210,7 +210,7 @@ CommonFunction.install = function (Vue) {
         },
       }).then(function (resp) {
         func(resp.data.city);
-        that.setSQCookie('sunqBlogLocation','',24*7); // 相隔一周同一浏览器再次访问时会重新定位
+        that.setSQCookie('sunqBlogLocation',resp.data.city,24*7); // 相隔一周同一浏览器再次访问时会重新定位
       }).catch();
     }
   };
