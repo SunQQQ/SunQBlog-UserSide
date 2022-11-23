@@ -263,7 +263,7 @@
           </div> -->
           <div class="BigBlock AboutMeMarginTop weathDev">
             <div class="TitleFontLine weathTitle">
-              天气<span class="citySpan">{{ city }}</span>
+              <span class="citySpan">{{ city }}</span>天气
             </div>
             <div
               class="BlogStatistic weathContent"
@@ -273,10 +273,13 @@
                 <!-- <div class="weathDay">11月23日</div> -->
                 <div class="weathDay">{{ item.date }}</div>
                 <div class="weathIcon">
-                  <i :class="`iconfont ${item.dayweatherIcon} AboutMeIcon`" style="font-size:1.8rem"></i>
+                  <!-- <i :class="`iconfont ${item.dayweatherIcon} AboutMeIcon`" style="font-size:1.8rem"></i> -->
+                  <svg class="icon" aria-hidden="true">
+                    <use :xlink:href="`#${item.dayweatherIcon}`"></use>
+                  </svg>
                 </div>
+                <div class="weathChinese">{{ item.dayweather }}</div>
                 <div class="temperature">{{ item.nighttemp }} ~ {{ item.daytemp }}°C</div>
-                <div>{{ item.dayweather }}</div>
               </div>
             </div>
           </div>
@@ -419,9 +422,13 @@ export default {
 }
 .weathIcon{
   padding-bottom: .3rem;
-  font-size: 1.5rem;
+  font-size: 2.2rem;
 }
 .citySpan{
   font-size: 1.1rem;
+}
+.weathChinese{
+  padding-bottom: .3rem;
+  font-size: 1rem;
 }
 </style>

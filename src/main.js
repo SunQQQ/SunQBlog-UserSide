@@ -4,6 +4,7 @@ import router from './router';
 import './static/css/base.less';
 import CommonFunction from './util/util';
 import './static/iconfont/iconfont.css';
+import './static/iconfont/iconfont'
 import store from './store';
 import VueParticles from 'vue-particles'; // 离子动画背景
 

@@ -6,18 +6,32 @@
   "description": "",
   "glyphs": [
     {
-      "icon_id": "573568",
-      "name": "速冷",
-      "font_class": "suleng",
-      "unicode": "e66c",
-      "unicode_decimal": 58988
+      "icon_id": "5076621",
+      "name": "热",
+      "font_class": "re1",
+      "unicode": "e602",
+      "unicode_decimal": 58882
     },
     {
-      "icon_id": "685507",
-      "name": "小雨",
-      "font_class": "xiaoyu",
-      "unicode": "e6f7",
-      "unicode_decimal": 59127
+      "icon_id": "5377511",
+      "name": "冷藏区",
+      "font_class": "lengcangqu",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "9594814",
+      "name": "大风",
+      "font_class": "dafeng",
+      "unicode": "e6c6",
+      "unicode_decimal": 59078
+    },
+    {
+      "icon_id": "19670904",
+      "name": "下雨",
+      "font_class": "xiayu",
+      "unicode": "e66d",
+      "unicode_decimal": 58989
     },
     {
       "icon_id": "1314410",
@@ -46,20 +60,6 @@
       "font_class": "yangsha",
       "unicode": "e678",
       "unicode_decimal": 59000
-    },
-    {
-      "icon_id": "23680385",
-      "name": "热",
-      "font_class": "re",
-      "unicode": "e714",
-      "unicode_decimal": 59156
-    },
-    {
-      "icon_id": "701962",
-      "name": "风",
-      "font_class": "feng",
-      "unicode": "e707",
-      "unicode_decimal": 59143
     },
     {
       "icon_id": "2878429",
