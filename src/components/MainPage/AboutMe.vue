@@ -211,7 +211,7 @@
               </div>
             </div>
           </div>
-          <div class="BigBlock AboutMeMarginTop">
+          <!-- <div class="BigBlock AboutMeMarginTop">
             <div class="TitleFontLine">Contacts</div>
             <div
               class="BlogStatistic"
@@ -260,6 +260,25 @@
                 ></a>
               </div>
             </div>
+          </div> -->
+          <div class="BigBlock AboutMeMarginTop weathDev">
+            <div class="TitleFontLine weathTitle">
+              天气<span class="citySpan">{{ city }}</span>
+            </div>
+            <div
+              class="BlogStatistic weathContent"
+            >
+              <div class="BlogStatisticItem borderRight" v-for="(item,i) in weathArray" v-bind:key="i">
+                <div class="weathWeek">{{ item.week }}</div>
+                <!-- <div class="weathDay">11月23日</div> -->
+                <div class="weathDay">{{ item.date }}</div>
+                <div class="weathIcon">
+                  <i :class="`iconfont ${item.dayweatherIcon} AboutMeIcon`" style="font-size:1.8rem"></i>
+                </div>
+                <div class="temperature">{{ item.nighttemp }} ~ {{ item.daytemp }}°C</div>
+                <div>{{ item.dayweather }}</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -272,12 +291,16 @@
 import Heartfelt from "../SonCompnent/Heartfelt";
 import Store from "../../store";
 import axios from 'axios';
+import weathJson from '../../static/map/weath.json';
+import weekJson from '../../static/map/week.json';
 
 export default {
   name: "AboutMe",
   data: function () {
     return {
       buttonAnimate: false,
+      city: "",
+      weathArray: []
     };
   },
   components: {
@@ -291,7 +314,8 @@ export default {
 
     // 设置天气预报模块
     setWeathe: function () {
-      let sunqBlogWeather = this.getSQCookie("sunqBlogWeather"); // 3小时内不再刷新
+      // let sunqBlogWeather = this.getSQCookie("sunqBlogWeather"); // 3小时内不再刷新
+      let sunqBlogWeather = ""; // 3小时内不再刷新
 
       if (sunqBlogWeather) {
         this.renderWeathDom(sunqBlogWeather);
@@ -324,7 +348,25 @@ export default {
     },
 
     renderWeathDom: function (dataObj) {
-      console.log(JSON.parse(JSON.stringify(dataObj)));
+      if(dataObj.status=="1" && dataObj.infocode=='10000'){
+        let that = this,
+          weathArray = dataObj.forecasts[0].casts,
+          week;
+
+        console.log(dataObj);
+        console.log(weekJson);
+
+        that.city = dataObj.forecasts[0].city;
+        if(weathArray.length > 0){
+          weathArray.forEach(function(item){
+            item.week = weekJson[item.week];
+            item.date = item.date.split('-')[1] + '月' + item.date.split('-')[2] + "日";
+            item.dayweatherIcon = weathJson[item.dayweather];
+          });
+          weathArray.pop();
+          that.weathArray = weathArray;
+        }
+      }
     },
   },
   mounted: function () {
@@ -350,5 +392,36 @@ export default {
 }
 .about-url-card {
   padding: 0;
+}
+.weathDev{
+  padding: 1rem 0.5rem;
+}
+.weathTitle{
+  font-size: 1.1rem;
+  margin-top: 0;
+}
+.weathContent{
+  border-top: none; 
+  padding-bottom: 0;
+  padding-top: 1rem;
+}
+.weathWeek{
+  padding-bottom: .3rem;
+}
+.weathDay{
+  opacity: .5;
+  font-size: 0.9rem;
+  padding-bottom: .3rem;
+}
+.temperature{
+  font-size: 0.8rem;
+  padding-bottom: .3rem;
+}
+.weathIcon{
+  padding-bottom: .3rem;
+  font-size: 1.5rem;
+}
+.citySpan{
+  font-size: 1.1rem;
 }
 </style>
