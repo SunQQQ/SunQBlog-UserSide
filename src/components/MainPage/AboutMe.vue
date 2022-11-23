@@ -127,7 +127,7 @@
                 class="iconfont icon-weixin AboutMeIcon"
                 style="color: #f78e3d"
               ></i
-              >微信：13213074006，欢迎商业合作与技术交流
+              >微信：13213074006，欢迎进前端分享群、商业合作等
             </p>
           </div>
 
@@ -429,6 +429,8 @@ export default {
 }
 .weathChinese{
   padding-bottom: .3rem;
-  font-size: 1rem;
+  font-size: .9rem;
+  overflow: hidden;
+  flex-wrap:nowrap
 }
 </style>
