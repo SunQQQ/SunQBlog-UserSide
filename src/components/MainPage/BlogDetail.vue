@@ -261,7 +261,7 @@ export default {
               });
 
               // 创建日志
-              this.createLog({
+              That.createLog({
                 moduleType: "button",
                 operateType: "评论文章",
                 operateContent: That.Article.Title,
