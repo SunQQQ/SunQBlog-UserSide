@@ -269,7 +269,7 @@
               class="BlogStatistic weathContent"
             >
               <div class="BlogStatisticItem borderRight" v-for="(item,i) in weathArray" v-bind:key="i">
-                <div class="weathWeek">{{ item.week }}</div>
+                <div class="weathWeek" v-html="item.week"></div>
                 <!-- <div class="weathDay">11月23日</div> -->
                 <div class="weathDay">{{ item.date }}</div>
                 <div class="weathIcon">
@@ -356,13 +356,15 @@ export default {
           weathArray = dataObj.forecasts[0].casts,
           week;
 
-        console.log(dataObj);
-        console.log(weekJson);
-
         that.city = dataObj.forecasts[0].city;
         if(weathArray.length > 0){
-          weathArray.forEach(function(item){
-            item.week = weekJson[item.week];
+          weathArray.forEach(function(item,i){
+            if(i == 0){
+              item.week = weekJson[item.week] + '<span style="font-size:0.5rem">(今天)</span>';
+            }else{
+              item.week = weekJson[item.week];
+            } 
+            
             item.date = item.date.split('-')[1] + '月' + item.date.split('-')[2] + "日";
             item.dayweatherIcon = weathJson[item.dayweather];
           });
