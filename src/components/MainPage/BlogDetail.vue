@@ -257,7 +257,7 @@ export default {
 
               Store.commit("ChangeTip", {
                 Show: true,
-                Title: "回复成功",
+                Title: "评论成功",
               });
 
               // 创建日志
