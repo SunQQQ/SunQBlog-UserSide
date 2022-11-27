@@ -211,7 +211,7 @@
               </div>
             </div>
           </div>
-          <!-- <div class="BigBlock AboutMeMarginTop">
+          <div class="BigBlock AboutMeMarginTop">
             <div class="TitleFontLine">Contacts</div>
             <div
               class="BlogStatistic"
@@ -260,28 +260,6 @@
                 ></a>
               </div>
             </div>
-          </div> -->
-          <div class="BigBlock AboutMeMarginTop weathDev">
-            <div class="TitleFontLine weathTitle">
-              <span class="citySpan">{{ city }}</span>天气
-            </div>
-            <div
-              class="BlogStatistic weathContent"
-            >
-              <div class="BlogStatisticItem borderRight" v-for="(item,i) in weathArray" v-bind:key="i">
-                <div class="weathWeek" v-html="item.week"></div>
-                <!-- <div class="weathDay">11月23日</div> -->
-                <div class="weathDay">{{ item.date }}</div>
-                <div class="weathIcon">
-                  <!-- <i :class="`iconfont ${item.dayweatherIcon} AboutMeIcon`" style="font-size:1.8rem"></i> -->
-                  <svg class="icon" aria-hidden="true">
-                    <use :xlink:href="`#${item.dayweatherIcon}`"></use>
-                  </svg>
-                </div>
-                <div class="weathChinese">{{ item.dayweather }}</div>
-                <div class="temperature">{{ item.nighttemp }} ~ {{ item.daytemp }}°C</div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -293,17 +271,12 @@
 <script>
 import Heartfelt from "../SonCompnent/Heartfelt";
 import Store from "../../store";
-import axios from 'axios';
-import weathJson from '../../static/map/weath.json';
-import weekJson from '../../static/map/week.json';
 
 export default {
   name: "AboutMe",
   data: function () {
     return {
       buttonAnimate: false,
-      city: "",
-      weathArray: []
     };
   },
   components: {
@@ -313,71 +286,10 @@ export default {
     // 设置按钮动画的开始与停止
     setButtonAnimate: function (status) {
       this.buttonAnimate = status;
-    },
-
-    // 设置天气预报模块
-    setWeathe: function () {
-      // let sunqBlogWeather = this.getSQCookie("sunqBlogWeather"); // 3小时内不再刷新
-      let sunqBlogWeather = ""; // 3小时内不再刷新
-
-      if (sunqBlogWeather) {
-        this.renderWeathDom(sunqBlogWeather);
-      } else {
-        this.GetLocation(this.getWeathData);
-      }
-    },
-
-    getWeathData: function (cityName, cityCode) {
-      let that = this;
-      axios({
-        url: "https://restapi.amap.com/v3/weather/weatherInfo",
-        method: "GET",
-        params: {
-          key: "ba5f9b69f0541123a4dbe142da230b4d",
-          city: cityCode,
-          extensions: 'all',
-          output: "JSON"
-        },
-      }).then(function (resp) {
-          that.renderWeathDom(resp.data);
-
-          that.setSQCookie(
-            "sunqBlogWeather",
-            resp.data,
-            3
-          ); // 相隔3小时同一浏览器再次访问时会重新获取天气
-        })
-        .catch();
-    },
-
-    renderWeathDom: function (dataObj) {
-      if(dataObj.status=="1" && dataObj.infocode=='10000'){
-        let that = this,
-          weathArray = dataObj.forecasts[0].casts,
-          week;
-
-        that.city = dataObj.forecasts[0].city;
-        if(weathArray.length > 0){
-          weathArray.forEach(function(item,i){
-            if(i == 0){
-              item.week = weekJson[item.week] + '<span style="font-size:0.5rem">(今天)</span>';
-            }else{
-              item.week = weekJson[item.week];
-            } 
-            
-            item.date = item.date.split('-')[1] + '月' + item.date.split('-')[2] + "日";
-            item.dayweatherIcon = weathJson[item.dayweather];
-          });
-          weathArray.pop();
-          that.weathArray = weathArray;
-        }
-      }
-    },
+    }
   },
   mounted: function () {
     Store.commit("ChangeActive", 4); // 切换Topbar高亮
-
-    this.setWeathe();
 
     this.createLog({
       moduleType: "menu",
@@ -397,42 +309,5 @@ export default {
 }
 .about-url-card {
   padding: 0;
-}
-.weathDev{
-  padding: 1rem 0.5rem;
-}
-.weathTitle{
-  font-size: 1.1rem;
-  margin-top: 0;
-}
-.weathContent{
-  border-top: none; 
-  padding-bottom: 0;
-  padding-top: 1rem;
-}
-.weathWeek{
-  padding-bottom: .3rem;
-}
-.weathDay{
-  opacity: .5;
-  font-size: 0.9rem;
-  padding-bottom: .3rem;
-}
-.temperature{
-  font-size: 0.8rem;
-  padding-bottom: .3rem;
-}
-.weathIcon{
-  padding-bottom: .3rem;
-  font-size: 2.2rem;
-}
-.citySpan{
-  font-size: 1.1rem;
-}
-.weathChinese{
-  padding-bottom: .3rem;
-  font-size: .9rem;
-  overflow: hidden;
-  flex-wrap:nowrap
 }
 </style>

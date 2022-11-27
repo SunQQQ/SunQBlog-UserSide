@@ -180,65 +180,31 @@
                   </div>
                 </div>
               </div>
-              <div class="BigBlock AboutMeMarginTop">
-                <div class="TitleFontLine">Contacts</div>
-                <div
-                  class="BlogStatistic"
-                  style="border-top: none; padding-bottom: 0"
-                >
-                  <div class="BlogStatisticItem">
-                    <a
-                      href="https://github.com/SunQQQ"
-                      target="_blank"
-                      @click="contact('github')"
-                    >
-                      <i
-                        class="iconfont icon-github AboutMeIcon"
-                        style="color: #948aec"
-                      ></i>
-                    </a>
-                  </div>
-                  <div class="BlogStatisticItem">
-                    <a
-                      href="https://www.zhihu.com/people/s-q-51-44-23/activities"
-                      target="_blank"
-                      @click="contact('知乎')"
-                    >
-                      <i
-                        class="iconfont icon-zhihu AboutMeIcon"
-                        style="color: #3dbd7d"
-                      ></i>
-                    </a>
-                  </div>
-                  <div class="BlogStatisticItem">
-                    <a
-                      href="https://blog.csdn.net/sun_qqq"
-                      target="_blank"
-                      @click="contact('csdn')"
-                    >
-                      <i
-                        class="iconfont icon-CN_csdnnet AboutMeIcon"
-                        style="color: #f78e3d"
-                      ></i>
-                    </a>
-                  </div>
-                  <div class="BlogStatisticItem">
-                    <i
-                      class="iconfont icon-youxiang AboutMeIcon"
-                      style="color: #49a9ee"
-                    ></i>
-                  </div>
-                  <div class="BlogStatisticItem">
-                    <a
-                      href="https://music.163.com/#/user/home?id=386558098"
-                      target="_blank"
-                      @click="contact('网易云')"
-                    >
-                      <i
-                        class="iconfont AboutMeIcon icon-CN_NetEasemusic"
-                        style="color: #f46e65"
-                      ></i>
-                    </a>
+
+              <div class="BigBlock AboutMeMarginTop weathDev">
+                <div class="TitleFontLine weathTitle">
+                  <span class="citySpan">{{ city }}</span
+                  >天气
+                </div>
+                <div class="BlogStatistic weathContent">
+                  <div
+                    class="BlogStatisticItem borderRight"
+                    v-for="(item, i) in weathArray"
+                    v-bind:key="i"
+                  >
+                    <div class="weathWeek" v-html="item.week"></div>
+                    <!-- <div class="weathDay">11月23日</div> -->
+                    <div class="weathDay">{{ item.date }}</div>
+                    <div class="weathIcon">
+                      <!-- <i :class="`iconfont ${item.dayweatherIcon} AboutMeIcon`" style="font-size:1.8rem"></i> -->
+                      <svg class="icon" aria-hidden="true">
+                        <use :xlink:href="`#${item.dayweatherIcon}`"></use>
+                      </svg>
+                    </div>
+                    <div class="weathChinese">{{ item.dayweather }}</div>
+                    <div class="temperature">
+                      {{ item.nighttemp }} ~ {{ item.daytemp }}°C
+                    </div>
                   </div>
                 </div>
               </div>
@@ -320,7 +286,9 @@
 import Pagination from "../SonCompnent/Pagination";
 import Emotion from "../SonCompnent/Emotion";
 import Store from "../../store";
-import Axios from "axios";
+import axios from 'axios';
+import weathJson from '../../static/map/weath.json';
+import weekJson from '../../static/map/week.json';
 
 export default {
   name: "MessageBoard",
@@ -350,6 +318,8 @@ export default {
       FadeAnimate: false, // 弹框显隐动画
       AticleBottom: false, // 文章底线
       buttonAnimate: false, // 博客入口按钮动画
+      city: "",
+      weathArray: []
     };
   },
   methods: {
@@ -520,7 +490,7 @@ export default {
     },
 
     // 上滑加载更多
-    ValueByPagition: function (SelectPage) {
+    _ValueByPagition: function (SelectPage) {
       var That = this;
       this.SQFrontAjax({
         Url: "/api/MessageRead/foreend",
@@ -591,11 +561,71 @@ export default {
     setButtonAnimate: function (status) {
       this.buttonAnimate = status;
     },
+
+    // 设置天气预报模块
+    setWeathe: function () {
+      let sunqBlogWeather = ""; // 3小时内不再刷新
+
+      if (sunqBlogWeather) {
+        this.renderWeathDom(sunqBlogWeather);
+      } else {
+        this.GetLocation(this.getWeathData);
+      }
+    },
+
+    getWeathData: function (cityName, cityCode) {
+      let that = this;
+      axios({
+        url: "https://restapi.amap.com/v3/weather/weatherInfo",
+        method: "GET",
+        params: {
+          key: "ba5f9b69f0541123a4dbe142da230b4d",
+          city: cityCode,
+          extensions: 'all',
+          output: "JSON"
+        },
+      }).then(function (resp) {
+          that.renderWeathDom(resp.data);
+
+          that.setSQCookie(
+            "sunqBlogWeather",
+            resp.data,
+            3
+          ); // 相隔3小时同一浏览器再次访问时会重新获取天气
+        })
+        .catch();
+    },
+
+    renderWeathDom: function (dataObj) {
+      if(dataObj.status=="1" && dataObj.infocode=='10000'){
+        let that = this,
+          weathArray = dataObj.forecasts[0].casts,
+          week;
+
+        that.city = dataObj.forecasts[0].city;
+        if(weathArray.length > 0){
+          weathArray.forEach(function(item,i){
+            if(i == 0){
+              item.week = weekJson[item.week] + '<span style="font-size:0.5rem">(今天)</span>';
+            }else{
+              item.week = weekJson[item.week];
+            } 
+            
+            item.date = item.date.split('-')[1] + '月' + item.date.split('-')[2] + "日";
+            item.dayweatherIcon = weathJson[item.dayweather];
+          });
+          weathArray.pop();
+          that.weathArray = weathArray;
+        }
+      }
+    },
   },
   mounted: function () {
     this.MessageRead();
     // 切换Topbar高亮
     Store.commit("ChangeActive", 1);
+
+    this.setWeathe();
 
     // 创建日志
     this.createLog({
@@ -667,10 +697,10 @@ export default {
   .boat {
     display: block;
     position: absolute;
-    animation:boatSwimming 150s linear;
-    animation-fill-mode:forwards;
-    animation-direction:alternate;
-    -webkit-animation-direction:alternate; /* Safari 和 Chrome */
+    animation: boatSwimming 150s linear;
+    animation-fill-mode: forwards;
+    animation-direction: alternate;
+    -webkit-animation-direction: alternate; /* Safari 和 Chrome */
     animation-iteration-count: 1;
     // -webkit-animation-iteration-count: 2; /*Safari and Chrome*/
     animation-delay: 2s;
@@ -709,9 +739,9 @@ export default {
 
   .boat img {
     animation: boatSmall 150s linear;
-    animation-fill-mode:forwards;
-    animation-direction:alternate;
-    -webkit-animation-direction:alternate; /* Safari 和 Chrome */
+    animation-fill-mode: forwards;
+    animation-direction: alternate;
+    -webkit-animation-direction: alternate; /* Safari 和 Chrome */
     animation-iteration-count: 1;
     // -webkit-animation-iteration-count:2; /*Safari and Chrome*/
     animation-delay: 2s;
@@ -721,7 +751,7 @@ export default {
   }
 
   // 船缩小的动画
-  @keyframes boatSmall{
+  @keyframes boatSmall {
     0% {
       width: 62vh;
       height: 32vh;
@@ -971,5 +1001,43 @@ export default {
   right: -1rem;
   top: -1rem;
   cursor: pointer;
+}
+
+.weathDev{
+  padding: 1rem 0.5rem;
+}
+.weathTitle{
+  font-size: 1.1rem;
+  margin-top: 0;
+}
+.weathContent{
+  border-top: none; 
+  padding-bottom: 0;
+  padding-top: 1rem;
+}
+.weathWeek{
+  padding-bottom: .3rem;
+}
+.weathDay{
+  opacity: .5;
+  font-size: 0.9rem;
+  padding-bottom: .3rem;
+}
+.temperature{
+  font-size: 0.8rem;
+  padding-bottom: .3rem;
+}
+.weathIcon{
+  padding-bottom: .3rem;
+  font-size: 2.2rem;
+}
+.citySpan{
+  font-size: 1.1rem;
+}
+.weathChinese{
+  padding-bottom: .3rem;
+  font-size: .9rem;
+  overflow: hidden;
+  flex-wrap:nowrap
 }
 </style>
