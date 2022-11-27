@@ -129,7 +129,7 @@
             </div>
           </div>
           <div
-            class="BlogIndexContentRight"
+            class="BlogIndexContentRight messageboard-page"
             style="border: 1px solid #e9e9e9; border-radius: 3px"
           >
             <div
@@ -762,6 +762,12 @@ export default {
       height: 0vh;
       opacity: 0.8;
     }
+  }
+
+  .messageboard-page{
+    position: sticky;
+    position: -webkit-sticky;
+    top: 60px;
   }
 }
 

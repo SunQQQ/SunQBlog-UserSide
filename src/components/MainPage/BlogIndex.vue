@@ -45,7 +45,7 @@
             <div class="ListBottom" v-if="AticleBottom">你滑到我底线啦</div>
             <Pagination v-on:PaginationToParent="ValueByPagition" ref="Pagi"></Pagination>
           </div>
-          <div class="BlogIndexContentRight">
+          <div class="BlogIndexContentRight blogindex-page">
             <div class="Module HotArticleModule">
               <transition name="Fade">
                 <img src="../../static/img/HotArticleList.jpg" v-if="DefaultGraph.HotArticlePart">
