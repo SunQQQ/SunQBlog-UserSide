@@ -490,7 +490,7 @@ export default {
     },
 
     // 上滑加载更多
-    _ValueByPagition: function (SelectPage) {
+    ValueByPagition: function (SelectPage) {
       var That = this;
       this.SQFrontAjax({
         Url: "/api/MessageRead/foreend",
