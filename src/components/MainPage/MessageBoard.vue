@@ -201,7 +201,7 @@
                         <use :xlink:href="`#${item.dayweatherIcon}`"></use>
                       </svg>
                     </div>
-                    <div class="weathChinese">{{ item.dayweather }}</div>
+                    <div class="weathChinese" :title="item.dayweather">{{ item.dayweather }}</div>
                     <div class="temperature">
                       {{ item.nighttemp }} ~ {{ item.daytemp }}°C
                     </div>
@@ -1041,9 +1041,14 @@ export default {
   font-size: 1.1rem;
 }
 .weathChinese{
-  padding-bottom: .3rem;
   font-size: .9rem;
   overflow: hidden;
-  flex-wrap:nowrap
+  min-width: 0;
+  -webkit-box-flex: 1;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  margin-bottom: 0.3rem;
 }
 </style>
