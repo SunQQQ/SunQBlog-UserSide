@@ -93,7 +93,7 @@
             <div class="list-td align give-up">访问时间</div>
           </div>
           <div :class="i % 2 == 0 ? 'list-tr single' : 'list-tr'" v-for="(item, i) in userActionData" v-bind:key="i">
-            <div class="list-td">{{ i }}</div>
+            <div class="list-td" v-html="i">{{ i }}</div>
             <div class="list-td action-padding">
               <ul>
                 <li v-for="(item, i) in item.action" v-bind:key="i" v-html="item">{{item}}</li>
@@ -666,13 +666,15 @@ export default {
           dayNum: dayNum ? dayNum : 1
         },
         Success: function (data) {
+          let curCompleteIp = data.yourIp; // 当前访客的IP
+
           userActionObject = data.userAction;
           that.totalUserAction = data.dateListTotal;
 
           for (let i in userActionObject) {
             // 保护用户隐私，马赛克掉ip最后一组数字
             let array = i.split('.'),
-              currentIp = array[0] + '.' + array[1] + '.' + array[2] + '.***',
+              currentIp = (i==curCompleteIp) ? i+"(你的)" : (array[0] + '.' + array[1] + '.' + array[2] + '.***'),
               item = userActionObject[i];
 
             // 处理访问来源
