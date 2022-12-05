@@ -212,7 +212,7 @@
             </div>
           </div>
           <div class="BigBlock AboutMeMarginTop">
-            <div class="TitleFontLine">Contacts</div>
+            <div class="TitleFontLine">联系我</div>
             <div
               class="BlogStatistic"
               style="border-top: none; padding-bottom: 0"
@@ -224,6 +224,18 @@
                     style="color: #948aec"
                   ></i
                 ></a>
+              </div>
+              <div class="BlogStatisticItem my-pointer" @click="infoMessage('13213074006')">
+                <i
+                    class="iconfont AboutMeIcon icon-weixin"
+                    style="color: #f46e65"
+                  ></i>
+              </div>
+              <div class="BlogStatisticItem my-pointer" @click="infoMessage('1585437938@qq.com')">
+                <i
+                  class="iconfont icon-youxiang AboutMeIcon"
+                  style="color: #49a9ee"
+                ></i>
               </div>
               <div class="BlogStatisticItem">
                 <a
@@ -240,22 +252,6 @@
                   ><i
                     class="iconfont icon-CN_csdnnet AboutMeIcon"
                     style="color: #f78e3d"
-                  ></i
-                ></a>
-              </div>
-              <div class="BlogStatisticItem">
-                <i
-                  class="iconfont icon-youxiang AboutMeIcon"
-                  style="color: #49a9ee"
-                ></i>
-              </div>
-              <div class="BlogStatisticItem">
-                <a
-                  href="https://music.163.com/#/user/home?id=386558098"
-                  target="_blank"
-                  ><i
-                    class="iconfont AboutMeIcon icon-CN_NetEasemusic"
-                    style="color: #f46e65"
                   ></i
                 ></a>
               </div>
@@ -286,6 +282,13 @@ export default {
     // 设置按钮动画的开始与停止
     setButtonAnimate: function (status) {
       this.buttonAnimate = status;
+    },
+    // 联系我的弹出框
+    infoMessage: (message) => {
+      Store.commit('ChangeTip', {
+          Show: true,
+          Title: message
+        });
     }
   },
   mounted: function () {

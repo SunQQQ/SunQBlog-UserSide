@@ -2,53 +2,36 @@
   <transition name="Fade" mode="out-in">
     <div style="position: relative">
       <div class="MessageBoardCover" @click="CloseMessageSubmit">
-        <div
-          :class="
-            OpenMessageSubmitValue
-              ? 'WriteMessageFrameFadeIn'
-              : 'WriteMessageFrameFadeOut'
-          "
-        >
+        <div :class="
+          OpenMessageSubmitValue
+            ? 'WriteMessageFrameFadeIn'
+            : 'WriteMessageFrameFadeOut'
+        ">
           <div class="WriteMessageFrameLeft">
             <img src="../../static/img/DefaultHeadIcon.jpg" />
             <div>欢迎你来</div>
           </div>
           <div style="flex: 1">
-            <div
-              :class="
-                OpenTextAreaCover
-                  ? 'WriteMessageFrameContent'
-                  : 'WriteMessageFrameContent WriteMessageFrameContentColorBorder'
-              "
-            >
+            <div :class="
+              OpenTextAreaCover
+                ? 'WriteMessageFrameContent'
+                : 'WriteMessageFrameContent WriteMessageFrameContentColorBorder'
+            ">
               <!--阻止触发CloseMessageSubmit-->
-              <textarea
-                ref="LeaveMessageTextArea"
-                placeholder="输入留言"
-                v-model="MessageText"
-                @click.stop=""
-              >
+              <textarea ref="LeaveMessageTextArea" placeholder="输入留言" v-model="MessageText" @click.stop="">
               </textarea>
               <span class="EmotionButton" @click="OpenEmotions()">
                 <i class="iconfont icon-face IconfontSize"></i>
               </span>
               <!--需阻止冒泡，否则会冒泡到最上层，触发CloseMessageSubmit方法。该方法逻辑与此处方法操作相反-->
-              <div
-                class="TextAreaCover"
-                @click.stop="OpenMessageSubmit()"
-                v-if="OpenTextAreaCover"
-              >
+              <div class="TextAreaCover" @click.stop="OpenMessageSubmit()" v-if="OpenTextAreaCover">
                 来都来啦，留个脚印吧
               </div>
             </div>
             <div class="OpenMessageSubmit">
               <div class="LeaveMessageName">
                 <!--阻止触发CloseMessageSubmit-->
-                <input
-                  placeholder="输入你的大名或昵称"
-                  v-model="MessageLeaveName"
-                  @click.stop=""
-                />
+                <input placeholder="输入你的大名或昵称" v-model="MessageLeaveName" @click.stop="" />
               </div>
               <div class="OpenMessageSubmitButton" @click="MessageSubmit()">
                 提交
@@ -63,45 +46,27 @@
 
       <div class="BlogIndexContent">
         <div class="BlogFlex">
-          <div
-            class="BlogIndexContentLeft"
-            style="
+          <div class="BlogIndexContentLeft" style="
               background-color: #ffffff;
               margin-top: 1rem;
               border: 1px solid #e9e9e9;
               border-radius: 3px;
-            "
-          >
+            ">
             <div class="CommentList">
-              <div
-                class="CommentItem"
-                v-for="(item, i) in MessageList"
-                v-bind:key="i"
-              >
+              <div class="CommentItem" v-for="(item, i) in MessageList" v-bind:key="i">
                 <div class="CommentItemIcon">
                   <!--如果用户名是sunq，直接展示我的专属头像。如果不是sunq，展示库里存的本条数据的头像，如果数据里该字段为空，展示默认头像-->
-                  <img
-                    :src="getIconAdress(item.iconNo)"
-                    v-if="item.MessageLeaveName != 'sunq'"
-                  />
-                  <img
-                    src="../../static/img/ZhihuIcon.jpg"
-                    v-if="item.MessageLeaveName == 'sunq'"
-                  />
+                  <img :src="getIconAdress(item.iconNo)" v-if="item.MessageLeaveName != 'sunq'" />
+                  <img src="../../static/img/ZhihuIcon.jpg" v-if="item.MessageLeaveName == 'sunq'" />
                 </div>
                 <div class="CommentItemContent">
                   <div>
                     {{ item.MessageLeaveName }}
-                    <span
-                      v-if="
-                        item.LocationCityName &&
-                        item.LocationCityName.length > 0
-                      "
-                    >
-                      <i
-                        class="iconfont icon-buoumaotubiao23 LocationIconfont"
-                      ></i
-                      >{{ item.LocationCityName }}
+                    <span v-if="
+                      item.LocationCityName &&
+                      item.LocationCityName.length > 0
+                    ">
+                      <i class="iconfont icon-buoumaotubiao23 LocationIconfont"></i>{{ item.LocationCityName }}
                     </span>
                   </div>
                   <div class="ArticleCommentText" v-html="item.MessageText">
@@ -111,10 +76,7 @@
                     <div class="DateAnswerLeft">
                       {{ item.MessageLeaveDate }}
                     </div>
-                    <div
-                      class="DateAnswerRight"
-                      @click="AnswerMessage(item.MessageLeaveName)"
-                    >
+                    <div class="DateAnswerRight" @click="AnswerMessage(item.MessageLeaveName)">
                       回复
                     </div>
                   </div>
@@ -128,19 +90,9 @@
               你滑到我底线啦
             </div>
           </div>
-          <div
-            class="BlogIndexContentRight messageboard-page"
-            style="border: 1px solid #e9e9e9; border-radius: 3px"
-          >
-            <div
-              class="Module"
-              style="padding: 0 0 0.5rem; background-color: transparent"
-            >
-              <div
-                class="GitPart"
-                @mouseenter="setButtonAnimate(true)"
-                @mouseleave="setButtonAnimate(false)"
-              >
+          <div class="BlogIndexContentRight messageboard-page" style="border: 1px solid #e9e9e9; border-radius: 3px">
+            <div class="Module" style="padding: 0 0 0.5rem; background-color: transparent">
+              <div class="GitPart" @mouseenter="setButtonAnimate(true)" @mouseleave="setButtonAnimate(false)">
                 <div class="TopBackBlack"></div>
                 <div class="GitPic">
                   <img src="../../static/img/ZhihuIcon.jpg" />
@@ -150,14 +102,8 @@
                 </div>
                 <div class="Content">
                   <div class="GitName">孙权的Github</div>
-                  <a
-                    class="BlueButton"
-                    :class="buttonAnimate ? 'open_animate' : ''"
-                    href="https://github.com/SunQQQ"
-                    target="_blank"
-                    @click="readCode()"
-                    >博客源码</a
-                  >
+                  <a class="BlueButton" :class="buttonAnimate ? 'open_animate' : ''" href="https://github.com/SunQQQ"
+                    target="_blank" @click="readCode()">博客源码</a>
                   <div class="BlogStatistic">
                     <div class="BlogStatisticItem">
                       <div class="BlogStatisticItemNum">49</div>
@@ -181,17 +127,12 @@
                 </div>
               </div>
 
-              <div class="BigBlock AboutMeMarginTop weathDev">
+              <div class="BigBlock AboutMeMarginTop weathDev" :class="city ? '' : 'weathNo'">
                 <div class="TitleFontLine weathTitle">
-                  <span class="citySpan">{{ city }}</span
-                  >天气
+                  <span class="citySpan">{{ city }}</span>天气
                 </div>
                 <div class="BlogStatistic weathContent">
-                  <div
-                    class="BlogStatisticItem borderRight"
-                    v-for="(item, i) in weathArray"
-                    v-bind:key="i"
-                  >
+                  <div class="BlogStatisticItem borderRight" v-for="(item, i) in weathArray" v-bind:key="i">
                     <div class="weathWeek" v-html="item.week"></div>
                     <!-- <div class="weathDay">11月23日</div> -->
                     <div class="weathDay">{{ item.date }}</div>
@@ -208,64 +149,70 @@
                   </div>
                 </div>
               </div>
+
+              <div class="BigBlock AboutMeMarginTop" :class="city ? 'weathNo' : ''">
+                <div class="TitleFontLine">联系我</div>
+                <div class="BlogStatistic" style="border-top: none; padding-bottom: 0">
+                  <div class="BlogStatisticItem">
+                    <a href="https://github.com/SunQQQ" target="_blank"><i class="iconfont icon-github AboutMeIcon"
+                        style="color: #948aec"></i></a>
+                  </div>
+                  <div class="BlogStatisticItem my-pointer" @click="infoMessage('13213074006')">
+                    <i class="iconfont AboutMeIcon icon-weixin" style="color: #f46e65"></i>
+                  </div>
+                  <div class="BlogStatisticItem my-pointer" @click="infoMessage('1585437938@qq.com')">
+                    <i class="iconfont icon-youxiang AboutMeIcon" style="color: #49a9ee"></i>
+                  </div>
+                  <div class="BlogStatisticItem">
+                    <a href="https://www.zhihu.com/people/s-q-51-44-23/activities" target="_blank"><i
+                        class="iconfont icon-zhihu AboutMeIcon" style="color: #3dbd7d"></i></a>
+                  </div>
+                  <div class="BlogStatisticItem">
+                    <a href="https://blog.csdn.net/sun_qqq" target="_blank"><i
+                        class="iconfont icon-CN_csdnnet AboutMeIcon" style="color: #f78e3d"></i></a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <Pagination
-          v-on:PaginationToParent="ValueByPagition"
-          ref="Pagi"
-        ></Pagination>
+        <Pagination v-on:PaginationToParent="ValueByPagition" ref="Pagi"></Pagination>
       </div>
       <!--回复留言弹框PageActive-->
-      <div
-        style="
+      <div style="
           position: fixed;
           top: 0;
           bottom: 0;
           left: 0;
           right: 0;
           z-index: 1000;
-        "
-        v-if="MessageAnswerFrame"
-      >
+        " v-if="MessageAnswerFrame">
         <div class="MessageBoxWrapper" @click="CloseAnswerMessage()"></div>
-        <div
-          class="WriteMessageFrameFadeIn"
-          style="
+        <div class="WriteMessageFrameFadeIn" style="
             position: fixed;
             top: 0;
             bottom: 0;
             left: 0;
             right: 0;
             z-index: 1000;
-          "
-        >
+          ">
           <div class="WriteMessageFrameLeft">
             <img src="../../static/img/DefaultHeadIcon.jpg" />
             <div>回复留言</div>
           </div>
           <div style="flex: 1; position: relative">
-            <div
-              class="
+            <div class="
                 WriteMessageFrameContent
                 WriteMessageFrameContentColorBorder
-              "
-            >
-              <textarea
-                ref="AnswerMessageContentDom"
-                placeholder="输入留言"
-                v-model="MessageText"
-              ></textarea>
+              ">
+              <textarea ref="AnswerMessageContentDom" placeholder="输入留言" v-model="MessageText"></textarea>
               <span class="EmotionButton" @click="OpenEmotions()">
                 <i class="iconfont icon-face IconfontSize"></i>
               </span>
             </div>
             <div class="OpenMessageSubmit">
               <div class="LeaveMessageName">
-                <input
-                  placeholder="输入你的大名或昵称"
-                  v-model="MessageLeaveName"
-                />
+                <input placeholder="输入你的大名或昵称" v-model="MessageLeaveName" />
               </div>
               <div class="OpenMessageSubmitButton" @click="MessageSubmit()">
                 提交
@@ -357,8 +304,8 @@ export default {
 
       if (Store.getters.GetMessageText && this.MessageLeaveName) {
         let MatchedMessageText = That.MatchEmotion(
-            Store.getters.GetMessageText
-          ),
+          Store.getters.GetMessageText
+        ),
           iconNo = this.GetLocalStorage("SunqBlog").ArticleCommentIcon
             ? this.GetLocalStorage("SunqBlog").ArticleCommentIcon
             : Math.round(Math.random() * 4);
@@ -585,32 +532,32 @@ export default {
           output: "JSON"
         },
       }).then(function (resp) {
-          that.renderWeathDom(resp.data);
+        that.renderWeathDom(resp.data);
 
-          that.setSQCookie(
-            "sunqBlogWeather",
-            resp.data,
-            3
-          ); // 相隔3小时同一浏览器再次访问时会重新获取天气
-        })
+        that.setSQCookie(
+          "sunqBlogWeather",
+          resp.data,
+          3
+        ); // 相隔3小时同一浏览器再次访问时会重新获取天气
+      })
         .catch();
     },
 
     renderWeathDom: function (dataObj) {
-      if(dataObj.status=="1" && dataObj.infocode=='10000'){
+      if (dataObj.status == "1" && dataObj.infocode == '10000') {
         let that = this,
           weathArray = dataObj.forecasts[0].casts,
           week;
 
         that.city = dataObj.forecasts[0].city;
-        if(weathArray.length > 0){
-          weathArray.forEach(function(item,i){
-            if(i == 0){
+        if (weathArray.length > 0) {
+          weathArray.forEach(function (item, i) {
+            if (i == 0) {
               item.week = weekJson[item.week] + '<span style="font-size:0.5rem">(今天)</span>';
-            }else{
+            } else {
               item.week = weekJson[item.week];
-            } 
-            
+            }
+
             item.date = item.date.split('-')[1] + '月' + item.date.split('-')[2] + "日";
             item.dayweatherIcon = weathJson[item.dayweather];
           });
@@ -619,6 +566,14 @@ export default {
         }
       }
     },
+
+    // 联系我的弹出框
+    infoMessage: (message) => {
+      Store.commit('ChangeTip', {
+        Show: true,
+        Title: message
+      });
+    }
   },
   mounted: function () {
     this.MessageRead();
@@ -641,6 +596,7 @@ export default {
 @import "../../static/css/AboutMe";
 @import "../../static/css/BlogIndex";
 @import "../../static/css/BlogDetail";
+
 /*pc端*/
 @media only screen and (min-device-width: 768px) {
   .WriteMessageFrameFadeIn {
@@ -700,7 +656,8 @@ export default {
     animation: boatSwimming 150s linear;
     animation-fill-mode: forwards;
     animation-direction: alternate;
-    -webkit-animation-direction: alternate; /* Safari 和 Chrome */
+    -webkit-animation-direction: alternate;
+    /* Safari 和 Chrome */
     animation-iteration-count: 1;
     // -webkit-animation-iteration-count: 2; /*Safari and Chrome*/
     animation-delay: 2s;
@@ -715,6 +672,7 @@ export default {
       top: 60vh;
       left: 14vw;
     }
+
     // 20% {
     //   top: 48vh;
     //   left: 42vh;
@@ -741,7 +699,8 @@ export default {
     animation: boatSmall 150s linear;
     animation-fill-mode: forwards;
     animation-direction: alternate;
-    -webkit-animation-direction: alternate; /* Safari 和 Chrome */
+    -webkit-animation-direction: alternate;
+    /* Safari 和 Chrome */
     animation-iteration-count: 1;
     // -webkit-animation-iteration-count:2; /*Safari and Chrome*/
     animation-delay: 2s;
@@ -757,6 +716,7 @@ export default {
       height: 32vh;
       opacity: 1;
     }
+
     100% {
       width: 0vh;
       height: 0vh;
@@ -764,7 +724,7 @@ export default {
     }
   }
 
-  .messageboard-page{
+  .messageboard-page {
     position: sticky;
     position: -webkit-sticky;
     top: 60px;
@@ -841,18 +801,22 @@ export default {
     transform: scale(0.9);
     height: 4.5rem;
   }
+
   20% {
     transform: scale(0.925);
     height: 5rem;
   }
+
   60% {
     transform: scale(0.95);
     height: 6rem;
   }
+
   80% {
     transform: scale(0.975);
     height: 7rem;
   }
+
   100% {
     transform: scale(1);
     height: 7.5rem;
@@ -864,18 +828,22 @@ export default {
     transform: scale(0.9);
     height: 7.5rem;
   }
+
   20% {
     transform: scale(0.925);
     height: 7rem;
   }
+
   60% {
     transform: scale(0.95);
     height: 6rem;
   }
+
   80% {
     transform: scale(0.975);
     height: 5rem;
   }
+
   100% {
     transform: scale(1);
     height: 4.5rem;
@@ -930,18 +898,23 @@ export default {
   0% {
     transform: translateY(-1rem);
   }
+
   20% {
     transform: translateY(-0.8rem);
   }
+
   40% {
     transform: translateY(-0.6rem);
   }
+
   60% {
     transform: translateY(-0.4rem);
   }
+
   80% {
     transform: translateY(-0.2rem);
   }
+
   100% {
     transform: translateY(0rem);
   }
@@ -1009,38 +982,50 @@ export default {
   cursor: pointer;
 }
 
-.weathDev{
+.weathDev {
   padding: 1rem 0.5rem;
 }
-.weathTitle{
+
+.weathNo {
+  display: none;
+}
+
+.weathTitle {
   font-size: 1.1rem;
   margin-top: 0;
 }
-.weathContent{
-  border-top: none; 
+
+.weathContent {
+  border-top: none;
   padding-bottom: 0;
   padding-top: 1rem;
 }
-.weathWeek{
+
+.weathWeek {
   padding-bottom: .3rem;
 }
-.weathDay{
+
+.weathDay {
   opacity: .5;
   font-size: 0.9rem;
   padding-bottom: .3rem;
 }
-.temperature{
+
+.temperature {
   font-size: 0.8rem;
   padding-bottom: .3rem;
 }
-.weathIcon{
+
+.weathIcon {
   padding-bottom: .3rem;
   font-size: 2.2rem;
 }
-.citySpan{
+
+.citySpan {
   font-size: 1.1rem;
 }
-.weathChinese{
+
+.weathChinese {
   font-size: .9rem;
   overflow: hidden;
   min-width: 0;
