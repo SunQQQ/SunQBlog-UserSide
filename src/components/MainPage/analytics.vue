@@ -92,8 +92,11 @@
             <div class="list-td align give-up">访问设备</div>
             <div class="list-td align give-up">访问时间</div>
           </div>
-          <div :class="i % 2 == 0 ? 'list-tr single' : 'list-tr'" v-for="(item, i) in userActionData" v-bind:key="i">
-            <div class="list-td" v-html="i">{{ i }}</div>
+          <div :class="item.curIp ? 'list-tr single' : 'list-tr'" v-for="(item, i) in userActionData" v-bind:key="i">
+            <div class="list-td text-center">
+              <div>{{ item.curIp ? item.curIp : i }}</div>
+              <div class="your-ip" v-if="item.curIp">（你的轨迹）</div>
+            </div>
             <div class="list-td action-padding">
               <ul>
                 <li v-for="(item, i) in item.action" v-bind:key="i" v-html="item">{{item}}</li>
@@ -667,6 +670,7 @@ export default {
         },
         Success: function (data) {
           let curCompleteIp = data.yourIp; // 当前访客的IP
+          // let curCompleteIp = "36.48.127.8"; // 当前访客的IP
 
           userActionObject = data.userAction;
           that.totalUserAction = data.dateListTotal;
@@ -674,8 +678,8 @@ export default {
           for (let i in userActionObject) {
             // 保护用户隐私，马赛克掉ip最后一组数字
             let array = i.split('.'),
-              currentIp = (i==curCompleteIp) ? i+"(你的)" : (array[0] + '.' + array[1] + '.' + array[2] + '.***'),
-              item = userActionObject[i];
+            item = userActionObject[i],
+            currentIp = array[0] + '.' + array[1] + '.' + array[2] + '.***';
 
             // 处理访问来源
             if (userActionObject[i].fromUrl) {
@@ -684,9 +688,15 @@ export default {
               userActionObject[i].fromUrl = '直接打开';
             }
 
+            // 标识下当前用户的轨迹
+            if(curCompleteIp == i){
+              item.curIp = curCompleteIp; // 用户自己的IP不再打码
+            }
+
             // 为用户IP打码
             userActionObject[currentIp] = item;
             delete userActionObject[i];
+            
 
             // 因为对象当前本来的属性名已经被删掉了，所以得修改新的属性名对应的属性值
             if (JSON.stringify(userActionObject[currentIp].location) === '[]') {
@@ -695,6 +705,8 @@ export default {
           }
 
           that.userActionData = userActionObject;
+          console.log('轨迹数据',that.userActionData);
+          // debugger
         }
       });
       // 初始化时不创建日志。切换时间维度后，记日志并刷新日志列表
