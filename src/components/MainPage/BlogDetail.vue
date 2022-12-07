@@ -150,6 +150,9 @@
 import Marked from "marked";
 import Emotion from "../SonCompnent/Emotion";
 import Store from "../../store";
+import highlight from "highlight.js";
+import "highlight.js/styles/github.css"; // 黑色风格
+// import 'highlight.js/styles/atom-one-dark.css' // 清新风格
 
 export default {
   name: "BlogDetail",
@@ -195,7 +198,31 @@ export default {
 
           That.Article = data[0];
           That.Article.CreateDate = That.DateFormat(That.Article.CreateDate);
-          That.Article.Content = Marked(That.Article.Content); //Markdown格式字符串转html
+
+          const rendererMD = new Marked.Renderer();
+          rendererMD.image = function (href, title, text) {
+            return `<img onclick="showMarkedImage(event, '${href}')" src="${href}" alt="${text}" title="${
+              title ? title : ""
+            }">`;
+          };
+          Marked.setOptions({
+            renderer: rendererMD,
+            gfm: true,
+            tables: true,
+            breaks: false,
+            pedantic: false,
+            sanitize: false,
+            smartLists: true,
+            smartypants: false,
+            highlight: function (code) {
+              return highlight.highlightAuto(code).value;
+            },
+          });
+
+          That.Article.Content = Marked(That.Article.Content).replace(
+            /<pre>/g,
+            "<pre class='language-html'>"
+          ); //Markdown格式字符串转html
 
           // 创建日志
           That.createLog({
@@ -319,9 +346,22 @@ export default {
     AppendMessageText: function () {
       // 光标聚焦
       this.$refs.MessageText.focus();
-    },
+    }
   },
   mounted: function () {
+    window.showMarkedImage = function(e, href) {
+      let el = e.target
+      let rfs =
+        el.requestFullScreen ||
+        el.webkitRequestFullScreen ||
+        el.mozRequestFullScreen ||
+        el.msRequestFullScreen
+      if (rfs) {
+        rfs.call(el)
+      }
+      console.log(href)
+    }
+
     // 初始化文章内容
     this.InitPage();
     // 初始化评论列表
