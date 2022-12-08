@@ -352,14 +352,11 @@ export default {
     window.showMarkedImage = function(e, href) {
       let el = e.target
       let rfs =
-        el.requestFullScreen ||
-        el.webkitRequestFullScreen ||
-        el.mozRequestFullScreen ||
-        el.msRequestFullScreen
-      if (rfs) {
-        rfs.call(el)
-      }
-      console.log(href)
+        el.requestFullscreen ||
+        el.webkitRequestFullscreen ||
+        el.mozRequestFullscreen ||
+        el.msRequestFullscreen
+      if(rfs) rfs.call(el); // 这里rfs()会执行失败，因为rfs返回的是个单纯的函数，没有对象去调用它了
     }
 
     // 初始化文章内容
