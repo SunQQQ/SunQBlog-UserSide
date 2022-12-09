@@ -1,0 +1,264 @@
+@import '../../static/css/FriendUrl';
+/*移动端*/
+@media only screen and (max-device-width: 768px) {
+    .TimeLineTr{
+        .myflex(center);
+        position: relative;
+        margin: 0 1rem;
+    }
+    .TimeFixedBac{
+        width: 100%;
+        height: 80vh;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 100;
+        background-attachment: fixed;
+        background: url(../../static/img/timeLine-bac.jpg) no-repeat 50% #cef;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .clockDev{
+        position: absolute;
+        left: 0;
+        top: 4.3rem;
+        z-index: 800;
+        width: 120px;
+        height: 134px;
+    }
+    .clockDev img{
+        width: 100%;
+        height: 100%;
+    }
+
+    .needleDiv{
+        z-index: 1000;
+        position: absolute;
+        top: 100px;
+        left:15px;
+        animation: needleRound 60s linear;
+        animation-iteration-count: infinite;
+        width: 60px;
+        height: 41px;
+    }
+    .needleDiv img{
+        width: 100%;
+        height: 100%;
+    }
+    .FriendUrlBac{
+        height: 80vh;
+        background: transparent;
+        z-index: 100;
+        margin-top: 0;
+    }
+    .flower{
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 35vw;
+        height: 24.8vw;
+        z-index: 800;
+    }
+    .flower img{
+        width: 100%;
+        height: 100%;
+    }
+    .TimeLIneTitle{
+        padding-top: 25vh;
+    }
+}
+
+/*PC端*/
+@media only screen and (min-device-width: 768px) {
+    .TimeLineTr{
+        .myflex(center);
+        position: relative;
+    }
+    .TimeFixedBac{
+        width: 100%;
+        height: 95vh;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 100;
+        background-attachment: fixed;
+        background: url(../../static/img/timeLine-bac.jpg) no-repeat 50% #cef;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .FriendUrlBac{
+        height: 83vh;
+        background: transparent;
+        z-index: 100;
+    }
+    .needleDiv{
+        z-index: 1000;
+        position: absolute;
+        top: 1.4vw;
+        left:4.2vw;
+        animation: needleRound 60s linear;
+        animation-iteration-count: infinite;
+        width: 15.5vw;
+        height: 10.6vw;
+    }
+    .needleDiv img{
+        width: 100%;
+        height: 100%;
+    }
+    .flower{
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 28vw;
+        height: 19.8vw;
+        z-index: 800;
+    }
+    .flower img{
+        width: 100%;
+        height: 100%;
+    }
+    .TimeLIneTitle{
+        margin-top: 12vh
+    }
+    .clockDev{
+        position: absolute;
+        left: 0;
+        top: -8vw;
+        z-index: 800;
+        width: 35vw;
+        height: 39vw;
+    }
+    .clockDev img{
+        width: 100%;
+        height: 100%;
+    }
+
+    .bubble-right-margin{
+        margin-right: 8rem !important;
+    }
+    .bubble-margin{
+        margin-left: 8rem !important;
+    }
+}
+@keyframes needleRound{
+    0% {
+        transform:rotate(0deg);
+        transform-origin: 3.9vw 2.7vw;
+    }
+    100% {
+        transform:rotate(360deg);
+        transform-origin: 3.9vw 2.7vw;
+    }
+}
+
+.TimeFixedBac:before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+.FriendUrlTitleSummary{
+    /*color: @FontColorWhite;*/
+    color:black;
+    font-size: 1rem;
+    font-family: Helvetica,STHeiti STXihei,Microsoft JhengHei,Microsoft YaHei,Tohoma,Arial;
+    margin-top: 1rem;
+}
+
+.TimeLineTdLeft{
+    flex: 1;
+    padding-right:2rem;
+    position: relative;
+}
+.TimeLineTdCenter{
+    width: 2px;
+    height: 100%;
+    background-color: @ThemeColor;
+    height:100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+}
+.TimeLineTdRight{
+    padding-left:2rem;
+    flex: 1;
+}
+.Bubble{
+    margin-right: 1rem;
+    margin: 1rem 0;
+    position: relative;
+    background-color: @fore_color;
+    border-radius: 5px;
+    padding: 1rem;
+    border: 1px solid @ThemeColor;
+}
+.Bubble:before{
+    content: "";
+    border: 8px solid transparent;
+    width: 0;
+    height: 0;
+    display: inline-block;
+    border-left: 8px solid @ThemeColor;
+
+    right: -16px;
+    position: absolute;
+    top: 1.3rem;
+}
+.Bubble:after{
+    content: "";
+    width: 1rem;
+    height: 1rem;
+    display: inline-block;
+    background-color: @ThemeColor;
+    border-radius: 100%;
+    border: 0.25rem solid @fore_color;
+
+    position: absolute;
+    right: -2.90rem;
+    top: 1rem;
+    z-index: 1000;
+}
+.BubbleRight{
+    margin-right: 1rem;
+    margin: 1rem 0;
+    position: relative;
+    background-color: @fore_color;
+    border-radius: 5px;
+    padding: 1rem;
+    border: 1px solid @ThemeColor;
+}
+.BubbleRight:before{
+    content: "";
+    border: 8px solid transparent;
+    width: 0;
+    height: 0;
+    display: inline-block;
+    border-right: 8px solid @ThemeColor;
+    left: -16px;
+    position: absolute;
+    top: 1.3rem;
+}
+.BubbleRight:after{
+     content: "";
+     width: 1rem;
+     height: 1rem;
+     display: inline-block;
+     background-color: @fore_color;
+     border-radius: 100%;
+     border: 0.2rem solid @ThemeColor;
+
+     position: absolute;
+     left: -2.7rem;
+     top: 1rem;
+
+    z-index: 1000;
+ }
+.TimeLineTime{
+    color:@ThemeColor;
+    margin-right: 1rem;
+}
