@@ -306,9 +306,7 @@ export default {
         let MatchedMessageText = That.MatchEmotion(
           Store.getters.GetMessageText
         ),
-          iconNo = this.GetLocalStorage("SunqBlog").ArticleCommentIcon
-            ? this.GetLocalStorage("SunqBlog").ArticleCommentIcon
-            : Math.round(Math.random() * 4);
+          iconNo = this.GetLocalStorage("SunqBlog").ArticleCommentIcon || Math.round(Math.random() * 4);
 
         this.GetLocation(function (LocationCityName) {
           That.SQFrontAjax({
