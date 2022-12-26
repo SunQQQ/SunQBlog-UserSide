@@ -2,7 +2,7 @@
  * @Author: ke.xue
  * @Date: 2022-12-24 12:55:54
  * @LastEditors: ke.xue
- * @LastEditTime: 2022-12-24 15:05:25
+ * @LastEditTime: 2022-12-26 14:58:12
  * @FilePath: \SunQBlog-UserSide\src\components\experimentalField\imageToPdf.vue
  * @Description: 文件描述
 -->
@@ -10,8 +10,10 @@
   <transition name="fade" mode="out-in">
     <div class="toPdf">
       <input v-if="showInput" type="file" accept="image/*" multiple="multiple" @change="inputChange">
-      <button class="button" @click="clearAll">清空</button>
-      <button class="button" @click="download">下载</button>
+      <div class="buttonBox">        
+        <button class="button" @click="clearAll">清空</button>
+        <button class="button" @click="download">下载</button>
+      </div>
       <div ref="imgs" class="imgsBox">
         <img v-for="(item, index) in imgs" :key="index" :src="item" alt="">
       </div>
@@ -129,6 +131,8 @@ export default {
 
 <style lang="less" scoped>
 .toPdf {
+  margin-top: 100px;
+  padding: 0 20px 20px;
   .imgsBox {
     margin: 10px auto;
     width: 600px;
@@ -136,6 +140,9 @@ export default {
     img {
       width: 600px;
     }
+  }
+  .buttonBox {
+    margin-top: 30px;
   }
   .button {
     min-width: 100px;
