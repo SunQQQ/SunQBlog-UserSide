@@ -10,6 +10,7 @@
   "dependencies": {
     "axios": "0.18.0",
     "compression-webpack-plugin": "1.1.12",
+    "core-js": "^2.6.12",
     "crypto-js": "4.1.1",
     "echarts": "5.2.2",
     "highlight.js": "^9.13.1",

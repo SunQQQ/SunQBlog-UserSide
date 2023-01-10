@@ -93,10 +93,14 @@ export default {
       this.downloadPDF(this.$refs.imgs)
     },
     inputChange (e) {
-      const arr = []
-      for (const item of e.target.files) {
-        arr.push(this.fileToUrl(item))
-      }
+      const arr = [],
+        that = this,
+        filesArray = Array.from(e.target.files); // e.target.files是个类数组，需转化
+            
+      filesArray.forEach((item)=>{
+        arr.push(that.fileToUrl(item));
+      });
+
       Promise.all(arr).then(res => {
         this.imgs = [...this.imgs, ...res]
         this.updateInput()
