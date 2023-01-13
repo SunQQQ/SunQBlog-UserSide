@@ -126,7 +126,7 @@
   export default {
     name: "BlogIndex",
     components: {
-      Heartfelt,
+      // Heartfelt,
       Pagination
     },
     data: function () {

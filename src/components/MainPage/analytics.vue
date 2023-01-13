@@ -138,7 +138,7 @@ export default {
   name: "analytics",
   components: {
     Pagination,
-    Heartfelt
+    // Heartfelt
   },
   data: function () {
     return {
