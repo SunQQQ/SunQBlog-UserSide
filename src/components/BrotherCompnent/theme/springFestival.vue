@@ -107,7 +107,7 @@ export default {
                     width: 80px;
                     height: 16px;
                     background-color: #FACCAB;
-                    box-shadow: 0px 0px 5px 5px #E58B55 inset;
+                    box-shadow: 0px 0px 4px 4px #E58B55 inset;
                 }
             }
 
