@@ -164,7 +164,7 @@ export default {
 
 @media only screen and(max-device-width:768px) {
     .springFestival{
-        // display: none;
+        display: none;
         img {
             width: 95px;
             height: 60px;
