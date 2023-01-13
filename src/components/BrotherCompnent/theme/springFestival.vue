@@ -59,19 +59,20 @@ export default {
     name: "springFestival",
     data() {
         return {
-            screenWidth:0,
+            screenWidth: 0,
             springIconLeft: 0,
         }
     },
     created() {
         this.screenWidth = window.screen.width;
-        this.springIconLeft = this.screenWidth>768 ? (this.screenWidth-1200)/2 + 120 : 110;
+        this.springIconLeft = this.screenWidth > 768 ? (this.screenWidth - 1200) / 2 + 120 : 110;
         console.log(this.springIconLeft);
     }
 }
 </script>
 
-<style scoped lang="less">
+
+<style lang="less">// 此处特意不加scoped,让本主题的样式干扰/覆盖掉各组件原本的属性
 @media only screen and(min-device-width:768px) {
     .springFestival {
         img {
@@ -160,11 +161,17 @@ export default {
             right: 5%;
         }
     }
+
+    .MenuItemActive{
+        border-bottom: 2px solid #D92223!important;
+        color: #D92223!important;
+    }
 }
 
 @media only screen and(max-device-width:768px) {
-    .springFestival{
+    .springFestival {
         display: none;
+
         img {
             width: 95px;
             height: 60px;
@@ -172,6 +179,7 @@ export default {
             top: 0px;
             z-index: 10000;
         }
+
         .leftCouplet {
             display: none;
         }
