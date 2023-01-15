@@ -90,6 +90,7 @@ export default {
             text-align: center;
             width: 100px;
             z-index: 1000;
+            display:none;
 
             .coupletRoller {
                 display: flex;
