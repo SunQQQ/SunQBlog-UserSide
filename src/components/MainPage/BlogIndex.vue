@@ -45,7 +45,7 @@
             <div class="ListBottom" v-if="AticleBottom">你滑到我底线啦</div>
             <Pagination v-on:PaginationToParent="ValueByPagition" ref="Pagi"></Pagination>
           </div>
-          <div class="BlogIndexContentRight blogindex-page">
+          <div class="BlogIndexContentRight blogindex-page" v-bind:style="{ top: stickyTop }">
             <div class="Module HotArticleModule">
               <transition name="Fade">
                 <img src="../../static/img/HotArticleList.jpg" v-if="DefaultGraph.HotArticlePart">
@@ -144,7 +144,8 @@
           ArticleListPart: true,
           HotArticlePart: true,
           ArticleTagPart: true
-        }
+        },
+        stickyTop: 0
       }
     },
     methods: {
@@ -334,6 +335,8 @@
 
       this.InitArticleTag(this);
       Store.commit("ChangeActive", 0); // 切换Topbar高亮
+
+      this.stickyTop = -(942.3 - window.innerHeight + 76) + 46 + 'px'; // 设置右侧区域粘性布局的top高度
 
       // 创建日志
       that.createLog({
