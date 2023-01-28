@@ -1,13 +1,19 @@
 <template>
-    <footer class="Footer">
+    <footer class="Footer" v-show="footerShow">
         <div>版权所有 @ 2018 SunQuan.保留所有权利  <span class="RecordNo">豫ICP备17047894号-1</span></div>
         <div>Base on Node + Vue、 Design by SunQuan</div>
     </footer>
 </template>
 
 <script>
+    import store from "../../store"
   export default {
-    name: "Footer"
+    name: "Footer",
+    computed:{
+        footerShow(){
+            return store.state.footer.show;
+        }
+    }
   }
 </script>
 

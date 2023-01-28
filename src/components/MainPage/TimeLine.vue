@@ -79,6 +79,7 @@
       this.GetTimeLineList();
       // topbar高亮设置
       Store.commit("ChangeActive", 2);
+      Store.commit("changeFooter",true); // 展示footer
 
       // 创建日志
       this.createLog({

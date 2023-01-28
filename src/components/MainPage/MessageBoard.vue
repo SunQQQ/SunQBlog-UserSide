@@ -454,8 +454,10 @@ export default {
             That.AticleBottom = true;
             // 停止分页器的滚动监听
             That.$refs.Pagi.SetUpdate(false);
+            Store.commit("changeFooter",true); // 展示footer
           } else {
             That.$refs.Pagi.SetUpdate(true);
+            Store.commit("changeFooter",false); // 隐藏footer
             // 创建日志
             That.createLog({
               moduleType: "pageTurn",
@@ -577,6 +579,8 @@ export default {
     this.MessageRead();
     // 切换Topbar高亮
     Store.commit("ChangeActive", 1);
+
+    Store.commit("changeFooter",false); // 初始化时隐藏footer
 
     this.setWeathe();
 

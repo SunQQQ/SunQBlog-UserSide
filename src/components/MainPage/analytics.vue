@@ -762,7 +762,8 @@ export default {
   },
   mounted: function () {
     var that = this;
-    Store.commit("ChangeActive", 5);// 切换Topbar高亮
+    Store.commit("ChangeActive", 5); // 切换Topbar高亮
+    Store.commit("changeFooter",true); // 展示footer 
 
     Vue.prototype.$echarts = echarts;
     this.setLineChart(7, 'init');

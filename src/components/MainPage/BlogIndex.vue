@@ -118,8 +118,7 @@
 </template>
 
 <script>
-  import Heartfelt from '../SonCompnent/Heartfelt';
-  import Pagination from '../SonCompnent/Pagination';
+  import Heartfelt from '../SonCompnent/Heartfelt';  import Pagination from '../SonCompnent/Pagination';
   import Store from '../../store'
   import axios from "axios";
 
@@ -240,9 +239,13 @@
               That.AticleBottom = true;
               // 停止分页器的滚动监听
               That.$refs.Pagi.SetUpdate(false);
+              // 下拉到底部后，展示footer
+              Store.commit("changeFooter",true);
             } else {
               That.$refs.Pagi.SetUpdate(true);
 
+              // 还有分页时，隐藏footer
+              Store.commit("changeFooter",false);
               // 创建日志
               That.createLog({
                 moduleType: 'pageTurn',
@@ -337,6 +340,8 @@
       Store.commit("ChangeActive", 0); // 切换Topbar高亮
 
       this.stickyTop = -(942.3 - window.innerHeight + 76) + 46 + 'px'; // 设置右侧区域粘性布局的top高度
+
+      Store.commit("changeFooter",false); // 初始化时隐藏footer
 
       // 创建日志
       that.createLog({

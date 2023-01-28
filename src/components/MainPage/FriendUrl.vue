@@ -101,6 +101,7 @@
       this.GetFriendUrlList();
       // 切换Topbar高亮
       Store.commit("ChangeActive", 3);
+      Store.commit("changeFooter",true); // 展示footer
 
       // 创建日志
       this.createLog({

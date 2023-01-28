@@ -22,6 +22,11 @@ export default new Vuex.Store({
     Tips:{
       Show:false,
       Title:''
+    },
+
+    // footer组件
+    footer:{
+      show: false
     }
   },
   getters: {
@@ -64,6 +69,10 @@ export default new Vuex.Store({
       State.Tips.Show = Value.Show;
       State.Tips.Title = Value.Title;
     },
+    // footer组件
+    changeFooter:(state,value)=>{
+      state.footer.show = value;
+    }
   },
   actions: {
 
