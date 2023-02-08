@@ -339,7 +339,11 @@
       Store.commit("ChangeActive", 0); // 切换Topbar高亮
 
       // 超大分辨率下，不再设置margin-top值
-      if(window.innerHeight < 1042) this.stickyTop = -(942.3 - window.innerHeight + 76) + 46 + 'px'; // 设置右侧区域粘性布局的top高度
+      if(window.innerHeight < 1042){
+        this.stickyTop = -(942.3 - window.innerHeight + 76) + 46 + 'px'; // 设置右侧区域粘性布局的top高度
+      }else{
+        this.stickyTop = 60 + "px"; // 把导航栏的距离留出来
+      }
 
       Store.commit("changeFooter",false); // 初始化时隐藏footer
 
