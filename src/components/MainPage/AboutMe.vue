@@ -276,7 +276,7 @@ export default {
     };
   },
   components: {
-    // Heartfelt,
+    Heartfelt,
   },
   methods: {
     // 设置按钮动画的开始与停止

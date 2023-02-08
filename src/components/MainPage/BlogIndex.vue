@@ -120,12 +120,11 @@
 <script>
   import Heartfelt from '../SonCompnent/Heartfelt';  import Pagination from '../SonCompnent/Pagination';
   import Store from '../../store'
-  import axios from "axios";
 
   export default {
     name: "BlogIndex",
     components: {
-      // Heartfelt,
+      Heartfelt,
       Pagination
     },
     data: function () {

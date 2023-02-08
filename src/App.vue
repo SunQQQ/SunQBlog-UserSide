@@ -7,7 +7,7 @@
         <Loading></Loading>
         <CanvasBac></CanvasBac>
         <AirPlane></AirPlane>
-        <spring-festival></spring-festival>
+        <!-- <spring-festival></spring-festival> -->
     </div>
 </template>
 <script>
@@ -17,7 +17,7 @@
   import Loading from './components/BrotherCompnent/Loading'
   import CanvasBac from './components/BrotherCompnent/CanvasBac'
   import AirPlane from './components/BrotherCompnent/Airplane'
-  import springFestival from '@/components/BrotherCompnent/theme/springFestival'
+  // import springFestival from '@/components/BrotherCompnent/theme/springFestival'
 
   export default {
     name: 'app',
@@ -28,7 +28,7 @@
       Loading:Loading,
       CanvasBac:CanvasBac,
       AirPlane:AirPlane,
-      springFestival:springFestival
+      // springFestival:springFestival
     }
   }
 </script>
