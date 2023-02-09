@@ -8,13 +8,29 @@
  */
 import Vue from 'vue';
 import Router from 'vue-router';
-import BlogDetail from '@/components/MainPage/BlogDetail';
-import BlogIndex from '@/components/MainPage/BlogIndex';
-import MessageBoard from '@/components/MainPage/MessageBoard';
-import FriendUrl from '@/components/MainPage/FriendUrl';
-import TimeLine from '@/components/MainPage/TimeLine';
-import AboutMe from '@/components/MainPage/AboutMe';
-import analytics from '@/components/MainPage/analytics';
+// import BlogIndex from '@/components/MainPage/BlogIndex';
+// import BlogDetail from '@/components/MainPage/BlogDetail';
+// import MessageBoard from '@/components/MainPage/MessageBoard';
+// import analytics from '@/components/MainPage/analytics';
+// import FriendUrl from '@/components/MainPage/FriendUrl';
+// import TimeLine from '@/components/MainPage/TimeLine';
+// import AboutMe from '@/components/MainPage/AboutMe';
+
+const BlogIndex = ()=>
+  import(/* webpackChunkName: "blogPages" */ '@/components/MainPage/BlogIndex');
+const BlogDetail = () => 
+  import(/* webpackChunkName: "blogPages" */ '@/components/MainPage/BlogDetail');
+const MessageBoard = ()=>
+  import(/* webpackChunkName: "messageBoard" */ '@/components/MainPage/MessageBoard');
+const analytics = () => 
+  import(/* webpackChunkName: "analytics" */ '@/components/MainPage/analytics');
+const FriendUrl = () => 
+  import(/* webpackChunkName:"simpleMenu" */ '@/components/MainPage/FriendUrl');
+const TimeLine = () =>
+  import(/* webpackChunkName:"simpleMenu" */ '@/components/MainPage/TimeLine');
+const AboutMe = () =>
+  import(/* webpackChunkName:"simpleMenu" */ '@/components/MainPage/AboutMe');    
+
 import imageToPdf from '@/components/ExperimentalField/imageToPdf';
 import ExperimentalField from '@/components/ExperimentalField/index';
 
