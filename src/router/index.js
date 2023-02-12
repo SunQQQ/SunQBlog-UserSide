@@ -29,7 +29,10 @@ const FriendUrl = () =>
 const TimeLine = () =>
   import(/* webpackChunkName:"simpleMenu" */ '@/components/MainPage/TimeLine');
 const AboutMe = () =>
-  import(/* webpackChunkName:"simpleMenu" */ '@/components/MainPage/AboutMe');    
+  import(/* webpackChunkName:"simpleMenu" */ '@/components/MainPage/AboutMe');   
+  
+const analyticsPlus =()=>
+  import('@/components/MainPage/analyticsPlus');  
 
 import imageToPdf from '@/components/ExperimentalField/imageToPdf';
 import ExperimentalField from '@/components/ExperimentalField/index';
@@ -68,6 +71,10 @@ export default new Router({
       path:'/analytics',
       name:'analytics',
       component:analytics
+    },{
+      path:'/analyticsPlus',
+      name:'analyticsPlus',
+      component:analyticsPlus
     },{
       path:'/experimentalField',
       name: 'ExperimentalField',
