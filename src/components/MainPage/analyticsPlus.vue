@@ -29,8 +29,10 @@
           </div>
         </div>
       </div>
-      <lineChart></lineChart>
-
+      <lineChart v-on:getQuotaVal="getQuotaVal"></lineChart>
+      <map-chart></map-chart>
+      <pie-chart></pie-chart>
+      <userAction></userAction>
     </div>
     <Heartfelt></Heartfelt>
   </div>
@@ -40,14 +42,20 @@
 import Store from "../../store";
 import Heartfelt from '../SonCompnent/Heartfelt';
 import Pagination from '../SonCompnent/Pagination';
-import lineChart from '@/components/SonCompnent/analytics/line-chart'
+import lineChart from '@/components/SonCompnent/analytics/line-chart';
+import mapChart from '@/components/SonCompnent/analytics/map-chart';
+import pieChart from '@/components/SonCompnent/analytics/pie-chart';
+import userAction from '@/components/SonCompnent/analytics/user-action';
 
 export default {
   name: "analyticsPlus",
   components: {
     Pagination,
     Heartfelt,
-    lineChart
+    lineChart,
+    mapChart,
+    pieChart,
+    userAction
   },
   data: function () {
     return {
@@ -61,12 +69,22 @@ export default {
     }
   },
   methods: {
-  
+    // 本事件用来监听折线图子组件，从子组件拿到指标数据
+    getQuotaVal:function(obj){
+      this.todayVisit = obj.todayVisit; // 今日浏览量
+      this.todayIpNum = obj.todayIpNum; // 今日IP数
+      this.dateVisit = obj.dateVisit; // 近7/14/30天访问量
+      this.yesterdayVisit = obj.yesterdayVisit;
+      this.yesterdayIpNum = obj.yesterdayIpNum;
+      this.allVisitIp = obj.allVisitIp;
+
+      this.lineDateType = obj.lineDateType;
+    }
   },
   mounted: function () {
     var that = this;
     Store.commit("ChangeActive", 5); // 切换Topbar高亮
-    Store.commit("changeFooter",true); // 展示footer 
+    Store.commit("changeFooter", true); // 展示footer 
 
     // 创建日志
     // this.createLog({

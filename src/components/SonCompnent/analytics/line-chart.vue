@@ -93,6 +93,8 @@ export default {
       },
       // 折线图对象
       lineChart: "",
+      // 指标区域的数据
+      quateData:{}
     };
   },
   methods: {
@@ -125,14 +127,15 @@ export default {
 
           // 因处理数据耗时较长，添加loading，并提前渲染折线图，缓解页面空白太久
           Store.commit("ChangeLoading", true);
-          // that.lineChart.setOption(that.lineChartOption);
+          that.lineChart.setOption(that.lineChartOption);
 
-          if (!that.todayVisit) that.todayVisit = data.dateCountList[0].reading; // 设置今日浏览量PV
-          if (!that.todayIpNum) that.todayIpNum = data.dateCountList[0].ipNum; // 设置今日IP数
-          if (!that.yesterdayVisit)
-            that.yesterdayVisit = data.dateCountList[1].reading; // 设置昨日浏览量PV
-          if (!that.yesterdayIpNum)
-            that.yesterdayIpNum = data.dateCountList[1].ipNum; // 设置昨日IP数
+          // 指标区域数据
+          if (!that.quateData.todayVisit) that.quateData.todayVisit = data.dateCountList[0].reading; // 设置今日浏览量PV
+          if (!that.quateData.todayIpNum) that.quateData.todayIpNum = data.dateCountList[0].ipNum; // 设置今日IP数
+          if (!that.quateData.yesterdayVisit)
+            that.quateData.yesterdayVisit = data.dateCountList[1].reading; // 设置昨日浏览量PV
+          if (!that.quateData.yesterdayIpNum)
+            that.quateData.yesterdayIpNum = data.dateCountList[1].ipNum; // 设置昨日IP数
 
           data.dateCountList.forEach(function (item) {
             dates.push(item.time);
@@ -142,17 +145,16 @@ export default {
             totalIp += item.ipNum;
           });
 
-          // that.dateVisit = totalVisit; // 设置选中时间维度下的访问量
-          // that.allVisitIp = totalIp;
+          // 指标区域数据
+          that.quateData.dateVisit = totalVisit; // 设置选中时间维度下的访问量
+          that.quateData.allVisitIp = totalIp;
+          that.quateData.lineDateType = dayNum;
 
-          // debugger
-          console.log("至暗斯克",dates.reverse());
+          that.$emit('getQuotaVal',that.quateData);
 
           that.lineChartOption.xAxis.data = dates.reverse();
           that.lineChartOption.series[0].data = readings.reverse();
           that.lineChartOption.series[1].data = ipArray.reverse();
-
-          console.log('数据',that.lineChartOption);
 
           that.lineChart.setOption(that.lineChartOption);
 
@@ -171,7 +173,6 @@ export default {
   },
   mounted: function () {
     Vue.prototype.$echarts = echarts;
-    console.log("mouted");
     this.setLineChart(7, "init");
   },
 };
