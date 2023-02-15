@@ -139,13 +139,13 @@ export default {
                     that.map.setOption(that.mapOption, true);
 
                     // 初始化时不创建日志。切换时间维度后，记日志并刷新日志列表
-                    // if (!init) {
-                    //     that.createLog({
-                    //         moduleType: 'button',
-                    //         operateType: '切换地图时间维度',
-                    //         operateContent: '近' + dayNum + '天'
-                    //     });
-                    // }
+                    if (!init) {
+                        that.createLog({
+                            moduleType: 'button',
+                            operateType: '切换地图时间维度',
+                            operateContent: '近' + dayNum + '天'
+                        });
+                    }
                 }
             });
         },
