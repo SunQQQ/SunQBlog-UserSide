@@ -1,13 +1,6 @@
-/*
- * @Author: ke.xue
- * @Date: 2022-12-24 14:29:42
- * @LastEditors: ke.xue
- * @LastEditTime: 2022-12-24 14:57:26
- * @FilePath: \SunQBlog-UserSide\src\router\index.js
- * @Description: 文件描述
- */
 import Vue from 'vue';
 import Router from 'vue-router';
+// 使用如下方式引入组件不会分包
 // import BlogIndex from '@/components/MainPage/BlogIndex';
 // import BlogDetail from '@/components/MainPage/BlogDetail';
 // import MessageBoard from '@/components/MainPage/MessageBoard';
@@ -16,20 +9,26 @@ import Router from 'vue-router';
 // import TimeLine from '@/components/MainPage/TimeLine';
 // import AboutMe from '@/components/MainPage/AboutMe';
 
-const BlogIndex = ()=>
+// 使用如下函数的形式引入，打包时会分包
+const BlogIndex = () =>
   import(/* webpackChunkName: "blogPages" */ '@/components/MainPage/BlogIndex');
-const BlogDetail = () => 
+
+const BlogIndexCopy = () =>
+  import(/* webpackChunkName: "blogPages" */ '@/components/MainPage/BlogIndex-copy');
+
+
+const BlogDetail = () =>
   import(/* webpackChunkName: "blogPages" */ '@/components/MainPage/BlogDetail');
-const MessageBoard = ()=>
+const MessageBoard = () =>
   import(/* webpackChunkName: "messageBoard" */ '@/components/MainPage/MessageBoard');
-const analytics = () => 
+const analytics = () =>
   import(/* webpackChunkName: "analytics" */ '@/components/MainPage/analytics');
-const FriendUrl = () => 
+const FriendUrl = () =>
   import(/* webpackChunkName:"simpleMenu" */ '@/components/MainPage/FriendUrl');
 const TimeLine = () =>
   import(/* webpackChunkName:"simpleMenu" */ '@/components/MainPage/TimeLine');
 const AboutMe = () =>
-  import(/* webpackChunkName:"simpleMenu" */ '@/components/MainPage/AboutMe');   
+  import(/* webpackChunkName:"simpleMenu" */ '@/components/MainPage/AboutMe');
 
 import imageToPdf from '@/components/ExperimentalField/imageToPdf';
 import ExperimentalField from '@/components/ExperimentalField/index';
@@ -38,13 +37,17 @@ Vue.use(Router);
 
 export default new Router({
   mode: 'hash',
-  scrollBehavior:() => ({ y:0 }),
+  scrollBehavior: () => ({ y: 0 }),
   routes: [
     {
       path: '/',
       name: 'BlogIndex',
       component: BlogIndex
-    }, {
+    },{
+      path:"/BlogIndexCopy",
+      name:'BlogIndexCopy',
+      component:BlogIndexCopy
+    },{
       path: '/BlogDetail',
       name: 'BlogDetail',
       component: BlogDetail
@@ -57,26 +60,26 @@ export default new Router({
       name: 'FriendUrl',
       component: FriendUrl
     }, {
-      path:'/TimeLine',
-      name:'TimeLine',
-      component:TimeLine
+      path: '/TimeLine',
+      name: 'TimeLine',
+      component: TimeLine
     }, {
-      path:'/AboutMe',
-      name:'AboutMe',
-      component:AboutMe
-    },{
-      path:'/analytics',
-      name:'analytics',
-      component:analytics
-    },{
-      path:'/experimentalField',
+      path: '/AboutMe',
+      name: 'AboutMe',
+      component: AboutMe
+    }, {
+      path: '/analytics',
+      name: 'analytics',
+      component: analytics
+    }, {
+      path: '/experimentalField',
       name: 'ExperimentalField',
-      component:ExperimentalField,
+      component: ExperimentalField,
       children: [
         {
-          path:'/experimentalField/imageToPdf',
-          name:'imageToPdf',
-          component:imageToPdf
+          path: '/experimentalField/imageToPdf',
+          name: 'imageToPdf',
+          component: imageToPdf
         }
       ]
     }
