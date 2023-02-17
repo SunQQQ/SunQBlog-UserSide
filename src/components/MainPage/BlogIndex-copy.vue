@@ -30,11 +30,6 @@
         
       }
     },
-    methods: {
-      
-      
-      
-    },
     mounted: function () {
       let that = this;
       Store.commit("ChangeActive", 0); // 切换Topbar高亮
