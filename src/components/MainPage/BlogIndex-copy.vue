@@ -17,6 +17,7 @@
   import Heartfelt from '../SonCompnent/Heartfelt';  
   import BlogList from '../SonCompnent/blog-page/blog-list';
   import HotBlog from '../SonCompnent/blog-page/hot-blog';
+  import Store from '../../store';
 
   export default {
     name: "BlogIndex",

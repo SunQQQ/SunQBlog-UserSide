@@ -63,6 +63,7 @@ export default {
                 HotArticlePart: true,
                 ArticleTagPart: true
             },
+            Tags:{}
         }
     },
     methods: {
@@ -108,7 +109,7 @@ export default {
                         Skip: SelectPage * 8,
                         Limit: 8
                     },
-                    // ArticleTag: That.Tags.Active
+                    ArticleTag: That.Tags.Active
                 },
                 Success: function (data) {
                     data.forEach(function (Item) {
@@ -159,8 +160,15 @@ export default {
         },
     },
     mounted:function(){
+        let that = this;
+
         // 获取文章列表
         this.GetArticle('');
+
+        this.bus.$on('GetArticle',function(tagName){
+            that.GetArticle(tagName);
+            that.Tags.Active = tagName;
+        });
     }
 }
 </script>

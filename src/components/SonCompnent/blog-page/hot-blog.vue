@@ -60,7 +60,7 @@
             <div class="TagListHead">文章分类<span style="color: #aaa;font-size: 0.8rem">（点击筛选呦）</span></div>
             <div class="TagListTr">
                 <div :class="item.TagName != Tags.Active ? 'TagListTd' : 'TagListTdActive'" v-for="item in Tags"
-                    :key="item.id" @click="GetArticle(item.TagName)">{{ item.TagName }}
+                    :key="item.id" @click="refreshArticle(item.TagName)">{{ item.TagName }}
                 </div>
             </div>
         </div>
@@ -181,6 +181,9 @@ export default {
         // 监控gitHub模块DOM的鼠标滑入划出事件，鼠标悬停时打开源码按钮动画效果，移出时关闭动画
         enter: function (status) {
             this.buttonAnimate = status;
+        },
+        refreshArticle: function(tagName){
+            this.bus.$emit('GetArticle',tagName);
         }
     },
     mounted: function () {
