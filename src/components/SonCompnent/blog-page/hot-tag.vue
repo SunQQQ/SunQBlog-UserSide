@@ -183,7 +183,9 @@ export default {
             this.buttonAnimate = status;
         },
         refreshArticle: function(tagName){
+            // 事件总线 操作blog-list组件中获取文章的方法
             this.bus.$emit('GetArticle',tagName);
+            this.Tags.Active = tagName;
         }
     },
     mounted: function () {

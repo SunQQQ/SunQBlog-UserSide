@@ -5,7 +5,7 @@
       <div class="BlogIndexContent">
         <div class="BlogFlex">
           <BlogList></BlogList>
-          <HotBlog></HotBlog>
+          <HotTag></HotTag>
         </div>
       </div>
       <Heartfelt></Heartfelt>
@@ -16,7 +16,7 @@
 <script>
   import Heartfelt from '../SonCompnent/Heartfelt';  
   import BlogList from '../SonCompnent/blog-page/blog-list';
-  import HotBlog from '../SonCompnent/blog-page/hot-blog';
+  import HotTag from '../SonCompnent/blog-page/hot-tag';
   import Store from '../../store';
 
   export default {
@@ -24,7 +24,7 @@
     components: {
       Heartfelt,
       BlogList,
-      HotBlog
+      HotTag
     },
     data: function () {
       return {      

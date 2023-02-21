@@ -81,9 +81,6 @@ export default {
                     ArticleTag: ArticleTag
                 },
                 Success: function (data) {
-                    // 高亮
-                    // That.Tags.Active = ArticleTag;
-
                     data.forEach(function (Item) {
                         Item.CreateDate = Item.CreateDate.slice(0, 10);
                     });
@@ -167,7 +164,7 @@ export default {
 
         this.bus.$on('GetArticle',function(tagName){
             that.GetArticle(tagName);
-            that.Tags.Active = tagName;
+            that.Tags.Active = tagName;        
         });
     }
 }
