@@ -20,6 +20,7 @@
     "less-loader": "4.1.0",
     "marked": "0.5.2",
     "npm": "^8.19.2",
+    "uglifyjs-webpack-plugin": "^2.2.0",
     "vue": "2.5.17",
     "vue-canvas-nest": "2.0.0",
     "vue-particles": "1.0.9",
