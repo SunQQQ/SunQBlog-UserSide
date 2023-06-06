@@ -32,6 +32,7 @@ const AboutMe = () =>
 
 import imageToPdf from '@/components/ExperimentalField/imageToPdf';
 import ExperimentalField from '@/components/ExperimentalField/index';
+import student from '@/components/ExperimentalField/student';
 
 Vue.use(Router);
 
@@ -82,6 +83,10 @@ export default new Router({
           component: imageToPdf
         }
       ]
+    }, {
+      path: '/student',
+      name: 'student',
+      component: student
     }
   ]
 });
