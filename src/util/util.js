@@ -77,7 +77,7 @@ CommonFunction.install = function (Vue) {
     axios.post(Para['Url'], Para['UploadData'],{timeout:10000}).then(function (response) {
       if(!Para.noLoading) Store.commit('ChangeLoading', false);
 
-      if (response.data.status == '0') {
+      if (response.data.statusCode == 200) {
         Para['Success'](response.data.data);
       } else {
         Store.commit('ChangeTip', {
@@ -105,7 +105,7 @@ CommonFunction.install = function (Vue) {
             Title: error.response.statusText
           });
         }
-      }else if (error.request && error.request.readyState==4 && error.request.status==0){
+      }else if (error.request && error.request.readyState==4 && error.request.statusCode==0){
         Store.commit('ChangeTip', {
           Show: true,
           Title: '接口访问超时'

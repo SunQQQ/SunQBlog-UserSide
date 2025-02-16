@@ -15,22 +15,22 @@
               <div style="flex: 1">
                 <div class="ArticleTitle">
                   <!--<div class="ArticleTag">{{ item.ArticleTag }}</div>-->
-                  <h3 class="ArticleTitleText">{{ item.Title }}</h3>
+                  <h3 class="ArticleTitleText">{{ item.title }}</h3>
                 </div>
-                <div class="ArticleContent" v-html="item.Summary">
-                  {{ item.Summary }}
+                <div class="ArticleContent" v-html="item.summary">
+                  {{ item.summary }}
                 </div>
                 <div class="ArticleFooter">
-                  <!--<div class="ArticleFooterItem">发表：{{ item.CreateDate }}</div>
+                  <!--<div class="ArticleFooterItem">发表：{{ item.createTime }}</div>
                   <div class="ArticleFooterItem" @click="UpdateRouter('BlogDetail',item._id)">评论：{{ item.CommentNum }}</div>-->
                   <!--<div class="ArticleFooterItem" style="border: none">
                     <i class="iconfont icon-yueduliang iconBlogIndex"></i>1000
                   </div>-->
                   <div class="ArticleFooterItem" style="border: none">
-                    <i class="iconfont icon-biaoqian iconBlogIndex"></i>{{ item.ArticleTag }}
+                    <i class="iconfont icon-biaoqian iconBlogIndex"></i>{{ item.articleTagName }}
                   </div>
                   <div class="ArticleFooterItem" style="border: none">
-                    <i class="iconfont icon-shijianzhongbiao iconBlogIndex"></i>{{ item.CreateDate }}
+                    <i class="iconfont icon-shijianzhongbiao iconBlogIndex"></i>{{ item.createTime }}
                   </div>
                   <div class="ArticleFooterItem" style="border: none">
                     <i class="iconfont icon-yueduliang iconBlogIndex"></i>{{ item.articleReadNum ? item.articleReadNum : 0 }}
@@ -43,10 +43,10 @@
             </div>
             <div class="NoDataHint" v-if="!ArticleList.length">暂无数据</div>
             <div class="ListBottom" v-if="AticleBottom">你滑到我底线啦</div>
-            <Pagination v-on:PaginationToParent="ValueByPagition" ref="Pagi"></Pagination>
+            <!-- <Pagination v-on:PaginationToParent="ValueByPagition" ref="Pagi"></Pagination> -->
           </div>
           <div class="BlogIndexContentRight blogindex-page" v-bind:style="{ top: stickyTop }">
-            <div class="Module HotArticleModule">
+            <!-- <div class="Module HotArticleModule">
               <transition name="Fade">
                 <img src="../../static/img/HotArticleList.jpg" v-if="DefaultGraph.HotArticlePart">
               </transition>
@@ -54,33 +54,33 @@
               <div class="HotArticle">
                 <div class="HotArticleItem" v-for="(Item,Index) in HotArticleList" v-bind:key="Index">
                   <div v-if="Index == 0" @click="UpdateRouter('BlogDetail',Item)">
-                    <span style="color:#f44e03;font-size: 15px">No{{Index+1}} </span>{{Item.Title}}
+                    <span style="color:#f44e03;font-size: 15px">No{{Index+1}} </span>{{Item.title}}
                   </div>
                   <div v-if="Index == 1" @click="UpdateRouter('BlogDetail',Item)">
-                    <span style="color:#d41800;font-size: 15px">No{{Index+1}} </span>{{Item.Title}}
+                    <span style="color:#d41800;font-size: 15px">No{{Index+1}} </span>{{Item.title}}
                   </div>
                   <div v-if="Index == 2" @click="UpdateRouter('BlogDetail',Item)">
-                    <span style="color:#f37e21;font-size: 15px">No{{Index+1}} </span>{{Item.Title}}
+                    <span style="color:#f37e21;font-size: 15px">No{{Index+1}} </span>{{Item.title}}
                   </div>
                   <div v-if="Index == 3" @click="UpdateRouter('BlogDetail',Item)">
-                    <span style="color:#f3212d;font-size: 15px">No{{Index+1}} </span>{{Item.Title}}
+                    <span style="color:#f3212d;font-size: 15px">No{{Index+1}} </span>{{Item.title}}
                   </div>
                   <div v-if="Index == 4" @click="UpdateRouter('BlogDetail',Item)">
-                    <span style="color:#212df3;font-size: 15px">No{{Index+1}} </span>{{Item.Title}}
+                    <span style="color:#212df3;font-size: 15px">No{{Index+1}} </span>{{Item.title}}
                   </div>
                   <div v-if="Index > 4" @click="UpdateRouter('BlogDetail',Item)">
-                    <span>No{{Index+1}} </span>{{Item.Title}}
+                    <span>No{{Index+1}} </span>{{Item.title}}
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
             <div class="Module" style="padding: 0 0 0.5rem" @mouseenter="enter(true)" @mouseleave="enter(false)">
               <div class="TopBack"></div>
               <div class="ZhihuIcon">
                 <img src="../../static/img/ZhihuIcon.jpg">
               </div>
               <div class="TextCenter">
-                孙权的小博客
+                <!-- 孙权的小博客 -->Coding Time
                 <a class="BlueButton" :class="buttonAnimate ? 'open_animate' : ''" href="https://github.com/SunQQQ" target="_blank" @click="readCode()">博客源码</a>
               </div>
               <div class="BlogStatistic">
@@ -104,8 +104,8 @@
               </transition>
               <div class="TagListHead">文章分类<span style="color: #aaa;font-size: 0.8rem">（点击筛选呦）</span></div>
               <div class="TagListTr">
-                <div :class="item.TagName != Tags.Active ? 'TagListTd' : 'TagListTdActive'"
-                     v-for="item in Tags" :key="item.id" @click="GetArticle(item.TagName)">{{ item.TagName }}
+                <div :class="item.name != Tags.Active ? 'TagListTd' : 'TagListTdActive'"
+                     v-for="item in Tags" :key="item.id" @click="GetArticle(item.id)">{{ item.name }}
                 </div>
               </div>
             </div>
@@ -150,55 +150,54 @@
       InitArticleTag: function (That) {
         // 初始化标签列表
         this.SQFrontAjax({
-          Url: '/api/TagRead/foreend',
+          Url: '/api/getDictionaryList',
           Success: function (data) {
             That.Tags = data;
             That.Tags.Active = '';
             That.DefaultGraph.ArticleTagPart = false;
-            debugger
           }
         });
 
         // 获取文章列表
         this.GetArticle('');
-        //渲染文章
-        this.GetArticleNum();
-        //渲染留言个数
-        this.GetLeaveMessageNum();
-        // 渲染评论个数
-        this.GetCommentNum();
-        //渲染热门博文
-        this.GetHotArticle();
+        // //渲染文章
+        // this.GetArticleNum();
+        // //渲染留言个数
+        // this.GetLeaveMessageNum();
+        // // 渲染评论个数
+        // this.GetCommentNum();
+        // //渲染热门博文
+        // this.GetHotArticle();
       },
       // 获取文章列表
-      GetArticle: function (ArticleTag) {
+      GetArticle: function (articleTagName) {
         var That = this;
 
         this.SQFrontAjax({
-          Url: '/api/ArticleRead/foreend',
+          Url: '/api/getUserBlogList',
           UploadData: {
             PagnationData: {
               Skip: 0,
               Limit: 8
             },
-            ArticleTag: ArticleTag
+            ArticleTag: articleTagName
           },
           Success: function (data) {
             // 高亮
-            That.Tags.Active = ArticleTag;
+            That.Tags.Active = articleTagName;
 
             data.forEach(function (Item) {
-              Item.CreateDate = Item.CreateDate.slice(0, 10);
+              Item.createTime = Item.createTime.slice(0, 10);
             });
             That.DefaultGraph.ArticleListPart = false;// 隐藏骨架屏
             That.ArticleList = data;
 
             // 创建日志 只有在筛选某个标签后，再记录日志
-            if (ArticleTag) That.createLog({
-              moduleType: 'button',
-              operateType: '筛选文章分类',
-              operateContent: ArticleTag
-            });
+            // if (ArticleTag) That.createLog({
+            //   moduleType: 'button',
+            //   operateType: '筛选文章分类',
+            //   operateContent: ArticleTag
+            // });
           }
         });
       },
@@ -232,7 +231,7 @@
           },
           Success: function (data) {
             data.forEach(function (Item) {
-              Item.CreateDate = Item.CreateDate.slice(0, 10);
+              Item.createTime = Item.createTime.slice(0, 10);
             });
             That.ArticleList = That.ArticleList.concat(data);
             if (data.length != 8) {
@@ -279,7 +278,7 @@
             name: RouterName,
             query: {
               _id:articleMessage._id,
-              Title:articleMessage.Title,
+              Title:articleMessage.title,
               from:'首页'
             }
           });
@@ -297,7 +296,7 @@
       GetArticleNum: function () {
         var That = this;
         this.SQFrontAjax({
-          Url: '/api/getarticlenum/foreend',
+          Url: '/api/getArticleCount',
           Success: function (data) {
             var NumInterval = window.setInterval(function () {
               That.ArticleNum += 1;
@@ -349,11 +348,11 @@
       Store.commit("changeFooter",false); // 初始化时隐藏footer
 
       // 创建日志
-      that.createLog({
-        moduleType: 'menu',
-        operateType: '选择菜单',
-        operateContent: '博文'
-      });
+      // that.createLog({
+      //   moduleType: 'menu',
+      //   operateType: '选择菜单',
+      //   operateContent: '博文'
+      // });
     },
   }
 </script>

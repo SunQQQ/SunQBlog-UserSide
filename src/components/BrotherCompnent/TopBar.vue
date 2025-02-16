@@ -4,7 +4,8 @@
       <div class="MoveingLight"></div>
       <div class="MediaIndexContent">
         <div class="MediaLeft" @click="ChangeRouter('BlogIndex')">
-          <span>Sunq's Blog</span>
+          <!-- <span>Sunq's Blog</span> -->
+          <span>Coding Time</span>
         </div>
         <div class="MediaRight">
           <div :class="Active == 6 ? 'MenuItemActive' : 'MenuItem'" @click="openUrl()">开放式后台</div>
