@@ -427,6 +427,7 @@
     width: 40%;
     font-size: 1.2rem;
     cursor: pointer;
+    font-weight: bolder;
   }
 
   .MediaLeft span {

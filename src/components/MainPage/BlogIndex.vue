@@ -80,17 +80,17 @@
                 <img src="../../static/img/ZhihuIcon.jpg">
               </div>
               <div class="TextCenter">
-                <!-- 孙权的小博客 -->Coding Time
+                <p>编程时间</p>
                 <a class="BlueButton" :class="buttonAnimate ? 'open_animate' : ''" href="https://github.com/SunQQQ" target="_blank" @click="readCode()">博客源码</a>
               </div>
               <div class="BlogStatistic">
                 <div class="BlogStatisticItem">
                   <div class="BlogStatisticItemNum">{{ ArticleNum }}</div>
-                  <div class="BlogStatisticItemText">博客文章</div>
+                  <div class="BlogStatisticItemText">文章数量</div>
                 </div>
                 <div class="BlogStatisticItem">
                   <div class="BlogStatisticItemNum">{{ CommentNum }}</div>
-                  <div class="BlogStatisticItemText">博文评论</div>
+                  <div class="BlogStatisticItemText">评论数量</div>
                 </div>
                 <div class="BlogStatisticItem">
                   <div class="BlogStatisticItemNum">{{ LeaveMessageNum }}</div>

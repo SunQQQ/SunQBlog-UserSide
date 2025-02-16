@@ -103,7 +103,7 @@
                 <div class="Content">
                   <div class="GitName">孙权的Github</div>
                   <a class="BlueButton" :class="buttonAnimate ? 'open_animate' : ''" href="https://github.com/SunQQQ"
-                    target="_blank" @click="readCode()">博客源码</a>
+                    target="_blank" @click="readCode()">网站源码</a>
                   <div class="BlogStatistic">
                     <div class="BlogStatisticItem">
                       <div class="BlogStatisticItemNum">49</div>
