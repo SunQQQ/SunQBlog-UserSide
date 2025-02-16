@@ -53,37 +53,37 @@
               border-radius: 3px;
             ">
             <div class="CommentList">
-              <div class="CommentItem" v-for="(item, i) in MessageList" v-bind:key="i">
+              <div class="CommentItem" v-for="(item, i) in messageList" v-bind:key="i">
                 <div class="CommentItemIcon">
-                  <!--如果用户名是sunq，直接展示我的专属头像。如果不是sunq，展示库里存的本条数据的头像，如果数据里该字段为空，展示默认头像-->
-                  <img :src="getIconAdress(item.iconNo)" v-if="item.MessageLeaveName != 'sunq'" />
-                  <img src="../../static/img/ZhihuIcon.jpg" v-if="item.MessageLeaveName == 'sunq'" />
+                  <!-- <img :src="getIconAdress(item.avator)" v-if="item.leaveName != 'sunq'" /> -->
+                  <img src="../../static/img/ZhihuIcon.jpg" v-if="item.leaveName != 'sunq'" />
+                  <img src="../../static/img/ZhihuIcon.jpg" v-if="item.leaveName == 'sunq'" />
                 </div>
                 <div class="CommentItemContent">
                   <div>
-                    {{ item.MessageLeaveName }}
+                    {{ item.leaveName }}
                     <span v-if="
-                      item.LocationCityName &&
-                      item.LocationCityName.length > 0
+                      item.city &&
+                      item.city.length > 0
                     ">
-                      <i class="iconfont icon-buoumaotubiao23 LocationIconfont"></i>{{ item.LocationCityName }}
+                      <i class="iconfont icon-buoumaotubiao23 LocationIconfont"></i>{{ item.city }}
                     </span>
                   </div>
-                  <div class="ArticleCommentText" v-html="item.MessageText">
-                    {{ item.MessageText }}
+                  <div class="ArticleCommentText" v-html="item.messageContent">
+                    {{ item.messageContent }}
                   </div>
                   <div class="DateAnswer">
                     <div class="DateAnswerLeft">
-                      {{ item.MessageLeaveDate }}
+                      {{ item.createTime }}
                     </div>
-                    <div class="DateAnswerRight" @click="AnswerMessage(item.MessageLeaveName)">
+                    <div class="DateAnswerRight" @click="AnswerMessage(item.leaveName)">
                       回复
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="NoDataHint" v-if="MessageList.length == 0">
+            <div class="NoDataHint" v-if="messageList.length == 0">
               暂无数据
             </div>
             <div class="MessageBoardListBottom" v-if="AticleBottom">
@@ -259,7 +259,7 @@ export default {
         Math.round(Math.random() * 3) +
         ".jpg", // 留言信息的默认头像地址
       MessageLeaveName: "", //留言人姓名
-      MessageList: "", // 留言列表
+      messageList: [], // 留言列表
       MessageLeaveDate: "", // 写留言的时间
       MessageAnswerFrame: false, //回复留言弹框
       FadeAnimate: false, // 弹框显隐动画
@@ -369,9 +369,8 @@ export default {
     // 渲染留言列表
     MessageRead: function () {
       var That = this;
-
       this.SQFrontAjax({
-        Url: "/api/MessageRead/foreend",
+        Url: "/api/userLeaveMsgList",
         UploadData: {
           PagnationData: {
             Skip: 0,
@@ -381,9 +380,9 @@ export default {
         Success: function (data) {
           // 渲染列表
           data.forEach(function (Item) {
-            Item.MessageLeaveDate = That.DateFormat(Item.MessageLeaveDate);
+            Item.createTime = That.DateFormat(Item.createTime);
           });
-          That.MessageList = data;
+          That.messageList = data;
         },
       });
       // 默认填写留言输入框的昵称
@@ -449,7 +448,7 @@ export default {
           data.forEach(function (Item) {
             Item.MessageLeaveDate = That.DateFormat(Item.MessageLeaveDate);
           });
-          That.MessageList = That.MessageList.concat(data);
+          That.messageList = That.messageList.concat(data);
           if (data.length != 8) {
             That.AticleBottom = true;
             // 停止分页器的滚动监听

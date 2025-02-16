@@ -191,6 +191,8 @@
             });
             That.DefaultGraph.ArticleListPart = false;// 隐藏骨架屏
             That.ArticleList = data;
+            console.log(That.ArticleList);
+            
 
             // 创建日志 只有在筛选某个标签后，再记录日志
             // if (ArticleTag) That.createLog({
