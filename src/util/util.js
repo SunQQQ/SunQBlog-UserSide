@@ -2,7 +2,7 @@ import axios from 'axios';
 import Store from '../store';
 
 // 设置axios的超时重新请求，一共请求3次，每次请求间隔1秒
-axios.defaults.retry = 3;
+axios.defaults.retry = 0;
 axios.defaults.retryDelay = 1000;
 axios.interceptors.response.use(undefined, function axiosRetryInterceptor(err) {
   var config = err.config;

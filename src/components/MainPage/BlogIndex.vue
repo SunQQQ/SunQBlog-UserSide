@@ -273,11 +273,11 @@
       },
       // 切换路由
       UpdateRouter: function (RouterName, articleMessage) {
-        if (articleMessage._id) {
+        if (articleMessage.id) {
           this.$router.push({
             name: RouterName,
             query: {
-              _id:articleMessage._id,
+              id:articleMessage.id,
               Title:articleMessage.title,
               from:'首页'
             }

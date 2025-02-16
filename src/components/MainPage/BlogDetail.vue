@@ -3,10 +3,10 @@
     <div>
       <div class="TopBarHeight"></div>
       <div class="ArticleDetailHeader">
-        <img :src="Article.ArticleCover" />
-        <div class="HeaderContent" v-if="!Article.ArticleCover">
-          <span>{{ Article.Title }}</span>
-          <span>{{ Article.Summary }}</span>
+        <img :src="Article.articleCover" />
+        <div class="HeaderContent" v-if="!Article.articleCover">
+          <span>{{ Article.title }}</span>
+          <span>{{ Article.summary }}</span>
         </div>
       </div>
 
@@ -26,12 +26,12 @@
             v-show="BlogDetailSkeletonScreen"
           />
 
-          <h1>{{ Article.Title }}</h1>
+          <h1>{{ Article.title }}</h1>
           <div class="ArticleCreateTime">
             发布时间：{{ Article.CreateDate }}
           </div>
-          <div class="markdown-body" v-html="Article.Content">
-            {{ Article.Content }}
+          <div class="markdown-body" v-html="Article.content">
+            {{ Article.content }}
           </div>
         </div>
       </div>
@@ -188,16 +188,16 @@ export default {
     InitPage: function () {
       var That = this;
       this.SQFrontAjax({
-        Url: "/api/ArticleReadOne/foreend",
+        Url: "/api/getBlogDetail",
         UploadData: {
-          _id: this.$route.query._id,
+          id: this.$route.query.id,
         },
         Success: function (data) {
           // 关闭骨架屏
           That.BlogDetailSkeletonScreen = false;
 
-          That.Article = data[0];
-          That.Article.CreateDate = That.DateFormat(That.Article.CreateDate);
+          That.Article = data;
+          That.Article.createTime = That.DateFormat(That.Article.createTime);
 
           const rendererMD = new Marked.Renderer();
           rendererMD.image = function (href, title, text) {
@@ -225,11 +225,11 @@ export default {
           ); //Markdown格式字符串转html
 
           // 创建日志
-          That.createLog({
-            moduleType: "button",
-            operateType: "浏览文章(" + That.$route.query.from + "入口)",
-            operateContent: That.$route.query.Title,
-          });
+          // That.createLog({
+          //   moduleType: "button",
+          //   operateType: "浏览文章(" + That.$route.query.from + "入口)",
+          //   operateContent: That.$route.query.title,
+          // });
         },
       });
 
@@ -262,7 +262,7 @@ export default {
             Url: "/api/ArticleCommentCreate/foreend",
             UploadData: {
               ArticleId: That.$route.query._id,
-              ArticleName: That.Article.Title,
+              ArticleName: That.Article.title,
               ArticleCommentNickName: That.ArticleCommentNickName,
               ArticleCommentEmail: That.ArticleCommentEmail,
               ArticleCommentUrl: That.ArticleCommentUrl,
@@ -282,17 +282,17 @@ export default {
                 Value: That.ArticleCommentNickName,
               });
 
-              Store.commit("ChangeTip", {
-                Show: true,
-                Title: "评论成功",
-              });
+              // Store.commit("ChangeTip", {
+              //   Show: true,
+              //   title: "评论成功",
+              // });
 
               // 创建日志
-              That.createLog({
-                moduleType: "button",
-                operateType: "评论文章",
-                operateContent: That.Article.Title,
-              });
+              // That.createLog({
+              //   moduleType: "button",
+              //   operateType: "评论文章",
+              //   operateContent: That.Article.title,
+              // });
             },
           });
         });
@@ -300,10 +300,10 @@ export default {
         // 清空textarea
         Store.commit("CleanMessageText");
       } else {
-        Store.commit("ChangeTip", {
-          Show: true,
-          Title: "昵称和评论不能为空呦",
-        });
+        // Store.commit("ChangeTip", {
+        //   Show: true,
+        //   title: "昵称和评论不能为空呦",
+        // });
       }
     },
     // 获取评论列表
