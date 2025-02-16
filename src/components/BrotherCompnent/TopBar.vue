@@ -5,7 +5,7 @@
       <div class="MediaIndexContent">
         <div class="MediaLeft" @click="ChangeRouter('BlogIndex')">
           <!-- <span>Sunq's Blog</span> -->
-          <span>Coding Time</span>
+          <span>Coding Life</span>
         </div>
         <div class="MediaRight">
           <div :class="Active == 6 ? 'MenuItemActive' : 'MenuItem'" @click="openUrl()">开放式后台</div>
@@ -425,7 +425,7 @@
 
   .MediaLeft {
     width: 40%;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     cursor: pointer;
     font-weight: bolder;
   }
