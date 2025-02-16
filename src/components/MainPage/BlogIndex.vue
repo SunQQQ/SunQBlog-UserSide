@@ -151,6 +151,9 @@
         // 初始化标签列表
         this.SQFrontAjax({
           Url: '/api/getDictionaryList',
+          UploadData: {
+            parentId: 1
+          },
           Success: function (data) {
             That.Tags = data;
             That.Tags.Active = '';
