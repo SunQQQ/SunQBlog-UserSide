@@ -1,7 +1,7 @@
 <template>
     <div class="Heartfelt">
-        <p class="HeartfeltContent">{{ HeartfeltContent }}</p>
-        <p class="HeartfeltWritter" v-if="HeartfeltWritter">--{{ HeartfeltWritter }}</p>
+        <p class="HeartfeltContent">{{ content }}</p>
+        <p class="HeartfeltWritter" v-if="writer">--{{ writer }}</p>
     </div>
 </template>
 
@@ -10,8 +10,8 @@
     name: "Heartfelt",
     data:function () {
       return{
-        HeartfeltContent:'',
-        HeartfeltWritter:'',
+        content:'',
+        writer:'',
         LocalHeartFeltData: this.GetLocalStorage('SunqBlog') ? this.GetLocalStorage('SunqBlog').HeartFeltData : '', //本地缓存的心声数据
         LastLoginDate: this.GetLocalStorage('SunqBlog') ? this.GetLocalStorage('SunqBlog').LastLoginDate : '',      //最近一次登录时间
         IntervalTime:-1
@@ -37,7 +37,7 @@
           });
 
           this.SQFrontAjax({
-            Url: '/api/getheartfeltnum',
+            Url: '/api/userHeartList',
             Success:function (data) {
               That.GetHeartfelt(data);
             }
@@ -48,11 +48,11 @@
       GetHeartfelt:function (HeartfeltNum,LocalData) {
         var That = this;
 
-        if(LocalData){
-          That.ChangeView(LocalData,HeartfeltNum);
-        }else {
+        // if(LocalData){
+        //   That.ChangeView(LocalData,HeartfeltNum);
+        // }else {
           this.SQFrontAjax({
-            Url: '/api/HeartfeltRead/foreend',
+            Url: '/api/userHeartList',
             Success: function (data) {
               // 存下心声数据
               That.SetLocalStorage('SunqBlog', {
@@ -69,7 +69,7 @@
               That.ChangeView(data,HeartfeltNum);
             }
           });
-        }
+        // }
       },
       // 修改视图的数据
       ChangeView:function (Array,HeartfeltNum) {
@@ -83,8 +83,8 @@
       // 设置随机值
       SetRandomNum:function (Array,HeartfeltNum) {
         var Random = Math.ceil(Math.random()*HeartfeltNum);
-        this.HeartfeltContent = Array[Random-1].HeartfeltContent;
-        this.HeartfeltWritter = Array[Random-1].HeartfeltWriter;
+        this.content = Array[Random-1].content;
+        this.writer = Array[Random-1].writer;
       }
     },
     mounted:function () {
