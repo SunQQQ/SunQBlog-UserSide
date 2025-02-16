@@ -80,7 +80,7 @@
                 <img src="../../static/img/ZhihuIcon.jpg">
               </div>
               <div class="TextCenter">
-                <p>编程时间</p>
+                <b>编程时间</b>
                 <a class="BlueButton" :class="buttonAnimate ? 'open_animate' : ''" href="https://github.com/SunQQQ" target="_blank" @click="readCode()">博客源码</a>
               </div>
               <div class="BlogStatistic">
@@ -104,7 +104,7 @@
               </transition>
               <div class="TagListHead">文章分类<span style="color: #aaa;font-size: 0.8rem">（点击筛选呦）</span></div>
               <div class="TagListTr">
-                <div :class="item.name != Tags.Active ? 'TagListTd' : 'TagListTdActive'"
+                <div :class="item.id != Tags.Active ? 'TagListTd' : 'TagListTdActive'"
                      v-for="item in Tags" :key="item.id" @click="GetArticle(item.id)">{{ item.name }}
                 </div>
               </div>
@@ -162,7 +162,7 @@
         });
 
         // 获取文章列表
-        this.GetArticle('');
+        this.GetArticle(0);
         // //渲染文章
         // this.GetArticleNum();
         // //渲染留言个数
@@ -173,7 +173,7 @@
         // this.GetHotArticle();
       },
       // 获取文章列表
-      GetArticle: function (articleTagName) {
+      GetArticle: function (tagId) {
         var That = this;
 
         this.SQFrontAjax({
@@ -183,11 +183,16 @@
               Skip: 0,
               Limit: 8
             },
-            ArticleTag: articleTagName
+            // 0查询全部文章
+            tag: tagId == That.Tags.Active ? 0 : tagId
           },
           Success: function (data) {
-            // 高亮
-            That.Tags.Active = articleTagName;
+            // 选中后，高亮。且点击高亮标签时，取消选中
+            if(That.Tags.Active == tagId){
+              That.Tags.Active = -1;
+            }else{
+              That.Tags.Active = tagId;
+            }
 
             data.forEach(function (Item) {
               Item.createTime = Item.createTime.slice(0, 10);
