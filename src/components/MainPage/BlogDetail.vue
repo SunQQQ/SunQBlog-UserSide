@@ -28,7 +28,7 @@
 
           <h1>{{ Article.title }}</h1>
           <div class="ArticleCreateTime">
-            发布时间：{{ Article.CreateDate }}
+            发布时间：{{ Article.createTime }}
           </div>
           <div class="markdown-body" v-html="Article.content">
             {{ Article.content }}
@@ -198,7 +198,7 @@ export default {
 
           That.Article = data;
           That.Article.createTime = That.DateFormat(That.Article.createTime);
-
+        
           const rendererMD = new Marked.Renderer();
           rendererMD.image = function (href, title, text) {
             return `<img onclick="showMarkedImage(event, '${href}')" src="${href}" alt="${text}" title="${
@@ -219,7 +219,7 @@ export default {
             },
           });
 
-          That.Article.Content = Marked(That.Article.Content).replace(
+          That.Article.content = Marked(That.Article.content).replace(
             /<pre>/g,
             "<pre class='language-html'>"
           ); //Markdown格式字符串转html
