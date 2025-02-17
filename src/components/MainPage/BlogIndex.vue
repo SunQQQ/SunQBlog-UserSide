@@ -163,8 +163,6 @@
 
         // 获取文章列表
         this.GetArticle(0);
-        // //渲染文章
-        // this.GetArticleNum();
         // //渲染留言个数
         // this.GetLeaveMessageNum();
         // // 渲染评论个数
@@ -192,13 +190,12 @@
               That.Tags.Active = tagId;
             }
 
-            data.forEach(function (Item) {
+            data.list.forEach(function (Item) {
               Item.createTime = Item.createTime.slice(0, 10);
             });
             That.DefaultGraph.ArticleListPart = false;// 隐藏骨架屏
-            That.ArticleList = data;
-            console.log(That.ArticleList);
-            
+            That.ArticleList = data.list;
+            That.ArticleNum = data.total;
 
             // 创建日志 只有在筛选某个标签后，再记录日志
             // if (ArticleTag) That.createLog({
@@ -297,21 +294,6 @@
             name: RouterName
           });
         }
-      },
-      //获取文章数量
-      GetArticleNum: function () {
-        var That = this;
-        this.SQFrontAjax({
-          Url: '/api/getArticleCount',
-          Success: function (data) {
-            var NumInterval = window.setInterval(function () {
-              That.ArticleNum += 1;
-              if (data == That.ArticleNum) {
-                clearInterval(NumInterval);
-              }
-            }, 30);
-          }
-        });
       },
       //获取热门文章
       GetHotArticle: function () {
