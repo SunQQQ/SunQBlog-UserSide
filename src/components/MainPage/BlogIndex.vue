@@ -179,10 +179,8 @@
         this.SQFrontAjax({
           Url: '/api/getUserBlogList',
           UploadData: {
-            page: {
-              Skip: 0,
-              Limit: 8
-            },
+            start: 0,
+            size: 8,
             // 0查询全部文章
             tag: (tagId == That.Tags.Active) ? 0 : tagId
           },
@@ -233,11 +231,9 @@
         this.SQFrontAjax({
           Url: '/api/getUserBlogList',
           UploadData: {
-            page: {
-              Skip: SelectPage * 8,
-              Limit: 8
-            },
-            ArticleTag: That.Tags.Active
+            start: SelectPage * 8,
+            size: 8,
+            tag: That.Tags.Active
           },
           Success: function (data) {
             data.forEach(function (Item) {
