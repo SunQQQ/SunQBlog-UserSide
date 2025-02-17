@@ -233,10 +233,10 @@
             tag: That.Tags.Active
           },
           Success: function (data) {
-            data.forEach(function (Item) {
+            data.list.forEach(function (Item) {
               Item.createTime = Item.createTime.slice(0, 10);
             });
-            That.ArticleList = That.ArticleList.concat(data);
+            That.ArticleList = That.ArticleList.concat(data.list);
             if (data.length != 8) {
               That.AticleBottom = true;
               // 停止分页器的滚动监听
