@@ -43,7 +43,7 @@
             </div>
             <div class="NoDataHint" v-if="!ArticleList.length">暂无数据</div>
             <div class="ListBottom" v-if="AticleBottom">你滑到我底线啦</div>
-            <!-- <Pagination v-on:PaginationToParent="ValueByPagition" ref="Pagi"></Pagination> -->
+            <Pagination v-on:PaginationToParent="ValueByPagition" ref="Pagi"></Pagination>
           </div>
           <div class="BlogIndexContentRight blogindex-page" v-bind:style="{ top: stickyTop }">
             <!-- <div class="Module HotArticleModule">
@@ -156,7 +156,7 @@
           },
           Success: function (data) {
             That.Tags = data;
-            That.Tags.Active = '';
+            That.Tags.Active = 0;
             That.DefaultGraph.ArticleTagPart = false;
           }
         });
@@ -184,12 +184,12 @@
               Limit: 8
             },
             // 0查询全部文章
-            tag: tagId == That.Tags.Active ? 0 : tagId
+            tag: (tagId == That.Tags.Active) ? 0 : tagId
           },
           Success: function (data) {
             // 选中后，高亮。且点击高亮标签时，取消选中
             if(That.Tags.Active == tagId){
-              That.Tags.Active = -1;
+              That.Tags.Active = 0;
             }else{
               That.Tags.Active = tagId;
             }
@@ -231,7 +231,7 @@
       ValueByPagition: function (SelectPage) {
         var That = this;
         this.SQFrontAjax({
-          Url: '/api/ArticleRead/foreend',
+          Url: '/api/getUserBlogList',
           UploadData: {
             page: {
               Skip: SelectPage * 8,
@@ -255,12 +255,12 @@
 
               // 还有分页时，隐藏footer
               Store.commit("changeFooter",false);
-              // 创建日志
-              That.createLog({
-                moduleType: 'pageTurn',
-                operateType: '下拉文章列表到',
-                operateContent: '第' + (SelectPage + 1) + '页'
-              });
+              // // 创建日志
+              // That.createLog({
+              //   moduleType: 'pageTurn',
+              //   operateType: '下拉文章列表到',
+              //   operateContent: '第' + (SelectPage + 1) + '页'
+              // });
             }
           }
         });
