@@ -310,11 +310,10 @@ export default {
 
         this.GetLocation(function (LocationCityName) {
           That.SQFrontAjax({
-            Url: "/api/MessageCreate/foreend",
+            Url: "/api/createLeaveMessage",
             UploadData: {
               MessageText: MatchedMessageText,
               MessageLeaveName: That.MessageLeaveName,
-              MessageLeaveDate: new Date(),
               LocationCityName: LocationCityName,
               iconNo: iconNo,
             },
@@ -345,12 +344,12 @@ export default {
               // 初始TextArea框遮盖
               That.OpenTextAreaCover = true;
 
-              // 创建日志
-              That.createLog({
-                moduleType: "button",
-                operateType: "留言",
-                operateContent: MatchedMessageText,
-              });
+              // // 创建日志
+              // That.createLog({
+              //   moduleType: "button",
+              //   operateType: "留言",
+              //   operateContent: MatchedMessageText,
+              // });
             },
           });
         });
