@@ -52,6 +52,7 @@
         line-height: 3rem;
         display: inline-block;
         text-align: center;
+        z-index: 1000;
     }
     .tipContent{
         display: inline-block;

@@ -82,7 +82,7 @@ CommonFunction.install = function (Vue) {
       } else {
         Store.commit('ChangeTip', {
           Show: true,
-          Title: response.data.data
+          Title: response.data.message
         });
       }
     }).catch(function (error) {

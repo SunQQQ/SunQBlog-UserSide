@@ -53,12 +53,18 @@ export default {
             username: That.username,
             password: That.password
           },
-          Success: function () {
+          Success: function (data) {
             Store.commit("ChangeTip", {
               Show: true,
               Title: "登录成功",
             });
             Store.commit('ChangeLogin', false);
+
+            // 存储token
+            That.SetLocalStorage('SunqBlog', {
+              Key: 'token',
+              Value: data.token
+            });
           }
         });
       } else {
@@ -86,7 +92,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 999;
   /* 确保遮罩层在最上层 */
 }
 
