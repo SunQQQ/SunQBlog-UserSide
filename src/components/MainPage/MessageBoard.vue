@@ -51,31 +51,65 @@
               border-radius: 3px;
             ">
             <div class="CommentList">
-              <div class="CommentItem" v-for="(item, i) in messageList" v-bind:key="i">
-                <div class="CommentItemIcon">
-                  <!-- <img :src="getIconAdress(item.avator)" v-if="item.leaveName != 'sunq'" /> -->
-                  <img src="../../static/img/ZhihuIcon.jpg" v-if="item.leaveName != 'sunq'" />
-                  <img src="../../static/img/ZhihuIcon.jpg" v-if="item.leaveName == 'sunq'" />
-                </div>
-                <div class="CommentItemContent">
-                  <div>
-                    {{ item.leaveName }}
-                    <span v-if="
-                      item.city &&
-                      item.city.length > 0
-                    ">
-                      <i class="iconfont icon-buoumaotubiao23 LocationIconfont"></i>{{ item.city }}
-                    </span>
+              <div v-for="(item, i) in messageList" v-bind:key="i">
+                <!-- 父级评论 -->
+                <div class="CommentItem" >
+                  <div class="CommentItemIcon">
+                    <!-- <img :src="getIconAdress(item.avator)" v-if="item.leaveName != 'sunq'" /> -->
+                    <img src="../../static/img/ZhihuIcon.jpg" v-if="item.leaveName != 'sunq'" />
+                    <img src="../../static/img/ZhihuIcon.jpg" v-if="item.leaveName == 'sunq'" />
                   </div>
-                  <div class="ArticleCommentText" v-html="item.messageContent">
-                    {{ item.messageContent }}
-                  </div>
-                  <div class="DateAnswer">
-                    <div class="DateAnswerLeft">
-                      {{ item.createTime }}
+                  <div class="CommentItemContent">
+                    <div>
+                      {{ item.leaveName }}
+                      <span v-if="
+                        item.city &&
+                        item.city.length > 0
+                      ">
+                        <i class="iconfont icon-buoumaotubiao23 LocationIconfont"></i>{{ item.city }}
+                      </span>
                     </div>
-                    <div class="DateAnswerRight" @click="AnswerMessage(item.leaveName)">
-                      回复
+                    <div class="ArticleCommentText" v-html="item.messageContent">
+                      {{ item.messageContent }}
+                    </div>
+                    <div class="DateAnswer">
+                      <div class="DateAnswerLeft">
+                        {{ item.createTime }}
+                      </div>
+                      <div class="DateAnswerRight" @click="AnswerMessage(item.leaveName)">
+                        回复
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- 子评论 -->
+                <div class="CommentItem" v-for="(childItem, i) in item.child" v-bind:key="i">
+                  <div style="width: 40px;"></div>
+                  <div class="CommentItemIcon">
+                    <!-- <img :src="getIconAdress(item.avator)" v-if="item.leaveName != 'sunq'" /> -->
+                    <img src="../../static/img/ZhihuIcon.jpg" v-if="childItem.leaveName != 'sunq'" />
+                    <img src="../../static/img/ZhihuIcon.jpg" v-if="childItem.leaveName == 'sunq'" />
+                  </div>
+                  <div class="CommentItemContent">
+                    <div>
+                      {{ childItem.leaveName }}
+                      <span v-if="
+                        childItem.city &&
+                        childItem.city.length > 0
+                      ">
+                        <i class="iconfont icon-buoumaotubiao23 LocationIconfont"></i>{{ childItem.city }}
+                      </span>
+                    </div>
+                    <div class="ArticleCommentText" v-html="childItem.messageContent">
+                      {{ childItem.messageContent }}
+                    </div>
+                    <div class="DateAnswer">
+                      <div class="DateAnswerLeft">
+                        {{ childItem.createTime }}
+                      </div>
+                      <div class="DateAnswerRight" @click="AnswerMessage(childItem.leaveName)">
+                        回复
+                      </div>
                     </div>
                   </div>
                 </div>
