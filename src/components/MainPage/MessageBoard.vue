@@ -334,6 +334,13 @@ export default {
     MessageSubmit: function () {
       var That = this;
 
+      let LocalHeartFeltData = this.GetLocalStorage('SunqBlog') ? this.GetLocalStorage('SunqBlog').token : '';
+      // 判断登录状态
+      if(!LocalHeartFeltData){
+        Store.commit('ChangeLogin', true);
+        return;
+      }
+
       if (Store.getters.GetMessageText && this.MessageLeaveName) {
         let MatchedMessageText = That.MatchEmotion(
           Store.getters.GetMessageText
@@ -342,7 +349,7 @@ export default {
 
         this.GetLocation(function (LocationCityName) {
           That.SQFrontAjax({
-            Url: "/api/createLeaveMessage",
+            Url: "/createLeaveMessage",
             UploadData: {
               MessageText: MatchedMessageText,
               MessageLeaveName: That.MessageLeaveName,

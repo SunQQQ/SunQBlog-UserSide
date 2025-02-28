@@ -27,7 +27,9 @@ export default new Vuex.Store({
     // footer组件
     footer:{
       show: false
-    }
+    },
+
+    showLogin: true
   },
   getters: {
     GetMessageText: function (State) {
@@ -72,6 +74,11 @@ export default new Vuex.Store({
     // footer组件
     changeFooter:(state,value)=>{
       state.footer.show = value;
+    },
+
+    // 登录组件
+    ChangeLogin:(state,value)=>{
+      state.showLogin = value;
     }
   },
   actions: {
