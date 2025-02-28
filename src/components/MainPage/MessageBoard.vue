@@ -2,21 +2,19 @@
   <transition name="Fade" mode="out-in">
     <div style="position: relative">
       <div class="MessageBoardCover" @click="CloseMessageSubmit">
-        <div :class="
-          OpenMessageSubmitValue
+        <div :class="OpenMessageSubmitValue
             ? 'WriteMessageFrameFadeIn'
             : 'WriteMessageFrameFadeOut'
-        ">
+          ">
           <div class="WriteMessageFrameLeft">
             <img src="../../static/img/DefaultHeadIcon.jpg" />
             <div>欢迎你来</div>
           </div>
           <div style="flex: 1">
-            <div :class="
-              OpenTextAreaCover
+            <div :class="OpenTextAreaCover
                 ? 'WriteMessageFrameContent'
                 : 'WriteMessageFrameContent WriteMessageFrameContentColorBorder'
-            ">
+              ">
               <!--阻止触发CloseMessageSubmit-->
               <textarea ref="LeaveMessageTextArea" placeholder="输入留言" v-model="MessageText" @click.stop="">
               </textarea>
@@ -371,10 +369,8 @@ export default {
       this.SQFrontAjax({
         Url: "/api/userLeaveMsgList",
         UploadData: {
-          PagnationData: {
-            Skip: 0,
-            Limit: 8,
-          },
+          start: 0,
+          size: 8
         },
         Success: function (data) {
           // 渲染列表
@@ -439,8 +435,8 @@ export default {
         Url: "/api/MessageRead/foreend",
         UploadData: {
           PagnationData: {
-            Skip: SelectPage * 8,
-            Limit: 8,
+            start: SelectPage * 8,
+            size: 8,
           },
         },
         Success: function (data) {
@@ -452,10 +448,10 @@ export default {
             That.AticleBottom = true;
             // 停止分页器的滚动监听
             That.$refs.Pagi.SetUpdate(false);
-            Store.commit("changeFooter",true); // 展示footer
+            Store.commit("changeFooter", true); // 展示footer
           } else {
             That.$refs.Pagi.SetUpdate(true);
-            Store.commit("changeFooter",false); // 隐藏footer
+            Store.commit("changeFooter", false); // 隐藏footer
             // 创建日志
             That.createLog({
               moduleType: "pageTurn",
@@ -578,16 +574,16 @@ export default {
     // 切换Topbar高亮
     Store.commit("ChangeActive", 1);
 
-    Store.commit("changeFooter",false); // 初始化时隐藏footer
+    Store.commit("changeFooter", false); // 初始化时隐藏footer
 
     this.setWeathe();
 
     // 创建日志
-    this.createLog({
-      moduleType: "munu",
-      operateType: "选择菜单",
-      operateContent: "留言",
-    });
+    // this.createLog({
+    //   moduleType: "munu",
+    //   operateType: "选择菜单",
+    //   operateContent: "留言",
+    // });
   },
 };
 </script>
