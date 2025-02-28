@@ -51,7 +51,7 @@
               border-radius: 3px;
             ">
             <div class="CommentList">
-              <div v-for="(item, i) in messageList" v-bind:key="i">
+              <div v-for="(item, i) in messageList" v-bind:key="i" style="border-bottom: 1px solid #e9e9e9;">
                 <!-- 父级评论 -->
                 <div class="CommentItem" >
                   <div class="CommentItemIcon">
@@ -626,6 +626,16 @@ export default {
 @import "../../static/css/AboutMe";
 @import "../../static/css/BlogIndex";
 @import "../../static/css/BlogDetail";
+
+
+.CommentItem{
+  border-bottom: none;
+}
+
+.CommentItem:first-child{
+  border-top: none;
+  border-bottom: none;
+}
 
 /*pc端*/
 @media only screen and (min-device-width: 768px) {
