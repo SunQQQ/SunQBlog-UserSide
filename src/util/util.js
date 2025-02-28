@@ -74,7 +74,15 @@ CommonFunction.install = function (Vue) {
       Para['UploadData'] = {};
     }
 
-    axios.post(Para['Url'], Para['UploadData'],{timeout:10000}).then(function (response) {
+    let Token = this.GetLocalStorage('SunqBlog') ? this.GetLocalStorage('SunqBlog').token : '';
+    // 设置请求头
+    let config = {
+      headers: {
+          'Authorization': Token // 将 Token 放入 Authorization Header 中
+      }
+    };
+
+    axios.post(Para['Url'], Para['UploadData'],config,{timeout:10000}).then(function (response) {
       if(!Para.noLoading) Store.commit('ChangeLoading', false);
 
       if (response.data.statusCode == 200) {

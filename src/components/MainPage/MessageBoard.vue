@@ -23,7 +23,7 @@
               </span>
               <!--需阻止冒泡，否则会冒泡到最上层，触发CloseMessageSubmit方法。该方法逻辑与此处方法操作相反-->
               <div class="TextAreaCover" @click.stop="OpenMessageSubmit()" v-if="OpenTextAreaCover">
-                来都来啦，留个脚印吧
+                来都来啦，留个言吧
               </div>
             </div>
             <div class="OpenMessageSubmit">
@@ -349,12 +349,11 @@ export default {
 
         this.GetLocation(function (LocationCityName) {
           That.SQFrontAjax({
-            Url: "/createLeaveMessage",
+            Url: "/api/createLeaveMessage",
             UploadData: {
-              MessageText: MatchedMessageText,
-              MessageLeaveName: That.MessageLeaveName,
-              LocationCityName: LocationCityName,
-              iconNo: iconNo,
+              messageContent: MatchedMessageText,
+              city: LocationCityName,
+              avator: iconNo,
             },
             Success: function () {
               Store.commit("ChangeTip", {

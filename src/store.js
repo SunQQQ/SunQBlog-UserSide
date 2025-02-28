@@ -29,7 +29,7 @@ export default new Vuex.Store({
       show: false
     },
 
-    showLogin: true
+    showLogin: false
   },
   getters: {
     GetMessageText: function (State) {
