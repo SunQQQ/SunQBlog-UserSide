@@ -18,7 +18,7 @@
     "jspdf": "^2.5.1",
     "less": "3.8.1",
     "less-loader": "4.1.0",
-    "marked": "0.5.2",
+    "marked": "4.0.10",
     "npm": "^8.19.2",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "vue": "2.5.17",
