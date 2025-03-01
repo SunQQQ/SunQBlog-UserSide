@@ -29,7 +29,8 @@ export default new Vuex.Store({
       show: false
     },
 
-    showLogin: false
+    showLogin: false,
+    MessageLeaveName: ''
   },
   getters: {
     GetMessageText: function (State) {
@@ -79,6 +80,9 @@ export default new Vuex.Store({
     // 登录组件
     ChangeLogin:(state,value)=>{
       state.showLogin = value;
+    },
+    ChangeMessageLeaveName:(state,value)=>{
+      state.MessageLeaveName = value;
     }
   },
   actions: {

@@ -2,29 +2,30 @@
   <transition name="Fade" mode="out-in">
     <div style="position: relative">
       <div class="MessageBoardCover" @click="CloseMessageSubmit">
-        <div :class="OpenMessageSubmitValue
+        <!-- <div :class="OpenMessageSubmitValue
             ? 'WriteMessageFrameFadeIn'
             : 'WriteMessageFrameFadeOut'
-          ">
+          "> -->
+        <div class="WriteMessageFrameFadeIn">
           <div class="WriteMessageFrameLeft">
             <img src="../../static/img/DefaultHeadIcon.jpg" />
             <div>欢迎你来</div>
           </div>
           <div style="flex: 1">
             <div :class="OpenTextAreaCover
-                ? 'WriteMessageFrameContent'
-                : 'WriteMessageFrameContent WriteMessageFrameContentColorBorder'
+              ? 'WriteMessageFrameContent'
+              : 'WriteMessageFrameContent WriteMessageFrameContentColorBorder'
               ">
               <!--阻止触发CloseMessageSubmit-->
-              <textarea ref="LeaveMessageTextArea" placeholder="输入留言" v-model="MessageText" @click.stop="">
+              <textarea ref="LeaveMessageTextArea" placeholder="来都来啦，留个言吧~" v-model="MessageText" @click.stop="">
               </textarea>
               <span class="EmotionButton" @click="OpenEmotions()">
                 <i class="iconfont icon-face IconfontSize"></i>
               </span>
               <!--需阻止冒泡，否则会冒泡到最上层，触发CloseMessageSubmit方法。该方法逻辑与此处方法操作相反-->
-              <div class="TextAreaCover" @click.stop="OpenMessageSubmit()" v-if="OpenTextAreaCover">
+              <!-- <div class="TextAreaCover" @click.stop="OpenMessageSubmit()" v-if="OpenTextAreaCover">
                 来都来啦，留个言吧
-              </div>
+              </div> -->
             </div>
             <div class="OpenMessageSubmit">
               <div class="LeaveMessageName">
@@ -53,7 +54,7 @@
             <div class="CommentList">
               <div v-for="(item, i) in messageList" v-bind:key="i" style="border-bottom: 1px solid #e9e9e9;">
                 <!-- 父级评论 -->
-                <div class="CommentItem" >
+                <div class="CommentItem">
                   <div class="CommentItemIcon">
                     <!-- <img :src="getIconAdress(item.avator)" v-if="item.leaveName != 'sunq'" /> -->
                     <img src="../../static/img/ZhihuIcon.jpg" v-if="item.leaveName != 'sunq'" />
@@ -268,7 +269,6 @@ import Store from "../../store";
 import axios from 'axios';
 import weathJson from '../../static/map/weath.json';
 import weekJson from '../../static/map/week.json';
-
 export default {
   name: "MessageBoard",
   components: { Pagination, Emotion },
@@ -281,6 +281,9 @@ export default {
         Store.commit("ChangeMessageText", Value);
       },
     },
+    MessageLeaveName() {
+      return Store.state.MessageLeaveName;
+    },
   },
   data: function () {
     return {
@@ -290,7 +293,6 @@ export default {
         "../../static/img/default_headicon_" +
         Math.round(Math.random() * 3) +
         ".jpg", // 留言信息的默认头像地址
-      MessageLeaveName: "", //留言人姓名
       messageList: [], // 留言列表
       MessageLeaveDate: "", // 写留言的时间
       MessageAnswerFrame: false, //回复留言弹框
@@ -303,19 +305,19 @@ export default {
   },
   methods: {
     // 展示留言textarea
-    OpenMessageSubmit: function () {
-      // 隐藏textarea的遮层
-      this.OpenTextAreaCover = false;
-      //显示提交按钮
-      this.OpenMessageSubmitValue = true;
-      this.$refs["LeaveMessageTextArea"].focus();
+    // OpenMessageSubmit: function () {
+    //   // 隐藏textarea的遮层
+    //   this.OpenTextAreaCover = false;
+    //   //显示提交按钮
+    //   this.OpenMessageSubmitValue = true;
+    //   this.$refs["LeaveMessageTextArea"].focus();
 
-      // 填写缓存中游客名
-      var LocalCommonUser = this.GetLocalStorage("SunqBlog");
-      if (LocalCommonUser.toString() != "{}") {
-        this.MessageLeaveName = LocalCommonUser.ArticleCommentNickName;
-      }
-    },
+    //   // 填写缓存中游客名
+    //   var LocalCommonUser = this.GetLocalStorage("SunqBlog");
+    //   if (LocalCommonUser.toString() != "{}") {
+    //     this.MessageLeaveName = LocalCommonUser.ArticleCommentNickName;
+    //   }
+    // },
 
     CloseMessageSubmit: function () {
       // 隐藏textarea的遮层
@@ -336,7 +338,7 @@ export default {
 
       let LocalHeartFeltData = this.GetLocalStorage('SunqBlog') ? this.GetLocalStorage('SunqBlog').token : '';
       // 判断登录状态
-      if(!LocalHeartFeltData){
+      if (!LocalHeartFeltData) {
         Store.commit('ChangeLogin', true);
         return;
       }
@@ -363,11 +365,6 @@ export default {
               // 清空留言框
               Store.commit("CleanMessageText");
 
-              // 存储用户名到本地
-              That.SetLocalStorage("SunqBlog", {
-                Key: "ArticleCommentNickName",
-                Value: That.MessageLeaveName,
-              });
               // 存储用户的随机头像放到本地
               That.SetLocalStorage("SunqBlog", {
                 Key: "ArticleCommentIcon",
@@ -420,11 +417,6 @@ export default {
           That.messageList = data;
         },
       });
-      // 默认填写留言输入框的昵称
-      var LocalCommonUser = this.GetLocalStorage("SunqBlog");
-      if (LocalCommonUser.toString() != "{}") {
-        That.MessageLeaveName = LocalCommonUser.ArticleCommentNickName;
-      }
     },
 
     // 打开回复留言弹框
@@ -447,12 +439,6 @@ export default {
           DomObject.value.length
         );
       }, 100);
-
-      // 填写缓存中游客名
-      var LocalCommonUser = this.GetLocalStorage("SunqBlog");
-      if (LocalCommonUser.toString() != "{}") {
-        That.MessageLeaveName = LocalCommonUser.ArticleCommentNickName;
-      }
     },
 
     // 关闭回复留言框
@@ -607,9 +593,18 @@ export default {
         Show: true,
         Title: message
       });
-    }
+    },
+
+    setUserName: function () {
+      let userInfoData = this.GetLocalStorage('SunqBlog') ? this.GetLocalStorage('SunqBlog').userInfo : '';
+      if (userInfoData) {
+        this.MessageLeaveName = userInfoData.name;
+      }
+    },
   },
   mounted: function () {
+    this.setUserName();
+
     this.MessageRead();
     // 切换Topbar高亮
     Store.commit("ChangeActive", 1);
@@ -634,11 +629,11 @@ export default {
 @import "../../static/css/BlogDetail";
 
 
-.CommentItem{
+.CommentItem {
   border-bottom: none;
 }
 
-.CommentItem:first-child{
+.CommentItem:first-child {
   border-top: none;
   border-bottom: none;
 }
@@ -973,7 +968,7 @@ export default {
 .LeaveMessageName input {
   width: 8rem;
   height: 1.5rem;
-  border: 1px solid @ThemeColor;
+  // border: 1px solid @ThemeColor;
 }
 
 .OpenMessageSubmitButton {

@@ -7,13 +7,13 @@ axios.defaults.retryDelay = 1000;
 axios.interceptors.response.use(undefined, function axiosRetryInterceptor(err) {
   var config = err.config;
   // If config does not exist or the retry option is not set, reject
-  if(!config || !config.retry) return Promise.reject(err);
+  if (!config || !config.retry) return Promise.reject(err);
 
   // Set the variable for keeping track of the retry count
   config.__retryCount = config.__retryCount || 0;
 
   // Check if we've maxed out the total number of retries
-  if(config.__retryCount >= config.retry) {
+  if (config.__retryCount >= config.retry) {
     // Reject with the error
     return Promise.reject(err);
   }
@@ -22,14 +22,14 @@ axios.interceptors.response.use(undefined, function axiosRetryInterceptor(err) {
   config.__retryCount += 1;
 
   // Create new promise to handle exponential backoff
-  var backoff = new Promise(function(resolve) {
-    setTimeout(function() {
+  var backoff = new Promise(function (resolve) {
+    setTimeout(function () {
       resolve();
     }, config.retryDelay || 1);
   });
 
   // Return the promise in which recalls axios to retry the request
-  return backoff.then(function() {
+  return backoff.then(function () {
     return axios(config);
   });
 });
@@ -68,7 +68,7 @@ CommonFunction.install = function (Vue) {
    */
   Vue.prototype.SQFrontAjax = function (Para) {
     // 如果设置了noLoading参数（有这个字段），则不再加载loading
-    if(!Para.noLoading) Store.commit('ChangeLoading', true);
+    if (!Para.noLoading) Store.commit('ChangeLoading', true);
 
     if (!Para['UploadData']) {
       Para['UploadData'] = {};
@@ -78,12 +78,12 @@ CommonFunction.install = function (Vue) {
     // 设置请求头
     let config = {
       headers: {
-          'Authorization': Token // 将 Token 放入 Authorization Header 中
+        'Authorization': Token // 将 Token 放入 Authorization Header 中
       }
     };
 
-    axios.post(Para['Url'], Para['UploadData'],config,{timeout:10000}).then(function (response) {
-      if(!Para.noLoading) Store.commit('ChangeLoading', false);
+    axios.post(Para['Url'], Para['UploadData'], config, { timeout: 10000 }).then(function (response) {
+      if (!Para.noLoading) Store.commit('ChangeLoading', false);
 
       if (response.data.statusCode == 200) {
         Para['Success'](response.data.data);
@@ -94,26 +94,34 @@ CommonFunction.install = function (Vue) {
         });
       }
     }).catch(function (error) {
-      if(!Para.noLoading) Store.commit('ChangeLoading', false);
+      if (!Para.noLoading) Store.commit('ChangeLoading', false);
 
       if (error.response) { // 请求超时时，前端会终止http请求。故请求是没有响应值的，error.response为空
-        if(error.response.status == '500'){
+        if (error.response.status == '500') {
           Store.commit('ChangeTip', {
             Show: true,
             Title: '网络异常，请检查网络'
           });
-        }else if(error.response.status == '404'){ // 404时也是有response的
+        } else if (error.response.status == '404') { // 404时也是有response的
           Store.commit('ChangeTip', {
             Show: true,
             Title: '您访问的接口不存在...'
           });
-        }else { // 500和404之外的状态码直接弹框展示statusText
+        }else if(error.response.status == '401'){
+          Store.commit('ChangeTip', {
+            Show: true,
+            Title: '登录信息已过期，请重新登录'
+          });
+          setTimeout(function () {
+            Store.commit('ChangeLogin', true);
+          }, 1000);
+        } else { // 500和404之外的状态码直接弹框展示statusText
           Store.commit('ChangeTip', {
             Show: true,
             Title: error.response.statusText
           });
         }
-      }else if (error.request && error.request.readyState==4 && error.request.statusCode==0){
+      } else if (error.request && error.request.readyState == 4 && error.request.statusCode == 0) {
         Store.commit('ChangeTip', {
           Show: true,
           Title: '接口访问超时'
@@ -208,9 +216,9 @@ CommonFunction.install = function (Vue) {
       sunqBlogLocationCode = this.getSQCookie('sunqBlogLocationCode');
 
     // 如果用户多次访问，一周内不会重复请求定位接口
-    if(locationCookie){
-      func(locationCookie,sunqBlogLocationCode);
-    }else {
+    if (locationCookie) {
+      func(locationCookie, sunqBlogLocationCode);
+    } else {
       axios({
         url: 'https://restapi.amap.com/v3/ip',
         method: 'post',
@@ -218,19 +226,19 @@ CommonFunction.install = function (Vue) {
           key: 'ba5f9b69f0541123a4dbe142da230b4d'
         },
       }).then(function (resp) {
-        func(resp.data.city,resp.data.adcode);
-        that.setSQCookie('sunqBlogLocation',resp.data.city,3); // 相隔3小时同一浏览器再次访问时会重新定位
-        that.setSQCookie('sunqBlogLocationCode',resp.data.adcode,3);
+        func(resp.data.city, resp.data.adcode);
+        that.setSQCookie('sunqBlogLocation', resp.data.city, 3); // 相隔3小时同一浏览器再次访问时会重新定位
+        that.setSQCookie('sunqBlogLocationCode', resp.data.adcode, 3);
       }).catch();
     }
   };
 
-  Vue.prototype.getIpLocation = function(func){
+  Vue.prototype.getIpLocation = function (func) {
     axios({
       url: 'https://pv.sohu.com/cityjson?ie=utf-8',
       method: 'post'
     }).then(function (resp) {
-      resp.cip = resp.cip.replace('::ffff:','');
+      resp.cip = resp.cip.replace('::ffff:', '');
       // resp.cname = resp.cname;
       func(resp.cname, resp.cip);
     }).catch();
@@ -342,27 +350,27 @@ CommonFunction.install = function (Vue) {
    * @param array
    * @returns {any[]}
    */
-  Vue.prototype.dedupe = function(array){
+  Vue.prototype.dedupe = function (array) {
     return Array.from(new Set(array));
   };
-  
-  Vue.prototype.createLog = function (log){
+
+  Vue.prototype.createLog = function (log) {
     let that = this,
       dateString = this.getSQTime();
     that.GetLocation(function (LocationCityName) {
       that.SQFrontAjax({
         Url: '/api/visitCreate/foreend',
         UploadData: {
-          location:LocationCityName,
-          fromUrl:document.referrer,
-          time:dateString,
+          location: LocationCityName,
+          fromUrl: document.referrer,
+          time: dateString,
           browser: window.navigator.platform.split(' ')[0] + '\n' + that.getSQBrowser() + '\n' + window.screen.width + "*" + window.screen.height,
-          moduleType:log.moduleType,
-          operateType:log.operateType,
-          operateContent:log.operateContent ? log.operateContent : '',
+          moduleType: log.moduleType,
+          operateType: log.operateType,
+          operateContent: log.operateContent ? log.operateContent : '',
         },
         Success: function () {
-          that.setSQCookie('sunqBlog','统计访问量',12); // 12个小时内同一个浏览器算一个访问量
+          that.setSQCookie('sunqBlog', '统计访问量', 12); // 12个小时内同一个浏览器算一个访问量
         }
       });
     });

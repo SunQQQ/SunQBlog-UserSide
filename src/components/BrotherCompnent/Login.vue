@@ -60,10 +60,17 @@ export default {
             });
             Store.commit('ChangeLogin', false);
 
+            // 登录成功后，填充留言页面的用户名
+            Store.commit('ChangeMessageLeaveName', data.userInfo.name);
+
             // 存储token
             That.SetLocalStorage('SunqBlog', {
               Key: 'token',
               Value: data.token
+            });
+            That.SetLocalStorage('SunqBlog', {
+              Key: 'userInfo',
+              Value: data.userInfo
             });
           }
         });
