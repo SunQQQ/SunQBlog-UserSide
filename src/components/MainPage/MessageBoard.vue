@@ -30,9 +30,9 @@
             <div class="OpenMessageSubmit">
               <div class="LeaveMessageName">
                 <!--阻止触发CloseMessageSubmit-->
-                <input placeholder="输入你的大名或昵称" v-model="MessageLeaveName" @click.stop="" />
+                <!-- <input placeholder="输入你的大名或昵称" v-model="MessageLeaveName" @click.stop="" /> -->
               </div>
-              <div class="OpenMessageSubmitButton" @click="MessageSubmit()">
+              <div class="OpenMessageSubmitButton" @click="MessageSubmit(1)">
                 提交
               </div>
             </div>
@@ -77,7 +77,7 @@
                       <div class="DateAnswerLeft">
                         {{ item.createTime }}
                       </div>
-                      <div class="DateAnswerRight" @click="AnswerMessage(item.leaveName)">
+                      <div class="DateAnswerRight" @click="AnswerMessage(item.leaveName, item.id)">
                         回复
                       </div>
                     </div>
@@ -108,7 +108,7 @@
                       <div class="DateAnswerLeft">
                         {{ childItem.createTime }}
                       </div>
-                      <div class="DateAnswerRight" @click="AnswerMessage(childItem.leaveName)">
+                      <div class="DateAnswerRight" @click="AnswerMessage(childItem.leaveName,childItem.parentId)">
                         回复
                       </div>
                     </div>
@@ -245,9 +245,9 @@
             </div>
             <div class="OpenMessageSubmit">
               <div class="LeaveMessageName">
-                <input placeholder="输入你的大名或昵称" v-model="MessageLeaveName" />
+                <!-- <input placeholder="输入你的大名或昵称" v-model="MessageLeaveName" /> -->
               </div>
-              <div class="OpenMessageSubmitButton" @click="MessageSubmit()">
+              <div class="OpenMessageSubmitButton" @click="MessageSubmit(2)">
                 提交
               </div>
             </div>
@@ -300,25 +300,12 @@ export default {
       AticleBottom: false, // 文章底线
       buttonAnimate: false, // 博客入口按钮动画
       city: "",
-      weathArray: []
+      weathArray: [],
+      parentId: '',
+      curPage: 0
     };
   },
   methods: {
-    // 展示留言textarea
-    // OpenMessageSubmit: function () {
-    //   // 隐藏textarea的遮层
-    //   this.OpenTextAreaCover = false;
-    //   //显示提交按钮
-    //   this.OpenMessageSubmitValue = true;
-    //   this.$refs["LeaveMessageTextArea"].focus();
-
-    //   // 填写缓存中游客名
-    //   var LocalCommonUser = this.GetLocalStorage("SunqBlog");
-    //   if (LocalCommonUser.toString() != "{}") {
-    //     this.MessageLeaveName = LocalCommonUser.ArticleCommentNickName;
-    //   }
-    // },
-
     CloseMessageSubmit: function () {
       // 隐藏textarea的遮层
       this.OpenTextAreaCover = true;
@@ -332,8 +319,12 @@ export default {
         ".jpeg");
     },
 
-    // 提交留言
-    MessageSubmit: function () {
+    /**
+     * 提交留言
+     * @param level 1: 一级留言 2: 二级留言
+     * 直接留言则为一级留言，回复留言则为二级留言
+     */
+    MessageSubmit: function (level) {
       var That = this;
 
       let LocalHeartFeltData = this.GetLocalStorage('SunqBlog') ? this.GetLocalStorage('SunqBlog').token : '';
@@ -343,20 +334,32 @@ export default {
         return;
       }
 
-      if (Store.getters.GetMessageText && this.MessageLeaveName) {
+      // 一级留言制空parentId
+      if(level == 1){
+        this.parentId = '';
+      }
+
+      // if (Store.getters.GetMessageText && this.MessageLeaveName) {
+      if (Store.getters.GetMessageText) {
         let MatchedMessageText = That.MatchEmotion(
           Store.getters.GetMessageText
         ),
           iconNo = this.GetLocalStorage("SunqBlog").ArticleCommentIcon || Math.round(Math.random() * 4);
 
         this.GetLocation(function (LocationCityName) {
+          // 处理回复留言的二级数据
+          let param = {
+            messageContent: MatchedMessageText,
+            city: LocationCityName,
+            avator: iconNo,
+          }
+          if (That.parentId) {
+            param.parentId = That.parentId;
+          }
+
           That.SQFrontAjax({
             Url: "/api/createLeaveMessage",
-            UploadData: {
-              messageContent: MatchedMessageText,
-              city: LocationCityName,
-              avator: iconNo,
-            },
+            UploadData: param,
             Success: function () {
               Store.commit("ChangeTip", {
                 Show: true,
@@ -365,14 +368,9 @@ export default {
               // 清空留言框
               Store.commit("CleanMessageText");
 
-              // 存储用户的随机头像放到本地
-              That.SetLocalStorage("SunqBlog", {
-                Key: "ArticleCommentIcon",
-                Value: iconNo,
-              });
-
               // 刷新留言列表
-              That.MessageRead();
+              // That.ValueByPagition();
+              That.$router.go(0);
 
               // 如果是回复留言，关闭留言弹框
               That.MessageAnswerFrame = false;
@@ -401,12 +399,12 @@ export default {
     },
 
     // 渲染留言列表
-    MessageRead: function () {
+    MessageRead: function (curPage) {
       var That = this;
       this.SQFrontAjax({
         Url: "/api/userLeaveMsgList",
         UploadData: {
-          start: 0,
+          start: curPage ? curPage * 8 : 0,
           size: 8
         },
         Success: function (data) {
@@ -421,16 +419,22 @@ export default {
             // 停止分页器的滚动监听
             That.$refs.Pagi.SetUpdate(false);
             Store.commit("changeFooter", true); // 展示footer
+          }else{
+            That.AticleBottom = false;
+            That.$refs.Pagi.SetUpdate(true);
+            Store.commit("changeFooter", false); // 隐藏footer
           }
         },
       });
     },
 
     // 打开回复留言弹框
-    AnswerMessage: function (AnswedPerson) {
+    AnswerMessage: function (AnswedPerson, parentId) {
       var That = this;
       this.MessageAnswerFrame = true;
       this.FadeAnimate = true;
+
+      this.parentId = parentId;
 
       // 填写@某人
       Store.commit("ChangeMessageText", "@" + AnswedPerson + ":");
@@ -464,6 +468,9 @@ export default {
     // 上滑加载更多
     ValueByPagition: function (SelectPage) {
       var That = this;
+
+      this.curPage = SelectPage;
+
       this.SQFrontAjax({
         Url: "/api/userLeaveMsgList",
         UploadData: {
@@ -484,11 +491,11 @@ export default {
             That.$refs.Pagi.SetUpdate(true);
             Store.commit("changeFooter", false); // 隐藏footer
             // 创建日志
-            That.createLog({
-              moduleType: "pageTurn",
-              operateType: "下拉留言列表到",
-              operateContent: "第" + (SelectPage + 1) + "页",
-            });
+            // That.createLog({
+            //   moduleType: "pageTurn",
+            //   operateType: "下拉留言列表到",
+            //   operateContent: "第" + (SelectPage + 1) + "页",
+            // });
           }
         },
       });
