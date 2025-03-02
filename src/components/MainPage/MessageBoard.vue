@@ -415,6 +415,13 @@ export default {
             Item.createTime = That.DateFormat(Item.createTime);
           });
           That.messageList = data;
+
+          if (data.length != 8) {
+            That.AticleBottom = true;
+            // 停止分页器的滚动监听
+            That.$refs.Pagi.SetUpdate(false);
+            Store.commit("changeFooter", true); // 展示footer
+          }
         },
       });
     },
@@ -458,12 +465,10 @@ export default {
     ValueByPagition: function (SelectPage) {
       var That = this;
       this.SQFrontAjax({
-        Url: "/api/MessageRead/foreend",
+        Url: "/api/userLeaveMsgList",
         UploadData: {
-          PagnationData: {
-            start: SelectPage * 8,
-            size: 8,
-          },
+          start: SelectPage * 8,
+          size: 8
         },
         Success: function (data) {
           data.forEach(function (Item) {
@@ -652,7 +657,7 @@ export default {
     padding: 1.5rem 1.5rem 2rem 1rem;
     animation: FadeIn 0.2s linear;
     animation-fill-mode: forwards;
-
+    z-index: 5;
     overflow: hidden;
   }
 
