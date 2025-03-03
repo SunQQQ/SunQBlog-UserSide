@@ -56,9 +56,7 @@
                 <!-- 父级评论 -->
                 <div class="CommentItem">
                   <div class="CommentItemIcon">
-                    <!-- <img :src="getIconAdress(item.avator)" v-if="item.leaveName != 'sunq'" /> -->
-                    <img src="../../static/img/ZhihuIcon.jpg" v-if="item.leaveName != 'sunq'" />
-                    <img src="../../static/img/ZhihuIcon.jpg" v-if="item.leaveName == 'sunq'" />
+                    <img :src="getIconAdress(item.avator)"/>
                   </div>
                   <div class="CommentItemContent">
                     <div>
@@ -351,7 +349,6 @@ export default {
           let param = {
             messageContent: MatchedMessageText,
             city: LocationCityName,
-            avator: iconNo,
           }
           if (That.parentId) {
             param.parentId = That.parentId;
