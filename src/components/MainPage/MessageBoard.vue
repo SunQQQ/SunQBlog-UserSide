@@ -56,7 +56,7 @@
                 <!-- 父级评论 -->
                 <div class="CommentItem">
                   <div class="CommentItemIcon">
-                    <img :src="getIconAdress(item.avator)"/>
+                    <img :src="getIconAdress(item.avator)" />
                   </div>
                   <div class="CommentItemContent">
                     <div>
@@ -85,9 +85,7 @@
                 <div class="CommentItem" v-for="(childItem, i) in item.child" v-bind:key="i">
                   <div style="width: 40px;"></div>
                   <div class="CommentItemIcon">
-                    <!-- <img :src="getIconAdress(item.avator)" v-if="item.leaveName != 'sunq'" /> -->
-                    <img src="../../static/img/ZhihuIcon.jpg" v-if="childItem.leaveName != 'sunq'" />
-                    <img src="../../static/img/ZhihuIcon.jpg" v-if="childItem.leaveName == 'sunq'" />
+                    <img :src="getIconAdress(childItem.avator)"/>
                   </div>
                   <div class="CommentItemContent">
                     <div>
@@ -106,7 +104,7 @@
                       <div class="DateAnswerLeft">
                         {{ childItem.createTime }}
                       </div>
-                      <div class="DateAnswerRight" @click="AnswerMessage(childItem.leaveName,childItem.parentId)">
+                      <div class="DateAnswerRight" @click="AnswerMessage(childItem.leaveName, childItem.parentId)">
                         回复
                       </div>
                     </div>
@@ -333,7 +331,7 @@ export default {
       }
 
       // 一级留言制空parentId
-      if(level == 1){
+      if (level == 1) {
         this.parentId = '';
       }
 
@@ -416,7 +414,7 @@ export default {
             // 停止分页器的滚动监听
             That.$refs.Pagi.SetUpdate(false);
             Store.commit("changeFooter", true); // 展示footer
-          }else{
+          } else {
             That.AticleBottom = false;
             That.$refs.Pagi.SetUpdate(true);
             Store.commit("changeFooter", false); // 隐藏footer
