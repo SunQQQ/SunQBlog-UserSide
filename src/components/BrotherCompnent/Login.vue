@@ -9,14 +9,20 @@
           <div class="form-group">
             <label for="username">账号</label>
             <input type="text" id="username" v-model="username" placeholder="请输入账号" required />
+            <button type="button" class="generate-button" @click="generateUsername">
+              生成随机账号
+            </button>
           </div>
           <div class="form-group">
             <label for="password">密码</label>
-            <input type="password" id="password" v-model="password" placeholder="请输入密码" required />
+            <input id="password" v-model="password" placeholder="请输入密码" required />
+            <button type="button" class="generate-button" @click="generatePassword">
+              生成随机密码
+            </button>
           </div>
           <div class="button-content">
             <button type="submit" class="login-button" @click="login">登录</button>
-            <button type="submit" class="login-button register-color">注册并登录</button>
+            <button type="submit" class="login-button register-color" @click="regist">注册并登录</button>
           </div>
         </form>
         <!-- 关闭按钮 -->
@@ -43,6 +49,25 @@ export default {
     },
   },
   methods: {
+    // 生成随机账号
+    generateUsername() {
+      let That = this;
+      That.SQFrontAjax({
+        Url: "/api/getUserName",
+        Success: function (data) {
+          That.username = data.name; // 添加前缀
+        },
+      });
+    },
+    // 生成随机密码
+    generatePassword() {
+      const chars = "0123456789";
+      let password = "";
+      for (let i = 0; i < 4; i++) {
+        password += chars.charAt(Math.floor(Math.random() * chars.length)); // 生成4位随机密码
+      }
+      this.password = password;
+    },
     login() {
       let That = this;
       // 登录逻辑
@@ -82,6 +107,41 @@ export default {
       // 关闭登录框
       Store.commit('ChangeLogin', false);
     },
+    regist(){
+      let That = this;
+      // 注册逻辑
+      if (this.username && this.password) {
+        That.SQFrontAjax({
+          Url: "/api/register",
+          UploadData: {
+            username: That.username,
+            password: That.password
+          },
+          Success: function (data) {
+            Store.commit("ChangeTip", {
+              Show: true,
+              Title: "注册成功",
+            });
+            Store.commit('ChangeLogin', false);
+
+            // 注册成功后，填充留言页面的用户名
+            Store.commit('ChangeMessageLeaveName', data.userInfo.name);
+
+            // 存储token
+            That.SetLocalStorage('SunqBlog', {
+              Key: 'token',
+              Value: data.token
+            });
+            That.SetLocalStorage('SunqBlog', {
+              Key: 'userInfo',
+              Value: data.userInfo
+            });
+          }
+        });
+      } else {
+        alert("请输入账号和密码");
+      }
+    }
   },
 };
 </script>
@@ -145,6 +205,7 @@ export default {
 
 .form-group {
   margin-bottom: 1.5rem;
+  position: relative;
 }
 
 .form-group label {
@@ -161,8 +222,8 @@ export default {
   border-radius: 4px;
   font-size: 1rem;
   outline: none;
-  transition: border-color 0.3s ease;
   box-sizing: border-box;
+  background-color: white !important;
 }
 
 .form-group input:focus {
@@ -192,5 +253,31 @@ export default {
 
 .login-button:hover {
   background-color: #0056b3;
+}
+
+/* 输入框和按钮的容器 */
+.input-with-button {
+  display: flex;
+  align-items: center;
+}
+
+/* 输入框 */
+.input-with-button input {
+  flex: 1;
+  margin-right: 0.5rem;
+  /* 输入框和按钮之间的间距 */
+}
+
+/* 生成按钮 */
+.generate-button {
+  font-size: 0.9rem;
+  cursor: pointer;
+  position: absolute;
+  width: 100px;
+  right: 2px;
+  border: none;
+  color: #01aaed;
+  top: 40px;
+  background-color: white;
 }
 </style>

@@ -388,7 +388,7 @@ export default {
         // });
         Store.commit("ChangeTip", {
           Show: true,
-          Title: "昵称和留言不能为空呦",
+          Title: "留言内容不能为空呦",
         });
       }
     },
