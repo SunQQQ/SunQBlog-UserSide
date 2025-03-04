@@ -112,7 +112,7 @@ export default {
       // 注册逻辑
       if (this.username && this.password) {
         That.SQFrontAjax({
-          Url: "/api/register",
+          Url: "/api/regist",
           UploadData: {
             username: That.username,
             password: That.password
@@ -124,7 +124,7 @@ export default {
             });
             Store.commit('ChangeLogin', false);
 
-            // 注册成功后，填充留言页面的用户名
+            // // 注册成功后，填充留言页面的用户名
             Store.commit('ChangeMessageLeaveName', data.userInfo.name);
 
             // 存储token

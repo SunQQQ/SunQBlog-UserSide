@@ -4,7 +4,7 @@
       <div class="MoveingLight"></div>
       <div class="MediaIndexContent">
         <div class="MediaLeft" @click="ChangeRouter('BlogIndex')">
-          <!-- <span>Sunq's Blog</span> -->
+          <!-- <span>Coding Life</span> -->
           <span>Coding Life</span>
         </div>
         <div class="MediaRight">
@@ -19,7 +19,7 @@
       </div>
     </div>
     <div class="MobileTopBar">
-      <div class="MobileTopBarLogo" @click="ChangeRouter('BlogIndex')">Sunq's Blog</div>
+      <div class="MobileTopBarLogo" @click="ChangeRouter('BlogIndex')">Coding Life</div>
       <div class="MenuTopBarIcon" @click="OpenMenu()">
 <!--
         <i :class="OpenMobileMenu ? 'iconfont icon-fork IconfontSize' : 'iconfont icon-iconset0194 IconfontSize'"></i>
