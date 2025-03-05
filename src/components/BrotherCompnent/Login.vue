@@ -41,6 +41,7 @@ export default {
     return {
       username: "", // 账号
       password: "", // 密码
+      nameId: 0, // 随机用户名在表中的id 
     };
   },
   computed: {
@@ -55,6 +56,7 @@ export default {
       That.SQFrontAjax({
         Url: "/api/getUserName",
         Success: function (data) {
+          That.nameId = data.id;
           That.username = data.name; // 添加前缀
         },
       });
@@ -120,7 +122,7 @@ export default {
           Success: function (data) {
             Store.commit("ChangeTip", {
               Show: true,
-              Title: "注册成功",
+              Title: "注册并登录成功",
             });
             Store.commit('ChangeLogin', false);
 
@@ -136,6 +138,19 @@ export default {
               Key: 'userInfo',
               Value: data.userInfo
             });
+
+            if(That.nameId > 0){
+              // 删除已经使用的随机用户名
+              That.SQFrontAjax({
+                Url: "/api/markNameAsUsed",
+                UploadData: {
+                  id: That.nameId
+                },
+                Success: function (data) {
+                  console.log('删除已经使用的随机用户名');
+                }
+              });
+            }
           }
         });
       } else {
