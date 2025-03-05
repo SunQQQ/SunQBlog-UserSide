@@ -9,8 +9,8 @@
                  class="BlogIndexContentLeftDefaultGraph">
             <div class="ArticleItem" v-for="(item,i) in ArticleList" v-bind:key="i"
                  @click="UpdateRouter('BlogDetail',item)">
-              <div class="ArticleItemCover" v-if="item.ArticleCover">
-                <img :src="item.ArticleCover">
+              <div class="ArticleItemCover">
+                <img :src="item.articleCover ? item.articleCover : require('../../static/img/ArticleList.jpg')">
               </div>
               <div style="flex: 1">
                 <div class="ArticleTitle">

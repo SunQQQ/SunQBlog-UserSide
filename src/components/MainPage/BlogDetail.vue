@@ -307,21 +307,21 @@ export default {
       }
     },
     // 获取评论列表
-    GetCommentList: function () {
-      var That = this;
-      this.SQFrontAjax({
-        Url: "/api/ArticleCommentRead/foreend",
-        UploadData: {
-          ArticleId: this.$route.query._id,
-        },
-        Success: function (data) {
-          That.ArticleCommentList = data;
-          data.forEach(function (Item, I) {
-            Item.ArticleCommentDate = That.DateFormat(Item.ArticleCommentDate);
-          });
-        },
-      });
-    },
+    // GetCommentList: function () {
+    //   var That = this;
+    //   this.SQFrontAjax({
+    //     Url: "/api/ArticleCommentRead/foreend",
+    //     UploadData: {
+    //       ArticleId: this.$route.query._id,
+    //     },
+    //     Success: function (data) {
+    //       That.ArticleCommentList = data;
+    //       data.forEach(function (Item, I) {
+    //         Item.ArticleCommentDate = That.DateFormat(Item.ArticleCommentDate);
+    //       });
+    //     },
+    //   });
+    // },
     // 传入文章id，在文章表里给对应文章评论数加一
     UpdateArticleCommentNum: function () {
       this.SQFrontAjax({
