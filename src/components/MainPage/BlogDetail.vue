@@ -53,14 +53,15 @@
                 if="commentList.length != 0"
               >
                 <div class="CommentItemIcon">
-                  <img
+                  <!-- <img
                     src="../../static/img/DefaultHeadIcon.jpg"
                     v-if="item.createrName != 'sunq'"
                   />
                   <img
                     src="../../static/img/ZhihuIcon.jpg"
                     v-if="item.createrName == 'sunq'"
-                  />
+                  /> -->
+                  <img :src="getIconAdress(item.createrAvator)" />
                 </div>
                 <div class="CommentItemContent">
                   <div class="createrName">
@@ -346,7 +347,12 @@ export default {
     AppendMessageText: function () {
       // 光标聚焦
       this.$refs.MessageText.focus();
-    }
+    },
+    getIconAdress: function (iconNo) {
+      return require("@/static/img/default_headicon_" +
+        iconNo.toString() +
+        ".jpeg");
+    },
   },
   mounted: function () {
     window.showMarkedImage = function(e, href) {
