@@ -53,14 +53,6 @@
                 if="commentList.length != 0"
               >
                 <div class="CommentItemIcon">
-                  <!-- <img
-                    src="../../static/img/DefaultHeadIcon.jpg"
-                    v-if="item.createrName != 'sunq'"
-                  />
-                  <img
-                    src="../../static/img/ZhihuIcon.jpg"
-                    v-if="item.createrName == 'sunq'"
-                  /> -->
                   <img :src="getIconAdress(item.createrAvator)" />
                 </div>
                 <div class="CommentItemContent">
@@ -111,7 +103,7 @@
             <div class="UserHeadIcon">
               <img src="../../static/img/DefaultHeadIcon.jpg" />
             </div>
-            <div class="CommentUserInfo">
+            <!-- <div class="CommentUserInfo">
               <input
                 placeholder="昵称（必填）"
                 v-model="createrName"
@@ -124,7 +116,7 @@
                 placeholder="网址（可以不填哦）"
                 v-model="ArticleCommentUrl"
               />
-            </div>
+            </div> -->
           </div>
           <div class="ArticleDetailCommentContent">
             <textarea
@@ -173,7 +165,6 @@ export default {
   data() {
     return {
       Article: {},
-      createrName: "",
       ArticleCommentEmail: "",
       ArticleCommentUrl: "",
 
@@ -233,12 +224,6 @@ export default {
           // });
         },
       });
-
-      // 默认填写文章评论输入框的昵称
-      var LocalCommonUser = this.GetLocalStorage("SunqBlog");
-      if (LocalCommonUser.toString() != "{}") {
-        this.createrName = LocalCommonUser.createrName;
-      }
     },
     /**
      * 本方法用于提交评论
@@ -252,7 +237,7 @@ export default {
     CommentSubmit: function () {
       var That = this;
 
-      if (this.createrName && Store.getters.GetMessageText) {
+      if (Store.getters.GetMessageText) {
         var MatchedMessageText = That.MatchEmotion(
           Store.getters.GetMessageText
         );
@@ -260,28 +245,15 @@ export default {
         this.GetLocation(function (LocationCityName) {
           // 新增评论
           That.SQFrontAjax({
-            Url: "/api/ArticleCommentCreate/foreend",
+            Url: "/api/addComment",
             UploadData: {
-              ArticleId: That.$route.query._id,
-              ArticleName: That.Article.title,
-              createrName: That.createrName,
-              ArticleCommentEmail: That.ArticleCommentEmail,
-              ArticleCommentUrl: That.ArticleCommentUrl,
+              articleId: That.$route.query.id,
               commentContent: MatchedMessageText,
-              createTime: new Date(),
-              LocationCityName: LocationCityName,
+              city: LocationCityName,
+              comParentId: 0
             },
             Success: function () {
               That.GetCommentList();
-
-              // 修改被评论文章的评论数字段
-              That.UpdateArticleCommentNum();
-
-              // 存储用户名到本地
-              That.SetLocalStorage("SunqBlog", {
-                Key: "createrName",
-                Value: That.createrName,
-              });
 
               // Store.commit("ChangeTip", {
               //   Show: true,
@@ -301,10 +273,10 @@ export default {
         // 清空textarea
         Store.commit("CleanMessageText");
       } else {
-        // Store.commit("ChangeTip", {
-        //   Show: true,
-        //   title: "昵称和评论不能为空呦",
-        // });
+        Store.commit("ChangeTip", {
+          Show: true,
+          title: "评论内容不能为空呦"
+        });
       }
     },
     // 获取评论列表
@@ -321,17 +293,6 @@ export default {
             Item.createTime = That.DateFormat(Item.createTime);
           });
         },
-      });
-    },
-    // 传入文章id，在文章表里给对应文章评论数加一
-    UpdateArticleCommentNum: function () {
-      this.SQFrontAjax({
-        Url: "/api/ArticleCommentNumUpdate/foreend",
-        UploadData: {
-          _id: this.$route.query._id,
-          type: "add",
-        },
-        Success: function (data) {},
       });
     },
     // 回复评论
