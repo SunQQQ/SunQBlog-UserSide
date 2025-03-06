@@ -22,7 +22,7 @@
                 </div>
                 <div class="ArticleFooter">
                   <!--<div class="ArticleFooterItem">发表：{{ item.createTime }}</div>
-                  <div class="ArticleFooterItem" @click="UpdateRouter('BlogDetail',item._id)">评论：{{ item.CommentNum }}</div>-->
+                  <div class="ArticleFooterItem" @click="UpdateRouter('BlogDetail',item._id)">评论：{{ item.commentNum }}</div>-->
                   <!--<div class="ArticleFooterItem" style="border: none">
                     <i class="iconfont icon-yueduliang iconBlogIndex"></i>1000
                   </div>-->
@@ -35,8 +35,8 @@
                   <div class="ArticleFooterItem" style="border: none">
                     <i class="iconfont icon-yueduliang iconBlogIndex"></i>{{ item.pageViewNum }}
                   </div>
-                  <div class="ArticleFooterItem" style="border: none" v-show="item.CommentNum">
-                    <i class="iconfont icon-pinglun iconBlogIndex"></i>{{ item.CommentNum }}
+                  <div class="ArticleFooterItem" style="border: none">
+                    <i class="iconfont icon-pinglun iconBlogIndex"></i>{{ item.commentNum }}
                   </div>
                 </div>
               </div>
@@ -89,7 +89,7 @@
                   <div class="BlogStatisticItemText">文章数量</div>
                 </div>
                 <div class="BlogStatisticItem">
-                  <div class="BlogStatisticItemNum">{{ CommentNum }}</div>
+                  <div class="BlogStatisticItemNum">{{ commentNum }}</div>
                   <div class="BlogStatisticItemText">评论数量</div>
                 </div>
                 <div class="BlogStatisticItem">
@@ -133,7 +133,7 @@
         ArticleList: [],// 文章列表        
         ArticleNum: 0,// 文章量     
         LeaveMessageNum: 0,// 留言量        
-        CommentNum: 0,// 博客评论量
+        commentNum: 0,// 博客评论量
         HotArticleList: [],// 热门文章列表
         AticleBottom: false,// 文章底线
         buttonAnimate: false, // 首页源码入口动画效果
@@ -165,8 +165,6 @@
         this.GetArticle(0);
         // //渲染留言个数
         // this.GetLeaveMessageNum();
-        // // 渲染评论个数
-        // this.GetCommentNum();
         // //渲染热门博文
         // this.GetHotArticle();
       },
@@ -255,22 +253,6 @@
               //   operateContent: '第' + (SelectPage + 1) + '页'
               // });
             }
-          }
-        });
-      },
-      // 获取评论数量
-      GetCommentNum: function () {
-        var That = this;
-        this.SQFrontAjax({
-          Url: '/api/getcommentnum',
-          Success: function (data) {
-
-            var NumInterval = window.setInterval(function () {
-              That.CommentNum += 1;
-              if (data == That.CommentNum) {
-                clearInterval(NumInterval);
-              }
-            }, 30);
           }
         });
       },
