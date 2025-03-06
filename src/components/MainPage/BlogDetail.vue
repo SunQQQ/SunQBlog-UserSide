@@ -38,7 +38,7 @@
       <div
         class="ArticleDetailContent"
         style="margin-top: 1rem"
-        v-if="ArticleCommentList.length > 0"
+        v-if="commentList.length > 0"
       >
         <div
           class="ArticleDetailContentTab"
@@ -48,23 +48,23 @@
             <div class="CommentList">
               <div
                 class="CommentItem"
-                v-for="(item, i) in ArticleCommentList"
+                v-for="(item, i) in commentList"
                 v-bind:key="i"
-                if="ArticleCommentList.length != 0"
+                if="commentList.length != 0"
               >
                 <div class="CommentItemIcon">
                   <img
                     src="../../static/img/DefaultHeadIcon.jpg"
-                    v-if="item.ArticleCommentNickName != 'sunq'"
+                    v-if="item.createrName != 'sunq'"
                   />
                   <img
                     src="../../static/img/ZhihuIcon.jpg"
-                    v-if="item.ArticleCommentNickName == 'sunq'"
+                    v-if="item.createrName == 'sunq'"
                   />
                 </div>
                 <div class="CommentItemContent">
-                  <div class="ArticleCommentNickName">
-                    {{ item.ArticleCommentNickName }}
+                  <div class="createrName">
+                    {{ item.createrName }}
                     <span
                       v-if="
                         item.LocationCityName &&
@@ -78,18 +78,18 @@
                     </span>
                   </div>
                   <div
-                    class="ArticleCommentText"
-                    v-html="item.ArticleCommentText"
+                    class="commentContent"
+                    v-html="item.commentContent"
                   >
-                    {{ item.ArticleCommentText }}
+                    {{ item.commentContent }}
                   </div>
                   <div class="DateAnswer">
                     <div class="DateAnswerLeft">
-                      {{ item.ArticleCommentDate }}
+                      {{ item.createTime }}
                     </div>
                     <div
                       class="DateAnswerRight"
-                      @click="AnswerComment(item.ArticleCommentNickName)"
+                      @click="AnswerComment(item.createrName)"
                     >
                       回复
                     </div>
@@ -113,7 +113,7 @@
             <div class="CommentUserInfo">
               <input
                 placeholder="昵称（必填）"
-                v-model="ArticleCommentNickName"
+                v-model="createrName"
               />
               <input
                 placeholder="邮箱（可以不填哦）"
@@ -172,14 +172,14 @@ export default {
   data() {
     return {
       Article: {},
-      ArticleCommentNickName: "",
+      createrName: "",
       ArticleCommentEmail: "",
       ArticleCommentUrl: "",
 
-      /*ArticleCommentText: '',*/
+      /*commentContent: '',*/
 
-      ArticleCommentDate: "",
-      ArticleCommentList: "",
+      createTime: "",
+      commentList: "",
       BlogDetailSkeletonScreen: true,
     };
   },
@@ -236,7 +236,7 @@ export default {
       // 默认填写文章评论输入框的昵称
       var LocalCommonUser = this.GetLocalStorage("SunqBlog");
       if (LocalCommonUser.toString() != "{}") {
-        this.ArticleCommentNickName = LocalCommonUser.ArticleCommentNickName;
+        this.createrName = LocalCommonUser.createrName;
       }
     },
     /**
@@ -251,7 +251,7 @@ export default {
     CommentSubmit: function () {
       var That = this;
 
-      if (this.ArticleCommentNickName && Store.getters.GetMessageText) {
+      if (this.createrName && Store.getters.GetMessageText) {
         var MatchedMessageText = That.MatchEmotion(
           Store.getters.GetMessageText
         );
@@ -263,11 +263,11 @@ export default {
             UploadData: {
               ArticleId: That.$route.query._id,
               ArticleName: That.Article.title,
-              ArticleCommentNickName: That.ArticleCommentNickName,
+              createrName: That.createrName,
               ArticleCommentEmail: That.ArticleCommentEmail,
               ArticleCommentUrl: That.ArticleCommentUrl,
-              ArticleCommentText: MatchedMessageText,
-              ArticleCommentDate: new Date(),
+              commentContent: MatchedMessageText,
+              createTime: new Date(),
               LocationCityName: LocationCityName,
             },
             Success: function () {
@@ -278,8 +278,8 @@ export default {
 
               // 存储用户名到本地
               That.SetLocalStorage("SunqBlog", {
-                Key: "ArticleCommentNickName",
-                Value: That.ArticleCommentNickName,
+                Key: "createrName",
+                Value: That.createrName,
               });
 
               // Store.commit("ChangeTip", {
@@ -307,21 +307,21 @@ export default {
       }
     },
     // 获取评论列表
-    // GetCommentList: function () {
-    //   var That = this;
-    //   this.SQFrontAjax({
-    //     Url: "/api/ArticleCommentRead/foreend",
-    //     UploadData: {
-    //       ArticleId: this.$route.query._id,
-    //     },
-    //     Success: function (data) {
-    //       That.ArticleCommentList = data;
-    //       data.forEach(function (Item, I) {
-    //         Item.ArticleCommentDate = That.DateFormat(Item.ArticleCommentDate);
-    //       });
-    //     },
-    //   });
-    // },
+    GetCommentList: function () {
+      var That = this;
+      this.SQFrontAjax({
+        Url: "/api/getCommentList",
+        UploadData: {
+          articleId: this.$route.query.id,
+        },
+        Success: function (data) {
+          That.commentList = data;
+          data.forEach(function (Item, I) {
+            Item.createTime = That.DateFormat(Item.createTime);
+          });
+        },
+      });
+    },
     // 传入文章id，在文章表里给对应文章评论数加一
     UpdateArticleCommentNum: function () {
       this.SQFrontAjax({
