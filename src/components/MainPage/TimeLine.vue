@@ -30,14 +30,14 @@
                         <div class="TimeLineTdCenter"></div>
                         <div class="TimeLineTdRight">
                             <div class="BubbleRight bubble-right-margin">
-                                <span class="TimeLineTime">{{ Item.CreateDate }}</span>{{ Item.TextContent }}
+                                <span class="TimeLineTime">{{ Item.content_date }}</span>{{ Item.content }}
                             </div>
                         </div>
                     </div>
                     <div class="TimeLineTr" v-if="Index%2 != 0">
                         <div class="TimeLineTdLeft">
                             <div class="Bubble bubble-margin">
-                                <span class="TimeLineTime">{{ Item.CreateDate }}</span>{{ Item.TextContent }}
+                                <span class="TimeLineTime">{{ Item.content_date }}</span>{{ Item.content }}
                             </div>
                         </div>
                         <div class="TimeLineTdCenter"></div>
@@ -65,11 +65,6 @@
         this.SQFrontAjax({
           Url:'/api/getTimeLineList',
           Success:function (data) {
-            data.forEach(function (Item) {
-              if(Item.CreateDate){
-                Item.CreateDate = Item.CreateDate.slice(0,10);
-              }
-            });
             That.TimeLineList = data;
           }
         });
