@@ -10,7 +10,8 @@
             <div class="ArticleItem" v-for="(item,i) in ArticleList" v-bind:key="i"
                  @click="UpdateRouter('BlogDetail',item)">
               <div class="ArticleItemCover">
-                <img :src="item.articleCover ? item.articleCover : require('../../static/img/ArticleList.jpg')">
+                <img :src="item.articleCover ? item.articleCover : require('../../static/img/default_article_cover.jpeg')"
+                     class="ArticleItemCoverImg">
               </div>
               <div style="flex: 1">
                 <div class="ArticleTitle">
