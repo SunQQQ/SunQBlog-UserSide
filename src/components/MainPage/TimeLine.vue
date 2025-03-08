@@ -63,7 +63,7 @@
       GetTimeLineList:function () {
         var That = this;
         this.SQFrontAjax({
-          Url:'/api/TimeLineRead/foreend',
+          Url:'/api/getTimeLineList',
           Success:function (data) {
             data.forEach(function (Item) {
               if(Item.CreateDate){
@@ -76,7 +76,7 @@
       }
     },
     mounted:function () {
-      // this.GetTimeLineList();
+      this.GetTimeLineList();
       // topbar高亮设置
       Store.commit("ChangeActive", 2);
       Store.commit("changeFooter",true); // 展示footer
