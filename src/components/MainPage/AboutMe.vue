@@ -295,11 +295,11 @@ export default {
     Store.commit("ChangeActive", 4); // 切换Topbar高亮
     Store.commit("changeFooter",true); // 展示footer 
 
-    this.createLog({
-      moduleType: "menu",
-      operateType: "选择菜单",
-      operateContent: "关于",
-    });
+    // this.createLog({
+    //   moduleType: "menu",
+    //   operateType: "选择菜单",
+    //   operateContent: "关于",
+    // });
   },
 };
 </script>
