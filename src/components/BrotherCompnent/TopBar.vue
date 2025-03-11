@@ -4,8 +4,8 @@
       <div class="MoveingLight"></div>
       <div class="MediaIndexContent">
         <div class="MediaLeft" @click="ChangeRouter('BlogIndex')">
-          <!-- <span>Happy Coding</span> -->
-          <span>Happy Coding</span>
+          <!-- <span>coding life</span> -->
+          <span>coding life</span>
         </div>
         <div class="MediaRight">
           <div :class="Active == 6 ? 'MenuItemActive' : 'MenuItem'" @click="openUrl()">开放式后台</div>
@@ -19,7 +19,7 @@
       </div>
     </div>
     <div class="MobileTopBar">
-      <div class="MobileTopBarLogo" @click="ChangeRouter('BlogIndex')">Happy Coding</div>
+      <div class="MobileTopBarLogo" @click="ChangeRouter('BlogIndex')">coding life</div>
       <div class="MenuTopBarIcon" @click="OpenMenu()">
 <!--
         <i :class="OpenMobileMenu ? 'iconfont icon-fork IconfontSize' : 'iconfont icon-iconset0194 IconfontSize'"></i>
@@ -91,13 +91,13 @@
       },
 
       openUrl:function(){
-        window.open('http://39.104.22.73:68/#/','_blank');
+        window.open('http://www.codinglife.online/admin/#/userManage','_blank');
         // 创建日志
-        this.createLog({
-          moduleType:'menu',
-          operateType:'选择菜单',
-          operateContent:'管理后台'
-        });
+        // this.createLog({
+        //   moduleType:'menu',
+        //   operateType:'选择菜单',
+        //   operateContent:'管理后台'
+        // });
       },
 
       // 伸缩 移动端菜单详情

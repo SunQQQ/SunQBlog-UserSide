@@ -81,7 +81,7 @@
                 <img src="../../static/img/ZhihuIcon.jpg">
               </div>
               <div class="TextCenter">
-                <b>编程与人生</b>
+                <b>编程 & 人生</b>
                 <a class="BlueButton" :class="buttonAnimate ? 'open_animate' : ''" href="https://github.com/SunQQQ" target="_blank" @click="readCode()">博客源码</a>
               </div>
               <div class="BlogStatistic">
