@@ -55,7 +55,7 @@
                                 <i class="iconfont TopBackBlackGit icon-github1"></i>
                             </div>
                             <div class="Content">
-                                <div class="GitName">孙权的Github</div>
+                                <div class="GitName">Coding Life GitHub</div>
                                 <a class="BlueButton" href="https://github.com/SunQQQ">Follow Me</a>
                                 <div class="BlogStatistic">
                                     <div class="BlogStatisticItem">

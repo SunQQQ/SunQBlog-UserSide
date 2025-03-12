@@ -130,7 +130,7 @@
                   <i class="iconfont TopBackBlackGit icon-github1"></i>
                 </div>
                 <div class="Content">
-                  <div class="GitName">孙权的Github</div>
+                  <div class="GitName">Coding Life GitHub</div>
                   <a class="BlueButton" :class="buttonAnimate ? 'open_animate' : ''" href="https://github.com/SunQQQ"
                     target="_blank" @click="readCode()">网站源码</a>
                   <div class="BlogStatistic">
