@@ -91,7 +91,8 @@
       },
 
       openUrl:function(){
-        window.open('http://www.codinglife.online/admin/#/userManage','_blank');
+        // window.open('http://www.codinglife.online/admin/#/userManage','_blank');
+        window.open('http://39.107.193.226/admin/#/userManage','_blank');
         // 创建日志
         // this.createLog({
         //   moduleType:'menu',

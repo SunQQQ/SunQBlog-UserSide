@@ -3,11 +3,12 @@
     <div>
       <div class="TopBarHeight"></div>
       <div class="ArticleDetailHeader">
-        <img :src="Article.articleCover" />
-        <div class="HeaderContent" v-if="!Article.articleCover">
+        <!-- <img :src="Article.articleCover" />-->
+        <!-- <div class="HeaderContent" v-if="!Article.articleCover"> -->
+        <div class="HeaderContent">
           <span>{{ Article.title }}</span>
           <span>{{ Article.summary }}</span>
-        </div>
+        </div> 
       </div>
 
       <div class="ArticleDetailContent">
@@ -26,9 +27,14 @@
             v-show="BlogDetailSkeletonScreen"
           />
 
-          <h1>{{ Article.title }}</h1>
+          <!-- <h1>{{ Article.title }}</h1> -->
           <div class="ArticleCreateTime">
-            发布时间：{{ Article.createTime }}
+            <div style="margin-right: 1rem;">
+              作者：{{ Article.createName }}
+            </div>
+            <div>
+              发布时间：{{ Article.createTime }}
+            </div>
           </div>
           <div class="markdown-body" v-html="Article.content">
             {{ Article.content }}
