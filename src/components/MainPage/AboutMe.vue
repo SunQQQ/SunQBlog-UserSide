@@ -10,7 +10,7 @@
                 class="iconfont icon-person AboutMeIcon"
                 style="color: #49a9ee"
               ></i
-              >本博客不强制游客注册/登录，留言/评论等功能只需填入昵称，即可使用。
+              >游客可管理自己的文章、心声等内容，深度体验且一键注册巨省心。
             </p>
             <p>
               <i
