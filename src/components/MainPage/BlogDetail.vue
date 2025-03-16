@@ -182,7 +182,7 @@ export default {
       this.SQFrontAjax({
         Url: "/api/getBlogDetail",
         UploadData: {
-          id: this.$route.query.id,
+          id: Number(this.$route.query.id),
         },
         Success: function (data) {
           // 关闭骨架屏
