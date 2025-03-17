@@ -12,83 +12,39 @@
       return{
         content:'',
         writer:'',
-        LocalHeartFeltData: this.GetLocalStorage('SunqBlog') ? this.GetLocalStorage('SunqBlog').HeartFeltData : '', //本地缓存的心声数据
-        LastLoginDate: this.GetLocalStorage('SunqBlog') ? this.GetLocalStorage('SunqBlog').LastLoginDate : '',      //最近一次登录时间
         IntervalTime:-1
       }
     },
     methods:{
-      InitView:function () {
-        var That = this,
-          CurrentDate = (new Date()).getTime();
-
-        if(That.LastLoginDate){
-          That.IntervalTime = CurrentDate - That.LastLoginDate;
-        }
-
-        // 有缓存并且距最近登录时间小于1天。则使用缓存
-        if(That.LocalHeartFeltData && That.IntervalTime < 1000*60*60*24){
-          That.GetHeartfelt(That.LocalHeartFeltData.length,That.LocalHeartFeltData);
-        // 如果没有缓存(第一次登陆) 或者距最近登录时间大于1天。则重新请求数据，记下缓存
-        }else if(!That.LocalHeartFeltData || That.IntervalTime > 1000*60*60*24){
-          this.SetLocalStorage('SunqBlog', {
-            Key: 'LastLoginDate',
-            Value: (new Date()).getTime()
-          });
-
-          this.SQFrontAjax({
-            Url: '/api/userHeartList',
-            Success:function (data) {
-              That.GetHeartfelt(data);
-            }
-          });
-        }
-      },
       // 获取所有心声数据
-      GetHeartfelt:function (HeartfeltNum,LocalData) {
+      GetHeartfelt:function (HeartfeltNum) {
         var That = this;
 
-        // if(LocalData){
-        //   That.ChangeView(LocalData,HeartfeltNum);
-        // }else {
-          this.SQFrontAjax({
-            Url: '/api/userHeartList',
-            Success: function (data) {
-              // 存下心声数据
-              That.SetLocalStorage('SunqBlog', {
-                Key: 'HeartFeltData',
-                Value: data
-              });
-
-              //修改最近一次登录时间
-              That.SetLocalStorage('SunqBlog', {
-                Key: 'LastLoginDate',
-                Value: (new Date()).getTime()
-              });
-
-              That.ChangeView(data,HeartfeltNum);
-            }
-          });
-        // }
+        this.SQFrontAjax({
+          Url: '/api/userHeartList',
+          Success: function (data) {
+            That.ChangeView(data);
+          }
+        })
       },
       // 修改视图的数据
-      ChangeView:function (Array,HeartfeltNum) {
+      ChangeView:function (Array) {
         var That = this;
-        this.SetRandomNum(Array,HeartfeltNum);
+        this.SetRandomNum(Array);
 
         window.setInterval(function () {
-          That.SetRandomNum(Array,HeartfeltNum);
+          That.SetRandomNum(Array);
         },15000);
       },
       // 设置随机值
-      SetRandomNum:function (Array,HeartfeltNum) {
-        var Random = Math.ceil(Math.random()*HeartfeltNum);
+      SetRandomNum:function (Array) {
+        var Random = Math.ceil(Math.random()* Array.length);
         this.content = Array[Random-1].content;
         this.writer = Array[Random-1].writer;
       }
     },
     mounted:function () {
-      this.InitView();
+      this.GetHeartfelt();
     }
   }
 </script>
