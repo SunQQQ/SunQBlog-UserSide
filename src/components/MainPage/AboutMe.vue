@@ -199,7 +199,7 @@
                   </div>
                 </div>
                 <div class="BlogStatisticItem">
-                  <div class="BlogStatisticItemNum">160</div>
+                  <div class="BlogStatisticItemNum">280</div>
                   <div class="BlogStatisticItemText AboutMeGitData">Star</div>
                 </div>
                 <div class="BlogStatisticItem">
