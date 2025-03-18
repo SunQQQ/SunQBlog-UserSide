@@ -346,7 +346,7 @@ export default {
           // 处理回复留言的二级数据
           let param = {
             messageContent: MatchedMessageText,
-            city: LocationCityName,
+            city: Array.isArray(LocationCityName) ? "" : LocationCityName,
           }
           if (That.parentId) {
             param.parentId = That.parentId;
