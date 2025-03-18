@@ -165,7 +165,9 @@
         // 获取文章列表
         this.GetArticle(0);
         // //渲染留言个数
-        // this.GetLeaveMessageNum();
+        this.GetLeaveMessageNum();
+
+        this.GetCommentNum();
         // //渲染热门博文
         // this.GetHotArticle();
       },
@@ -209,12 +211,28 @@
       GetLeaveMessageNum: function () {
         var That = this;
         this.SQFrontAjax({
-          Url: '/api/getmessagenum',
+          Url: '/api/getLmCount',
           Success: function (data) {
 
             var NumInterval = window.setInterval(function () {
               That.LeaveMessageNum += 1;
               if (data == That.LeaveMessageNum) {
+                clearInterval(NumInterval);
+              }
+            }, 30);
+          }
+        });
+      },
+      // 获取评论数量
+      GetCommentNum: function () {
+        var That = this;
+        this.SQFrontAjax({
+          Url: '/api/getCommentCount',
+          Success: function (data) {
+
+            var NumInterval = window.setInterval(function () {
+              That.commentNum += 1;
+              if (data == That.commentNum) {
                 clearInterval(NumInterval);
               }
             }, 30);
