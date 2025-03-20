@@ -85,7 +85,7 @@
                 <div class="CommentItem itemPadding" v-for="(childItem, i) in item.child" v-bind:key="i">
                   <div style="width: 40px;"></div>
                   <div class="CommentItemIcon">
-                    <img :src="getIconAdress(childItem.avator)"/>
+                    <img :src="getIconAdress(childItem.avator)" />
                   </div>
                   <div class="CommentItemContent">
                     <div>
@@ -406,7 +406,7 @@ export default {
           // 渲染列表
           data.forEach(function (Item) {
             Item.createTime = That.DateFormat(Item.createTime);
-            if(Item.child.length > 0) {
+            if (Item.child.length > 0) {
               Item.child.forEach(function (childItem) {
                 childItem.createTime = That.DateFormat(childItem.createTime);
               });
@@ -631,6 +631,10 @@ export default {
     //   operateType: "选择菜单",
     //   operateContent: "留言",
     // });
+    const fullPath = this.$route.fullPath;
+    if (fullPath.includes('login')) {
+      Store.commit('ChangeLogin', true);
+    }
   },
 };
 </script>
@@ -645,7 +649,7 @@ export default {
   border-bottom: none;
 }
 
-.itemPadding{
+.itemPadding {
   padding-top: 0;
 }
 

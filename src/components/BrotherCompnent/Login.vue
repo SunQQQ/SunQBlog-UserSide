@@ -22,7 +22,7 @@
           </div>
           <div class="button-content">
             <button type="submit" class="login-button" @click="login">登录</button>
-            <button type="submit" class="login-button register-color" @click="regist">注册并登录</button>
+            <button type="submit" class="login-button register-color" @click="regist">注册</button>
           </div>
         </form>
         <!-- 关闭按钮 -->
