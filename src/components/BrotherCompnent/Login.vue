@@ -2,22 +2,22 @@
   <!-- 遮罩层 -->
   <div class="modal-mask" v-show="showLogin" @click="closeLogin">
     <!-- 登录框 -->
-    <div class="modal-container" @click.stop>
+    <div class="modal-container container-width" @click.stop>
       <div class="login-box">
-        <h2 class="login-title">登录</h2>
+        <h2 class="login-title">登录/注册</h2>
         <form @submit.prevent="handleLogin">
           <div class="form-group">
             <label for="username">账号</label>
             <input type="text" id="username" v-model="username" placeholder="请输入账号" required />
             <button type="button" class="generate-button" @click="generateUsername">
-              生成随机账号
+              一键生成
             </button>
           </div>
           <div class="form-group">
             <label for="password">密码</label>
             <input id="password" v-model="password" placeholder="请输入密码" required />
             <button type="button" class="generate-button" @click="generatePassword">
-              生成随机密码
+              一键生成
             </button>
           </div>
           <div class="button-content">
@@ -109,7 +109,7 @@ export default {
       // 关闭登录框
       Store.commit('ChangeLogin', false);
     },
-    regist(){
+    regist() {
       let That = this;
       // 注册逻辑
       if (this.username && this.password) {
@@ -139,7 +139,7 @@ export default {
               Value: data.userInfo
             });
 
-            if(That.nameId > 0){
+            if (That.nameId > 0) {
               // 删除已经使用的随机用户名
               That.SQFrontAjax({
                 Url: "/api/markNameAsUsed",
@@ -162,6 +162,20 @@ export default {
 </script>
 
 <style scoped>
+/*pc端*/
+@media only screen and (min-device-width: 768px) {
+  .container-width {
+    max-width: 400px;
+  }
+}
+
+/*移动端*/
+@media only screen and (max-device-width: 768px) {
+  .container-width {
+  max-width: 300px;
+}
+}
+
 /* 遮罩层 */
 .modal-mask {
   position: fixed;
@@ -185,7 +199,6 @@ export default {
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 400px;
   position: relative;
 }
 
