@@ -82,7 +82,7 @@
                   </div>
                 </div>
                 <!-- 子评论 -->
-                <div class="CommentItem" v-for="(childItem, i) in item.child" v-bind:key="i">
+                <div class="CommentItem itemPadding" v-for="(childItem, i) in item.child" v-bind:key="i">
                   <div style="width: 40px;"></div>
                   <div class="CommentItemIcon">
                     <img :src="getIconAdress(childItem.avator)"/>
@@ -643,6 +643,10 @@ export default {
 
 .CommentItem {
   border-bottom: none;
+}
+
+.itemPadding{
+  padding-top: 0;
 }
 
 .CommentItem:first-child {
