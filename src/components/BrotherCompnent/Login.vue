@@ -4,8 +4,35 @@
     <!-- 登录框 -->
     <div class="modal-container container-width" @click.stop>
       <div class="login-box">
-        <h2 class="login-title">登录/注册</h2>
-        <form @submit.prevent="handleLogin">
+        <!-- 标题 -->
+        <h2 class="login-title">{{ isLoginForm ? 'Login' : 'Regist' }}</h2>
+
+        <!-- 登录表单 -->
+        <form v-if="isLoginForm" @submit.prevent="login">
+          <div class="form-group">
+            <label for="username">账号</label>
+            <input type="text" id="username" v-model="username" placeholder="请输入账号" required />
+          </div>
+          <div class="form-group">
+            <label for="password">密码</label>
+            <input type="password" id="password" v-model="password" placeholder="请输入密码" required />
+          </div>
+          <div class="button-content">
+            <button type="submit" class="login-button">登录</button>
+          </div>
+          <!-- <button type="button" class="login-button register-color" @click="switchToRegister">
+              去注册
+          </button> -->
+          <div style="text-align: center;margin-top: 20px;">
+            还没有账号？
+            <span @click="switchToRegister" style="color:blue;cursor: pointer;">
+              快捷注册>>
+            </span>
+          </div>
+        </form>
+
+        <!-- 注册表单 -->
+        <form v-else @submit.prevent="regist">
           <div class="form-group">
             <label for="username">账号</label>
             <input type="text" id="username" v-model="username" placeholder="请输入账号" required />
@@ -15,16 +42,24 @@
           </div>
           <div class="form-group">
             <label for="password">密码</label>
-            <input id="password" v-model="password" placeholder="请输入密码" required />
+            <input type="password" id="password" v-model="password" placeholder="请输入密码" required />
             <button type="button" class="generate-button" @click="generatePassword">
               一键生成
             </button>
           </div>
           <div class="button-content">
-            <button type="submit" class="login-button" @click="login">登录</button>
-            <button type="submit" class="login-button register-color" @click="regist">注册</button>
+            <button type="submit" class="login-button">注册</button>
+            <!-- <button type="button" class="login-button register-color" @click="switchToLogin">
+              去登录
+            </button> -->
+          </div>
+          <div style="text-align: center;margin-top: 20px;">
+            <span @click="switchToLogin" style="color:blue;cursor: pointer;">
+              返回登录>>
+            </span>
           </div>
         </form>
+
         <!-- 关闭按钮 -->
         <button class="close-button" @click="closeLogin">×</button>
       </div>
@@ -41,7 +76,8 @@ export default {
     return {
       username: "", // 账号
       password: "", // 密码
-      nameId: 0, // 随机用户名在表中的id 
+      nameId: 0, // 随机用户名在表中的id
+      isLoginForm: true, // 是否显示登录表单
     };
   },
   computed: {
@@ -70,9 +106,9 @@ export default {
       }
       this.password = password;
     },
+    // 登录
     login() {
       let That = this;
-      // 登录逻辑
       if (this.username && this.password) {
         That.SQFrontAjax({
           Url: "/api/login",
@@ -105,13 +141,9 @@ export default {
         alert("请输入账号和密码");
       }
     },
-    closeLogin() {
-      // 关闭登录框
-      Store.commit('ChangeLogin', false);
-    },
+    // 注册
     regist() {
       let That = this;
-      // 注册逻辑
       if (this.username && this.password) {
         That.SQFrontAjax({
           Url: "/api/regist",
@@ -122,11 +154,11 @@ export default {
           Success: function (data) {
             Store.commit("ChangeTip", {
               Show: true,
-              Title: "注册并登录成功",
+              Title: "注册登录，已自动成功",
             });
             Store.commit('ChangeLogin', false);
 
-            // // 注册成功后，填充留言页面的用户名
+            // 注册成功后，填充留言页面的用户名
             Store.commit('ChangeMessageLeaveName', data.userInfo.name);
 
             // 存储token
@@ -156,6 +188,18 @@ export default {
       } else {
         alert("请输入账号和密码");
       }
+    },
+    // 切换到注册表单
+    switchToRegister() {
+      this.isLoginForm = false;
+    },
+    // 切换到登录表单
+    switchToLogin() {
+      this.isLoginForm = true;
+    },
+    // 关闭登录框
+    closeLogin() {
+      Store.commit('ChangeLogin', false);
     }
   },
 };
@@ -165,7 +209,7 @@ export default {
 /*pc端*/
 @media only screen and (min-device-width: 768px) {
   .container-width {
-    max-width: 400px;
+    max-width: 300px;
   }
 }
 
@@ -264,7 +308,7 @@ export default {
 }
 
 .login-button {
-  width: 40%;
+  width: 50%;
   padding: 0.75rem;
   background-color: #007bff;
   color: #fff;
