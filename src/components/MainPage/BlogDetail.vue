@@ -255,7 +255,7 @@ export default {
             UploadData: {
               articleId: That.$route.query.id,
               commentContent: MatchedMessageText,
-              city: LocationCityName,
+              city: Array.isArray(LocationCityName) ? "" : LocationCityName,
               comParentId: 0
             },
             Success: function () {
