@@ -24,7 +24,7 @@ module.exports = {
   //     .plugin('webpack-bundle-analyzer')
   //     .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin);
   // },
-  productionSourceMap: false, // 关闭map文件的生成，map文件保存映射保证在程序报错时能找到资源文件
+  productionSourceMap: true, // 关闭map文件的生成，map文件保存映射保证在程序报错时能找到资源文件
   configureWebpack:config=>{
     // GZip压缩
     const CompressionPlugin = require('compression-webpack-plugin');
@@ -44,8 +44,8 @@ module.exports = {
       new UglifyJsPlugin({
         uglifyOptions: {
           compress: {
-            drop_debugger: true,//关闭debug
-            drop_console: true,//关闭console
+            // drop_debugger: true,//关闭debug
+            // drop_console: true,//关闭console
           }
         },
       })

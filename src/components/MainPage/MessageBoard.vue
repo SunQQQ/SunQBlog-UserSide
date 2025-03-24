@@ -311,7 +311,7 @@ export default {
 
     getIconAdress: function (iconNo) {
       return require("@/static/img/default_headicon_" +
-        iconNo.toString() +
+      (iconNo || 0).toString() +
         ".jpeg");
     },
 
@@ -411,9 +411,8 @@ export default {
                 childItem.createTime = That.DateFormat(childItem.createTime);
               });
             }
-          });
+          });       
           That.messageList = data;
-
           if (data.length != 8) {
             That.AticleBottom = true;
             // 停止分页器的滚动监听
