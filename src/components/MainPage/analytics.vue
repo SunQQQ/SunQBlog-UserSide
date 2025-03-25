@@ -4,6 +4,32 @@
       <div class="block" style="margin-top: 0">
         <div class="quota-content">
           <div class="quota-item">
+            <p>今日注册用户量</p>
+            <p class="num">{{ todayRegist }}</p>
+          </div>
+          <div class="quota-item">
+            <p>今日浏览量(PV)</p>
+            <p class="num">{{ todayVisit }}</p>
+          </div>
+          <div class="quota-item">
+            <p>今日IP量</p>
+            <p class="num">{{ todayIpNum }}</p>
+          </div>
+          <div class="quota-item">
+            <p>累计注册用户量</p>
+            <p class="num">{{ totalRegist }}</p>
+          </div>
+          <div class="quota-item">
+            <p>累计浏览量(PV)</p>
+            <p class="num">{{ yesterdayIpNum }}</p>
+          </div>
+          <div class="quota-item">
+            <p>累计IP量</p>
+            <p class="num">{{ todayIpNum }}</p>
+          </div>
+        </div>
+        <!-- <div class="quota-content">
+          <div class="quota-item">
             <p>今日浏览量(PV)</p>
             <p class="num">{{ todayVisit }}</p>
           </div>
@@ -27,7 +53,7 @@
             <p>近{{ lineDateType }}天IP</p>
             <p class="num">{{ allVisitIp }}</p>
           </div>
-        </div>
+        </div> -->
       </div>
       <lineChart v-on:getQuotaVal="getQuotaVal"></lineChart>
       <map-chart></map-chart>
@@ -40,22 +66,22 @@
 
 <script>
 import Store from "../../store";
-import Heartfelt from '../SonCompnent/Heartfelt';
+// import Heartfelt from '../SonCompnent/Heartfelt';
 import Pagination from '../SonCompnent/Pagination';
-import lineChart from '@/components/SonCompnent/analytics/line-chart';
-import mapChart from '@/components/SonCompnent/analytics/map-chart';
-import pieChart from '@/components/SonCompnent/analytics/pie-chart';
-import userAction from '@/components/SonCompnent/analytics/user-action';
+// import lineChart from '@/components/SonCompnent/analytics/line-chart';
+// import mapChart from '@/components/SonCompnent/analytics/map-chart';
+// import pieChart from '@/components/SonCompnent/analytics/pie-chart';
+// import userAction from '@/components/SonCompnent/analytics/user-action';
 
 export default {
   name: "analyticsPlus",
   components: {
     Pagination,
-    Heartfelt,
-    lineChart,
-    mapChart,
-    pieChart,
-    userAction
+    // Heartfelt,
+    // lineChart,
+    // mapChart,
+    // pieChart,
+    // userAction
   },
   data: function () {
     return {
@@ -65,7 +91,10 @@ export default {
       yesterdayVisit: 0,
       yesterdayIpNum: 0,
       allVisitIp: 0,
-      lineDateType: 0
+      lineDateType: 0,
+
+      todayRegist: 0,
+      totalRegist: 0
     }
   },
   methods: {
@@ -79,6 +108,16 @@ export default {
       this.allVisitIp = obj.allVisitIp;
 
       this.lineDateType = obj.lineDateType;
+    },
+    getUserData(){
+      let that = this;
+      that.SQFrontAjax({
+        Url: "/api/getUserData",
+        Success: function (data) {
+          that.todayRegist = data.todayUser;
+          that.totalRegist = data.totalUser;
+        }
+      });
     }
   },
   mounted: function () {
@@ -86,12 +125,14 @@ export default {
     Store.commit("ChangeActive", 5); // 切换Topbar高亮
     Store.commit("changeFooter", true); // 展示footer 
 
+    that.getUserData();
+
     // 创建日志
-    this.createLog({
-      moduleType: 'menu',
-      operateType: '选择菜单',
-      operateContent: '访问统计'
-    });
+    // this.createLog({
+    //   moduleType: 'menu',
+    //   operateType: '选择菜单',
+    //   operateContent: '访问统计'
+    // });
   }
 }
 </script>
