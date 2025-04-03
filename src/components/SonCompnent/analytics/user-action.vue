@@ -2,12 +2,12 @@
     <div class="block">
         <div class="title-part">
             <div class="module-title">用户轨迹</div>
-            <div class="day-switch">
+            <!-- <div class="day-switch">
                 <div :class="userActionDateType == '1' ? 'item active' : 'item'" @click="setUserAction(1)">今天</div>
                 <div :class="userActionDateType == '2' ? 'item active' : 'item'" @click="setUserAction(2)">最近2天</div>
                 <div :class="userActionDateType == '3' ? 'item active' : 'item'" @click="setUserAction(3)">最近3天</div>
             </div>
-            <div class="day-switch total-number give-up">轨迹总数：{{ totalUserAction }}条</div>
+            <div class="day-switch total-number give-up">轨迹总数：{{ totalUserAction }}条</div> -->
         </div>
         <div class="list">
             <div class="list-head">
@@ -74,33 +74,36 @@ export default {
                     // that.totalUserAction = data.dateListTotal;
 
                     // for (let i in userActionObject) {
-                    //     // 保护用户隐私，马赛克掉ip最后一组数字
-                    //     let array = i.split('.'),
-                    //         item = userActionObject[i],
-                    //         currentIp = array[0] + '.' + array[1] + '.' + array[2] + '.***';
+                    for (let i=0; i < userActionObject.length; i++) {
+                        let item = userActionObject[i];
+                        item.actions = item.actions.split('+');
+                        // // 保护用户隐私，马赛克掉ip最后一组数字
+                        // let array = i.split('.'),
+                        //     item = userActionObject[i],
+                        //     currentIp = array[0] + '.' + array[1] + '.' + array[2] + '.***';
 
-                    //     // 处理访问来源
-                    //     if (userActionObject[i].fromUrl) {
-                    //         userActionObject[i].fromUrl = userActionObject[i].fromUrl.split('/')[2];
-                    //     } else {
-                    //         userActionObject[i].fromUrl = '直接打开';
-                    //     }
+                        // // 处理访问来源
+                        // if (userActionObject[i].fromUrl) {
+                        //     userActionObject[i].fromUrl = userActionObject[i].fromUrl.split('/')[2];
+                        // } else {
+                        //     userActionObject[i].fromUrl = '直接打开';
+                        // }
 
-                    //     // 标识下当前用户的轨迹
-                    //     if (curCompleteIp == i) {
-                    //         item.curIp = curCompleteIp; // 用户自己的IP不再打码
-                    //     }
+                        // // 标识下当前用户的轨迹
+                        // if (curCompleteIp == i) {
+                        //     item.curIp = curCompleteIp; // 用户自己的IP不再打码
+                        // }
 
-                    //     // 为用户IP打码
-                    //     userActionObject[currentIp] = item;
-                    //     delete userActionObject[i];
+                        // // 为用户IP打码
+                        // userActionObject[currentIp] = item;
+                        // delete userActionObject[i];
 
 
-                    //     // 因为对象当前本来的属性名已经被删掉了，所以得修改新的属性名对应的属性值
-                    //     if (JSON.stringify(userActionObject[currentIp].location) === '[]') {
-                    //         userActionObject[currentIp].location = '地球';
-                    //     }
-                    // }
+                        // // 因为对象当前本来的属性名已经被删掉了，所以得修改新的属性名对应的属性值
+                        // if (JSON.stringify(userActionObject[currentIp].location) === '[]') {
+                        //     userActionObject[currentIp].location = '地球';
+                        // }
+                    }
 
                     that.userActionData = userActionObject;
                     // console.log('轨迹数据', that.userActionData);
