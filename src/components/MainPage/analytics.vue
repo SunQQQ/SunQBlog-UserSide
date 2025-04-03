@@ -94,10 +94,10 @@
 import Store from "../../store";
 import Heartfelt from '../SonCompnent/Heartfelt';
 import Pagination from '../SonCompnent/Pagination';
-import lineChart from '@/components/SonCompnent/analytics/line-chart';
-import mapChart from '@/components/SonCompnent/analytics/map-chart';
-import pieChart from '@/components/SonCompnent/analytics/pie-chart';
-import userAction from '@/components/SonCompnent/analytics/user-action';
+// import lineChart from '@/components/SonCompnent/analytics/line-chart';
+// import mapChart from '@/components/SonCompnent/analytics/map-chart';
+// import pieChart from '@/components/SonCompnent/analytics/pie-chart';
+// import userAction from '@/components/SonCompnent/analytics/user-action';
 
 export default {
   name: "analyticsPlus",
@@ -105,10 +105,10 @@ export default {
     Pagination,
 
     Heartfelt,
-    lineChart,
-    mapChart,
-    pieChart,
-    userAction
+    // lineChart,
+    // mapChart,
+    // pieChart,
+    // userAction
   },
   data: function () {
     return {
@@ -145,7 +145,8 @@ export default {
 
       this.lineDateType = obj.lineDateType;
     },
-    getUserData() {
+    // 获取顶部指标区域数据
+    topNum() {
       let that = this;
       that.SQFrontAjax({
         Url: "/api/getUserData",
@@ -164,6 +165,18 @@ export default {
           that.totalLeaveMess = data.totalLeaveMess;
         }
       });
+
+      that.SQFrontAjax({
+        Url: "/api/getLogIp",
+        Success: function (data) {
+          // 浏览量
+          that.todayVisit = data.todayPvCount;
+          that.totalVisit = data.totalPvCount;
+          // IP数
+          that.todayIpNum = data.todayIpCount;
+          that.totalIpNum = data.totalIpCount;
+        }
+      });
     }
   },
   mounted: function () {
@@ -171,7 +184,7 @@ export default {
     Store.commit("ChangeActive", 5); // 切换Topbar高亮
     Store.commit("changeFooter", true); // 展示footer 
 
-    that.getUserData();
+    that.topNum();
 
     // 创建日志
     // this.createLog({
