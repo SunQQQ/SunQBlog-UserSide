@@ -97,7 +97,7 @@ import Pagination from '../SonCompnent/Pagination';
 // import lineChart from '@/components/SonCompnent/analytics/line-chart';
 // import mapChart from '@/components/SonCompnent/analytics/map-chart';
 // import pieChart from '@/components/SonCompnent/analytics/pie-chart';
-// import userAction from '@/components/SonCompnent/analytics/user-action';
+import userAction from '@/components/SonCompnent/analytics/user-action';
 
 export default {
   name: "analyticsPlus",
@@ -108,7 +108,7 @@ export default {
     // lineChart,
     // mapChart,
     // pieChart,
-    // userAction
+    userAction
   },
   data: function () {
     return {

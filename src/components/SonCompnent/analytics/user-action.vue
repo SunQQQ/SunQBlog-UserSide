@@ -15,7 +15,7 @@
                 <div class="list-td">操作内容</div>
                 <div class="list-td align give-up">访问位置</div>
                 <div class="list-td align give-up">访问设备</div>
-                <div class="list-td align give-up">访问时间</div>
+                <div class="list-td align give-up">进入/离开时间</div>
             </div>
             <div :class="item.curIp ? 'list-tr single' : 'list-tr'" v-for="(item, i) in userActionData" v-bind:key="i">
                 <div class="list-td text-center">
@@ -24,14 +24,14 @@
                 </div>
                 <div class="list-td action-padding">
                     <ul>
-                        <li v-for="(item, i) in item.action" v-bind:key="i" v-html="item">{{item}}</li>
+                        <li v-for="(item, i) in item.actions" v-bind:key="i" v-html="item">{{item}}</li>
                     </ul>
                 </div>
-                <div class="list-td align give-up">{{ item.location }}</div>
+                <div class="list-td align give-up">{{ item.ipCity }}</div>
                 <div class="list-td align line-heigh give-up" v-html="item.browser">
                     {{ item.browser }}
                 </div>
-                <div class="list-td align give-up">{{ item.time }}</div>
+                <div class="list-td align give-up">{{ item.entryTime + item.leaveTime }}</div>
             </div>
             <div class="list-item"></div>
         </div>
@@ -60,50 +60,50 @@ export default {
                 userActionObject = {};
             that.userActionDateType = dayNum;
             this.SQFrontAjax({
-                Url: '/api/getUserAction/foreend',
+                Url: '/api/getUserAction',
                 noLoading: init ? 'yes' : '',
                 UploadData: {
                     endTime: this.getSQTime().split(' ')[0],
                     dayNum: dayNum ? dayNum : 1
                 },
                 Success: function (data) {
-                    let curCompleteIp = data.yourIp; // 当前访客的IP
-                    // let curCompleteIp = "36.48.127.8"; // 当前访客的IP
+                    // let curCompleteIp = data.yourIp; // 当前访客的IP
+                    // // let curCompleteIp = "36.48.127.8"; // 当前访客的IP
+                    
+                    userActionObject = data;
+                    // that.totalUserAction = data.dateListTotal;
 
-                    userActionObject = data.userAction;
-                    that.totalUserAction = data.dateListTotal;
+                    // for (let i in userActionObject) {
+                    //     // 保护用户隐私，马赛克掉ip最后一组数字
+                    //     let array = i.split('.'),
+                    //         item = userActionObject[i],
+                    //         currentIp = array[0] + '.' + array[1] + '.' + array[2] + '.***';
 
-                    for (let i in userActionObject) {
-                        // 保护用户隐私，马赛克掉ip最后一组数字
-                        let array = i.split('.'),
-                            item = userActionObject[i],
-                            currentIp = array[0] + '.' + array[1] + '.' + array[2] + '.***';
+                    //     // 处理访问来源
+                    //     if (userActionObject[i].fromUrl) {
+                    //         userActionObject[i].fromUrl = userActionObject[i].fromUrl.split('/')[2];
+                    //     } else {
+                    //         userActionObject[i].fromUrl = '直接打开';
+                    //     }
 
-                        // 处理访问来源
-                        if (userActionObject[i].fromUrl) {
-                            userActionObject[i].fromUrl = userActionObject[i].fromUrl.split('/')[2];
-                        } else {
-                            userActionObject[i].fromUrl = '直接打开';
-                        }
+                    //     // 标识下当前用户的轨迹
+                    //     if (curCompleteIp == i) {
+                    //         item.curIp = curCompleteIp; // 用户自己的IP不再打码
+                    //     }
 
-                        // 标识下当前用户的轨迹
-                        if (curCompleteIp == i) {
-                            item.curIp = curCompleteIp; // 用户自己的IP不再打码
-                        }
-
-                        // 为用户IP打码
-                        userActionObject[currentIp] = item;
-                        delete userActionObject[i];
+                    //     // 为用户IP打码
+                    //     userActionObject[currentIp] = item;
+                    //     delete userActionObject[i];
 
 
-                        // 因为对象当前本来的属性名已经被删掉了，所以得修改新的属性名对应的属性值
-                        if (JSON.stringify(userActionObject[currentIp].location) === '[]') {
-                            userActionObject[currentIp].location = '地球';
-                        }
-                    }
+                    //     // 因为对象当前本来的属性名已经被删掉了，所以得修改新的属性名对应的属性值
+                    //     if (JSON.stringify(userActionObject[currentIp].location) === '[]') {
+                    //         userActionObject[currentIp].location = '地球';
+                    //     }
+                    // }
 
                     that.userActionData = userActionObject;
-                    console.log('轨迹数据', that.userActionData);
+                    // console.log('轨迹数据', that.userActionData);
                     // debugger
                 }
             });
