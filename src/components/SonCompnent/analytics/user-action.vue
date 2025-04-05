@@ -11,15 +11,15 @@
         </div>
         <div class="list">
             <div class="list-head">
-                <div class="list-td">访问IP</div>
+                <div class="list-td align">访问IP<br>所在城市</div>
                 <div class="list-td">操作内容</div>
-                <div class="list-td align give-up">访问位置</div>
                 <div class="list-td align give-up">访问设备</div>
+                <div class="list-td align give-up">停留时间</div>
                 <div class="list-td align give-up">进入/离开时间</div>
             </div>
             <div :class="item.curIp ? 'list-tr single' : 'list-tr'" v-for="(item, i) in userActionData" v-bind:key="i">
-                <div class="list-td text-center">
-                    <div>{{ item.curIp ? item.curIp : item.ip }}</div>
+                <div class="list-td align text-center">
+                    <div>{{ item.curIp ? item.curIp : item.ip }}<br>{{ item.ipCity }}</div>
                     <div class="your-ip" v-if="item.curIp">（你的轨迹）</div>
                 </div>
                 <div class="list-td action-padding">
@@ -27,10 +27,10 @@
                         <li v-for="(item, i) in item.actions" v-bind:key="i" v-html="item">{{item}}</li>
                     </ul>
                 </div>
-                <div class="list-td align give-up">{{ item.ipCity }}</div>
                 <div class="list-td align line-heigh give-up" v-html="item.browser">
                     {{ item.browser }}
                 </div>
+                <div class="list-td align give-up">{{ item.stayTime }}秒</div>
                 <div class="list-td align give-up">{{ item.entryTime }}<br>{{ item.leaveTime }}</div>
             </div>
             <div class="list-item"></div>
