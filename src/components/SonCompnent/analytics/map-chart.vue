@@ -108,14 +108,13 @@ export default {
             that.mapList = [];
 
             this.SQFrontAjax({
-                Url: '/api/visitCount/foreend',
+                Url: '/api/city-daily',
                 noLoading: init ? 'yes' : '',
                 UploadData: {
-                    endTime: this.getSQTime().split(' ')[0],
-                    dayNum: dayNum
+                    days: dayNum
                 },
                 Success: function (data) {
-                    data.cityList.forEach(function (item) {
+                    data.forEach(function (item) {
                         let formatLocation;
                         if (typeof (item) == 'string') {
                             formatLocation = item.replace('市', ''); // 数据库存放的城市名称包含'市'字，但是所有城市维度数据中城市名称没有
@@ -137,15 +136,6 @@ export default {
                     that.mapOption.series[0].data = that.mapList;
                     that.$echarts.registerMap('china', china);
                     that.map.setOption(that.mapOption, true);
-
-                    // 初始化时不创建日志。切换时间维度后，记日志并刷新日志列表
-                    if (!init) {
-                        that.createLog({
-                            moduleType: 'button',
-                            operateType: '切换地图时间维度',
-                            operateContent: '近' + dayNum + '天'
-                        });
-                    }
                 }
             });
         },

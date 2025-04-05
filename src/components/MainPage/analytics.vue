@@ -95,7 +95,7 @@ import Store from "../../store";
 import Heartfelt from '../SonCompnent/Heartfelt';
 import Pagination from '../SonCompnent/Pagination';
 import lineChart from '@/components/SonCompnent/analytics/line-chart';
-// import mapChart from '@/components/SonCompnent/analytics/map-chart';
+import mapChart from '@/components/SonCompnent/analytics/map-chart';
 // import pieChart from '@/components/SonCompnent/analytics/pie-chart';
 import userAction from '@/components/SonCompnent/analytics/user-action';
 
@@ -106,7 +106,7 @@ export default {
 
     Heartfelt,
     lineChart,
-    // mapChart,
+    mapChart,
     // pieChart,
     userAction
   },
