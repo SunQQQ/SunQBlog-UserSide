@@ -3,15 +3,15 @@
         <div class="title-part">
             <div class="module-title">用户轨迹</div>
             <div class="day-switch">
-                <div :class="userActionDateType == '1' ? 'item active' : 'item'" @click="setUserAction(1)">今天</div>
-                <div :class="userActionDateType == '2' ? 'item active' : 'item'" @click="setUserAction(2)">昨天</div>
-                <div :class="userActionDateType == '3' ? 'item active' : 'item'" @click="setUserAction(3)">前天</div>
+                <div :class="userActionDateType == '0' ? 'item active' : 'item'" @click="setUserAction(0)">今天</div>
+                <div :class="userActionDateType == '1' ? 'item active' : 'item'" @click="setUserAction(1)">昨天</div>
+                <div :class="userActionDateType == '2' ? 'item active' : 'item'" @click="setUserAction(2)">前天</div>
             </div>
-            <div class="day-switch total-number give-up">轨迹总数：{{ totalUserAction }}条</div>
+            <div class="day-switch total-number give-up">日期：{{ curDay }} &nbsp;&nbsp;条数：{{ totalUserAction }}条</div>
         </div>
         <div class="list">
             <div class="list-head">
-                <div class="list-td align">访问IP<br>所在城市</div>
+                <div class="list-td align">IP城市</div>
                 <div class="list-td">操作内容</div>
                 <div class="list-td align give-up">访问设备</div>
                 <div class="list-td align give-up">停留时间</div>
@@ -19,7 +19,7 @@
             </div>
             <div :class="item.curIp ? 'list-tr single' : 'list-tr'" v-for="(item, i) in userActionData" v-bind:key="i">
                 <div class="list-td align text-center">
-                    <div>{{ item.curIp ? item.curIp : item.ip }}<br>{{ item.ipCity }}</div>
+                    <div>{{ item.ipCity }}<br>{{ item.curIp ? item.curIp : item.ip }}</div>
                     <div class="your-ip" v-if="item.curIp">（你的轨迹）</div>
                 </div>
                 <div class="list-td action-padding">
@@ -47,6 +47,7 @@ export default {
             userActionDateType: 1,
             userActionData: '',
             totalUserAction: 0,
+            curDay: ""
         }
     },
     methods: {
@@ -55,23 +56,25 @@ export default {
         * dayNum: 加载数据的周期 比如：1/7/14天
         * init: 判断是初始化状态，或是时间周期的切换；  初始状态时只有折线图弹出loading，且不记录操作日志。切换日期时弹出loading并记录日志
         */
-        setUserAction: function (dayNum, init) {
+        setUserAction: function (day, init) {
             let that = this,
-                userActionObject = {};
-            that.userActionDateType = dayNum;
+                userActionObject = [];
+
+            that.userActionDateType = day;
             this.SQFrontAjax({
                 Url: '/api/getUserAction',
                 noLoading: init ? 'yes' : '',
                 UploadData: {
-                    endTime: this.getSQTime().split(' ')[0],
-                    dayNum: dayNum ? dayNum : 1
+                    day: day
                 },
                 Success: function (data) {
                     // let curCompleteIp = data.yourIp; // 当前访客的IP
                     // // let curCompleteIp = "36.48.127.8"; // 当前访客的IP
                     
                     userActionObject = data;
-                    // that.totalUserAction = data.dateListTotal;
+                    that.totalUserAction = userActionObject.length;
+                    that.curDay = userActionObject[0] && userActionObject[0].day;
+                    
 
                     // for (let i in userActionObject) {
                     for (let i=0; i < userActionObject.length; i++) {
@@ -162,7 +165,7 @@ export default {
         },
     },
     mounted: function () {
-        this.setUserAction(1, 'init');
+        this.setUserAction(0, 'init');
     }
 }
 </script>
