@@ -104,9 +104,7 @@ export default {
      * init: 判断是初始化状态，或是时间周期的切换；  初始状态时只有折线图弹出loading，且不记录操作日志
      */
     setLineChart: function (dayNum, init) {
-      let that = this,
-        totalVisit = 0,
-        totalIp = 0;
+      let that = this;
 
       // 切换时间维度高亮，并修改指标区第三个指标名称
       that.lineDateType = dayNum;
@@ -115,10 +113,9 @@ export default {
           document.getElementById("line-chart")
         );
       this.SQFrontAjax({
-        Url: "/api/visitCount/foreend",
+        Url: "/api/ip-daily",
         UploadData: {
-          endTime: this.getSQTime().split(" ")[0],
-          dayNum: dayNum ? dayNum : 7,
+          days: dayNum ? dayNum : 7,
         },
         Success: function (data) {
           let dates = [],
@@ -129,44 +126,21 @@ export default {
           Store.commit("ChangeLoading", true);
           that.lineChart.setOption(that.lineChartOption);
 
-          // 指标区域数据
-          if (!that.quateData.todayVisit) that.quateData.todayVisit = data.dateCountList[0].reading; // 设置今日浏览量PV
-          if (!that.quateData.todayIpNum) that.quateData.todayIpNum = data.dateCountList[0].ipNum; // 设置今日IP数
-          if (!that.quateData.yesterdayVisit)
-            that.quateData.yesterdayVisit = data.dateCountList[1].reading; // 设置昨日浏览量PV
-          if (!that.quateData.yesterdayIpNum)
-            that.quateData.yesterdayIpNum = data.dateCountList[1].ipNum; // 设置昨日IP数
-
-          data.dateCountList.forEach(function (item) {
-            dates.push(item.time);
-            readings.push(item.reading);
-            ipArray.push(item.ipNum);
-            totalVisit += item.reading;
-            totalIp += item.ipNum;
+          data.forEach(function (item) {
+            dates.push(item.day);
+            readings.push(item.pv);
+            ipArray.push(item.ip);
           });
-
-          // 指标区域数据
-          that.quateData.dateVisit = totalVisit; // 设置选中时间维度下的访问量
-          that.quateData.allVisitIp = totalIp;
-          that.quateData.lineDateType = dayNum;
+          
+          that.lineChartOption.xAxis.data = dates;
+          that.lineChartOption.series[0].data = readings;
+          that.lineChartOption.series[1].data = ipArray;
 
           that.$emit('getQuotaVal',that.quateData);
-
-          that.lineChartOption.xAxis.data = dates.reverse();
-          that.lineChartOption.series[0].data = readings.reverse();
-          that.lineChartOption.series[1].data = ipArray.reverse();
 
           that.lineChart.setOption(that.lineChartOption);
 
           Store.commit("ChangeLoading", false);
-          // 初始化时不创建日志,切换时间维度后，记日志并刷新日志列表
-          if (!init) {
-            that.createLog({
-              moduleType: "button",
-              operateType: "切换折线图时间维度",
-              operateContent: "近" + dayNum + "天",
-            });
-          }
         },
       });
     },

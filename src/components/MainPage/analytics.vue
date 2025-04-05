@@ -24,7 +24,7 @@
             <p class="num">{{ todayLeaveMess }}</p>
           </div>
           <div class="quota-item">
-            <p>今日文章发布</p>
+            <p>今日文章</p>
             <p class="num">{{ todayArticle }}</p>
           </div>
         </div>
@@ -50,7 +50,7 @@
             <p class="num">{{ totalLeaveMess }}</p>
           </div>
           <div class="quota-item">
-            <p>累计文章发布</p>
+            <p>累计文章</p>
             <p class="num">{{ totalArticle }}</p>
           </div>
         </div>
@@ -94,7 +94,7 @@
 import Store from "../../store";
 import Heartfelt from '../SonCompnent/Heartfelt';
 import Pagination from '../SonCompnent/Pagination';
-// import lineChart from '@/components/SonCompnent/analytics/line-chart';
+import lineChart from '@/components/SonCompnent/analytics/line-chart';
 // import mapChart from '@/components/SonCompnent/analytics/map-chart';
 // import pieChart from '@/components/SonCompnent/analytics/pie-chart';
 import userAction from '@/components/SonCompnent/analytics/user-action';
@@ -105,7 +105,7 @@ export default {
     Pagination,
 
     Heartfelt,
-    // lineChart,
+    lineChart,
     // mapChart,
     // pieChart,
     userAction
