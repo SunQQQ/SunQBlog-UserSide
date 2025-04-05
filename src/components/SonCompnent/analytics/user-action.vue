@@ -20,7 +20,7 @@
             <div :class="item.curIp ? 'list-tr single' : 'list-tr'" v-for="(item, i) in userActionData" v-bind:key="i">
                 <div class="list-td align text-center">
                     <div>{{ item.ipCity }}<br>{{ item.curIp ? item.curIp : item.ip }}</div>
-                    <div class="your-ip" v-if="item.isCurUser">（你的轨迹）</div>
+                    <div class="your-ip" v-if="item.isCurUser">(你的轨迹)</div>
                 </div>
                 <div class="list-td action-padding">
                     <ul>
