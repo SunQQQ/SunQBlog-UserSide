@@ -4,54 +4,54 @@
       <div class="block" style="margin-top: 0">
         <div class="quota-content">
           <div class="quota-item">
-            <p>今日注册用户量</p>
-            <p class="num">{{ todayRegist }}</p>
-          </div>
-          <div class="quota-item">
-            <p>今日浏览量(PV)</p>
-            <p class="num">{{ todayVisit }}</p>
-          </div>
-          <div class="quota-item">
-            <p>今日IP量</p>
+            <p>今日IP</p>
             <p class="num">{{ todayIpNum }}</p>
           </div>
           <div class="quota-item">
-            <p>今日文章发布量</p>
-            <p class="num">{{ todayArticle }}</p>
+            <p>今日PV</p>
+            <p class="num">{{ todayVisit }}</p>
           </div>
           <div class="quota-item">
-            <p>今日评论量</p>
+            <p>今日注册</p>
+            <p class="num">{{ todayRegist }}</p>
+          </div>
+          <div class="quota-item">
+            <p>今日评论</p>
             <p class="num">{{ todayComment }}</p>
           </div>
           <div class="quota-item">
-            <p>今日留言量</p>
+            <p>今日留言</p>
             <p class="num">{{ todayLeaveMess }}</p>
+          </div>
+          <div class="quota-item">
+            <p>今日文章发布</p>
+            <p class="num">{{ todayArticle }}</p>
           </div>
         </div>
         <div class="quota-content">
           <div class="quota-item">
-            <p>累计注册用户量</p>
-            <p class="num">{{ totalRegist }}</p>
-          </div>
-          <div class="quota-item">
-            <p>累计浏览量(PV)</p>
-            <p class="num">{{ totalVisit }}</p>
-          </div>
-          <div class="quota-item">
-            <p>累计IP量</p>
+            <p>累计IP</p>
             <p class="num">{{ totalIpNum }}</p>
           </div>
           <div class="quota-item">
-            <p>累计文章发布量</p>
-            <p class="num">{{ totalArticle }}</p>
+            <p>累计PV</p>
+            <p class="num">{{ totalVisit }}</p>
           </div>
           <div class="quota-item">
-            <p>累计评论量</p>
+            <p>累计注册</p>
+            <p class="num">{{ totalRegist }}</p>
+          </div>
+          <div class="quota-item">
+            <p>累计评论</p>
             <p class="num">{{ totalComment }}</p>
           </div>
           <div class="quota-item">
-            <p>累计留言量</p>
+            <p>累计留言</p>
             <p class="num">{{ totalLeaveMess }}</p>
+          </div>
+          <div class="quota-item">
+            <p>累计文章发布</p>
+            <p class="num">{{ totalArticle }}</p>
           </div>
         </div>
         <!-- <div class="quota-content">

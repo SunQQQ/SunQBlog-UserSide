@@ -2,12 +2,12 @@
     <div class="block">
         <div class="title-part">
             <div class="module-title">用户轨迹</div>
-            <!-- <div class="day-switch">
+            <div class="day-switch">
                 <div :class="userActionDateType == '1' ? 'item active' : 'item'" @click="setUserAction(1)">今天</div>
-                <div :class="userActionDateType == '2' ? 'item active' : 'item'" @click="setUserAction(2)">最近2天</div>
-                <div :class="userActionDateType == '3' ? 'item active' : 'item'" @click="setUserAction(3)">最近3天</div>
+                <div :class="userActionDateType == '2' ? 'item active' : 'item'" @click="setUserAction(2)">昨天</div>
+                <div :class="userActionDateType == '3' ? 'item active' : 'item'" @click="setUserAction(3)">前天</div>
             </div>
-            <div class="day-switch total-number give-up">轨迹总数：{{ totalUserAction }}条</div> -->
+            <div class="day-switch total-number give-up">轨迹总数：{{ totalUserAction }}条</div>
         </div>
         <div class="list">
             <div class="list-head">
