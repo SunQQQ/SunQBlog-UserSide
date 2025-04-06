@@ -107,7 +107,7 @@ CommonFunction.install = function (Vue) {
             Show: true,
             Title: '您访问的接口不存在...'
           });
-        }else if(error.response.status == '401'){
+        } else if (error.response.status == '401') {
           Store.commit('ChangeTip', {
             Show: true,
             Title: '登录信息已过期，请重新登录'
@@ -355,24 +355,19 @@ CommonFunction.install = function (Vue) {
   };
 
   Vue.prototype.createLog = function (log) {
-    let that = this,
-      dateString = this.getSQTime();
-    that.GetLocation(function (LocationCityName) {
-      that.SQFrontAjax({
-        Url: '/api/visitCreate/foreend',
-        UploadData: {
-          location: LocationCityName,
-          fromUrl: document.referrer,
-          time: dateString,
-          browser: window.navigator.platform.split(' ')[0] + '\n' + that.getSQBrowser() + '\n' + window.screen.width + "*" + window.screen.height,
-          moduleType: log.moduleType,
-          operateType: log.operateType,
-          operateContent: log.operateContent ? log.operateContent : '',
-        },
-        Success: function () {
-          that.setSQCookie('sunqBlog', '统计访问量', 12); // 12个小时内同一个浏览器算一个访问量
-        }
-      });
+    let that = this;
+
+    that.SQFrontAjax({
+      Url: '/api/createLog',
+      UploadData: {
+        platformType: "用户端",
+        page: log.page,
+        action: log.action,
+        actionObject: log.actionObject,
+        actionDesc: log.actionDesc
+      },
+      Success: function () {
+      }
     });
   };
 };

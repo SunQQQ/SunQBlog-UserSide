@@ -136,7 +136,7 @@ export default {
           that.lineChartOption.series[0].data = readings;
           that.lineChartOption.series[1].data = ipArray;
 
-          that.$emit('getQuotaVal',that.quateData);
+          // that.$emit('getQuotaVal',that.quateData);
 
           that.lineChart.setOption(that.lineChartOption);
 

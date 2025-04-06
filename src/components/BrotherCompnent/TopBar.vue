@@ -92,12 +92,13 @@
 
       openUrl:function(){
         window.open('http://www.codinglife.online/admin/#/userManage','_blank');
-        // 创建日志
-        // this.createLog({
-        //   moduleType:'menu',
-        //   operateType:'选择菜单',
-        //   operateContent:'管理后台'
-        // });
+        
+        this.createLog({
+          page: "开放式后台",
+          action: "打开",
+          actionObject: "开放式后台页面",
+          actionDesc: ""
+        });
       },
 
       // 伸缩 移动端菜单详情
