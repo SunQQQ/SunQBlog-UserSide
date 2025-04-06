@@ -85,7 +85,7 @@ export default {
             // 饼图的数据
             pieArray: [],
             // 饼图时间维度
-            pieDateType: 1,
+            pieDateType: 0,
             pieBackColor: ['#fac858','#91cc75','#5470c6','#ee6666', '#73c0de', '#3ba272', '#fc8452', '#9a60b4'],
         }
     },
