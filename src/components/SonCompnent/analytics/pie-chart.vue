@@ -12,13 +12,13 @@
         <div class="pie-content" style="padding-bottom: 20px">
             <!-- <div class="pie-item scal-left" id="pie-chart2"></div>
           <div class="pie-item scal-center" id="pie-chart1"></div> -->
-            <div class="pie-item scal-right" id="pie-chart4"></div>
+            <div class="pie-item scal-right" id="pie-chart3"></div>
             <div class="pie-item scal-right" id="pie-chart1"></div>
         </div>
-        <div class="pie-content" style="padding-bottom: 20px">
-            <div class="pie-item scal-right" id="pie-chart3"></div>
+        <!-- <div class="pie-content" style="padding-bottom: 20px">
+            <div class="pie-item scal-right" id="pie-chart4"></div>
             <div class="pie-item scal-right" id="pie-chart2"></div>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -56,13 +56,18 @@ export default {
                         selectedMode: 'single',
                         selectedOffset: 30,
                         clockwise: true, // 顺时针渲染
+                        radius: ['40%', '70%'],
+                        avoidLabelOverlap: false,
+                        itemStyle: {
+                            borderRadius: 3,
+                            borderColor: '#fff',
+                            borderWidth: 1
+                        },
                         data: [
                             { value: 50, name: '移动端' },
                             { value: 30, name: 'PC端' },
                             { value: 20, name: '其他' },
-                        ],
-                        itemStyle: {
-                        }
+                        ]
                     }
                 ],
                 label: {
@@ -155,24 +160,14 @@ export default {
 
             // 设备占比饼图
             this.SQFrontAjax({
-                Url: '/api/getUserAction/foreend',
+                Url: '/api/getTerminal',
                 noLoading: init ? 'yes' : '',
                 UploadData: {
-                    endTime: this.getSQTime().split(' ')[0],
-                    dayNum: dayNum ? dayNum : 1
+                    days: dayNum ? dayNum : 1
                 },
                 Success: function (data) {
-                    userActionObject = data.userAction;
-                    for (let i in userActionObject) {
-                        let item = userActionObject[i],
-                            userBrowerWidth = (item.browser.split('\n')[2]).split('*')[0];
-
-                        if (userBrowerWidth >= 768) {
-                            pcUser += 1;
-                        } else {
-                            mobileUser += 1;
-                        }
-                    }
+                    pcUser = data.pcNum;
+                    mobileUser = data.mobileNum;
                     that.pieArray = [{
                         value: pcUser,
                         name: 'PC'
@@ -193,78 +188,70 @@ export default {
             });
 
             // 各项操作占比
-            this.SQFrontAjax({
-                Url: '/api/visitReadByDay/foreend',
-                noLoading: init ? 'yes' : '',
-                UploadData: {
-                    endTime: this.getSQTime().split(' ')[0],
-                    dayNum: dayNum ? dayNum : 1
-                },
-                Success: function (data) {
-                    // 统计各项操作行为的次数
-                    data.list.forEach(function (item) {
-                        if (pie2Object.hasOwnProperty(item)) {
-                            pie2Object[item] += 1;
-                        } else {
-                            // 库中浏览文章动作，是以下面三种文本记录
-                            if (item == '浏览文章(首页入口)' || item == '浏览文章(试验田入口)' || item == '浏览文章(undefined入口)') {
-                                pie2Object['浏览文章'] += 1;
-                            } else {
-                                pie2Object['其他'] += 1;
-                            }
-                        }
-                    });
+            // this.SQFrontAjax({
+            //     Url: '/api/visitReadByDay/foreend',
+            //     noLoading: init ? 'yes' : '',
+            //     UploadData: {
+            //         endTime: this.getSQTime().split(' ')[0],
+            //         dayNum: dayNum ? dayNum : 1
+            //     },
+            //     Success: function (data) {
+            //         // 统计各项操作行为的次数
+            //         data.list.forEach(function (item) {
+            //             if (pie2Object.hasOwnProperty(item)) {
+            //                 pie2Object[item] += 1;
+            //             } else {
+            //                 // 库中浏览文章动作，是以下面三种文本记录
+            //                 if (item == '浏览文章(首页入口)' || item == '浏览文章(试验田入口)' || item == '浏览文章(undefined入口)') {
+            //                     pie2Object['浏览文章'] += 1;
+            //                 } else {
+            //                     pie2Object['其他'] += 1;
+            //                 }
+            //             }
+            //         });
 
-                    // 转成饼图需要的数据格式，由对象转成数组
-                    for (let key in pie2Object) {
-                        if (pie2Object[key] > 0) {     // 某项如果为0，不再饼图里展示
-                            pie2Array.push({
-                                value: pie2Object[key],
-                                name: pie2ObjectMap[key]
-                            });
-                        }
-                    }
+            //         // 转成饼图需要的数据格式，由对象转成数组
+            //         for (let key in pie2Object) {
+            //             if (pie2Object[key] > 0) {     // 某项如果为0，不再饼图里展示
+            //                 pie2Array.push({
+            //                     value: pie2Object[key],
+            //                     name: pie2ObjectMap[key]
+            //                 });
+            //             }
+            //         }
 
-                    that.pie2 = that.$echarts.init(document.getElementById('pie-chart2'));
-                    that.pieChartOption.series[0].data = pie2Array;
-                    that.pieChartOption.title.text = '用户行为占比';
-                    that.pieChartOption.series[0].name = '用户操作';
-                    that.pieChartOption.label.fontSize = 10;
-                    that.pieChartOption.color = that.pieBackColor.reverse();
-                    that.pieChartOption.series[0].clockwise = true;
-                    // that.pieChartOption.label.formatter = function(data){
-                    //     return data.name;
-                    // };
-                    that.pie2.setOption(that.pieChartOption, true);
-                }
-            });
+            //         that.pie2 = that.$echarts.init(document.getElementById('pie-chart2'));
+            //         that.pieChartOption.series[0].data = pie2Array;
+            //         that.pieChartOption.title.text = '用户行为占比';
+            //         that.pieChartOption.series[0].name = '用户操作';
+            //         that.pieChartOption.label.fontSize = 10;
+            //         that.pieChartOption.color = that.pieBackColor.reverse();
+            //         that.pieChartOption.series[0].clockwise = true;
+            //         // that.pieChartOption.label.formatter = function(data){
+            //         //     return data.name;
+            //         // };
+            //         that.pie2.setOption(that.pieChartOption, true);
+            //     }
+            // });
 
             // 菜单点击比例饼图
             this.SQFrontAjax({
-                Url: '/api/menuClickByDay/foreend',
+                Url: '/api/getPageDaily',
                 noLoading: init ? 'yes' : '',
                 UploadData: {
-                    endTime: this.getSQTime().split(' ')[0],
-                    dayNum: dayNum ? dayNum : 1
+                    days: dayNum ? dayNum : 1
                 },
                 Success: function (data) {
-                    // 统计各个菜单点击次数
-                    data.list.forEach(function (item) {
-                        if (pie3Object.hasOwnProperty(item)) {
-                            pie3Object[item] += 1;
-                        }
-                    });
-
                     // 转成饼图需要的数据格式
-                    for (let key in pie3Object) {
-                        pie3Array.push({
-                            value: pie3Object[key],
+                    for (let key in data) {
+                        regularUserArray.push({
+                            value: data[key],
                             name: key
                         });
                     }
 
                     that.pie3 = that.$echarts.init(document.getElementById('pie-chart3'));
-                    that.pieChartOption.series[0].data = pie3Array;
+                    that.pieChartOption.series[0].data = regularUserArray;
                     that.pieChartOption.title.text = '菜单点击比例';
                     that.pieChartOption.series[0].name = '点击菜单';
                     that.pieChartOption.color = that.pieBackColor.reverse();
@@ -277,42 +264,33 @@ export default {
             });
 
             // 老用户占比
-            this.SQFrontAjax({
-                Url: '/api/regularUserByDay/foreend',
-                noLoading: init ? 'yes' : '',
-                UploadData: {
-                    endTime: this.getSQTime().split(' ')[0],
-                    dayNum: dayNum ? dayNum : 1
-                },
-                Success: function (data) {
-                    // 转成饼图需要的数据格式
-                    for (let key in data) {
-                        regularUserArray.push({
-                            value: data[key],
-                            name: regularUserMap[key]
-                        });
-                    }
+            // this.SQFrontAjax({
+            //     Url: '/api/regularUserByDay/foreend',
+            //     noLoading: init ? 'yes' : '',
+            //     UploadData: {
+            //         endTime: this.getSQTime().split(' ')[0],
+            //         dayNum: dayNum ? dayNum : 1
+            //     },
+            //     Success: function (data) {
+            //         // 转成饼图需要的数据格式
+            //         for (let key in data) {
+            //             regularUserArray.push({
+            //                 value: data[key],
+            //                 name: regularUserMap[key]
+            //             });
+            //         }
 
-                    that.pie4 = that.$echarts.init(document.getElementById('pie-chart4'));
-                    that.pieChartOption.series[0].data = regularUserArray;
-                    that.pieChartOption.title.text = '新老用户比例';
-                    that.pieChartOption.series[0].name = '用户类型';
-                    that.pieChartOption.color = ['#5470c6', '#ee6666'];
-                    // that.pieChartOption.label.formatter = function(data){
-                    //     return data.name;
-                    // }; 
-                    that.pie4.setOption(that.pieChartOption, true);
-                }
-            });
-
-            // 初始化时不创建日志。切换时间维度后，记日志并刷新日志列表
-            if (!init) {
-                that.createLog({
-                    moduleType: 'button',
-                    operateType: '切换数据占比时间维度',
-                    operateContent: '近' + dayNum + '天'
-                });
-            }
+            //         that.pie4 = that.$echarts.init(document.getElementById('pie-chart4'));
+            //         that.pieChartOption.series[0].data = regularUserArray;
+            //         that.pieChartOption.title.text = '新老用户比例';
+            //         that.pieChartOption.series[0].name = '用户类型';
+            //         that.pieChartOption.color = ['#5470c6', '#ee6666'];
+            //         // that.pieChartOption.label.formatter = function(data){
+            //         //     return data.name;
+            //         // }; 
+            //         that.pie4.setOption(that.pieChartOption, true);
+            //     }
+            // });
         },
 
     },
