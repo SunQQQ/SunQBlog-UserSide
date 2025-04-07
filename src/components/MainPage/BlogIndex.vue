@@ -18,8 +18,9 @@
                   <!--<div class="ArticleTag">{{ item.ArticleTag }}</div>-->
                   <h3 class="ArticleTitleText">{{ item.title }}</h3>
                 </div>
-                <div class="ArticleContent" v-html="item.summary">
-                  {{ item.summary }}
+                <div class="ArticleContent" 
+                    v-html="`<span class='author-name'>${item.createName}</span>：${item.summary}`">
+                  {{ item.createName }}：{{ item.summary }}
                 </div>
                 <div class="ArticleFooter">
                   <!--<div class="ArticleFooterItem">发表：{{ item.createTime }}</div>
