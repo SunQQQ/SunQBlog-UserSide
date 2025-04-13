@@ -60,6 +60,7 @@ export default {
         legend: {
           data: ["浏览量", "IP数","注册量"],
           top: "4%",
+          left: "right"
         },
         series: [
           {
