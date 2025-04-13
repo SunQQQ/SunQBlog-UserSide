@@ -1,10 +1,19 @@
 <template>
     <footer class="Footer" v-show="footerShow">
         <div>
-            © 2025 SunQuan. All Rights Reserved.<span class="RecordNo"><a
-                    href="https://beian.miit.gov.cn">豫ICP备2025116959号-1</a></span>
+            © 2025 SunQuan. All Rights Reserved. Based on Java + Vue,Design by SunQuan.
         </div>
-        <div>Based on Java + Vue, Design by SunQuan</div>
+        <div class="record">
+            <span>
+                <img src="../../static/img/record.png"/>
+            </span>
+            <span class="RecordNo">
+                <a href="https://beian.mps.gov.cn/#/query/webSearch">豫公网安备41010302003282号</a>
+            </span>
+            <span class="RecordNo">
+                <a href="https://beian.miit.gov.cn">豫ICP备2025116959号-1</a>
+            </span>
+        </div>
     </footer>
 </template>
 
@@ -60,5 +69,12 @@ export default {
 
 .Footer a {
     color: @FontColorGray;
+}
+.record{
+    img{
+        width: 0.8rem;
+        height: 0.8rem;
+        margin-bottom: 0 !important;
+    }
 }
 </style>
