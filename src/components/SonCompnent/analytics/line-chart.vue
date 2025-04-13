@@ -58,12 +58,12 @@ export default {
         xAxis: { data: [] },
         yAxis: {},
         legend: {
-          data: ["博客浏览量", "博客访问IP数"],
+          data: ["浏览量", "IP数","注册量"],
           top: "4%",
         },
         series: [
           {
-            name: "博客浏览量",
+            name: "浏览量",
             type: "line",
             data: [],
             itemStyle: {
@@ -75,7 +75,7 @@ export default {
             },
           },
           {
-            name: "博客访问IP数",
+            name: "IP数",
             type: "line",
             data: [],
             itemStyle: {
@@ -83,6 +83,18 @@ export default {
                 color: "#F72C5B",
                 label: { show: true },
                 lineStyle: { color: "#F72C5B" },
+              },
+            },
+          },
+          {
+            name: "注册量",
+            type: "line",
+            data: [],
+            itemStyle: {
+              normal: {
+                color: "#fac858",
+                label: { show: true },
+                lineStyle: { color: "#fac858" },
               },
             },
           },
@@ -120,7 +132,8 @@ export default {
         Success: function (data) {
           let dates = [],
             readings = [],
-            ipArray = [];
+            ipArray = [],
+            register = [];
 
           // 因处理数据耗时较长，添加loading，并提前渲染折线图，缓解页面空白太久
           Store.commit("ChangeLoading", true);
@@ -130,11 +143,13 @@ export default {
             dates.push(item.day);
             readings.push(item.pv);
             ipArray.push(item.ip);
+            register.push(item.register);
           });
           
           that.lineChartOption.xAxis.data = dates;
           that.lineChartOption.series[0].data = readings;
           that.lineChartOption.series[1].data = ipArray;
+          that.lineChartOption.series[2].data = register;
 
           // that.$emit('getQuotaVal',that.quateData);
 
