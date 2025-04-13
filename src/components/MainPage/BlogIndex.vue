@@ -6,20 +6,21 @@
         <div class="BlogFlex">
           <div class="BlogIndexContentLeft">
             <img src="../../static/img/ArticleList.jpg" v-if="DefaultGraph.ArticleListPart"
-                 class="BlogIndexContentLeftDefaultGraph">
-            <div class="ArticleItem" v-for="(item,i) in ArticleList" v-bind:key="i"
-                 @click="UpdateRouter('BlogDetail',item)">
+              class="BlogIndexContentLeftDefaultGraph">
+            <div class="ArticleItem" v-for="(item, i) in ArticleList" v-bind:key="i"
+              @click="UpdateRouter('BlogDetail', item)">
               <div class="ArticleItemCover">
-                <img :src="item.articleCover ? item.articleCover : require('../../static/img/default_article_cover.jpeg')"
-                     class="ArticleItemCoverImg">
+                <img
+                  :src="item.articleCover ? item.articleCover : require('../../static/img/default_article_cover.jpeg')"
+                  class="ArticleItemCoverImg">
               </div>
               <div style="flex: 1">
                 <div class="ArticleTitle">
                   <!--<div class="ArticleTag">{{ item.ArticleTag }}</div>-->
                   <h3 class="ArticleTitleText">{{ item.title }}</h3>
                 </div>
-                <div class="ArticleContent" 
-                    v-html="`<span class='author-name'>${item.createName}</span>：${item.summary}`">
+                <div class="ArticleContent"
+                  v-html="`<span class='author-name'>${item.createName}</span>：${item.summary}`">
                   {{ item.createName }}：{{ item.summary }}
                 </div>
                 <div class="ArticleFooter">
@@ -83,7 +84,8 @@
               </div>
               <div class="TextCenter">
                 <b>编程 & 人生</b>
-                <a class="BlueButton" :class="buttonAnimate ? 'open_animate' : ''" href="https://github.com/SunQQQ" target="_blank" @click="readCode()">博客源码</a>
+                <a class="BlueButton" :class="buttonAnimate ? 'open_animate' : ''" href="https://github.com/SunQQQ"
+                  target="_blank" @click="readCode()">博客源码</a>
               </div>
               <div class="BlogStatistic">
                 <div class="BlogStatisticItem">
@@ -106,8 +108,8 @@
               </transition>
               <div class="TagListHead">文章分类<span style="color: #aaa;font-size: 0.8rem">（点击筛选呦）</span></div>
               <div class="TagListTr">
-                <div :class="item.id != Tags.Active ? 'TagListTd' : 'TagListTdActive'"
-                     v-for="item in Tags" :key="item.id" @click="GetArticle(item.id)">{{ item.name }}
+                <div :class="item.id != Tags.Active ? 'TagListTd' : 'TagListTdActive'" v-for="item in Tags"
+                  :key="item.id" @click="GetArticle(item.id)">{{ item.name }}
                 </div>
               </div>
             </div>
@@ -120,233 +122,227 @@
 </template>
 
 <script>
-  import Heartfelt from '../SonCompnent/Heartfelt';  import Pagination from '../SonCompnent/Pagination';
-  import Store from '../../store'
+import Heartfelt from '../SonCompnent/Heartfelt'; import Pagination from '../SonCompnent/Pagination';
+import Store from '../../store'
 
-  export default {
-    name: "BlogIndex",
-    components: {
-      Heartfelt,
-      Pagination
-    },
-    data: function () {
-      return {
-        Tags: [],// 标签量
-        ArticleList: [],// 文章列表        
-        ArticleNum: 0,// 文章量     
-        LeaveMessageNum: 0,// 留言量        
-        commentNum: 0,// 博客评论量
-        HotArticleList: [],// 热门文章列表
-        AticleBottom: false,// 文章底线
-        buttonAnimate: false, // 首页源码入口动画效果
-        // 缺省图
-        DefaultGraph: {
-          ArticleListPart: true,
-          HotArticlePart: true,
-          ArticleTagPart: true
-        },
-        stickyTop: 0
-      }
-    },
-    methods: {
-      InitArticleTag: function (That) {
-        // 初始化标签列表
-        this.SQFrontAjax({
-          Url: '/api/getDictionaryList',
-          UploadData: {
-            parentId: 1
-          },
-          Success: function (data) {
-            That.Tags = data;
-            That.Tags.Active = 0;
-            That.DefaultGraph.ArticleTagPart = false;
-          }
-        });
-
-        // 获取文章列表
-        this.GetArticle(0);
-        // //渲染留言个数
-        this.GetLeaveMessageNum();
-
-        this.GetCommentNum();
-        // //渲染热门博文
-        // this.GetHotArticle();
+export default {
+  name: "BlogIndex",
+  components: {
+    Heartfelt,
+    Pagination
+  },
+  data: function () {
+    return {
+      Tags: [],// 标签量
+      ArticleList: [],// 文章列表        
+      ArticleNum: 0,// 文章量     
+      LeaveMessageNum: 0,// 留言量        
+      commentNum: 0,// 博客评论量
+      HotArticleList: [],// 热门文章列表
+      AticleBottom: false,// 文章底线
+      buttonAnimate: false, // 首页源码入口动画效果
+      // 缺省图
+      DefaultGraph: {
+        ArticleListPart: true,
+        HotArticlePart: true,
+        ArticleTagPart: true
       },
+      stickyTop: 0
+    }
+  },
+  methods: {
+    InitArticleTag: function (That) {
+      // 初始化标签列表
+      this.SQFrontAjax({
+        Url: '/api/getDictionaryList',
+        UploadData: {
+          parentId: 1
+        },
+        Success: function (data) {
+          That.Tags = data;
+          That.Tags.Active = 0;
+          That.DefaultGraph.ArticleTagPart = false;
+        }
+      });
+
       // 获取文章列表
-      GetArticle: function (tagId) {
-        var That = this;
+      this.GetArticle(0);
+      // //渲染留言个数
+      this.GetLeaveMessageNum();
 
-        this.SQFrontAjax({
-          Url: '/api/getUserBlogList',
-          UploadData: {
-            start: 0,
-            size: 8,
-            // 0查询全部文章
-            tag: (tagId == That.Tags.Active) ? 0 : tagId
-          },
-          Success: function (data) {
-            // 选中后，高亮。且点击高亮标签时，取消选中
-            if(That.Tags.Active == tagId){
-              That.Tags.Active = 0;
-            }else{
-              That.Tags.Active = tagId;
+      this.GetCommentNum();
+      // //渲染热门博文
+      // this.GetHotArticle();
+    },
+    // 获取文章列表
+    GetArticle: function (tagId) {
+      var That = this;
+
+      this.SQFrontAjax({
+        Url: '/api/getUserBlogList',
+        UploadData: {
+          start: 0,
+          size: 8,
+          // 0查询全部文章
+          tag: (tagId == That.Tags.Active) ? 0 : tagId
+        },
+        Success: function (data) {
+          // 选中后，高亮。且点击高亮标签时，取消选中
+          if (That.Tags.Active == tagId) {
+            That.Tags.Active = 0;
+          } else {
+            That.Tags.Active = tagId;
+          }
+
+          data.list.forEach(function (Item) {
+            Item.createTime = Item.createTime.slice(0, 10);
+          });
+          That.DefaultGraph.ArticleListPart = false;// 隐藏骨架屏
+          That.ArticleList = data.list;
+          That.ArticleNum = data.total;
+
+          // 创建日志 只有在筛选某个标签后，再记录日志
+          // if (ArticleTag) That.createLog({
+          //   moduleType: 'button',
+          //   operateType: '筛选文章分类',
+          //   operateContent: ArticleTag
+          // });
+        }
+      });
+    },
+    // 获取留言数量
+    GetLeaveMessageNum: function () {
+      var That = this;
+      this.SQFrontAjax({
+        Url: '/api/getLmCount',
+        Success: function (data) {
+
+          var NumInterval = window.setInterval(function () {
+            That.LeaveMessageNum += 1;
+            if (data == That.LeaveMessageNum) {
+              clearInterval(NumInterval);
             }
+          }, 30);
+        }
+      });
+    },
+    // 获取评论数量
+    GetCommentNum: function () {
+      var That = this;
+      this.SQFrontAjax({
+        Url: '/api/getCommentCount',
+        Success: function (data) {
 
-            data.list.forEach(function (Item) {
-              Item.createTime = Item.createTime.slice(0, 10);
-            });
-            That.DefaultGraph.ArticleListPart = false;// 隐藏骨架屏
-            That.ArticleList = data.list;
-            That.ArticleNum = data.total;
+          var NumInterval = window.setInterval(function () {
+            That.commentNum += 1;
+            if (data == That.commentNum) {
+              clearInterval(NumInterval);
+            }
+          }, 30);
+        }
+      });
+    },
+    //处理翻页
+    ValueByPagition: function (SelectPage) {
+      var That = this;
+      this.SQFrontAjax({
+        Url: '/api/getUserBlogList',
+        UploadData: {
+          start: SelectPage * 8,
+          size: 8,
+          tag: That.Tags.Active
+        },
+        Success: function (data) {
+          data.list.forEach(function (Item) {
+            Item.createTime = Item.createTime.slice(0, 10);
+          });
+          That.ArticleList = That.ArticleList.concat(data.list);
+          if (data.length != 8) {
+            That.AticleBottom = true;
+            // 停止分页器的滚动监听
+            That.$refs.Pagi.SetUpdate(false);
+            // 下拉到底部后，展示footer
+            Store.commit("changeFooter", true);
+          } else {
+            That.$refs.Pagi.SetUpdate(true);
 
-            // 创建日志 只有在筛选某个标签后，再记录日志
-            // if (ArticleTag) That.createLog({
-            //   moduleType: 'button',
-            //   operateType: '筛选文章分类',
-            //   operateContent: ArticleTag
+            // 还有分页时，隐藏footer
+            Store.commit("changeFooter", false);
+            // // 创建日志
+            // That.createLog({
+            //   moduleType: 'pageTurn',
+            //   operateType: '下拉文章列表到',
+            //   operateContent: '第' + (SelectPage + 1) + '页'
             // });
           }
-        });
-      },
-      // 获取留言数量
-      GetLeaveMessageNum: function () {
-        var That = this;
-        this.SQFrontAjax({
-          Url: '/api/getLmCount',
-          Success: function (data) {
-
-            var NumInterval = window.setInterval(function () {
-              That.LeaveMessageNum += 1;
-              if (data == That.LeaveMessageNum) {
-                clearInterval(NumInterval);
-              }
-            }, 30);
-          }
-        });
-      },
-      // 获取评论数量
-      GetCommentNum: function () {
-        var That = this;
-        this.SQFrontAjax({
-          Url: '/api/getCommentCount',
-          Success: function (data) {
-
-            var NumInterval = window.setInterval(function () {
-              That.commentNum += 1;
-              if (data == That.commentNum) {
-                clearInterval(NumInterval);
-              }
-            }, 30);
-          }
-        });
-      },
-      //处理翻页
-      ValueByPagition: function (SelectPage) {
-        var That = this;
-        this.SQFrontAjax({
-          Url: '/api/getUserBlogList',
-          UploadData: {
-            start: SelectPage * 8,
-            size: 8,
-            tag: That.Tags.Active
-          },
-          Success: function (data) {
-            data.list.forEach(function (Item) {
-              Item.createTime = Item.createTime.slice(0, 10);
-            });
-            That.ArticleList = That.ArticleList.concat(data.list);
-            if (data.length != 8) {
-              That.AticleBottom = true;
-              // 停止分页器的滚动监听
-              That.$refs.Pagi.SetUpdate(false);
-              // 下拉到底部后，展示footer
-              Store.commit("changeFooter",true);
-            } else {
-              That.$refs.Pagi.SetUpdate(true);
-
-              // 还有分页时，隐藏footer
-              Store.commit("changeFooter",false);
-              // // 创建日志
-              // That.createLog({
-              //   moduleType: 'pageTurn',
-              //   operateType: '下拉文章列表到',
-              //   operateContent: '第' + (SelectPage + 1) + '页'
-              // });
-            }
-          }
-        });
-      },
-      // 切换路由
-      UpdateRouter: function (RouterName, articleMessage) {
-        if (articleMessage.id) {
-          this.$router.push({
-            name: RouterName,
-            query: {
-              id:articleMessage.id,
-              Title:articleMessage.title,
-              from:'首页'
-            }
-          });
-        } else {
-          this.bus.$emit('TopBar', {
-            Active: 1,
-            MobileMenuActive: 1
-          });
-          this.$router.push({
-            name: RouterName
-          });
         }
-      },
-      //获取热门文章
-      GetHotArticle: function () {
-        var That = this;
-        this.SQFrontAjax({
-          Url: '/api/HotArticleRead/foreend',
-          Success: function (data) {
-            That.HotArticleList = data;
-            That.DefaultGraph.HotArticlePart = false;
+      });
+    },
+    // 切换路由
+    UpdateRouter: function (RouterName, articleMessage) {
+      if (articleMessage.id) {
+        this.$router.push({
+          name: RouterName,
+          query: {
+            id: articleMessage.id,
+            Title: articleMessage.title,
+            from: '首页'
           }
         });
-      },
-      // 查看源码
-      readCode: function () {
-        // 创建日志
-        this.createLog({
-          moduleType: 'button',
-          operateType: '查看源码',
-          operateContent: '首页入口'
+      } else {
+        this.bus.$emit('TopBar', {
+          Active: 1,
+          MobileMenuActive: 1
         });
-      },
-      // 监控gitHub模块DOM的鼠标滑入划出事件，鼠标悬停时打开源码按钮动画效果，移出时关闭动画
-      enter: function(status){
-        this.buttonAnimate = status;
+        this.$router.push({
+          name: RouterName
+        });
       }
     },
-    mounted: function () {
-      let that = this;
-
-      this.InitArticleTag(this);
-      Store.commit("ChangeActive", 0); // 切换Topbar高亮
-
-      // 超大分辨率下，不再设置margin-top值
-      if(window.innerHeight < 1042){
-        this.stickyTop = -(942.3 - window.innerHeight + 76) + 46 + 'px'; // 设置右侧区域粘性布局的top高度
-      }else{
-        this.stickyTop = 60 + "px"; // 把导航栏的距离留出来
-      }
-
-      Store.commit("changeFooter",false); // 初始化时隐藏footer
-
+    //获取热门文章
+    GetHotArticle: function () {
+      var That = this;
+      this.SQFrontAjax({
+        Url: '/api/HotArticleRead/foreend',
+        Success: function (data) {
+          That.HotArticleList = data;
+          That.DefaultGraph.HotArticlePart = false;
+        }
+      });
+    },
+    // 查看源码
+    readCode: function () {
       // 创建日志
-      // that.createLog({
-      //   moduleType: 'menu',
-      //   operateType: '选择菜单',
-      //   operateContent: '博文'
-      // });
+      this.createLog({
+        page: "博文",
+        action: "点击",
+        actionObject: "博客源码按钮",
+        actionDesc: ""
+      });
     },
-  }
+    // 监控gitHub模块DOM的鼠标滑入划出事件，鼠标悬停时打开源码按钮动画效果，移出时关闭动画
+    enter: function (status) {
+      this.buttonAnimate = status;
+    }
+  },
+  mounted: function () {
+    let that = this;
+
+    this.InitArticleTag(this);
+    Store.commit("ChangeActive", 0); // 切换Topbar高亮
+
+    // 超大分辨率下，不再设置margin-top值
+    if (window.innerHeight < 1042) {
+      this.stickyTop = -(942.3 - window.innerHeight + 76) + 46 + 'px'; // 设置右侧区域粘性布局的top高度
+    } else {
+      this.stickyTop = 60 + "px"; // 把导航栏的距离留出来
+    }
+
+    Store.commit("changeFooter", false); // 初始化时隐藏footer
+  },
+}
 </script>
 
 <style scoped lang="less">
-  @import "../../static/css/BlogIndex";
+@import "../../static/css/BlogIndex";
 </style>

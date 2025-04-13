@@ -22,3 +22,5 @@ yarn-error.log*
 *.sw*
 /blog-user/index.html
 /user
+yes
+yes.pub

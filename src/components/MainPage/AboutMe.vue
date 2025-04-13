@@ -107,7 +107,7 @@
             <div class="Content">
               <div class="GitName">CodingLife GitHub</div>
               <a class="BlueButton" :class="buttonAnimate ? 'open_animate' : ''" href="https://github.com/SunQQQ"
-                target="_blank">博客源码</a>
+                target="_blank" @click="readCode()">博客源码</a>
               <div class="BlogStatistic">
                 <div class="BlogStatisticItem">
                   <div class="BlogStatisticItemNum">49</div>
@@ -131,7 +131,7 @@
           <div class="BigBlock AboutMeMarginTop">
             <div class="TitleFontLine">联系我</div>
             <div class="BlogStatistic" style="border-top: none; padding-bottom: 0">
-              <div class="BlogStatisticItem">
+              <div class="BlogStatisticItem" @click="visitLog('github')">
                 <a href="https://github.com/SunQQQ" target="_blank"><i class="iconfont icon-github AboutMeIcon"
                     style="color: #948aec"></i></a>
               </div>
@@ -141,11 +141,11 @@
               <div class="BlogStatisticItem my-pointer" @click="infoMessage('1585437938@qq.com')">
                 <i class="iconfont icon-youxiang AboutMeIcon" style="color: #49a9ee"></i>
               </div>
-              <div class="BlogStatisticItem">
+              <div class="BlogStatisticItem" @click="visitLog('zhihu')">
                 <a href="https://www.zhihu.com/people/s-q-51-44-23/activities" target="_blank"><i
                     class="iconfont icon-zhihu AboutMeIcon" style="color: #3dbd7d"></i></a>
               </div>
-              <div class="BlogStatisticItem">
+              <div class="BlogStatisticItem" @click="visitLog('csdn')">
                 <a href="https://blog.csdn.net/sun_qqq" target="_blank"><i class="iconfont icon-CN_csdnnet AboutMeIcon"
                     style="color: #f78e3d"></i></a>
               </div>
@@ -177,13 +177,37 @@ export default {
     setButtonAnimate: function (status) {
       this.buttonAnimate = status;
     },
-    // 联系我的弹出框
-    infoMessage: (message) => {
+    infoMessage(message) {  // 普通函数，this 正确绑定
       Store.commit('ChangeTip', {
         Show: true,
         Title: message
       });
-    }
+      this.createLog({
+        page: "关于",
+        action: "点击",
+        actionObject: "联系我",
+        actionDesc: "：" + message
+      });
+    },
+    // 查看源码
+    readCode: function () {
+      // 创建日志
+      this.createLog({
+        page: "关于",
+        action: "点击",
+        actionObject: "博客源码按钮",
+        actionDesc: ""
+      });
+    },
+    visitLog(message){
+      // 创建日志
+      this.createLog({
+        page: "关于",
+        action: "点击",
+        actionObject: "联系我",
+        actionDesc: "：" + message
+      });
+    },
   },
   mounted: function () {
     Store.commit("ChangeActive", 4); // 切换Topbar高亮

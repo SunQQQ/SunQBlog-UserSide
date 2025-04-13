@@ -520,9 +520,10 @@ export default {
     readCode: function () {
       // 创建日志
       this.createLog({
-        moduleType: "button",
-        operateType: "查看源码",
-        operateContent: "留言板入口",
+        page: "留言",
+        action: "点击",
+        actionObject: "博客源码按钮",
+        actionDesc: ""
       });
     },
 
