@@ -48,10 +48,10 @@
                     <div class="createrName">
                       {{ item.createrName }}
                       <span v-if="
-                        item.LocationCityName &&
-                        item.LocationCityName.length > 0
+                        item.city &&
+                        item.city.length > 0
                       ">
-                        <i class="iconfont icon-buoumaotubiao23 LocationIconfont"></i>{{ item.LocationCityName }}
+                        <i class="iconfont icon-buoumaotubiao23 LocationIconfont"></i>{{ item.city }}
                       </span>
                     </div>
                     <div class="commentContent" v-html="item.commentContent">
@@ -75,10 +75,10 @@
                     <div class="createrName">
                       {{ itemTwo.createrName }}
                       <span v-if="
-                        itemTwo.LocationCityName &&
-                        itemTwo.LocationCityName.length > 0
+                        itemTwo.city &&
+                        itemTwo.city.length > 0
                       ">
-                        <i class="iconfont icon-buoumaotubiao23 LocationIconfont"></i>{{ itemTwo.LocationCityName }}
+                        <i class="iconfont icon-buoumaotubiao23 LocationIconfont"></i>{{ itemTwo.city }}
                       </span>
                     </div>
                     <div class="commentContent" v-html="itemTwo.commentContent">
