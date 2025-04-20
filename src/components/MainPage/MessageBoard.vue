@@ -371,21 +371,10 @@ export default {
               That.MessageAnswerFrame = false;
               // 初始TextArea框遮盖
               That.OpenTextAreaCover = true;
-
-              // // 创建日志
-              // That.createLog({
-              //   moduleType: "button",
-              //   operateType: "留言",
-              //   operateContent: MatchedMessageText,
-              // });
             },
           });
         });
       } else {
-        // That.bus.$emit('Tips', {
-        //   Show: true,
-        //   Title: '昵称和留言不能为空呦！'
-        // });
         Store.commit("ChangeTip", {
           Show: true,
           Title: "留言内容不能为空呦",
@@ -625,12 +614,6 @@ export default {
 
     this.setWeathe();
 
-    // 创建日志
-    // this.createLog({
-    //   moduleType: "munu",
-    //   operateType: "选择菜单",
-    //   operateContent: "留言",
-    // });
     const fullPath = this.$route.fullPath;
     if (fullPath.includes('login')) {
       Store.commit('ChangeLogin', true);
