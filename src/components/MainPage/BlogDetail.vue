@@ -239,10 +239,10 @@ export default {
           That.SQFrontAjax({
             Url: "/api/addComment",
             UploadData: {
-              articleId: That.$route.query.id,
+              articleId: Number(That.$route.query.id),
               commentContent: MatchedMessageText,
               city: Array.isArray(LocationCityName) ? "" : LocationCityName,
-              comParentId: parentCommentId
+              comParentId: Number(That.parentCommentId)
             },
             Success: function () {
               That.GetCommentList();
