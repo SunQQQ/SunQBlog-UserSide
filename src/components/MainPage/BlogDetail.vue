@@ -8,24 +8,18 @@
         <div class="HeaderContent">
           <span>{{ Article.title }}</span>
           <span>{{ Article.summary }}</span>
-        </div> 
+        </div>
       </div>
 
       <div class="ArticleDetailContent">
         <div class="ArticleDetailContentTab">
           <transition name="Fade" mode="out-in">
-            <img
-              src="../../static/img/BlogDetailSkele_PC.jpg"
-              class="BlogDetailSkeletonScreenPC"
-              v-show="BlogDetailSkeletonScreen"
-            />
+            <img src="../../static/img/BlogDetailSkele_PC.jpg" class="BlogDetailSkeletonScreenPC"
+              v-show="BlogDetailSkeletonScreen" />
           </transition>
 
-          <img
-            src="../../static/img/BlogDetailSkele_Mobile.jpg"
-            class="BlogDetailSkeletonScreenMobile"
-            v-show="BlogDetailSkeletonScreen"
-          />
+          <img src="../../static/img/BlogDetailSkele_Mobile.jpg" class="BlogDetailSkeletonScreenMobile"
+            v-show="BlogDetailSkeletonScreen" />
 
           <!-- <h1>{{ Article.title }}</h1> -->
           <div class="ArticleCreateTime">
@@ -41,56 +35,62 @@
           </div>
         </div>
       </div>
-      <div
-        class="ArticleDetailContent"
-        style="margin-top: 1rem"
-        v-if="commentList.length > 0"
-      >
-        <div
-          class="ArticleDetailContentTab"
-          style="padding: 1rem; min-height: unset"
-        >
+      <div class="ArticleDetailContent" style="margin-top: 1rem" v-if="commentList.length > 0">
+        <div class="ArticleDetailContentTab" style="padding: 1rem; min-height: unset">
           <div class="ArticleDetailComment">
             <div class="CommentList">
-              <div
-                class="CommentItem"
-                v-for="(item, i) in commentList"
-                v-bind:key="i"
-                if="commentList.length != 0"
-              >
-                <div class="CommentItemIcon">
-                  <img :src="getIconAdress(item.createrAvator)" />
-                </div>
-                <div class="CommentItemContent">
-                  <div class="createrName">
-                    {{ item.createrName }}
-                    <span
-                      v-if="
+              <div v-for="(item, i) in commentList" class="totalItem">
+                <div class="CommentItem" v-bind:key="i" if="commentList.length != 0">
+                  <div class="CommentItemIcon">
+                    <img :src="getIconAdress(item.createrAvator)" />
+                  </div>
+                  <div class="CommentItemContent">
+                    <div class="createrName">
+                      {{ item.createrName }}
+                      <span v-if="
                         item.LocationCityName &&
                         item.LocationCityName.length > 0
-                      "
-                    >
-                      <i
-                        class="iconfont icon-buoumaotubiao23 LocationIconfont"
-                      ></i
-                      >{{ item.LocationCityName }}
-                    </span>
-                  </div>
-                  <div
-                    class="commentContent"
-                    v-html="item.commentContent"
-                  >
-                    {{ item.commentContent }}
-                  </div>
-                  <div class="DateAnswer">
-                    <div class="DateAnswerLeft">
-                      {{ item.createTime }}
+                      ">
+                        <i class="iconfont icon-buoumaotubiao23 LocationIconfont"></i>{{ item.LocationCityName }}
+                      </span>
                     </div>
-                    <div
-                      class="DateAnswerRight"
-                      @click="AnswerComment(item.createrName)"
-                    >
-                      回复
+                    <div class="commentContent" v-html="item.commentContent">
+                      {{ item.commentContent }}
+                    </div>
+                    <div class="DateAnswer">
+                      <div class="DateAnswerLeft">
+                        {{ item.createTime }}
+                      </div>
+                      <div class="DateAnswerRight" @click="AnswerComment(item.createrName, item.id)">
+                        回复
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="CommentItem item-two-level" v-for="(itemTwo, i) in item.child" v-bind:key="i" if="item.child">
+                  <div class="CommentItemIcon">
+                    <img :src="getIconAdress(itemTwo.createrAvator)" />
+                  </div>
+                  <div class="CommentItemContent">
+                    <div class="createrName">
+                      {{ itemTwo.createrName }}
+                      <span v-if="
+                        itemTwo.LocationCityName &&
+                        itemTwo.LocationCityName.length > 0
+                      ">
+                        <i class="iconfont icon-buoumaotubiao23 LocationIconfont"></i>{{ itemTwo.LocationCityName }}
+                      </span>
+                    </div>
+                    <div class="commentContent" v-html="itemTwo.commentContent">
+                      {{ itemTwo.commentContent }}
+                    </div>
+                    <div class="DateAnswer">
+                      <div class="DateAnswerLeft">
+                        {{ itemTwo.createTime }}
+                      </div>
+                      <div class="DateAnswerRight" @click="AnswerComment(itemTwo.createrName, item.id)">
+                        回复
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -101,10 +101,7 @@
       </div>
 
       <div class="ArticleDetailContent" style="margin-top: 1rem">
-        <div
-          class="ArticleDetailContentTab"
-          style="padding: 1rem; min-height: unset"
-        >
+        <div class="ArticleDetailContentTab" style="padding: 1rem; min-height: unset">
           <div class="ArticleDetailCommentFirstLine">
             <div class="UserHeadIcon">
               <img src="../../static/img/DefaultHeadIcon.jpg" />
@@ -125,11 +122,7 @@
             </div> -->
           </div>
           <div class="ArticleDetailCommentContent">
-            <textarea
-              v-model="MessageText"
-              ref="MessageText"
-              placeholder="欢迎评论吖，鼓励和板砖我都认真听取哦"
-            ></textarea>
+            <textarea v-model="MessageText" ref="MessageText" placeholder="欢迎评论吖，鼓励和板砖我都认真听取哦"></textarea>
             <span class="EmotionButton" @click="OpenEmotions()">
               <i class="iconfont icon-face IconfontSize"></i>
             </span>
@@ -179,6 +172,7 @@ export default {
       createTime: "",
       commentList: "",
       BlogDetailSkeletonScreen: true,
+      parentCommentId: 0
     };
   },
   methods: {
@@ -196,12 +190,11 @@ export default {
 
           That.Article = data;
           That.Article.createTime = That.DateFormat(That.Article.createTime);
-        
+
           const rendererMD = new Marked.Renderer();
           rendererMD.image = function (href, title, text) {
-            return `<img onclick="showMarkedImage(event, '${href}')" src="${href}" alt="${text}" title="${
-              title ? title : ""
-            }">`;
+            return `<img onclick="showMarkedImage(event, '${href}')" src="${href}" alt="${text}" title="${title ? title : ""
+              }">`;
           };
           Marked.setOptions({
             renderer: rendererMD,
@@ -221,13 +214,6 @@ export default {
             /<pre>/g,
             "<pre class='language-html'>"
           ); //Markdown格式字符串转html
-
-          // 创建日志
-          // That.createLog({
-          //   moduleType: "button",
-          //   operateType: "浏览文章(" + That.$route.query.from + "入口)",
-          //   operateContent: That.$route.query.title,
-          // });
         },
       });
     },
@@ -256,7 +242,7 @@ export default {
               articleId: That.$route.query.id,
               commentContent: MatchedMessageText,
               city: Array.isArray(LocationCityName) ? "" : LocationCityName,
-              comParentId: 0
+              comParentId: parentCommentId
             },
             Success: function () {
               That.GetCommentList();
@@ -264,13 +250,6 @@ export default {
               // Store.commit("ChangeTip", {
               //   Show: true,
               //   title: "评论成功",
-              // });
-
-              // 创建日志
-              // That.createLog({
-              //   moduleType: "button",
-              //   operateType: "评论文章",
-              //   operateContent: That.Article.title,
               // });
             },
           });
@@ -302,9 +281,11 @@ export default {
       });
     },
     // 回复评论
-    AnswerComment: function (ComentNickName) {
+    AnswerComment: function (ComentNickName, parentId) {
       Store.commit("ChangeMessageText", "@" + ComentNickName + ":");
       this.$refs.MessageText.focus();
+
+      this.parentCommentId = parentId;
     },
     // 打开表情包弹框
     OpenEmotions: function () {
@@ -322,14 +303,14 @@ export default {
     },
   },
   mounted: function () {
-    window.showMarkedImage = function(e, href) {
+    window.showMarkedImage = function (e, href) {
       let el = e.target
       let rfs =
         el.requestFullscreen ||
         el.webkitRequestFullscreen ||
         el.mozRequestFullscreen ||
         el.msRequestFullscreen
-      if(rfs) rfs.call(el); // 这里rfs()会执行失败，因为rfs返回的是个单纯的函数，没有对象去调用它了
+      if (rfs) rfs.call(el); // 这里rfs()会执行失败，因为rfs返回的是个单纯的函数，没有对象去调用它了
     }
 
     // 初始化文章内容
