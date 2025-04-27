@@ -137,7 +137,7 @@ export default {
             });
 
             That.createLog({
-              page: "用户端登录注册页",
+              page: "登录注册页",
               action: "登录",
               actionObject: "用户端",
               actionDesc: "：尊贵的【" + That.username + "】"
@@ -192,7 +192,7 @@ export default {
             }
 
             That.createLog({
-              page: "用户端登录注册页",
+              page: "登录注册页",
               action: "注册",
               actionObject: "用户端",
               actionDesc: "：获得账号【" + data.userInfo.name + "】"
