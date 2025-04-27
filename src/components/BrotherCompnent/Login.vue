@@ -135,6 +135,13 @@ export default {
               Key: 'userInfo',
               Value: data.userInfo
             });
+
+            That.createLog({
+              page: "用户端登录注册页",
+              action: "登录",
+              actionObject: "用户端",
+              actionDesc: "：尊贵的【" + That.username + "】"
+            });
           }
         });
       } else {
@@ -154,7 +161,7 @@ export default {
           Success: function (data) {
             Store.commit("ChangeTip", {
               Show: true,
-              Title: "注册登录，已自动成功",
+              Title: "注册成功，已自动登录",
             });
             Store.commit('ChangeLogin', false);
 
@@ -183,6 +190,13 @@ export default {
                 }
               });
             }
+
+            That.createLog({
+              page: "用户端登录注册页",
+              action: "注册",
+              actionObject: "用户端",
+              actionDesc: "：获得账号【" + data.userInfo.name + "】"
+            });
           }
         });
       } else {
@@ -216,8 +230,8 @@ export default {
 /*移动端*/
 @media only screen and (max-device-width: 768px) {
   .container-width {
-  max-width: 300px;
-}
+    max-width: 300px;
+  }
 }
 
 /* 遮罩层 */
