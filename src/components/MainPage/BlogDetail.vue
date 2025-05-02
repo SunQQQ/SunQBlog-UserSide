@@ -30,16 +30,14 @@
               发布时间：{{ Article.createTime }}
             </div>
           </div>
-          <div class="markdown-body" v-html="Article.content">
-            {{ Article.content }}
-          </div>
+          <div class="markdown-body" v-html="Article.content"></div>
         </div>
       </div>
       <div class="ArticleDetailContent" style="margin-top: 1rem" v-if="commentList.length > 0">
         <div class="ArticleDetailContentTab" style="padding: 1rem; min-height: unset">
           <div class="ArticleDetailComment">
             <div class="CommentList">
-              <div v-for="(item, i) in commentList" class="totalItem">
+              <div v-for="(item, i) in commentList" class="totalItem" v-bind:key="i">
                 <div class="CommentItem" v-bind:key="i" if="commentList.length != 0">
                   <div class="CommentItemIcon">
                     <img :src="getIconAdress(item.createrAvator)" />
@@ -55,7 +53,6 @@
                       </span>
                     </div>
                     <div class="commentContent" v-html="item.commentContent">
-                      {{ item.commentContent }}
                     </div>
                     <div class="DateAnswer">
                       <div class="DateAnswerLeft">
@@ -82,7 +79,6 @@
                       </span>
                     </div>
                     <div class="commentContent" v-html="itemTwo.commentContent">
-                      {{ itemTwo.commentContent }}
                     </div>
                     <div class="DateAnswer">
                       <div class="DateAnswerLeft">
@@ -241,7 +237,6 @@ export default {
             UploadData: {
               articleId: Number(That.$route.query.id),
               commentContent: MatchedMessageText,
-              city: Array.isArray(LocationCityName) ? "" : LocationCityName,
               comParentId: Number(That.parentCommentId)
             },
             Success: function () {
