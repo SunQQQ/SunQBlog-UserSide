@@ -210,7 +210,7 @@ CommonFunction.install = function (Vue) {
    * @param func 获取成功后的回调函数，该参数将接受一个城市名称
    * @constructor
    */
-  Vue.prototype.GetLocation = function (func) {
+  Vue.prototype.GetLocation_copy = function (func) {
     let that = this,
       locationCookie = this.getSQCookie('sunqBlogLocation'),
       sunqBlogLocationCode = this.getSQCookie('sunqBlogLocationCode');
@@ -228,6 +228,26 @@ CommonFunction.install = function (Vue) {
       }).then(function (resp) {
         func(resp.data.city, resp.data.adcode);
         that.setSQCookie('sunqBlogLocation', resp.data.city, 3); // 相隔3小时同一浏览器再次访问时会重新定位
+        that.setSQCookie('sunqBlogLocationCode', resp.data.adcode, 3);
+      }).catch();
+    }
+  };
+
+  Vue.prototype.GetLocation = function (func) {
+    let that = this,
+      locationCookie = this.getSQCookie('sunqBlogLocation'),
+      sunqBlogLocationCode = this.getSQCookie('sunqBlogLocationCode');
+
+    // 如果用户多次访问，一周内不会重复请求定位接口
+    if (locationCookie) {
+      func(locationCookie, sunqBlogLocationCode);
+    } else {
+      axios({
+        url: 'https://codinglife.online/getLocation',
+        method: 'post',
+      }).then(function (resp) {
+        func(resp.data.city, resp.data.adcode);
+        that.setSQCookie('sunqBlogLocation', resp.data.city, 6); // 相隔3小时同一浏览器再次访问时会重新定位
         that.setSQCookie('sunqBlogLocationCode', resp.data.adcode, 3);
       }).catch();
     }

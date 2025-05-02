@@ -68,9 +68,7 @@
                         <i class="iconfont icon-buoumaotubiao23 LocationIconfont"></i>{{ item.city }}
                       </span>
                     </div>
-                    <div class="ArticleCommentText" v-html="item.messageContent">
-                      {{ item.messageContent }}
-                    </div>
+                    <div class="ArticleCommentText" v-html="item.messageContent"></div>
                     <div class="DateAnswer">
                       <div class="DateAnswerLeft">
                         {{ item.createTime }}
@@ -97,9 +95,7 @@
                         <i class="iconfont icon-buoumaotubiao23 LocationIconfont"></i>{{ childItem.city }}
                       </span>
                     </div>
-                    <div class="ArticleCommentText" v-html="childItem.messageContent">
-                      {{ childItem.messageContent }}
-                    </div>
+                    <div class="ArticleCommentText" v-html="childItem.messageContent"></div>
                     <div class="DateAnswer">
                       <div class="DateAnswerLeft">
                         {{ childItem.createTime }}
@@ -311,7 +307,7 @@ export default {
 
     getIconAdress: function (iconNo) {
       return require("@/static/img/default_headicon_" +
-      (iconNo || 0).toString() +
+        (iconNo || 0).toString() +
         ".jpeg");
     },
 
@@ -339,40 +335,36 @@ export default {
       if (Store.getters.GetMessageText) {
         let MatchedMessageText = That.MatchEmotion(
           Store.getters.GetMessageText
-        ),
-          iconNo = this.GetLocalStorage("SunqBlog").ArticleCommentIcon || Math.round(Math.random() * 4);
+        );
+        // 处理回复留言的二级数据
+        let param = {
+          messageContent: MatchedMessageText
+        }
+        if (That.parentId) {
+          param.parentId = That.parentId;
+        }
 
-        this.GetLocation(function (LocationCityName) {
-          // 处理回复留言的二级数据
-          let param = {
-            messageContent: MatchedMessageText,
-            city: Array.isArray(LocationCityName) ? "" : LocationCityName,
-          }
-          if (That.parentId) {
-            param.parentId = That.parentId;
-          }
+        That.SQFrontAjax({
+          Url: "/api/createLeaveMessage",
+          UploadData: param,
+          Success: function () {
+            Store.commit("ChangeTip", {
+              Show: true,
+              Title: "留言成功",
+            });
+            // 清空留言框
+            Store.commit("CleanMessageText");
 
-          That.SQFrontAjax({
-            Url: "/api/createLeaveMessage",
-            UploadData: param,
-            Success: function () {
-              Store.commit("ChangeTip", {
-                Show: true,
-                Title: "留言成功",
-              });
-              // 清空留言框
-              Store.commit("CleanMessageText");
+            // 刷新留言列表
+            // That.ValueByPagition(0);
+            // That.$router.go(0);
+            That.MessageRead();
 
-              // 刷新留言列表
-              // That.ValueByPagition();
-              That.$router.go(0);
-
-              // 如果是回复留言，关闭留言弹框
-              That.MessageAnswerFrame = false;
-              // 初始TextArea框遮盖
-              That.OpenTextAreaCover = true;
-            },
-          });
+            // 如果是回复留言，关闭留言弹框
+            That.MessageAnswerFrame = false;
+            // 初始TextArea框遮盖
+            That.OpenTextAreaCover = true;
+          },
         });
       } else {
         Store.commit("ChangeTip", {
@@ -400,7 +392,7 @@ export default {
                 childItem.createTime = That.DateFormat(childItem.createTime);
               });
             }
-          });       
+          });
           That.messageList = data;
           if (data.length != 8) {
             That.AticleBottom = true;
@@ -478,12 +470,6 @@ export default {
           } else {
             That.$refs.Pagi.SetUpdate(true);
             Store.commit("changeFooter", false); // 隐藏footer
-            // 创建日志
-            // That.createLog({
-            //   moduleType: "pageTurn",
-            //   operateType: "下拉留言列表到",
-            //   operateContent: "第" + (SelectPage + 1) + "页",
-            // });
           }
         },
       });
