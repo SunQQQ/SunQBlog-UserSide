@@ -518,16 +518,18 @@ export default {
 
     // 设置天气预报模块
     setWeathe: function () {
-      let sunqBlogWeather = ""; // 3小时内不再刷新
+      // todos: '此处待优化'
+      // let sunqBlogWeather = this.getSQCookie("sunqBlogWeather"); // 3小时内不再刷新
+      let sunqBlogWeather = ""
 
       if (sunqBlogWeather) {
-        this.renderWeathDom(sunqBlogWeather);
+        this.renderWeathDom(JSON.parse(sunqBlogWeather));
       } else {
-        this.GetLocation(this.getWeathData);
+        this.getWeathData();
       }
     },
 
-    getWeathData: function (cityName, cityCode) {
+    getWeathData: function () {
       let that = this;
 
       that.SQFrontAjax({
@@ -536,11 +538,13 @@ export default {
           console.log(data);
           that.renderWeathDom(data);
 
-          that.setSQCookie(
-            "sunqBlogWeather",
-            data,
-            3
-          ); // 相隔3小时同一浏览器再次访问时会重新获取天气
+          if (data.status == "1" && data.infocode == '10000') {
+            that.setSQCookie(
+              "sunqBlogWeather",
+              JSON.stringify(data),
+              3
+            ); // 相隔3小时同一浏览器再次访问时会重新获取天气
+          }
         }
       });
     },
