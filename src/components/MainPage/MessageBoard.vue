@@ -529,25 +529,20 @@ export default {
 
     getWeathData: function (cityName, cityCode) {
       let that = this;
-      axios({
-        url: "https://restapi.amap.com/v3/weather/weatherInfo",
-        method: "GET",
-        params: {
-          key: "ba5f9b69f0541123a4dbe142da230b4d",
-          city: cityCode,
-          extensions: 'all',
-          output: "JSON"
-        },
-      }).then(function (resp) {
-        that.renderWeathDom(resp.data);
 
-        that.setSQCookie(
-          "sunqBlogWeather",
-          resp.data,
-          3
-        ); // 相隔3小时同一浏览器再次访问时会重新获取天气
-      })
-        .catch();
+      that.SQFrontAjax({
+        Url: "/api/getWeather",
+        Success: function (data) {
+          console.log(data);
+          that.renderWeathDom(data);
+
+          that.setSQCookie(
+            "sunqBlogWeather",
+            data,
+            3
+          ); // 相隔3小时同一浏览器再次访问时会重新获取天气
+        }
+      });
     },
 
     renderWeathDom: function (dataObj) {
