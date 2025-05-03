@@ -64,7 +64,8 @@
                     </div>
                   </div>
                 </div>
-                <div class="CommentItem item-two-level" v-for="(itemTwo, i) in item.child" v-bind:key="i" if="item.child">
+                <div class="CommentItem item-two-level" v-for="(itemTwo, i) in item.child" v-bind:key="i"
+                  if="item.child">
                   <div class="CommentItemIcon">
                     <img :src="getIconAdress(itemTwo.createrAvator)" />
                   </div>
@@ -230,24 +231,17 @@ export default {
           Store.getters.GetMessageText
         );
 
-        this.GetLocation(function (LocationCityName) {
-          // 新增评论
-          That.SQFrontAjax({
-            Url: "/api/addComment",
-            UploadData: {
-              articleId: Number(That.$route.query.id),
-              commentContent: MatchedMessageText,
-              comParentId: Number(That.parentCommentId)
-            },
-            Success: function () {
-              That.GetCommentList();
-
-              // Store.commit("ChangeTip", {
-              //   Show: true,
-              //   title: "评论成功",
-              // });
-            },
-          });
+        // 新增评论
+        That.SQFrontAjax({
+          Url: "/api/addComment",
+          UploadData: {
+            articleId: Number(That.$route.query.id),
+            commentContent: MatchedMessageText,
+            comParentId: Number(That.parentCommentId)
+          },
+          Success: function () {
+            That.GetCommentList();
+          },
         });
 
         // 清空textarea
