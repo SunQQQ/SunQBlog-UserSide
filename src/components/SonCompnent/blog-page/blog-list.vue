@@ -86,13 +86,6 @@ export default {
                     });
                     That.DefaultGraph.ArticleListPart = false;// 隐藏骨架屏
                     That.ArticleList = data;
-
-                    // 创建日志 只有在筛选某个标签后，再记录日志
-                    if (ArticleTag) That.createLog({
-                        moduleType: 'button',
-                        operateType: '筛选文章分类',
-                        operateContent: ArticleTag
-                    });
                 }
             });
         },
@@ -124,12 +117,6 @@ export default {
 
                         // 还有分页时，隐藏footer
                         Store.commit("changeFooter", false);
-                        // 创建日志
-                        That.createLog({
-                            moduleType: 'pageTurn',
-                            operateType: '下拉文章列表到',
-                            operateContent: '第' + (SelectPage + 1) + '页'
-                        });
                     }
                 }
             });

@@ -380,6 +380,7 @@ CommonFunction.install = function (Vue) {
     that.SQFrontAjax({
       Url: '/api/createLog',
       UploadData: {
+        userId: that.GetLocalStorage('SunqBlog').id,
         platformType: "用户端",
         page: log.page,
         action: log.action,

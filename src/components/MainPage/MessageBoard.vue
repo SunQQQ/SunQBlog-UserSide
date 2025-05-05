@@ -495,7 +495,7 @@ export default {
     readCode: function () {
       // 创建日志
       this.createLog({
-        page: "留言",
+        page: "留言页",
         action: "点击",
         actionObject: "博客源码按钮",
         actionDesc: ""
@@ -503,11 +503,11 @@ export default {
     },
 
     contact: function (operateContent) {
-      // 创建日志
       this.createLog({
-        moduleType: "button",
-        operateType: "点击联系途径",
-        operateContent: operateContent,
+        page: "留言页",
+        action: "点击",
+        actionObject: "点击联系途径",
+        actionDesc: operateContent
       });
     },
 

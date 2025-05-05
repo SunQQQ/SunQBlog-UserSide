@@ -11,7 +11,7 @@
         </div>
         <div class="list">
             <div class="list-head">
-                <div class="list-td align">IP城市</div>
+                <div class="list-td align">城市/IP/用户名</div>
                 <div class="list-td">操作内容</div>
                 <div class="list-td align give-up">访问设备</div>
                 <div class="list-td align give-up">停留时间</div>
@@ -19,17 +19,15 @@
             </div>
             <div :class="item.curIp ? 'list-tr single' : 'list-tr'" v-for="(item, i) in userActionData" v-bind:key="i">
                 <div class="list-td align text-center">
-                    <div>{{ item.ipCity }}<br>{{ item.curIp ? item.curIp : item.ip }}</div>
+                    <div>{{ item.ipCity }}<br>{{ item.userName ? item.userName : item.ip }}</div>
                     <div class="your-ip" v-if="item.isCurUser">(你的轨迹)</div>
                 </div>
                 <div class="list-td action-padding">
                     <ul>
-                        <li v-for="(item, i) in item.actions" v-bind:key="i" v-html="item">{{item}}</li>
+                        <li v-for="(item, i) in item.actions" v-bind:key="i" v-html="item"></li>
                     </ul>
                 </div>
-                <div class="list-td align line-heigh give-up" v-html="item.browser">
-                    {{ item.browser }}
-                </div>
+                <div class="list-td align line-heigh give-up" v-html="item.browser"></div>
                 <div class="list-td align give-up">{{ item.stayTime }}秒</div>
                 <div class="list-td align give-up">{{ item.entryTime }}<br>{{ item.leaveTime }}</div>
             </div>
@@ -113,14 +111,6 @@ export default {
                     // debugger
                 }
             });
-            // 初始化时不创建日志。切换时间维度后，记日志并刷新日志列表
-            if (!init) {
-                that.createLog({
-                    moduleType: 'button',
-                    operateType: '切换用户轨迹时间维度',
-                    operateContent: '近' + dayNum + '天'
-                });
-            }
         },
         // 处理翻页
         ValueByPagition: function (SelectPage) {
@@ -151,14 +141,6 @@ export default {
                         That.$refs.Pagi.SetUpdate(false);
                     } else {
                         That.$refs.Pagi.SetUpdate(true);
-
-                        // 创建日志
-                        That.createLog({
-                            moduleType: 'pageTurn',
-                            operateType: '下拉访问日志列表到',
-                            operateContent: '第' + (SelectPage + 1) + '页'
-                        });
-
                     }
                 }
             });

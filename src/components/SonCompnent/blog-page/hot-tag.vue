@@ -171,12 +171,7 @@ export default {
         },
         // 查看源码
         readCode: function () {
-            // 创建日志
-            this.createLog({
-                moduleType: 'button',
-                operateType: '查看源码',
-                operateContent: '首页入口'
-            });
+            
         },
         // 监控gitHub模块DOM的鼠标滑入划出事件，鼠标悬停时打开源码按钮动画效果，移出时关闭动画
         enter: function (status) {

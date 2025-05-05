@@ -70,12 +70,6 @@ export default {
     document.getElementsByClassName("MobileTopBar")[0].style.display = 'none';
     document.getElementsByClassName("PcTopBar")[0].style.display = 'none';
     document.title = '六零齿学院';
-    // 创建日志
-    // this.createLog({
-    //   moduleType:'menu',
-    //   operateType:'选择菜单',
-    //   operateContent:'时间轴'
-    // });
   }
 }
 </script>
