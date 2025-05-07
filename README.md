@@ -7,7 +7,7 @@
  * @Description: 文件描述
 -->
 ## SunQuan's Blog
->此项目为孙权的个人网站，演示地址 正在开发中
+>此项目为孙权的个人网站，演示地址 https://codinglife.online
 
 本博客基于Vue2.0开发，使用媒体查询适配PC端和移动端。具备博客、留言板、用户轨迹分析、开放式后台等功能，整体设计风格清新简约，动画效果俏皮可爱，功能较为完善。
 
@@ -17,7 +17,7 @@
 ## 版本说明
 用户端代码分为v1.0和v2.0两个版本，分别对应管理后台和服务端的v1.0和v2.0两个版本。
 
-各端代码都分为v1.0和v2.0两个分支，v1版本已成熟，v2版本开发中。
+各端代码都分为v1.0和v2.0两个分支，v1版本已定版，v2版本还在持续迭代优化中。
 
 本地部署时请注意三端的分支需一致
 ``` bash
@@ -49,7 +49,7 @@ yarn run lint
 
 我的邮箱地址：1585437938@qq.com，也欢迎交流。
 
-我还用原生JS写了一个贪吃蛇小游戏，欢迎来玩：http://39.104.22.73:70/
+我还用原生JS写了一个贪吃蛇小游戏，欢迎来玩：https://codinglife.online/snake
 ## 博客预览
 ![index](https://github.com/SunQQQ/SunQBlog-UserSide/blob/master/static/readme_img/index.png)
 
