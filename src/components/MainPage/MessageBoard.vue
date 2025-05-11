@@ -117,6 +117,51 @@
           </div>
           <div class="BlogIndexContentRight messageboard-page" style="border: 1px solid #e9e9e9; border-radius: 3px">
             <div class="Module" style="padding: 0 0 0.5rem; background-color: transparent">
+              <div class="BigBlock AboutMeMarginTop weathDev" :class="city ? '' : 'weathNo'">
+                <div class="TitleFontLine weathTitle">
+                  <span class="citySpan">{{ city }}</span>天气
+                </div>
+                <div class="BlogStatistic weathContent">
+                  <div class="BlogStatisticItem borderRight" v-for="(item, i) in weathArray" v-bind:key="i">
+                    <div class="weathWeek" v-html="item.week"></div>
+                    <!-- <div class="weathDay">11月23日</div> -->
+                    <div class="weathDay">{{ item.date }}</div>
+                    <div class="weathIcon">
+                      <!-- <i :class="`iconfont ${item.dayweatherIcon} AboutMeIcon`" style="font-size:1.8rem"></i> -->
+                      <svg class="icon" aria-hidden="true">
+                        <use :xlink:href="`#${item.dayweatherIcon}`"></use>
+                      </svg>
+                    </div>
+                    <div class="weathChinese" :title="item.dayweather">{{ item.dayweather }}</div>
+                    <div class="temperature">
+                      {{ item.nighttemp }} ~ {{ item.daytemp }}°C
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="BigBlock AboutMeMarginTop" :class="city ? 'weathNo' : ''">
+                <div class="TitleFontLine">联系我</div>
+                <div class="BlogStatistic" style="border-top: none; padding-bottom: 0">
+                  <div class="BlogStatisticItem">
+                    <a href="https://github.com/SunQQQ" target="_blank"><i class="iconfont icon-github AboutMeIcon"
+                        style="color: #948aec"></i></a>
+                  </div>
+                  <div class="BlogStatisticItem my-pointer" @click="infoMessage('13213074006')">
+                    <i class="iconfont AboutMeIcon icon-weixin" style="color: #f46e65"></i>
+                  </div>
+                  <div class="BlogStatisticItem my-pointer" @click="infoMessage('1585437938@qq.com')">
+                    <i class="iconfont icon-youxiang AboutMeIcon" style="color: #49a9ee"></i>
+                  </div>
+                  <div class="BlogStatisticItem">
+                    <a href="https://www.zhihu.com/people/s-q-51-44-23/activities" target="_blank"><i
+                        class="iconfont icon-zhihu AboutMeIcon" style="color: #3dbd7d"></i></a>
+                  </div>
+                  <div class="BlogStatisticItem">
+                    <a href="https://blog.csdn.net/sun_qqq" target="_blank"><i
+                        class="iconfont icon-CN_csdnnet AboutMeIcon" style="color: #f78e3d"></i></a>
+                  </div>
+                </div>
+              </div>
               <div class="GitPart" @mouseenter="setButtonAnimate(true)" @mouseleave="setButtonAnimate(false)">
                 <div class="TopBackBlack"></div>
                 <div class="GitPic">
@@ -148,53 +193,6 @@
                         Repositories
                       </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="BigBlock AboutMeMarginTop weathDev" :class="city ? '' : 'weathNo'">
-                <div class="TitleFontLine weathTitle">
-                  <span class="citySpan">{{ city }}</span>天气
-                </div>
-                <div class="BlogStatistic weathContent">
-                  <div class="BlogStatisticItem borderRight" v-for="(item, i) in weathArray" v-bind:key="i">
-                    <div class="weathWeek" v-html="item.week"></div>
-                    <!-- <div class="weathDay">11月23日</div> -->
-                    <div class="weathDay">{{ item.date }}</div>
-                    <div class="weathIcon">
-                      <!-- <i :class="`iconfont ${item.dayweatherIcon} AboutMeIcon`" style="font-size:1.8rem"></i> -->
-                      <svg class="icon" aria-hidden="true">
-                        <use :xlink:href="`#${item.dayweatherIcon}`"></use>
-                      </svg>
-                    </div>
-                    <div class="weathChinese" :title="item.dayweather">{{ item.dayweather }}</div>
-                    <div class="temperature">
-                      {{ item.nighttemp }} ~ {{ item.daytemp }}°C
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="BigBlock AboutMeMarginTop" :class="city ? 'weathNo' : ''">
-                <div class="TitleFontLine">联系我</div>
-                <div class="BlogStatistic" style="border-top: none; padding-bottom: 0">
-                  <div class="BlogStatisticItem">
-                    <a href="https://github.com/SunQQQ" target="_blank"><i class="iconfont icon-github AboutMeIcon"
-                        style="color: #948aec"></i></a>
-                  </div>
-                  <div class="BlogStatisticItem my-pointer" @click="infoMessage('13213074006')">
-                    <i class="iconfont AboutMeIcon icon-weixin" style="color: #f46e65"></i>
-                  </div>
-                  <div class="BlogStatisticItem my-pointer" @click="infoMessage('1585437938@qq.com')">
-                    <i class="iconfont icon-youxiang AboutMeIcon" style="color: #49a9ee"></i>
-                  </div>
-                  <div class="BlogStatisticItem">
-                    <a href="https://www.zhihu.com/people/s-q-51-44-23/activities" target="_blank"><i
-                        class="iconfont icon-zhihu AboutMeIcon" style="color: #3dbd7d"></i></a>
-                  </div>
-                  <div class="BlogStatisticItem">
-                    <a href="https://blog.csdn.net/sun_qqq" target="_blank"><i
-                        class="iconfont icon-CN_csdnnet AboutMeIcon" style="color: #f78e3d"></i></a>
                   </div>
                 </div>
               </div>
