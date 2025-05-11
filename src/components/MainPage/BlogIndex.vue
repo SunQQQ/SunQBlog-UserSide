@@ -20,9 +20,7 @@
                   <h3 class="ArticleTitleText">{{ item.title }}</h3>
                 </div>
                 <div class="ArticleContent"
-                  v-html="`<span class='author-name'>${item.createName}</span>：${item.summary}`">
-                  {{ item.createName }}：{{ item.summary }}
-                </div>
+                  v-html="`<span class='author-name'>${item.createName}</span>：${item.summary}`"></div>
                 <div class="ArticleFooter">
                   <!--<div class="ArticleFooterItem">发表：{{ item.createTime }}</div>
                   <div class="ArticleFooterItem" @click="UpdateRouter('BlogDetail',item._id)">评论：{{ item.commentNum }}</div>-->
@@ -49,7 +47,7 @@
             <Pagination v-on:PaginationToParent="ValueByPagition" ref="Pagi"></Pagination>
           </div>
           <div class="BlogIndexContentRight blogindex-page" v-bind:style="{ top: stickyTop }">
-            <!-- <div class="Module HotArticleModule">
+            <div class="Module HotArticleModule">
               <transition name="Fade">
                 <img src="../../static/img/HotArticleList.jpg" v-if="DefaultGraph.HotArticlePart">
               </transition>
@@ -76,7 +74,7 @@
                   </div>
                 </div>
               </div>
-            </div> -->
+            </div>
             <div class="Module" style="padding: 0 0 0.5rem" @mouseenter="enter(true)" @mouseleave="enter(false)">
               <div class="TopBack"></div>
               <div class="ZhihuIcon">

@@ -263,9 +263,6 @@ export default {
         },
         Success: function (data) {
           That.commentList = data;
-          data.forEach(function (Item, I) {
-            Item.createTime = That.DateFormat(Item.createTime);
-          });
         },
       });
     },

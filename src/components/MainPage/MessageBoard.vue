@@ -384,15 +384,6 @@ export default {
           size: 8
         },
         Success: function (data) {
-          // 渲染列表
-          data.forEach(function (Item) {
-            Item.createTime = That.DateFormat(Item.createTime);
-            if (Item.child.length > 0) {
-              Item.child.forEach(function (childItem) {
-                childItem.createTime = That.DateFormat(childItem.createTime);
-              });
-            }
-          });
           That.messageList = data;
           if (data.length != 8) {
             That.AticleBottom = true;
