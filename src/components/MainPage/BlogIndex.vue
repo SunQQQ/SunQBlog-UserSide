@@ -47,31 +47,14 @@
             <Pagination v-on:PaginationToParent="ValueByPagition" ref="Pagi"></Pagination>
           </div>
           <div class="BlogIndexContentRight blogindex-page" v-bind:style="{ top: stickyTop }">
-            <div class="Module HotArticleModule">
+            <div class="Module ArticleTagModule">
               <transition name="Fade">
-                <img src="../../static/img/HotArticleList.jpg" v-if="DefaultGraph.HotArticlePart">
+                <img src="../../static/img/Tag.jpg" v-if="DefaultGraph.ArticleTagPart">
               </transition>
-              <div class="TagListHead">热门博文</div>
-              <div class="HotArticle">
-                <div class="HotArticleItem" v-for="(Item,Index) in HotArticleList" v-bind:key="Index">
-                  <div v-if="Index == 0" @click="UpdateRouter('BlogDetail',Item)">
-                    <span style="color:#f44e03;font-size: 15px">No{{Index+1}} </span>{{Item.title}}
-                  </div>
-                  <div v-if="Index == 1" @click="UpdateRouter('BlogDetail',Item)">
-                    <span style="color:#d41800;font-size: 15px">No{{Index+1}} </span>{{Item.title}}
-                  </div>
-                  <div v-if="Index == 2" @click="UpdateRouter('BlogDetail',Item)">
-                    <span style="color:#f37e21;font-size: 15px">No{{Index+1}} </span>{{Item.title}}
-                  </div>
-                  <div v-if="Index == 3" @click="UpdateRouter('BlogDetail',Item)">
-                    <span style="color:#f3212d;font-size: 15px">No{{Index+1}} </span>{{Item.title}}
-                  </div>
-                  <div v-if="Index == 4" @click="UpdateRouter('BlogDetail',Item)">
-                    <span style="color:#212df3;font-size: 15px">No{{Index+1}} </span>{{Item.title}}
-                  </div>
-                  <div v-if="Index > 4" @click="UpdateRouter('BlogDetail',Item)">
-                    <span>No{{Index+1}} </span>{{Item.title}}
-                  </div>
+              <div class="TagListHead">文章分类<span style="color: #aaa;font-size: 0.8rem">（点击筛选呦）</span></div>
+              <div class="TagListTr">
+                <div :class="item.id != Tags.Active ? 'TagListTd' : 'TagListTdActive'" v-for="item in Tags"
+                  :key="item.id" @click="GetArticle(item.id)">{{ item.name }}
                 </div>
               </div>
             </div>
@@ -100,14 +83,31 @@
                 </div>
               </div>
             </div>
-            <div class="Module ArticleTagModule">
+            <div class="Module HotArticleModule">
               <transition name="Fade">
-                <img src="../../static/img/Tag.jpg" v-if="DefaultGraph.ArticleTagPart">
+                <img src="../../static/img/HotArticleList.jpg" v-if="DefaultGraph.HotArticlePart">
               </transition>
-              <div class="TagListHead">文章分类<span style="color: #aaa;font-size: 0.8rem">（点击筛选呦）</span></div>
-              <div class="TagListTr">
-                <div :class="item.id != Tags.Active ? 'TagListTd' : 'TagListTdActive'" v-for="item in Tags"
-                  :key="item.id" @click="GetArticle(item.id)">{{ item.name }}
+              <div class="TagListHead">热门博文</div>
+              <div class="HotArticle">
+                <div class="HotArticleItem" v-for="(Item,Index) in HotArticleList" v-bind:key="Index">
+                  <div v-if="Index == 0" @click="UpdateRouter('BlogDetail',Item)">
+                    <span style="color:#f44e03;font-size: 15px">No{{Index+1}} </span>{{Item.title}}
+                  </div>
+                  <div v-if="Index == 1" @click="UpdateRouter('BlogDetail',Item)">
+                    <span style="color:#d41800;font-size: 15px">No{{Index+1}} </span>{{Item.title}}
+                  </div>
+                  <div v-if="Index == 2" @click="UpdateRouter('BlogDetail',Item)">
+                    <span style="color:#f37e21;font-size: 15px">No{{Index+1}} </span>{{Item.title}}
+                  </div>
+                  <div v-if="Index == 3" @click="UpdateRouter('BlogDetail',Item)">
+                    <span style="color:#f3212d;font-size: 15px">No{{Index+1}} </span>{{Item.title}}
+                  </div>
+                  <div v-if="Index == 4" @click="UpdateRouter('BlogDetail',Item)">
+                    <span style="color:#212df3;font-size: 15px">No{{Index+1}} </span>{{Item.title}}
+                  </div>
+                  <div v-if="Index > 4" @click="UpdateRouter('BlogDetail',Item)">
+                    <span>No{{Index+1}} </span>{{Item.title}}
+                  </div>
                 </div>
               </div>
             </div>
@@ -169,8 +169,6 @@ export default {
       this.GetLeaveMessageNum();
 
       this.GetCommentNum();
-      // //渲染热门博文
-      // this.GetHotArticle();
     },
     // 获取文章列表
     GetArticle: function (tagId) {
@@ -285,10 +283,13 @@ export default {
       }
     },
     //获取热门文章
-    GetHotArticle: function () {
+    GetHotArticle: function (topNum) {
       var That = this;
       this.SQFrontAjax({
-        Url: '/api/HotArticleRead/foreend',
+        Url: '/api/getHotList',
+        UploadData: {
+          topNum: topNum
+        },
         Success: function (data) {
           That.HotArticleList = data;
           That.DefaultGraph.HotArticlePart = false;
@@ -315,6 +316,8 @@ export default {
 
     this.InitArticleTag(this);
     Store.commit("ChangeActive", 0); // 切换Topbar高亮
+
+    that.GetHotArticle(6);
 
     // 超大分辨率下，不再设置margin-top值
     if (window.innerHeight < 1042) {
