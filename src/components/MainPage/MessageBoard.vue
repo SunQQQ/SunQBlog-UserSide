@@ -122,7 +122,7 @@
                   <span class="citySpan">{{ city }}</span>天气
                 </div>
                 <div class="BlogStatistic weathContent">
-                  <div class="BlogStatisticItem borderRight" v-for="(item, i) in weathArray" v-bind:key="i">
+                  <div class="BlogStatisticItem weathPadding borderRight" v-for="(item, i) in weathArray" v-bind:key="i">
                     <div class="weathWeek" v-html="item.week"></div>
                     <!-- <div class="weathDay">11月23日</div> -->
                     <div class="weathDay">{{ item.date }}</div>
@@ -510,7 +510,7 @@ export default {
       // todos: '此处待优化'
       // let sunqBlogWeather = this.getSQCookie("sunqBlogWeather"); // 3小时内不再刷新
       let sunqBlogWeather = ""
-
+          
       if (sunqBlogWeather) {
         this.renderWeathDom(JSON.parse(sunqBlogWeather));
       } else {
@@ -1001,7 +1001,7 @@ export default {
 }
 
 .weathDev {
-  padding: 1rem 0.5rem;
+  padding: 0;
 }
 
 .weathNo {
@@ -1011,12 +1011,14 @@ export default {
 .weathTitle {
   font-size: 1.1rem;
   margin-top: 0;
+  border-bottom: 1px solid  #e9e9e9;
+  padding: 0.8rem 0;
 }
 
 .weathContent {
   border-top: none;
   padding-bottom: 0;
-  padding-top: 1rem;
+  padding-top: 0;
 }
 
 .weathWeek {
@@ -1053,5 +1055,8 @@ export default {
   display: -webkit-box;
   text-overflow: ellipsis;
   margin-bottom: 0.3rem;
+}
+.weathPadding{
+  padding: 1rem 0;
 }
 </style>
