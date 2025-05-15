@@ -246,7 +246,8 @@ export default {
             Item.createTime = Item.createTime.slice(0, 10);
           });
           That.ArticleList = That.ArticleList.concat(data.list);
-          if (data.length != 8) {
+          
+          if (data.list.length != 8) {
             That.AticleBottom = true;
             // 停止分页器的滚动监听
             That.$refs.Pagi.SetUpdate(false);
