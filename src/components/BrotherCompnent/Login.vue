@@ -121,8 +121,7 @@ export default {
               Show: true,
               Title: "登录成功",
             });
-            Store.commit('ChangeLogin', false);
-
+            
             // 登录成功后，填充留言页面的用户名
             Store.commit('ChangeMessageLeaveName', data.userInfo.name);
 
@@ -135,6 +134,11 @@ export default {
               Key: 'userInfo',
               Value: data.userInfo
             });
+
+            // 登录成功后，关闭登录框
+            Store.commit('ChangeLogin', false);
+            // 每次登录成功后，都设置登录状态
+            Store.commit('SetLoginSuccess', Date.now());
 
             That.createLog({
               page: "登录注册页",
