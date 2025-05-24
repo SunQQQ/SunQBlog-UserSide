@@ -30,7 +30,7 @@
                         <div class="TimeLineTdCenter"></div>
                         <div class="TimeLineTdRight">
                             <div class="BubbleRight bubble-right-margin">
-                                <span class="TimeLineTime">{{ Item.content_date }}</span>{{ Item.content }}
+                                <span class="TimeLineTime">{{ Item.contentDate }}</span>{{ Item.content }}
                             </div>
                         </div>
                     </div>
