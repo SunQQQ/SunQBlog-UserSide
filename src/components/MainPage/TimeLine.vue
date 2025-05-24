@@ -37,7 +37,7 @@
                     <div class="TimeLineTr" v-if="Index%2 != 0">
                         <div class="TimeLineTdLeft">
                             <div class="Bubble bubble-margin">
-                                <span class="TimeLineTime">{{ Item.content_date }}</span>{{ Item.content }}
+                                <span class="TimeLineTime">{{ Item.contentDate }}</span>{{ Item.content }}
                             </div>
                         </div>
                         <div class="TimeLineTdCenter"></div>
