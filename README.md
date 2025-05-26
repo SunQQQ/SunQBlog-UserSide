@@ -26,6 +26,8 @@
 ```
 ## Build Setup
 ``` bash
+Node.js需使用v14.21.3
+
 # Project setup
 yarn install
 
