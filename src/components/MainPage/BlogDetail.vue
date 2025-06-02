@@ -1,10 +1,8 @@
 <template>
   <transition name="Fade" mode="out-in">
-    <div>
+    <article>
       <div class="TopBarHeight"></div>
       <div class="ArticleDetailHeader">
-        <!-- <img :src="Article.articleCover" />-->
-        <!-- <div class="HeaderContent" v-if="!Article.articleCover"> -->
         <div class="HeaderContent">
           <span>{{ Article.title }}</span>
           <span>{{ Article.summary }}</span>
@@ -97,7 +95,7 @@
         </div>
       </div>
 
-      <div class="ArticleDetailContent" style="margin-top: 1rem">
+      <section class="ArticleDetailContent" style="margin-top: 1rem">
         <div class="ArticleDetailContentTab" style="padding: 1rem; min-height: unset">
           <div class="ArticleDetailCommentFirstLine">
             <div class="UserHeadIcon">
@@ -128,10 +126,10 @@
             <div class="CommentSubmitButton" @click="CommentSubmit()">评论</div>
           </div>
         </div>
-      </div>
+      </section>
 
       <Emotion ref="EmotionB" @AppendInputValue="AppendMessageText"></Emotion>
-    </div>
+    </article>
   </transition>
 </template>
 

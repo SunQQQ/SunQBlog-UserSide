@@ -1,13 +1,11 @@
 <template>
-  <div>
-    <div class="PcTopBar">
-      <div class="MoveingLight"></div>
+  <header>
+    <div class="PcTopBar" role="banner">
       <div class="MediaIndexContent">
-        <div class="MediaLeft" @click="ChangeRouter('BlogIndex')">
-          <!-- <span>Coding Life</span> -->
-          <span>Coding Life</span>
+        <div class="MediaLeft" aria-label="网站名称" @click="ChangeRouter('BlogIndex')">
+          <span alt="网站名称">Coding Life</span>
         </div>
-        <div class="MediaRight">
+        <nav class="MediaRight">
           <div :class="Active == 6 ? 'MenuItemActive' : 'MenuItem'" @click="openUrl()">后台</div>
           <div :class="Active == 5 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('analytics')">统计</div>
           <div :class="Active == 4 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('AboutMe')">关于</div>
@@ -15,32 +13,26 @@
           <div :class="Active == 2 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('TimeLine')">时间轴</div>
           <div :class="Active == 1 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('MessageBoard')">留言</div>
           <div :class="Active == 0 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('BlogIndex')">博文</div>
-        </div>
+        </nav>
         <div class="avator_icon" @click="switchAccount()" :title=loginUser>
           <img :src=avatarUrl>
         </div>
       </div>
     </div>
     <div class="MobileTopBar">
-      <div class="MobileTopBarLogo" @click="ChangeRouter('BlogIndex')">Coding Life</div>
-      <div class="MenuTopBarIcon" @click="OpenMenu()">
-        <!--
-        <i :class="OpenMobileMenu ? 'iconfont icon-fork IconfontSize' : 'iconfont icon-iconset0194 IconfontSize'"></i>
--->
+      <div class="MobileTopBarLogo" aria-label="网站名称" @click="ChangeRouter('BlogIndex')">Coding Life</div>
+      <div class="MenuTopBarIcon" aria-expanded="false" aria-controls="mobile-menu" @click="OpenMenu()">
         <div class="MobileMenuSwitch">
           <span :class="OpenMobileMenu ? 'MenuButtonFirstGoOpen' : 'MenuButtonFirstGoClose'"></span>
           <span :class="OpenMobileMenu ? 'MenuButtonSecondGoOpen' : 'MenuButtonSecondGoClose'"></span>
           <span :class="OpenMobileMenu ? 'MenuButtonThirdGoOpen' : 'MenuButtonThirdGoClose'"></span>
-          <!--<span :class="OpenMobileMenu ? 'MenuButtonFirstGoOpen' : ''"></span>-->
-          <!--<span :class="OpenMobileMenu ? 'MenuButtonSecondGoOpen' : ''"></span>-->
-          <!--<span :class="OpenMobileMenu ? 'MenuButtonThirdGoOpen' : ''"></span>-->
         </div>
       </div>
     </div>
 
     <div class="MobileTopBarDiv" v-if="OpenMobileMenu"></div>
     <div class="MobileMenuDetail" v-if="OpenMobileMenu" @click="OpenMenu()">
-      <div class="MoblieMenuDetailContent">
+      <nav class="MoblieMenuDetailContent" aria-label="移动端导航">
         <div :class="Active == 0 ? 'MobileMenuDetailItemActive' : 'MobileMenuDetailItem'"
           @click="ChangeRouter('BlogIndex')">博文
         </div>
@@ -61,10 +53,10 @@
         </div>
         <div :class="Active == 6 ? 'MobileMenuDetailItemActive' : 'MobileMenuDetailItem'" @click="openUrl()">开放式后台
         </div>
-      </div>
+      </nav>
       <div class="MoblieMenuDetailShade"></div>
     </div>
-  </div>
+  </header>
 </template>
 
 <script>
@@ -155,17 +147,6 @@ export default {
 
   .MobileTopBarDiv {
     display: none;
-  }
-
-  .MoveingLight {
-    /*position: absolute;
-      left: -1px;
-      top:0;
-      width: 60px;
-      height: 60px;
-      transform: rotate(-45deg);
-      animation: MoveIt 3.5s linear infinite;
-      background: radial-gradient(#fff,hsla(0,0%,100%,.2),hsla(0,0%,100%,0));*/
   }
 
   .avator_icon {

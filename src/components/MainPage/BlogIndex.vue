@@ -4,7 +4,7 @@
       <div class="TopBarHeight"></div>
       <div class="BlogIndexContent">
         <div class="BlogFlex">
-          <div class="BlogIndexContentLeft">
+          <section class="BlogIndexContentLeft">
             <img src="../../static/img/ArticleList.jpg" v-if="DefaultGraph.ArticleListPart"
               class="BlogIndexContentLeftDefaultGraph">
             <div class="ArticleItem" v-for="(item, i) in ArticleList" v-bind:key="i"
@@ -45,9 +45,9 @@
             <div class="NoDataHint" v-if="!ArticleList.length">暂无数据</div>
             <div class="ListBottom" v-if="AticleBottom">你滑到我底线啦</div>
             <Pagination v-on:PaginationToParent="ValueByPagition" ref="Pagi"></Pagination>
-          </div>
-          <div class="BlogIndexContentRight blogindex-page" v-bind:style="{ top: stickyTop }">
-            <div class="Module ArticleTagModule">
+          </section>
+          <aside class="BlogIndexContentRight blogindex-page" v-bind:style="{ top: stickyTop }">
+            <section class="Module ArticleTagModule">
               <transition name="Fade">
                 <img src="../../static/img/Tag.jpg" v-if="DefaultGraph.ArticleTagPart">
               </transition>
@@ -57,8 +57,8 @@
                   :key="item.id" @click="GetArticle(item.id)">{{ item.name }}
                 </div>
               </div>
-            </div>
-            <div class="Module" style="padding: 0 0 0.5rem" @mouseenter="enter(true)" @mouseleave="enter(false)">
+            </section>
+            <section class="Module" style="padding: 0 0 0.5rem" @mouseenter="enter(true)" @mouseleave="enter(false)">
               <div class="TopBack"></div>
               <div class="ZhihuIcon">
                 <img src="../../static/img/ZhihuIcon.jpg">
@@ -82,8 +82,8 @@
                   <div class="BlogStatisticItemText">留言量</div>
                 </div>
               </div>
-            </div>
-            <div class="Module HotArticleModule">
+            </section>
+            <section class="Module HotArticleModule">
               <transition name="Fade">
                 <img src="../../static/img/HotArticleList.jpg" v-if="DefaultGraph.HotArticlePart">
               </transition>
@@ -110,8 +110,8 @@
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
+            </section>
+          </aside>
         </div>
       </div>
       <Heartfelt></Heartfelt>
