@@ -49,7 +49,7 @@ export default new Router({
       name:'BlogIndexCopy',
       component:BlogIndexCopy
     },{
-      path: '/BlogDetail',
+      path: '/BlogDetail/:id',
       name: 'BlogDetail',
       component: BlogDetail
     }, {

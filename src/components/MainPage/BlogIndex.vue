@@ -267,10 +267,8 @@ export default {
       if (articleMessage.id) {
         this.$router.push({
           name: RouterName,
-          query: {
-            id: articleMessage.id,
-            Title: articleMessage.title,
-            from: '首页'
+          params: {
+            id: articleMessage.id
           }
         });
       } else {
