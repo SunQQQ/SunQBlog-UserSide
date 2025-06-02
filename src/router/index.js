@@ -37,7 +37,7 @@ import student from '@/components/ExperimentalField/student';
 Vue.use(Router);
 
 export default new Router({
-  mode: 'hash',
+  mode: 'history',
   scrollBehavior: () => ({ y: 0 }),
   routes: [
     {
