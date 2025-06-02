@@ -1,13 +1,13 @@
 //表情包组件
 <template>
     <transition name="Fade">
-        <div class="EmoticonListCover" v-if="EmotionShow" @click="OpenEmotion(false)">
+        <section class="EmoticonListCover" v-if="EmotionShow" @click="OpenEmotion(false)">
             <div class="EmoticonList">
                 <div class="PicItem" v-for="(item,i) in EmotionList" @click="ClickEmoticon(i)" :key="i">
                     <img :src=" 'https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/' + i + '.gif'">
                 </div>
             </div>
-        </div>
+        </section>
     </transition>
 </template>
 

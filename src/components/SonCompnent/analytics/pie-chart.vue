@@ -1,5 +1,5 @@
 <template>
-    <div class="block padding-bottom-10 block-nopadding">
+    <section class="block padding-bottom-10 block-nopadding">
         <div class="title-part padding-left-right">
             <div class="module-title">数据占比</div>
             <div class="day-switch">
@@ -19,7 +19,7 @@
             <div class="pie-item scal-right" id="pie-chart4"></div>
             <div class="pie-item scal-right" id="pie-chart2"></div>
         </div> -->
-    </div>
+    </section>
 </template>
 
 <script>

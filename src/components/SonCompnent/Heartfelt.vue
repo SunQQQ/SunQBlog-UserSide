@@ -1,8 +1,8 @@
 <template>
-    <div class="Heartfelt">
+    <section class="Heartfelt">
         <p class="HeartfeltContent">{{ content }}</p>
         <p class="HeartfeltWritter" v-if="writer">--{{ writer }}</p>
-    </div>
+    </section>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="block">
+  <section class="block">
     <div class="title-part">
       <div class="module-title">流量趋势</div>
       <div class="day-switch">
@@ -30,7 +30,7 @@
       </div>
     </div>
     <div class="line-chart" id="line-chart"></div>
-  </div>
+  </section>
 </template>
 
 <script>
