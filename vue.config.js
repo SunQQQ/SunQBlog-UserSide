@@ -1,5 +1,5 @@
 module.exports = {
-  baseUrl:'./',
+  baseUrl: process.env.NODE_ENV === 'production' ? '/' : '/',
   outputDir:'user',
   devServer: {
     port: 8082, // 设置本地开发服务器监听端口为 8082
