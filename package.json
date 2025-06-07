@@ -12,6 +12,7 @@
     "compression-webpack-plugin": "1.1.12",
     "core-js": "^2.6.12",
     "crypto-js": "4.1.1",
+    "echarts": "5.2.2",
     "highlight.js": "^9.13.1",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",
