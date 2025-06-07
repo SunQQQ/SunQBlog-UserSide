@@ -50,5 +50,8 @@ module.exports = {
         },
       })
     );
+    externals: {
+      echarts: 'echarts' // 关键配置：将 echarts 从打包中排除
+    }
   }
 };

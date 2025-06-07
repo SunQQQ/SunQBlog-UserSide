@@ -8,10 +8,10 @@ import './static/iconfont/iconfont'
 import store from './store';
 import VueParticles from 'vue-particles'; // 离子动画背景
 
-import * as echarts from 'echarts/core';
-import { LineChart, PieChart, ScatterChart } from 'echarts/charts';
-import { TitleComponent, LegendComponent, TooltipComponent, GridComponent,GeoComponent } from 'echarts/components';
-import { CanvasRenderer } from 'echarts/renderers';
+// import * as echarts from 'echarts/core';
+// import { LineChart, PieChart, ScatterChart } from 'echarts/charts';
+// import { TitleComponent, LegendComponent, TooltipComponent, GridComponent,GeoComponent } from 'echarts/components';
+// import { CanvasRenderer } from 'echarts/renderers';
 
 Vue.use(VueParticles);
 Vue.config.productionTip = false;
@@ -19,12 +19,13 @@ Vue.use(CommonFunction);
 Vue.prototype.bus = new Vue;
 
 // 按需注册组件
-echarts.use([
-  LineChart, PieChart, ScatterChart,
-  TitleComponent, LegendComponent, TooltipComponent, GridComponent,GeoComponent,
-  CanvasRenderer
-]);
-Vue.prototype.$echarts = echarts; // Vue 项目
+// echarts.use([
+//   LineChart, PieChart, ScatterChart,
+//   TitleComponent, LegendComponent, TooltipComponent, GridComponent,GeoComponent,
+//   CanvasRenderer
+// ]);
+// Vue.prototype.$echarts = echarts; // Vue 项目
+Vue.prototype.$echarts = window.echarts; // 关键改动
 
 new Vue({
   render:function (h) {
