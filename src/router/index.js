@@ -11,19 +11,19 @@ import Router from 'vue-router';
 
 // 使用如下函数的形式引入，打包时会分包
 const BlogIndex = () =>
-  import(/* webpackChunkName: "blogPages" */ '@/components/MainPage/BlogIndex');
+  import(/* webpackChunkName: "blogIndex" */ '@/components/MainPage/BlogIndex');
 const BlogDetail = () =>
-  import(/* webpackChunkName: "blogPages" */ '@/components/MainPage/BlogDetail');
+  import(/* webpackChunkName: "blogDetail" */ '@/components/MainPage/BlogDetail');
 const MessageBoard = () =>
   import(/* webpackChunkName: "messageBoard" */ '@/components/MainPage/MessageBoard');
 const analytics = () =>
   import(/* webpackChunkName: "analytics" */ '@/components/MainPage/analytics');
 const FriendUrl = () =>
-  import(/* webpackChunkName:"simpleMenu" */ '@/components/MainPage/FriendUrl');
+  import(/* webpackChunkName:"friendUrl" */ '@/components/MainPage/FriendUrl');
 const TimeLine = () =>
-  import(/* webpackChunkName:"simpleMenu" */ '@/components/MainPage/TimeLine');
+  import(/* webpackChunkName:"timeLine" */ '@/components/MainPage/TimeLine');
 const AboutMe = () =>
-  import(/* webpackChunkName:"simpleMenu" */ '@/components/MainPage/AboutMe');
+  import(/* webpackChunkName:"aboutMe" */ '@/components/MainPage/AboutMe');
 
 import imageToPdf from '@/components/ExperimentalField/imageToPdf';
 import ExperimentalField from '@/components/ExperimentalField/index';
