@@ -14,16 +14,8 @@
 </template>
 
 <script>
-import Store from "../../../store";
 import china from '../../../static/map/china.json'
 import citys from '../../../static/map/citys'
-import Vue from 'vue';
-
-let echarts = require('echarts/lib/echarts');
-require('echarts/lib/chart/map');
-require('echarts/lib/component/title');
-require('echarts/lib/component/legend');
-require('echarts/lib/chart/scatter');
 
 export default {
     name: "map-chart",
@@ -141,7 +133,6 @@ export default {
         },
     },
     mounted: function () {
-        Vue.prototype.$echarts = echarts;
         this.setMap(0, 'init');
     }
 }

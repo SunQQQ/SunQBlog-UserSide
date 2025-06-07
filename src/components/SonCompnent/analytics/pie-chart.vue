@@ -23,16 +23,6 @@
 </template>
 
 <script>
-import Store from "../../../store";
-import Vue from 'vue';
-
-let echarts = require('echarts/lib/echarts');
-require('echarts/lib/chart/pie');
-
-require('echarts/lib/component/tooltip');
-require('echarts/lib/component/title');
-require('echarts/lib/component/legend');
-
 export default {
     name: 'pie-chart',
     data: function () {
