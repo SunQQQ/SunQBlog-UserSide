@@ -12,11 +12,6 @@ import Router from 'vue-router';
 // 使用如下函数的形式引入，打包时会分包
 const BlogIndex = () =>
   import(/* webpackChunkName: "blogPages" */ '@/components/MainPage/BlogIndex');
-
-const BlogIndexCopy = () =>
-  import(/* webpackChunkName: "blogPages" */ '@/components/MainPage/BlogIndex-copy');
-
-
 const BlogDetail = () =>
   import(/* webpackChunkName: "blogPages" */ '@/components/MainPage/BlogDetail');
 const MessageBoard = () =>
@@ -44,10 +39,6 @@ export default new Router({
       path: '/',
       name: 'BlogIndex',
       component: BlogIndex
-    },{
-      path:"/BlogIndexCopy",
-      name:'BlogIndexCopy',
-      component:BlogIndexCopy
     },{
       path: '/BlogDetail/:id',
       name: 'BlogDetail',
