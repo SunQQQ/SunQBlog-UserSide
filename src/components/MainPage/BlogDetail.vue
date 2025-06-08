@@ -233,7 +233,7 @@ export default {
         That.SQFrontAjax({
           Url: "/api/addComment",
           UploadData: {
-            articleId: Number(That.$route.query.id),
+            articleId: Number(That.$route.params.id),
             commentContent: MatchedMessageText,
             comParentId: Number(That.parentCommentId)
           },
@@ -257,7 +257,7 @@ export default {
       this.SQFrontAjax({
         Url: "/api/getCommentList",
         UploadData: {
-          articleId: this.$route.query.id,
+          articleId: this.$route.params.id,
         },
         Success: function (data) {
           That.commentList = data;
