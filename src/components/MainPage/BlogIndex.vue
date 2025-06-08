@@ -5,14 +5,14 @@
       <div class="BlogIndexContent">
         <div class="BlogFlex">
           <section class="BlogIndexContentLeft">
-            <img src="../../static/img/ArticleList.jpg" v-if="DefaultGraph.ArticleListPart"
-              class="BlogIndexContentLeftDefaultGraph">
+            <!-- <img src="../../static/img/ArticleList.jpg" v-if="DefaultGraph.ArticleListPart"
+              class="BlogIndexContentLeftDefaultGraph"> -->
             <div class="ArticleItem" v-for="(item, i) in ArticleList" v-bind:key="i"
               @click="UpdateRouter('BlogDetail', item)">
               <div class="ArticleItemCover">
                 <img
                   :src="item.articleCover ? item.articleCover : require('../../static/img/default_article_cover.jpeg')"
-                  class="ArticleItemCoverImg">
+                  class="ArticleItemCoverImg"> <!-- 使用原生懒加载 -->
               </div>
               <div style="flex: 1">
                 <div class="ArticleTitle">
@@ -89,24 +89,24 @@
               </transition>
               <div class="TagListHead">热门博文</div>
               <div class="HotArticle">
-                <div class="HotArticleItem" v-for="(Item,Index) in HotArticleList" v-bind:key="Index">
-                  <div v-if="Index == 0" @click="UpdateRouter('BlogDetail',Item)">
-                    <span style="color:#f44e03;font-size: 15px">No{{Index+1}} </span>{{Item.title}}
+                <div class="HotArticleItem" v-for="(Item, Index) in HotArticleList" v-bind:key="Index">
+                  <div v-if="Index == 0" @click="UpdateRouter('BlogDetail', Item)">
+                    <span style="color:#f44e03;font-size: 15px">No{{ Index + 1 }} </span>{{ Item.title }}
                   </div>
-                  <div v-if="Index == 1" @click="UpdateRouter('BlogDetail',Item)">
-                    <span style="color:#d41800;font-size: 15px">No{{Index+1}} </span>{{Item.title}}
+                  <div v-if="Index == 1" @click="UpdateRouter('BlogDetail', Item)">
+                    <span style="color:#d41800;font-size: 15px">No{{ Index + 1 }} </span>{{ Item.title }}
                   </div>
-                  <div v-if="Index == 2" @click="UpdateRouter('BlogDetail',Item)">
-                    <span style="color:#f37e21;font-size: 15px">No{{Index+1}} </span>{{Item.title}}
+                  <div v-if="Index == 2" @click="UpdateRouter('BlogDetail', Item)">
+                    <span style="color:#f37e21;font-size: 15px">No{{ Index + 1 }} </span>{{ Item.title }}
                   </div>
-                  <div v-if="Index == 3" @click="UpdateRouter('BlogDetail',Item)">
-                    <span style="color:#f3212d;font-size: 15px">No{{Index+1}} </span>{{Item.title}}
+                  <div v-if="Index == 3" @click="UpdateRouter('BlogDetail', Item)">
+                    <span style="color:#f3212d;font-size: 15px">No{{ Index + 1 }} </span>{{ Item.title }}
                   </div>
-                  <div v-if="Index == 4" @click="UpdateRouter('BlogDetail',Item)">
-                    <span style="color:#212df3;font-size: 15px">No{{Index+1}} </span>{{Item.title}}
+                  <div v-if="Index == 4" @click="UpdateRouter('BlogDetail', Item)">
+                    <span style="color:#212df3;font-size: 15px">No{{ Index + 1 }} </span>{{ Item.title }}
                   </div>
-                  <div v-if="Index > 4" @click="UpdateRouter('BlogDetail',Item)">
-                    <span>No{{Index+1}} </span>{{Item.title}}
+                  <div v-if="Index > 4" @click="UpdateRouter('BlogDetail', Item)">
+                    <span>No{{ Index + 1 }} </span>{{ Item.title }}
                   </div>
                 </div>
               </div>
@@ -246,7 +246,7 @@ export default {
             Item.createTime = Item.createTime.slice(0, 10);
           });
           That.ArticleList = That.ArticleList.concat(data.list);
-          
+
           if (data.list.length != 8) {
             That.AticleBottom = true;
             // 停止分页器的滚动监听
