@@ -145,7 +145,8 @@ export default {
         HotArticlePart: true,
         ArticleTagPart: true
       },
-      stickyTop: 0
+      stickyTop: 0,
+      perPageNum: 8 // 每页文章数量
     }
   },
   methods: {
@@ -178,7 +179,7 @@ export default {
         Url: '/api/getUserBlogList',
         UploadData: {
           start: 0,
-          size: 8,
+          size: That.perPageNum,
           // 0查询全部文章
           tag: (tagId == That.Tags.Active) ? 0 : tagId
         },
@@ -237,8 +238,8 @@ export default {
       this.SQFrontAjax({
         Url: '/api/getUserBlogList',
         UploadData: {
-          start: SelectPage * 8,
-          size: 8,
+          start: SelectPage * That.perPageNum,
+          size: That.perPageNum,
           tag: That.Tags.Active
         },
         Success: function (data) {
@@ -247,7 +248,7 @@ export default {
           });
           That.ArticleList = That.ArticleList.concat(data.list);
 
-          if (data.list.length != 8) {
+          if (data.list.length != That.perPageNum) {
             That.AticleBottom = true;
             // 停止分页器的滚动监听
             That.$refs.Pagi.SetUpdate(false);
