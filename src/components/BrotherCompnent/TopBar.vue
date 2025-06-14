@@ -87,7 +87,7 @@ export default {
     },
 
     openUrl: function () {
-      window.open('https://codinglife.online/admin/#/userManage', '_blank');
+      window.open('https://codinglife.online/admin', '_blank');
 
       this.createLog({
         page: "开放式后台",

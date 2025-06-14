@@ -146,7 +146,8 @@ export default {
         ArticleTagPart: true
       },
       stickyTop: 0,
-      perPageNum: 8 // 每页文章数量
+      perPageNum: 8, // 每页文章数量
+      windowWidth: window.innerWidth
     }
   },
   methods: {
@@ -309,6 +310,17 @@ export default {
     // 监控gitHub模块DOM的鼠标滑入划出事件，鼠标悬停时打开源码按钮动画效果，移出时关闭动画
     enter: function (status) {
       this.buttonAnimate = status;
+    },
+    calculatePageSize() {
+      if (this.windowWidth < 1366) {
+        this.perPageNum = 3 // 移动端和小屏设备
+      } else if (this.windowWidth >= 1366 && this.windowWidth < 1600) {
+        this.perPageNum = 4 // 14寸笔记本
+      } else if (this.windowWidth >= 1600 && this.windowWidth < 1920) {
+        this.perPageNum = 5 // 15.6寸笔记本
+      } else {
+        this.perPageNum = 8 // 大屏幕
+      }
     }
   },
   mounted: function () {
@@ -328,6 +340,10 @@ export default {
 
     Store.commit("changeFooter", false); // 初始化时隐藏footer
   },
+  created: function(){
+    // 根据不同设备，动态设置每页文章数量
+    this.calculatePageSize();
+  }
 }
 </script>
 
