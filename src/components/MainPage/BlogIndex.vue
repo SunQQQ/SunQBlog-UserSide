@@ -46,11 +46,11 @@
             <div class="ListBottom" v-if="AticleBottom">你滑到我底线啦</div>
             <Pagination v-on:PaginationToParent="ValueByPagition" ref="Pagi"></Pagination>
           </section>
-          <aside class="BlogIndexContentRight blogindex-page" v-if="isDeskTop" v-bind:style="{ top: stickyTop }">
+          <aside class="BlogIndexContentRight blogindex-page" v-bind:style="{ top: stickyTop }">
             <section class="Module ArticleTagModule">
-              <transition name="Fade">
+              <!-- <transition name="Fade">
                 <img src="../../static/img/Tag.jpg" v-if="DefaultGraph.ArticleTagPart">
-              </transition>
+              </transition> -->
               <div class="TagListHead">文章分类<span style="color: #aaa;font-size: 0.8rem">（点击筛选呦）</span></div>
               <div class="TagListTr">
                 <div :class="item.id != Tags.Active ? 'TagListTd' : 'TagListTdActive'" v-for="item in Tags"
@@ -58,7 +58,7 @@
                 </div>
               </div>
             </section>
-            <section class="Module" style="padding: 0 0 0.5rem" @mouseenter="enter(true)" @mouseleave="enter(false)">
+            <section v-if="isDeskTop" class="Module" style="padding: 0 0 0.5rem" @mouseenter="enter(true)" @mouseleave="enter(false)">
               <div class="TopBack"></div>
               <div class="ZhihuIcon">
                 <img src="../../static/img/ZhihuIcon.jpg">
@@ -84,9 +84,9 @@
               </div>
             </section>
             <section class="Module HotArticleModule">
-              <transition name="Fade">
+              <!-- <transition name="Fade">
                 <img src="../../static/img/HotArticleList.jpg" v-if="DefaultGraph.HotArticlePart">
-              </transition>
+              </transition> -->
               <div class="TagListHead">热门博文</div>
               <div class="HotArticle">
                 <div class="HotArticleItem" v-for="(Item, Index) in HotArticleList" v-bind:key="Index">
@@ -323,12 +323,12 @@ export default {
     Store.commit("ChangeActive", 0); // 切换Topbar高亮
 
     this.GetArticle(0);
+    that.InitArticleTag(this);
+    that.GetHotArticle(6);
 
     if(this.isDeskTop){
-      that.GetHotArticle(6);
-      that.InitArticleTag(this);
       
-      // //渲染留言个数
+      //渲染留言个数
       this.GetLeaveMessageNum();
       this.GetCommentNum();
     }

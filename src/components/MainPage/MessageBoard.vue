@@ -256,7 +256,6 @@
 import Pagination from "../SonCompnent/Pagination";
 import Emotion from "../SonCompnent/Emotion";
 import Store from "../../store";
-import axios from 'axios';
 import weathJson from '../../static/map/weath.json';
 import weekJson from '../../static/map/week.json';
 export default {
