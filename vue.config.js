@@ -50,5 +50,9 @@ module.exports = {
         },
       })
     );
+  },
+  chainWebpack: config => {
+    // 禁用所有 prefetch
+    config.plugins.delete('prefetch');
   }
 };

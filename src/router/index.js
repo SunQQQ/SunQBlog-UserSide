@@ -13,11 +13,11 @@ import Router from 'vue-router';
 const BlogIndex = () =>
   import(/* webpackChunkName: "simplePage" */ '@/components/MainPage/BlogIndex');
 const BlogDetail = () =>
-  import(/* webpackChunkName: "blogDetail" */ '@/components/MainPage/BlogDetail');
+  import(/* webpackChunkName: "blogDetail", webpackPrefetch: false */ '@/components/MainPage/BlogDetail');
 const MessageBoard = () =>
   import(/* webpackChunkName: "simplePage" */ '@/components/MainPage/MessageBoard');
 const analytics = () =>
-  import(/* webpackChunkName: "analytics" */ '@/components/MainPage/analytics');
+  import(/* webpackChunkName: "analytics", webpackPrefetch: false */ '@/components/MainPage/analytics');
 const FriendUrl = () =>
   import(/* webpackChunkName:"simplePage" */ '@/components/MainPage/FriendUrl');
 const TimeLine = () =>
@@ -25,9 +25,9 @@ const TimeLine = () =>
 const AboutMe = () =>
   import(/* webpackChunkName:"simplePage" */ '@/components/MainPage/AboutMe');
 
-import imageToPdf from '@/components/ExperimentalField/imageToPdf';
-import ExperimentalField from '@/components/ExperimentalField/index';
-import student from '@/components/ExperimentalField/student';
+// import imageToPdf from '@/components/ExperimentalField/imageToPdf';
+// import ExperimentalField from '@/components/ExperimentalField/index';
+// import student from '@/components/ExperimentalField/student';
 
 Vue.use(Router);
 
@@ -63,21 +63,23 @@ export default new Router({
       path: '/analytics',
       name: 'analytics',
       component: analytics
-    }, {
-      path: '/experimentalField',
-      name: 'ExperimentalField',
-      component: ExperimentalField,
-      children: [
-        {
-          path: '/experimentalField/imageToPdf',
-          name: 'imageToPdf',
-          component: imageToPdf
-        }
-      ]
-    }, {
-      path: '/student',
-      name: 'student',
-      component: student
-    }
+    },
+    
+    // {
+    //   path: '/experimentalField',
+    //   name: 'ExperimentalField',
+    //   component: ExperimentalField,
+    //   children: [
+    //     {
+    //       path: '/experimentalField/imageToPdf',
+    //       name: 'imageToPdf',
+    //       component: imageToPdf
+    //     }
+    //   ]
+    // }, {
+    //   path: '/student',
+    //   name: 'student',
+    //   component: student
+    // }
   ]
 });
