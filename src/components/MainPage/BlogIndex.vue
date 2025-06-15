@@ -46,7 +46,7 @@
             <div class="ListBottom" v-if="AticleBottom">你滑到我底线啦</div>
             <Pagination v-on:PaginationToParent="ValueByPagition" ref="Pagi"></Pagination>
           </section>
-          <aside class="BlogIndexContentRight blogindex-page" v-bind:style="{ top: stickyTop }">
+          <aside class="BlogIndexContentRight blogindex-page" v-if="isDeskTop" v-bind:style="{ top: stickyTop }">
             <section class="Module ArticleTagModule">
               <transition name="Fade">
                 <img src="../../static/img/Tag.jpg" v-if="DefaultGraph.ArticleTagPart">
@@ -114,7 +114,7 @@
           </aside>
         </div>
       </div>
-      <Heartfelt></Heartfelt>
+      <Heartfelt v-if="isDeskTop"></Heartfelt>
     </div>
   </transition>
 </template>
@@ -147,7 +147,8 @@ export default {
       },
       stickyTop: 0,
       perPageNum: 8, // 每页文章数量
-      windowWidth: window.innerWidth
+      windowWidth: window.innerWidth,
+      isDeskTop: window.innerWidth > 768 // 是否是桌面端
     }
   },
   methods: {
@@ -164,13 +165,6 @@ export default {
           That.DefaultGraph.ArticleTagPart = false;
         }
       });
-
-      // 获取文章列表
-      this.GetArticle(0);
-      // //渲染留言个数
-      this.GetLeaveMessageNum();
-
-      this.GetCommentNum();
     },
     // 获取文章列表
     GetArticle: function (tagId) {
@@ -326,10 +320,18 @@ export default {
   mounted: function () {
     let that = this;
 
-    this.InitArticleTag(this);
     Store.commit("ChangeActive", 0); // 切换Topbar高亮
 
-    that.GetHotArticle(6);
+    this.GetArticle(0);
+
+    if(this.isDeskTop){
+      that.GetHotArticle(6);
+      that.InitArticleTag(this);
+      
+      // //渲染留言个数
+      this.GetLeaveMessageNum();
+      this.GetCommentNum();
+    }
 
     // 超大分辨率下，不再设置margin-top值
     if (window.innerHeight < 1042) {

@@ -7,7 +7,7 @@
         <Footer></Footer>
         <Tips></Tips>
         <Loading></Loading>
-        <CanvasBac></CanvasBac>
+        <CanvasBac v-if="isDeskTop"></CanvasBac>
         <AirPlane></AirPlane>
         <Login></Login>
         <!-- <spring-festival></spring-festival> -->
@@ -34,7 +34,12 @@
       AirPlane:AirPlane,
       Login:Login,
       // springFestival:springFestival
-    }
+    },
+    data() {
+      return {
+        isDeskTop:  window.innerWidth > 768 // 是否是桌面端
+      }
+    },
   }
 </script>
 
