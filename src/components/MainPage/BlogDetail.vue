@@ -139,8 +139,8 @@ import Marked from "marked";
 import Emotion from "../SonCompnent/Emotion";
 import Store from "../../store";
 import highlight from "highlight.js";
-import "highlight.js/styles/github.css"; // 黑色风格
-// import 'highlight.js/styles/atom-one-dark.css' // 清新风格
+// import "highlight.js/styles/github.css"; // 清新风格
+import 'highlight.js/styles/atom-one-dark.css' // 黑色风格
 
 export default {
   name: "BlogDetail",
@@ -208,8 +208,9 @@ export default {
 
           That.Article.content = Marked(That.Article.content).replace(
             /<pre>/g,
-            "<pre class='language-html'>"
+            "<pre class='hljs language-html'>"
           ); //Markdown格式字符串转html
+          That.Article.content = Marked(That.Article.content);
         },
       });
     },
