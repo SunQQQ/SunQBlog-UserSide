@@ -12,7 +12,7 @@
               <div class="ArticleItemCover">
                 <img
                   :src="item.articleCover ? item.articleCover : require('../../static/img/default_article_cover.jpeg')"
-                  class="ArticleItemCoverImg"> <!-- 使用原生懒加载 -->
+                  class="ArticleItemCoverImg" :alt="item.title"> <!-- 使用原生懒加载 -->
               </div>
               <div style="flex: 1">
                 <div class="ArticleTitle">
