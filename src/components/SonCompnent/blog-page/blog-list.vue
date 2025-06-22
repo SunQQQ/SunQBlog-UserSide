@@ -1,20 +1,19 @@
 <template>
     <div class="BlogIndexContentLeft">
         <img src="../../../static/img/ArticleList.jpg" v-if="DefaultGraph.ArticleListPart"
-            class="BlogIndexContentLeftDefaultGraph">
+            class="BlogIndexContentLeftDefaultGraph"
+            alt="文章列表骨架屏">
         <div class="ArticleItem" v-for="(item, i) in ArticleList" v-bind:key="i"
             @click="UpdateRouter('BlogDetail', item)">
             <div class="ArticleItemCover" v-if="item.ArticleCover">
-                <img :src="item.ArticleCover">
+                <img :src="item.ArticleCover" alt="文章封面">
             </div>
             <div style="flex: 1">
                 <div class="ArticleTitle">
                     <!--<div class="ArticleTag">{{ item.ArticleTag }}</div>-->
                     <h3 class="ArticleTitleText">{{ item.Title }}</h3>
                 </div>
-                <div class="ArticleContent" v-html="item.Summary">
-                    {{ item.Summary }}
-                </div>
+                <div class="ArticleContent" v-html="item.Summary"></div>
                 <div class="ArticleFooter">
                     <!--<div class="ArticleFooterItem">发表：{{ item.CreateDate }}</div>
                   <div class="ArticleFooterItem" @click="UpdateRouter('BlogDetail',item._id)">评论：{{ item.CommentNum }}</div>-->

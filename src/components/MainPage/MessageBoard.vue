@@ -8,7 +8,7 @@
           "> -->
         <div class="WriteMessageFrameFadeIn">
           <div class="WriteMessageFrameLeft">
-            <img src="../../static/img/DefaultHeadIcon.jpg" />
+            <img src="../../static/img/DefaultHeadIcon.jpg" alt="默认头像" />
             <div>欢迎你来</div>
           </div>
           <div style="flex: 1">
@@ -39,7 +39,7 @@
           </div>
         </div>
         <div class="boat">
-          <img src="../../static/img/boat.png" />
+          <img src="../../static/img/boat.png" alt="背景图中小舟"/>
         </div>
       </div>
 
@@ -56,7 +56,7 @@
                 <!-- 父级评论 -->
                 <div class="CommentItem">
                   <div class="CommentItemIcon">
-                    <img :src="getIconAdress(item.avator)" />
+                    <img :src="getIconAdress(item.avator)" alt="用户头像"/>
                   </div>
                   <div class="CommentItemContent">
                     <div>
@@ -83,7 +83,7 @@
                 <div class="CommentItem itemPadding" v-for="(childItem, i) in item.child" v-bind:key="i">
                   <div style="width: 40px;"></div>
                   <div class="CommentItemIcon">
-                    <img :src="getIconAdress(childItem.avator)" />
+                    <img :src="getIconAdress(childItem.avator)" alt="用户头像"/>
                   </div>
                   <div class="CommentItemContent">
                     <div>
@@ -220,7 +220,7 @@
             z-index: 1000;
           ">
           <div class="WriteMessageFrameLeft">
-            <img src="../../static/img/DefaultHeadIcon.jpg" />
+            <img src="../../static/img/DefaultHeadIcon.jpg" alt="默认头像"/>
             <div>回复留言</div>
           </div>
           <div style="flex: 1; position: relative">

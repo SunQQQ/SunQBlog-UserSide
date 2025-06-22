@@ -3,14 +3,14 @@
         <div>
             <div class="TimeFixedBac">
                 <div class="flower">
-                    <img src="../../static/img/flower.png"/>
+                    <img src="../../static/img/flower.png" alt="背景图中花朵" />
                 </div>
             </div>
             <div class="clockDev">
-                <img src="../../static/img/clock.png"/>
+                <img src="../../static/img/clock.png" alt="背景图中时钟" />
             </div>
             <div class="needleDiv">
-                <img src="../../static/img/needle.png"/>
+                <img src="../../static/img/needle.png" alt="背景图中时针" />
             </div>
             
             <div class="FriendUrlBac">

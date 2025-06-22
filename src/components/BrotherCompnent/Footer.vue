@@ -5,7 +5,7 @@
         </div>
         <div class="record">
             <span>
-                <img src="../../static/img/record.png"/>
+                <img src="../../static/img/record.png" alt="公安部图标"/>
             </span>
             <span class="RecordNo">
                 <a href="https://beian.mps.gov.cn/#/query/webSearch">豫公网安备41010302003282号</a>

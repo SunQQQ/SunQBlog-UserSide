@@ -1,9 +1,11 @@
 <template>
     <div class="BlogIndexContentRight blogindex-page" v-bind:style="{ top: stickyTop }">
         <div class="Module HotArticleModule">
-            <transition name="Fade">
-                <img src="../../../static/img/HotArticleList.jpg" v-if="DefaultGraph.HotArticlePart">
-            </transition>
+            <!-- <transition name="Fade">
+                <img src="../../../static/img/HotArticleList.jpg" 
+                    v-if="DefaultGraph.HotArticlePart"
+                    alt="骨架图">
+            </transition> -->
             <div class="TagListHead">热门博文</div>
             <div class="HotArticle">
                 <div class="HotArticleItem" v-for="(Item, Index) in HotArticleList" v-bind:key="Index">
@@ -54,9 +56,9 @@
             </div>
         </div>
         <div class="Module ArticleTagModule">
-            <transition name="Fade">
-                <img src="../../../static/img/Tag.jpg" v-if="DefaultGraph.ArticleTagPart">
-            </transition>
+            <!-- <transition name="Fade">
+                <img src="../../../static/img/Tag.jpg" v-if="DefaultGraph.ArticleTagPart" alt="骨架图">
+            </transition> -->
             <div class="TagListHead">文章分类<span style="color: #aaa;font-size: 0.8rem">（点击筛选呦）</span></div>
             <div class="TagListTr">
                 <div :class="item.TagName != Tags.Active ? 'TagListTd' : 'TagListTdActive'" v-for="item in Tags"

@@ -3,7 +3,7 @@
 */
 <template>
     <div class="springFestival">
-        <img src="../../../static/img/theme/happyNewYear.jpg" :style="{ left: springIconLeft + 'px' }" />
+        <img src="../../../static/img/theme/happyNewYear.jpg" alt="现年快乐图标" :style="{ left: springIconLeft + 'px' }" />
         <div class="leftCouplet">
             <div class="coupletRoller">
                 <div class="rollerBorder"></div>

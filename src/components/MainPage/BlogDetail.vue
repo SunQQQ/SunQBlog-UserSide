@@ -12,11 +12,14 @@
       <div class="ArticleDetailContent">
         <div class="ArticleDetailContentTab">
           <transition name="Fade" mode="out-in">
-            <img src="../../static/img/BlogDetailSkele_PC.jpg" class="BlogDetailSkeletonScreenPC"
+            <img src="../../static/img/BlogDetailSkele_PC.jpg" 
+              alt="留言页骨架屏"
+              class="BlogDetailSkeletonScreenPC"
               v-show="BlogDetailSkeletonScreen" />
           </transition>
 
-          <img src="../../static/img/BlogDetailSkele_Mobile.jpg" class="BlogDetailSkeletonScreenMobile"
+          <img src="../../static/img/BlogDetailSkele_Mobile.jpg" alt="留言页骨架屏"
+            class="BlogDetailSkeletonScreenMobile"
             v-show="BlogDetailSkeletonScreen" />
 
           <!-- <h1>{{ Article.title }}</h1> -->
@@ -39,7 +42,7 @@
               <div v-for="(item, i) in commentList" class="totalItem" v-bind:key="i">
                 <div class="CommentItem" v-bind:key="i" if="commentList.length != 0">
                   <div class="CommentItemIcon">
-                    <img :src="getIconAdress(item.createrAvator)" />
+                    <img :src="getIconAdress(item.createrAvator)" alt="用户头像"/>
                   </div>
                   <div class="CommentItemContent">
                     <div class="createrName">
@@ -66,7 +69,7 @@
                 <div class="CommentItem item-two-level" v-for="(itemTwo, i) in item.child" v-bind:key="i"
                   if="item.child">
                   <div class="CommentItemIcon">
-                    <img :src="getIconAdress(itemTwo.createrAvator)" />
+                    <img :src="getIconAdress(itemTwo.createrAvator)" alt="用户头像"/>
                   </div>
                   <div class="CommentItemContent">
                     <div class="createrName">
@@ -100,7 +103,7 @@
         <div class="ArticleDetailContentTab" style="padding: 1rem; min-height: unset">
           <div class="ArticleDetailCommentFirstLine">
             <div class="UserHeadIcon">
-              <img src="../../static/img/DefaultHeadIcon.jpg" />
+              <img src="../../static/img/DefaultHeadIcon.jpg" alt="用户头像"/>
             </div>
             <!-- <div class="CommentUserInfo">
               <input

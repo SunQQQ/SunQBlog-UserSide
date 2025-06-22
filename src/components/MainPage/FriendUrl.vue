@@ -11,7 +11,7 @@
         <div class="UrlCardTr">
           <div class="UrlCardTd" v-for="(item,i) in FriendsUrlList" v-bind:key="i" @click="UpdateRouter('BlogDetail',item)">
             <div class="lab-cover">
-              <img v-bind:src="item.ArticleCover" v-if="item.ArticleCover">
+              <img v-bind:src="item.ArticleCover" v-if="item.ArticleCover" alt="文章封面">
             </div>
             <div class="UrlIconName">
               <div class="UrlName">{{ item.Title }}</div>

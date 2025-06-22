@@ -4,7 +4,7 @@
         <section class="EmoticonListCover" v-if="EmotionShow" @click="OpenEmotion(false)">
             <div class="EmoticonList">
                 <div class="PicItem" v-for="(item,i) in EmotionList" @click="ClickEmoticon(i)" :key="i">
-                    <img :src=" 'https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/' + i + '.gif'">
+                    <img :src=" 'https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/' + i + '.gif'" alt="表情图标">
                 </div>
             </div>
         </section>

@@ -15,7 +15,7 @@
           <div :class="Active == 0 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('BlogIndex')">博文</div>
         </nav>
         <div class="avator_icon" @click="switchAccount()" :title=loginUser>
-          <img :src=avatarUrl>
+          <img :src=avatorUrl alt="avator">
         </div>
       </div>
     </div>
@@ -67,7 +67,7 @@ export default {
   data: function () {
     return {
       OpenMobileMenu: false, //移动端菜单详情伸开、关闭
-      avatarUrl: this.GetLocalStorage('SunqBlog').userInfo ? this.getIconAdress(this.GetLocalStorage('SunqBlog').userInfo.avator) : require("@/static/img/DefaultHeadIcon.jpg"),
+      avatorUrl: this.GetLocalStorage('SunqBlog').userInfo ? this.getIconAdress(this.GetLocalStorage('SunqBlog').userInfo.avator) : require("@/static/img/DefaultHeadIcon.jpg"),
       loginUser: this.GetLocalStorage('SunqBlog').userInfo ? "当前账号：" + this.GetLocalStorage('SunqBlog').userInfo.name : "未登录"
     }
   },
@@ -118,7 +118,7 @@ export default {
   watch: {
     '$store.state.loginSuccess'() {
       let iconNo = this.GetLocalStorage('SunqBlog').userInfo.avator;
-      this.avatarUrl = this.getIconAdress(iconNo);
+      this.avatorUrl = this.getIconAdress(iconNo);
       this.loginUser = "当前账号：" + this.GetLocalStorage('SunqBlog').userInfo.name;
     }
   },
