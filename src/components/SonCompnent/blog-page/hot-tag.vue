@@ -31,7 +31,7 @@
         <div class="Module" style="padding: 0 0 0.5rem" @mouseenter="enter(true)" @mouseleave="enter(false)">
             <div class="TopBack"></div>
             <div class="ZhihuIcon">
-                <img src="../../../static/img/ZhihuIcon.jpg">
+                <img src="../../../static/img/ZhihuIcon.jpg" alt="favicon">
             </div>
             <div class="TextCenter">
                 孙权的小博客

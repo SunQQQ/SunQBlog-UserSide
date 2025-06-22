@@ -61,7 +61,7 @@
             <section v-if="isDeskTop" class="Module" style="padding: 0 0 0.5rem" @mouseenter="enter(true)" @mouseleave="enter(false)">
               <div class="TopBack"></div>
               <div class="ZhihuIcon">
-                <img src="../../static/img/ZhihuIcon.jpg">
+                <img src="../../static/img/ZhihuIcon.jpg" alt="favicon">
               </div>
               <div class="TextCenter">
                 <b>编程 & 人生</b>

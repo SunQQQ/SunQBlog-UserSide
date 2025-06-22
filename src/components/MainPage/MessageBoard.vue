@@ -165,7 +165,7 @@
               <div class="GitPart" @mouseenter="setButtonAnimate(true)" @mouseleave="setButtonAnimate(false)">
                 <div class="TopBackBlack"></div>
                 <div class="GitPic">
-                  <img src="../../static/img/ZhihuIcon.jpg" />
+                  <img src="../../static/img/ZhihuIcon.jpg" alt="favicon"/>
                 </div>
                 <div class="GitBack">
                   <i class="iconfont TopBackBlackGit icon-github1"></i>
