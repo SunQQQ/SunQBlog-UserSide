@@ -87,7 +87,7 @@
               <!-- <transition name="Fade">
                 <img src="../../static/img/HotArticleList.jpg" v-if="DefaultGraph.HotArticlePart">
               </transition> -->
-              <div class="TagListHead">热门博文</div>
+              <div class="TagListHead">热门文章</div>
               <div class="HotArticle">
                 <div class="HotArticleItem" v-for="(Item, Index) in HotArticleList" v-bind:key="Index">
                   <div v-if="Index == 0" @click="UpdateRouter('BlogDetail', Item)">
