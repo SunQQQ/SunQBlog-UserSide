@@ -8,7 +8,7 @@
             <!-- <img src="../../static/img/ArticleList.jpg" v-if="DefaultGraph.ArticleListPart"
               class="BlogIndexContentLeftDefaultGraph"> -->
             <div class="ArticleItem" v-for="(item, i) in ArticleList" v-bind:key="i"
-              @click="UpdateRouter('BlogDetail', item)">
+              @click="UpdateRouter('blog-detail', item)">
               <div class="ArticleItemCover">
                 <img
                   :src="item.articleCover ? item.articleCover : require('../../static/img/default_article_cover.jpeg')"

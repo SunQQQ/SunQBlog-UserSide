@@ -18,8 +18,8 @@ const MessageBoard = () =>
   import(/* webpackChunkName: "simplePage" */ '@/components/MainPage/MessageBoard');
 const analytics = () =>
   import(/* webpackChunkName: "analytics", webpackPrefetch: false */ '@/components/MainPage/analytics');
-const FriendUrl = () =>
-  import(/* webpackChunkName:"simplePage" */ '@/components/MainPage/FriendUrl');
+// const FriendUrl = () =>
+//   import(/* webpackChunkName:"simplePage" */ '@/components/MainPage/FriendUrl');
 const TimeLine = () =>
   import(/* webpackChunkName:"simplePage" */ '@/components/MainPage/TimeLine');
 const AboutMe = () =>
@@ -37,27 +37,23 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'BlogIndex',
+      name: 'index',
       component: BlogIndex
     },{
-      path: '/BlogDetail/:id',
-      name: 'BlogDetail',
+      path: '/blog-detail/:id',
+      name: 'blog-detail',
       component: BlogDetail
     }, {
-      path: '/MessageBoard',
-      name: 'MessageBoard',
+      path: '/message-board',
+      name: 'message-board',
       component: MessageBoard
     }, {
-      path: '/FriendUrl',
-      name: 'FriendUrl',
-      component: FriendUrl
-    }, {
-      path: '/TimeLine',
-      name: 'TimeLine',
+      path: '/time-line',
+      name: 'time-line',
       component: TimeLine
     }, {
-      path: '/AboutMe',
-      name: 'AboutMe',
+      path: '/about-me',
+      name: 'about-me',
       component: AboutMe
     }, {
       path: '/analytics',
@@ -80,6 +76,10 @@ export default new Router({
     //   path: '/student',
     //   name: 'student',
     //   component: student
+    // }, {
+    //   path: '/friend-url',
+    //   name: 'FriendUrl',
+    //   component: FriendUrl
     // }
   ]
 });

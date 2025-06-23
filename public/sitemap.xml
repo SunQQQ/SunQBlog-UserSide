@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- 首页/博文页 -->
+  <url>
+    <loc>https://codinglife.online/</loc>
+    <lastmod>2025-06-22</lastmod> <!-- 最后修改日期 -->
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+
+  <!-- 博客详情页 -->
+  <url>
+    <loc>https://codinglife.online/blog-detail/31</loc>
+    <lastmod>2025-06-22</lastmod> <!-- 最后修改日期 -->
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <!-- 留言页 -->
+  <url>
+    <loc>https://codinglife.online/message-board</loc>
+    <lastmod>2025-06-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- 时间轴页面 -->
+  <url>
+    <loc>https://codinglife.online/time-line</loc>
+    <lastmod>2025-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <!-- 关于我页面 -->
+  <url>
+    <loc>https://codinglife.online/about-me</loc>
+    <lastmod>2025-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 统计页面 -->
+  <url>
+    <loc>https://codinglife.online/analytics</loc>
+    <lastmod>2025-06-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- 管理后台页面 -->
+  <url>
+    <loc>https://codinglife.online/admin</loc>
+    <lastmod>2025-06-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- JS版贪吃蛇页面 -->
+  <url>
+    <loc>https://codinglife.online/snake</loc>
+    <lastmod>2025-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+</urlset>

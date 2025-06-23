@@ -2,17 +2,17 @@
   <header>
     <div class="PcTopBar" role="banner">
       <div class="MediaIndexContent">
-        <div class="MediaLeft" aria-label="网站名称" @click="ChangeRouter('BlogIndex')">
+        <div class="MediaLeft" aria-label="网站名称" @click="ChangeRouter('index')">
           <span alt="网站名称">Coding Life</span>
         </div>
         <nav class="MediaRight">
           <div :class="Active == 6 ? 'MenuItemActive' : 'MenuItem'" @click="openUrl()">后台</div>
           <div :class="Active == 5 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('analytics')">统计</div>
-          <div :class="Active == 4 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('AboutMe')">关于</div>
+          <div :class="Active == 4 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('about-me')">关于</div>
           <!-- <div :class="Active == 3 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('FriendUrl')">试验田</div> -->
-          <div :class="Active == 2 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('TimeLine')">时间轴</div>
-          <div :class="Active == 1 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('MessageBoard')">留言</div>
-          <div :class="Active == 0 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('BlogIndex')">博文</div>
+          <div :class="Active == 2 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('time-line')">时间轴</div>
+          <div :class="Active == 1 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('message-board')">留言</div>
+          <div :class="Active == 0 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('index')">博文</div>
         </nav>
         <div class="avator_icon" @click="switchAccount()" :title=loginUser>
           <img :src=avatorUrl alt="avator">
@@ -20,7 +20,7 @@
       </div>
     </div>
     <div class="MobileTopBar">
-      <div class="MobileTopBarLogo" aria-label="网站名称" @click="ChangeRouter('BlogIndex')">Coding Life</div>
+      <div class="MobileTopBarLogo" aria-label="网站名称" @click="ChangeRouter('index')">Coding Life</div>
       <div class="MenuTopBarIcon" aria-expanded="false" aria-controls="mobile-menu" @click="OpenMenu()">
         <div class="MobileMenuSwitch">
           <span :class="OpenMobileMenu ? 'MenuButtonFirstGoOpen' : 'MenuButtonFirstGoClose'"></span>
@@ -34,19 +34,19 @@
     <div class="MobileMenuDetail" v-if="OpenMobileMenu" @click="OpenMenu()">
       <nav class="MoblieMenuDetailContent" aria-label="移动端导航">
         <div :class="Active == 0 ? 'MobileMenuDetailItemActive' : 'MobileMenuDetailItem'"
-          @click="ChangeRouter('BlogIndex')">博文
+          @click="ChangeRouter('index')">博文
         </div>
         <div :class="Active == 1 ? 'MobileMenuDetailItemActive' : 'MobileMenuDetailItem'"
-          @click="ChangeRouter('MessageBoard')">留言
+          @click="ChangeRouter('message-board')">留言
         </div>
         <div :class="Active == 2 ? 'MobileMenuDetailItemActive' : 'MobileMenuDetailItem'"
-          @click="ChangeRouter('TimeLine')">时间轴
+          @click="ChangeRouter('time-line')">时间轴
         </div>
         <!-- <div :class="Active == 3 ? 'MobileMenuDetailItemActive' : 'MobileMenuDetailItem'"
              @click="ChangeRouter('FriendUrl')">试验田
         </div> -->
         <div :class="Active == 4 ? 'MobileMenuDetailItemActive' : 'MobileMenuDetailItem'"
-          @click="ChangeRouter('AboutMe')">关于
+          @click="ChangeRouter('about-me')">关于
         </div>
         <div :class="Active == 5 ? 'MobileMenuDetailItemActive' : 'MobileMenuDetailItem'"
           @click="ChangeRouter('analytics')">访问统计
