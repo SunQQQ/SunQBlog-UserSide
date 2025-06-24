@@ -12,14 +12,11 @@
       <div class="ArticleDetailContent">
         <div class="ArticleDetailContentTab">
           <transition name="Fade" mode="out-in">
-            <img src="../../static/img/BlogDetailSkele_PC.jpg" 
-              alt="留言页骨架屏"
-              class="BlogDetailSkeletonScreenPC"
+            <img src="../../static/img/BlogDetailSkele_PC.jpg" alt="留言页骨架屏" class="BlogDetailSkeletonScreenPC"
               v-show="BlogDetailSkeletonScreen" />
           </transition>
 
-          <img src="../../static/img/BlogDetailSkele_Mobile.jpg" alt="留言页骨架屏"
-            class="BlogDetailSkeletonScreenMobile"
+          <img src="../../static/img/BlogDetailSkele_Mobile.jpg" alt="留言页骨架屏" class="BlogDetailSkeletonScreenMobile"
             v-show="BlogDetailSkeletonScreen" />
 
           <!-- <h1>{{ Article.title }}</h1> -->
@@ -42,7 +39,7 @@
               <div v-for="(item, i) in commentList" class="totalItem" v-bind:key="i">
                 <div class="CommentItem" v-bind:key="i" if="commentList.length != 0">
                   <div class="CommentItemIcon">
-                    <img :src="getIconAdress(item.createrAvator)" alt="用户头像"/>
+                    <img :src="getIconAdress(item.createrAvator)" alt="用户头像" />
                   </div>
                   <div class="CommentItemContent">
                     <div class="createrName">
@@ -69,7 +66,7 @@
                 <div class="CommentItem item-two-level" v-for="(itemTwo, i) in item.child" v-bind:key="i"
                   if="item.child">
                   <div class="CommentItemIcon">
-                    <img :src="getIconAdress(itemTwo.createrAvator)" alt="用户头像"/>
+                    <img :src="getIconAdress(itemTwo.createrAvator)" alt="用户头像" />
                   </div>
                   <div class="CommentItemContent">
                     <div class="createrName">
@@ -103,25 +100,14 @@
         <div class="ArticleDetailContentTab" style="padding: 1rem; min-height: unset">
           <div class="ArticleDetailCommentFirstLine">
             <div class="UserHeadIcon">
-              <img src="../../static/img/DefaultHeadIcon.jpg" alt="用户头像"/>
+              <img :src="avator" alt="用户头像" />
             </div>
-            <!-- <div class="CommentUserInfo">
-              <input
-                placeholder="昵称（必填）"
-                v-model="createrName"
-              />
-              <input
-                placeholder="邮箱（可以不填哦）"
-                v-model="ArticleCommentEmail"
-              />
-              <input
-                placeholder="网址（可以不填哦）"
-                v-model="ArticleCommentUrl"
-              />
-            </div> -->
+            <div class="CommentUserInfo">
+              {{ userInfo ? userInfo.name : "游客" }}
+            </div>
           </div>
           <div class="ArticleDetailCommentContent">
-            <textarea v-model="MessageText" ref="MessageText" placeholder="欢迎评论吖，鼓励和板砖我都认真听取哦"></textarea>
+            <textarea v-model="MessageText" ref="MessageText" placeholder="老表，可否留下你的见解！"></textarea>
             <span class="EmotionButton" @click="OpenEmotions()">
               <i class="iconfont icon-face IconfontSize"></i>
             </span>
@@ -160,6 +146,12 @@ export default {
       },
     },
   },
+  created() {
+    this.userInfo = this.GetLocalStorage('SunqBlog').userInfo;
+    if (this.userInfo) {
+      this.avator = this.getIconAdress(this.userInfo.avator);
+    }
+  },
   data() {
     return {
       Article: {},
@@ -171,7 +163,9 @@ export default {
       createTime: "",
       commentList: "",
       BlogDetailSkeletonScreen: true,
-      parentCommentId: 0
+      parentCommentId: 0,
+      userInfo: null,
+      avator: require("../../static/img/DefaultHeadIcon.jpg"),
     };
   },
   methods: {

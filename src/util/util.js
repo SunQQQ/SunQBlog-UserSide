@@ -391,6 +391,12 @@ CommonFunction.install = function (Vue) {
       }
     });
   };
+
+  Vue.prototype.getIconAdress = function (iconNo) {
+    return require("@/static/img/default_headicon_" +
+      (iconNo || 0).toString() +
+      ".jpeg");
+  };
 };
 
 export default CommonFunction;
