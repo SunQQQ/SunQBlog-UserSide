@@ -7,7 +7,7 @@
                 <div :class="userActionDateType == '1' ? 'item active' : 'item'" @click="setUserAction(1)">昨天</div>
                 <div :class="userActionDateType == '2' ? 'item active' : 'item'" @click="setUserAction(2)">前天</div>
             </div>
-            <div class="day-switch total-number give-up">日期：{{ curDay }} &nbsp;&nbsp;条数：{{ totalUserAction }}条</div>
+            <div class="day-switch total-number give-up">日期：{{ curDay }} &nbsp;&nbsp;总计IP：{{ totalIp }}条&nbsp;&nbsp;平均PV：{{ Math.round(totalAction / totalIp).toFixed(0) }}</div>
         </div>
         <div class="list">
             <div class="list-head">
@@ -44,8 +44,9 @@ export default {
             // 用户行为
             userActionDateType: 1,
             userActionData: '',
-            totalUserAction: 0,
-            curDay: ""
+            totalIp: 0,
+            curDay: "",
+            totalAction: 0, // 总计操作
         }
     },
     methods: {
@@ -70,7 +71,7 @@ export default {
                     // // let curCompleteIp = "36.48.127.8"; // 当前访客的IP
                     
                     userActionObject = data;
-                    that.totalUserAction = userActionObject.length;
+                    that.totalIp = userActionObject.length;
                     that.curDay = userActionObject[0] && userActionObject[0].day;
                     
 
@@ -78,6 +79,7 @@ export default {
                     for (let i=0; i < userActionObject.length; i++) {
                         let item = userActionObject[i];
                         item.actions = item.actions.split('+');
+                        that.totalAction += item.actions.length;
                         // // 保护用户隐私，马赛克掉ip最后一组数字
                         // let array = i.split('.'),
                         //     item = userActionObject[i],

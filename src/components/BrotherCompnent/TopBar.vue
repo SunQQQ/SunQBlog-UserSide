@@ -491,8 +491,6 @@ export default {
   font-weight: bolder;
 }
 
-.MediaLeft span {}
-
 .MediaRight {
   flex: 1px;
   width: 60%;
