@@ -18,8 +18,8 @@ const MessageBoard = () =>
   import(/* webpackChunkName: "simplePage" */ '@/components/MainPage/MessageBoard');
 const analytics = () =>
   import(/* webpackChunkName: "analytics", webpackPrefetch: false */ '@/components/MainPage/analytics');
-// const FriendUrl = () =>
-//   import(/* webpackChunkName:"simplePage" */ '@/components/MainPage/FriendUrl');
+const FriendUrl = () =>
+  import(/* webpackChunkName:"simplePage" */ '@/components/MainPage/FriendUrl');
 const TimeLine = () =>
   import(/* webpackChunkName:"simplePage" */ '@/components/MainPage/TimeLine');
 const AboutMe = () =>
@@ -59,7 +59,11 @@ export default new Router({
       path: '/analytics',
       name: 'analytics',
       component: analytics
-    },
+    }, {
+      path: '/friend-url',
+      name: 'friend-url',
+      component: FriendUrl
+    }
     
     // {
     //   path: '/experimentalField',
@@ -76,10 +80,6 @@ export default new Router({
     //   path: '/student',
     //   name: 'student',
     //   component: student
-    // }, {
-    //   path: '/friend-url',
-    //   name: 'FriendUrl',
-    //   component: FriendUrl
     // }
   ]
 });

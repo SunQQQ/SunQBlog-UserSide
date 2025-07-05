@@ -1,28 +1,71 @@
 <template>
-  <transition name="fade" mode="out-in">
-    <div class="friend-content">
-      <div class="FriendUrlBac">
-        <div class="FriendUrlTitle">
-          <div class="FriendUrlTitleText">我的试验田</div>
-          <div class="CreateFriendUrlButton">你只管努力，收获的季节终会到来</div>
-        </div>
-      </div>
-      <div class="UrlCardList FriendUrlCard">
-        <div class="UrlCardTr">
-          <div class="UrlCardTd" v-for="(item,i) in FriendsUrlList" v-bind:key="i" @click="UpdateRouter('BlogDetail',item)">
-            <div class="lab-cover">
-              <img v-bind:src="item.ArticleCover" v-if="item.ArticleCover" alt="文章封面">
+    <transition name="fade" mode="out-in">
+        <div>
+            <div class="FriendUrlBac">
+                <div class="FriendUrlTitle">
+                    <div class="FriendUrlTitleText">前端朋友圈</div>
+                    <div class="CreateFriendUrlButton" @click="OpenPopup">我也加入</div>
+                </div>
             </div>
-            <div class="UrlIconName">
-              <div class="UrlName">{{ item.Title }}</div>
+            <div class="UrlCardList FriendUrlCard">
+                <div class="UrlCardTr">
+                    <transition name="Fade">
+                        <img src="../../static/img/FriendUrlPlaceholder.png" class="FriendUrlPlaceholderPC" v-if="FriendUrlPlaceholder">
+                    </transition>
+                    <transition name="Fade">
+                        <img src="../../static/img/ArticleList.jpg" class="FriendUrlPlaceholderMobile" v-if="FriendUrlPlaceholder">
+                    </transition>
+                    <div class="UrlCardTd" v-for="item in FriendsUrlList" @click="OpenFriendUrl(item.FriendUrlAdress)">
+                        <div class="UrlIconName">
+                            <img v-bind:src="item.FriendUrlIcoUrl" v-if="item.FriendUrlIcoUrl">
+                            <img src="../../static/img/DefaultHeadIcon.jpg" v-if="!item.FriendUrlIcoUrl">
+
+                            <div class="UrlName">{{ item.FriendUrlNickName }}</div>
+                        </div>
+                        <div class="UrlSummary">{{ item.FriendUrlDescript }}</div>
+                    </div>
+                </div>
+                <div class="ListBottom" v-if="AticleBottom">你滑到我底线啦</div>
+                <Pagination v-on:PaginationToParent="ValueByPagition" ref="Pagi"></Pagination>
             </div>
-            <div class="UrlSummary">{{ item.Summary }}</div>
-          </div>
+            <div class="PopupWindow" v-show="Wrapper">
+                <div class="FriendUrlWrapper" @click="ClosePopup"></div>
+                <div :class="FadeAnimate ? 'FriendUrlCreateWindowFadeIn' : 'FriendUrlCreateWindowFadeOut'">
+                    <div class="FriendUrlCreateWindowHeader">
+                        加入朋友圈<span @click="ClosePopup"><i class="iconfont icon-fork IconfontSize"></i></span>
+                    </div>
+                    <div class="FriendUrlCreateWindowItem">
+                        <div class="FriendUrlCreateWindowItemLeft">姓名/昵称：</div>
+                        <div class="FriendUrlCreateWindowItemRight">
+                            <input v-model="FriendUrlNickName"/>
+                        </div>
+                    </div>
+                    <div class="FriendUrlCreateWindowItem">
+                        <div class="FriendUrlCreateWindowItemLeft">博客地址：</div>
+                        <div class="FriendUrlCreateWindowItemRight">
+                            <input v-model="FriendUrlAdress"/>
+                        </div>
+                    </div>
+                    <div class="FriendUrlCreateWindowItem">
+                        <div class="FriendUrlCreateWindowItemLeft">图标地址：</div>
+                        <div class="FriendUrlCreateWindowItemRight">
+                            <input v-model="FriendUrlIcoUrl" placeholder="可以不填哦"/>
+                        </div>
+                    </div>
+                    <div class="FriendUrlCreateWindowItem">
+                        <div class="FriendUrlCreateWindowItemLeft">个人描述：</div>
+                        <div class="FriendUrlCreateWindowItemRight">
+                            <input v-model="FriendUrlDescript"/>
+                        </div>
+                    </div>
+                    <div class="FriendUrlCreateWindowFooter">
+                        <div class="FriendUrlSubmitButton" @click="FriendUrlSubmit">提交</div>
+                        <div class="FriendUrlSubmitButton FriendUrlCancelButton" @click="ClosePopup">取消</div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="ListBottom" v-if="AticleBottom">你滑到我底线啦</div>
-      </div>
-    </div>
-  </transition>
+    </transition>
 </template>
 
 <script>
@@ -31,88 +74,131 @@
 
   export default {
     name: "FriendUrl",
-    components: {
-      Pagination: Pagination
+    components:{
+      Pagination:Pagination
     },
-    data: function () {
-      return {
-        Wrapper: false,
-        FriendUrlNickName: '',
-        FriendUrlAdress: '',
-        FriendUrlDescript: '',
-        FriendsUrlList: '',
-        FriendUrlIcoUrl: '',
+    data:function(){
+      return{
+        Wrapper:false,
+        FriendUrlNickName:'',
+        FriendUrlAdress:'',
+        FriendUrlDescript:'',
+        FriendsUrlList:'',
+        FriendUrlIcoUrl:'',
         // 弹框显隐动画
-        FadeAnimate: false,
+        FadeAnimate:false,
 
         // 文章底线
-        AticleBottom: false,
+        AticleBottom:false,
 
-        FriendUrlPlaceholder: true
+       FriendUrlPlaceholder:true
       }
     },
-    methods: {
+    methods:{
+      // 关闭弹框
+      ClosePopup:function () {
+        var That = this;
+        this.FadeAnimate = false;
+        setTimeout(function () {
+          That.Wrapper = false;
+        },200)
+      },
+      // 弹出弹框
+      OpenPopup:function () {
+        this.Wrapper = true;
+        this.FadeAnimate = true;
+      },
+      // 提交友链
+      FriendUrlSubmit:function () {
+        var That = this;
+        if(this.FriendUrlNickName && this.FriendUrlAdress && this.FriendUrlDescript){
+          this.SQFrontAjax({
+            Url:'/api/FriendUrlCreate/foreend',
+            UploadData:{
+              FriendUrlNickName: this.FriendUrlNickName,
+              FriendUrlAdress: this.FriendUrlAdress,
+              FriendUrlDescript:this.FriendUrlDescript,
+              FriendUrlIcoUrl:this.FriendUrlIcoUrl
+            },
+            Success:function () {
+              Store.commit('ChangeTip',{
+                Show: true,
+                Title: '提交成功'
+              });
+              That.ClosePopup();
+              That.GetFriendUrlList();
+            }
+          });
+        }else {
+          Store.commit('ChangeTip',{
+            Show: true,
+            Title: '请完善网站信息哦'
+          });
+        }
+      },
+      OpenFriendUrl:function(Url){
+        window.open(Url);
+      },
       //初始化友链列表
-      GetFriendUrlList: function () {
+      GetFriendUrlList:function () {
         var That = this,
           mvpUrl = [],//记录有标记的数据
           newArray;
 
         this.SQFrontAjax({
-          Url: '/api/ArticleRead/foreend',
-          UploadData: {
+          Url:'/api/FriendUrlRead/foreend',
+          UploadData:{
             PagnationData: {
               Skip: 0,
-              Limit: 8
-            },
-            ArticleTag: '试验田',
-            orderType:{  // 以优先级排序，需要传入此字段及值
-              order:1
+              Limit: 16
             }
           },
-          Success: function (data) {
-            That.FriendsUrlList = data;
+          Success:function (data) {
+            for(let i=0;i<data.length;i++){
+              if(data[i].order){
+                mvpUrl[data[i].order] = data[i];//根据数据order字段组成一个数组
+                data.splice(i,1);
+              }
+            }
+
+            newArray = mvpUrl.concat(data);    //得到一个将有标记的值提前了的数组
+
+           That.FriendUrlPlaceholder = false;
+           That.FriendsUrlList = newArray;
           }
         });
       },
-      // 切换路由
-      UpdateRouter: function (RouterName, articleMessage) {
-        if (articleMessage._id) {
-          this.$router.push({
-            name: RouterName,
-            query: {
-              _id:articleMessage._id,
-              Title:articleMessage.Title,
-              from:'试验田'
+      ValueByPagition:function (SelectPage) {
+        var That = this;
+        this.SQFrontAjax({
+          Url: '/api/FriendUrlRead/foreend',
+          UploadData: {
+            PagnationData: {
+              Skip:SelectPage * 16,
+              Limit:16
             }
-          });
-        } else {
-          this.bus.$emit('TopBar', {
-            Active: 1,
-            MobileMenuActive: 1
-          });
-          this.$router.push({
-            name: RouterName
-          });
-        }
-      },
+          },
+          Success: function (data) {
+            That.FriendsUrlList = That.FriendsUrlList.concat(data);
+            if(data.length != 16){
+              That.AticleBottom = true;
+              // 停止分页器的滚动监听
+              That.$refs.Pagi.SetUpdate(false);
+            }else {
+              That.$refs.Pagi.SetUpdate(true);
+            }
+          }
+        });
+      }
     },
-    mounted: function () {
-      this.GetFriendUrlList();
+    mounted:function(){
+      // this.GetFriendUrlList();
       // 切换Topbar高亮
       Store.commit("ChangeActive", 3);
-      Store.commit("changeFooter",true); // 展示footer
-
-      // 创建日志
-      this.createLog({
-        moduleType:'menu',
-        operateType:'选择菜单',
-        operateContent:'试验田'
-      });
     },
   }
 </script>
 
 <style scoped lang="less">
-  @import '../../static/css/FriendUrl';
+    @import '../../static/css/FriendUrl';
 </style>

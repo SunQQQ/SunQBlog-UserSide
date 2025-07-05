@@ -8,8 +8,8 @@
         <nav class="MediaRight">
           <div :class="Active == 6 ? 'MenuItemActive' : 'MenuItem'" @click="openUrl()">后台</div>
           <div :class="Active == 5 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('analytics')">统计</div>
+          <div :class="Active == 3 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('friend-url')">朋友圈</div>
           <div :class="Active == 4 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('about-me')">关于</div>
-          <!-- <div :class="Active == 3 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('FriendUrl')">试验田</div> -->
           <div :class="Active == 2 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('time-line')">时间轴</div>
           <div :class="Active == 1 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('message-board')">留言</div>
           <div :class="Active == 0 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('index')">博文</div>
@@ -42,14 +42,17 @@
         <div :class="Active == 2 ? 'MobileMenuDetailItemActive' : 'MobileMenuDetailItem'"
           @click="ChangeRouter('time-line')">时间轴
         </div>
-        <!-- <div :class="Active == 3 ? 'MobileMenuDetailItemActive' : 'MobileMenuDetailItem'"
+        <div :class="Active == 3 ? 'MobileMenuDetailItemActive' : 'MobileMenuDetailItem'"
              @click="ChangeRouter('FriendUrl')">试验田
-        </div> -->
+        </div>
         <div :class="Active == 4 ? 'MobileMenuDetailItemActive' : 'MobileMenuDetailItem'"
           @click="ChangeRouter('about-me')">关于
         </div>
+        <div :class="Active == 4 ? 'MobileMenuDetailItemActive' : 'MobileMenuDetailItem'"
+          @click="ChangeRouter('friend-url')">朋友圈
+        </div>
         <div :class="Active == 5 ? 'MobileMenuDetailItemActive' : 'MobileMenuDetailItem'"
-          @click="ChangeRouter('analytics')">访问统计
+          @click="ChangeRouter('analytics')">统计
         </div>
         <div :class="Active == 6 ? 'MobileMenuDetailItemActive' : 'MobileMenuDetailItem'" @click="openUrl()">开放式后台
         </div>
