@@ -88,10 +88,8 @@ export default {
       siteLogo: '',
       // 弹框显隐动画
       FadeAnimate: false,
-
       // 文章底线
       AticleBottom: false,
-
       FriendUrlPlaceholder: true,
       pageSize: 8, // 每页显示的条数
       curPage: 0 // 当前页码
@@ -152,7 +150,6 @@ export default {
     getSiteList: function (start) {
       var That = this;
       That.curPage = start;
-
       this.SQFrontAjax({
         Url: '/api/getSiteList',
         UploadData: {
@@ -176,8 +173,7 @@ export default {
   },
   mounted: function () {
     this.getSiteList(0);
-    // 切换Topbar高亮
-    Store.commit("ChangeActive", 3);
+    Store.commit("ChangeActive", 3);    // 切换Topbar高亮
   },
 }
 </script>

@@ -1,9 +1,14 @@
 module.exports = {
   baseUrl: process.env.NODE_ENV === 'production' ? '/' : '/',
-  outputDir:'user',
+  outputDir: 'user',
   devServer: {
     port: 8082, // 设置本地开发服务器监听端口为 8082
-    // 设置代理
+
+    hot: true, // 启用热更新
+    overlay: false, // 关闭全屏错误覆盖
+    clientLogLevel: 'warn', // 减少控制台日志
+    stats: 'minimal', // 简化终端输出
+
     proxy: {
       '/api': {
         target: 'http://localhost:8080/', // 开发环境下使用
@@ -25,34 +30,40 @@ module.exports = {
   //     .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin);
   // },
   productionSourceMap: true, // 关闭map文件的生成，map文件保存映射保证在程序报错时能找到资源文件
-  configureWebpack:config=>{
-    // GZip压缩
-    const CompressionPlugin = require('compression-webpack-plugin');
-    // build时关闭console、debugger
-    const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-    config.plugins.push(
-      new CompressionPlugin({
-        algorithm:'gzip',
-        test:/\.(js|css|woff|woff2|svg)$/,  // 要压缩的文件
-        threshold:10240, // 压缩超过10k的数据
-        deleteOriginalAssets:false, // 不删除压缩前的文件，如果浏览器不支持Gzip，则会加载源文件
-        minRatio:0.8 // 压缩比大于0.8的文件将不会被压缩
-      })
-    );
+  configureWebpack: config => {
+    if (process.env.NODE_ENV === 'production') {
+      // GZip压缩
+      const CompressionPlugin = require('compression-webpack-plugin');
+      // build时关闭console、debugger
+      const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-    config.plugins.push(
-      new UglifyJsPlugin({
-        uglifyOptions: {
-          compress: {
-            // drop_debugger: true,//关闭debug
-            // drop_console: true,//关闭console
-          }
-        },
-      })
-    );
+      config.plugins.push(
+        new CompressionPlugin({
+          algorithm: 'gzip',
+          test: /\.(js|css|woff|woff2|svg)$/,  // 要压缩的文件
+          threshold: 10240, // 压缩超过10k的数据
+          deleteOriginalAssets: false, // 不删除压缩前的文件，如果浏览器不支持Gzip，则会加载源文件
+          minRatio: 0.8 // 压缩比大于0.8的文件将不会被压缩
+        })
+      );
+
+      config.plugins.push(
+        new UglifyJsPlugin({
+          uglifyOptions: {
+            compress: {
+              // drop_debugger: true,//关闭debug
+              // drop_console: true,//关闭console
+            }
+          },
+        })
+      );
+    }else{
+      config.devtool = 'cheap-module-eval-source-map'; // 开发环境使用更快的sourcemap
+      config.cache = { type: 'filesystem' }; // 启用持久化缓存
+    }
   },
   chainWebpack: config => {
-    // 禁用所有 prefetch
+    // 禁用所有prefetch
     config.plugins.delete('prefetch');
   }
 };
