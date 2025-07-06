@@ -3,7 +3,7 @@
     <div>
       <div class="FriendUrlBac">
         <div class="FriendUrlTitle">
-          <div class="FriendUrlTitleText">前端朋友圈</div>
+          <div class="FriendUrlTitleText">开源朋友圈</div>
           <div class="CreateFriendUrlButton" @click="OpenPopup">我也加入</div>
         </div>
       </div>
@@ -33,7 +33,7 @@
         <div class="FriendUrlWrapper" @click="ClosePopup"></div>
         <div :class="FadeAnimate ? 'FriendUrlCreateWindowFadeIn' : 'FriendUrlCreateWindowFadeOut'">
           <div class="FriendUrlCreateWindowHeader">
-            加入朋友圈<span @click="ClosePopup"><i class="iconfont icon-fork IconfontSize"></i></span>
+            网站信息<span @click="ClosePopup"><i class="iconfont icon-fork IconfontSize"></i></span>
           </div>
           <div class="FriendUrlCreateWindowItem">
             <div class="FriendUrlCreateWindowItemLeft">姓名/昵称：</div>
@@ -60,8 +60,8 @@
             </div>
           </div>
           <div class="FriendUrlCreateWindowFooter">
-            <div class="FriendUrlSubmitButton" @click="FriendUrlSubmit">提交</div>
-            <div class="FriendUrlSubmitButton FriendUrlCancelButton" @click="ClosePopup">取消</div>
+            <div class="siteSubmitButton" @click="siteSubmit">提交</div>
+            <div class="siteSubmitButton FriendUrlCancelButton" @click="ClosePopup">取消</div>
           </div>
         </div>
       </div>
@@ -94,6 +94,7 @@ export default {
 
       FriendUrlPlaceholder: true,
       pageSize: 8, // 每页显示的条数
+      curPage: 0 // 当前页码
     }
   },
   methods: {
@@ -111,11 +112,11 @@ export default {
       this.FadeAnimate = true;
     },
     // 提交友链
-    FriendUrlSubmit: function () {
+    siteSubmit: function () {
       var That = this;
-      if (this.siteName && this.siteUrl && this.siteDesc) {
+      if (this.siteName && this.siteUrl && this.siteDesc && this.siteLogo) {
         this.SQFrontAjax({
-          Url: '/api/FriendUrlCreate/foreend',
+          Url: '/api/addSite',
           UploadData: {
             siteName: this.siteName,
             siteUrl: this.siteUrl,
@@ -128,13 +129,19 @@ export default {
               Title: '提交成功'
             });
             That.ClosePopup();
-            That.getSiteList();
+
+            // 以下是刷新列表
+            That.getSiteList(0);
+            // 重置分页器（假设支持 reset 方法）
+            if (That.$refs.Pagi && That.$refs.Pagi.reset) {
+              That.$refs.Pagi.reset();
+            }
           }
         });
       } else {
         Store.commit('ChangeTip', {
           Show: true,
-          Title: '请完善网站信息哦'
+          Title: '请完善网站信息'
         });
       }
     },
@@ -144,6 +151,7 @@ export default {
     //初始化友链列表
     getSiteList: function (start) {
       var That = this;
+      That.curPage = start;
 
       this.SQFrontAjax({
         Url: '/api/getSiteList',
@@ -153,16 +161,11 @@ export default {
         },
         Success: function (data) {
           That.FriendUrlPlaceholder = false;
-          That.FriendsUrlList = That.FriendsUrlList.concat(data);
-          if( data.length != That.pageSize) {
-            // 停止分页器的滚动监听
-            That.$refs.Pagi.SetUpdate(false);
-            Store.commit("changeFooter", true);
-          } else {
-            // 停止分页器的滚动监听
-            That.$refs.Pagi.SetUpdate(true);
-            Store.commit("changeFooter", false);
-          }
+          That.FriendsUrlList = start === 0 ? data : That.FriendsUrlList.concat(data);
+
+          That.$refs.Pagi.SetUpdate(data.length === That.pageSize); // 如果数据满一页，允许继续加载
+          That.AticleBottom = data.length < That.pageSize;
+          Store.commit("changeFooter", data.length < That.pageSize);
         }
       });
     },
