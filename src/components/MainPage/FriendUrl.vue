@@ -33,28 +33,28 @@
         <div class="FriendUrlWrapper" @click="ClosePopup"></div>
         <div :class="FadeAnimate ? 'FriendUrlCreateWindowFadeIn' : 'FriendUrlCreateWindowFadeOut'">
           <div class="FriendUrlCreateWindowHeader">
-            网站信息<span @click="ClosePopup"><i class="iconfont icon-fork IconfontSize"></i></span>
+            站点信息<span @click="ClosePopup"><i class="iconfont icon-fork IconfontSize"></i></span>
           </div>
           <div class="FriendUrlCreateWindowItem">
-            <div class="FriendUrlCreateWindowItemLeft">姓名/昵称：</div>
+            <div class="FriendUrlCreateWindowItemLeft">站点名称：</div>
             <div class="FriendUrlCreateWindowItemRight">
               <input v-model="siteName" />
             </div>
           </div>
           <div class="FriendUrlCreateWindowItem">
-            <div class="FriendUrlCreateWindowItemLeft">博客地址：</div>
+            <div class="FriendUrlCreateWindowItemLeft">站点地址：</div>
             <div class="FriendUrlCreateWindowItemRight">
               <input v-model="siteUrl" />
             </div>
           </div>
           <div class="FriendUrlCreateWindowItem">
-            <div class="FriendUrlCreateWindowItemLeft">图标地址：</div>
+            <div class="FriendUrlCreateWindowItemLeft">logo地址：</div>
             <div class="FriendUrlCreateWindowItemRight">
-              <input v-model="siteLogo" placeholder="可以不填哦" />
+              <input v-model="siteLogo" placeholder="" />
             </div>
           </div>
           <div class="FriendUrlCreateWindowItem">
-            <div class="FriendUrlCreateWindowItemLeft">个人描述：</div>
+            <div class="FriendUrlCreateWindowItemLeft">站点描述：</div>
             <div class="FriendUrlCreateWindowItemRight">
               <input v-model="siteDesc" />
             </div>
