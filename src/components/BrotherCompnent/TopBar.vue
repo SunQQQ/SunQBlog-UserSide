@@ -6,7 +6,7 @@
           <span alt="网站名称">Coding Life</span>
         </div>
         <nav class="MediaRight">
-          <div :class="Active == 6 ? 'MenuItemActive' : 'MenuItem'" @click="openUrl()">后台</div>
+          <div :class="Active == 6 ? 'MenuItemActive' : 'MenuItem'" @click="openUrl()">开放式后台</div>
           <div :class="Active == 5 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('analytics')">统计</div>
           <div :class="Active == 3 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('friend-url')">朋友圈</div>
           <div :class="Active == 4 ? 'MenuItemActive' : 'MenuItem'" @click="ChangeRouter('about-me')">关于</div>
