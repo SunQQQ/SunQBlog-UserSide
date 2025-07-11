@@ -147,7 +147,7 @@ export default {
       },
       stickyTop: 0,
       perPageNum: 8, // 每页文章数量
-      windowWidth: window.innerWidth,
+      windowWidth: window.innerWidth + 8, // 浏览器宽度，+8是为了兼容浏览器滚动条的宽度
       isDeskTop: window.innerWidth > 768 // 是否是桌面端
     }
   },
