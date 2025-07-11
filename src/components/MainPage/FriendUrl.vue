@@ -91,7 +91,7 @@ export default {
       // 文章底线
       AticleBottom: false,
       FriendUrlPlaceholder: true,
-      pageSize: 8, // 每页显示的条数
+      pageSize: 24, // 每页显示的条数
       curPage: 0 // 当前页码
     }
   },
