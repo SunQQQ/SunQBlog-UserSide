@@ -42,13 +42,10 @@
         <div :class="Active == 2 ? 'MobileMenuDetailItemActive' : 'MobileMenuDetailItem'"
           @click="ChangeRouter('time-line')">时间轴
         </div>
-        <div :class="Active == 3 ? 'MobileMenuDetailItemActive' : 'MobileMenuDetailItem'"
-             @click="ChangeRouter('FriendUrl')">试验田
-        </div>
         <div :class="Active == 4 ? 'MobileMenuDetailItemActive' : 'MobileMenuDetailItem'"
           @click="ChangeRouter('about-me')">关于
         </div>
-        <div :class="Active == 4 ? 'MobileMenuDetailItemActive' : 'MobileMenuDetailItem'"
+        <div :class="Active == 3 ? 'MobileMenuDetailItemActive' : 'MobileMenuDetailItem'"
           @click="ChangeRouter('friend-url')">朋友圈
         </div>
         <div :class="Active == 5 ? 'MobileMenuDetailItemActive' : 'MobileMenuDetailItem'"
