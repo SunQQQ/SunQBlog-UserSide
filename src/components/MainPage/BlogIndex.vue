@@ -1,6 +1,7 @@
 <template>
   <transition name="Fade" mode="out-in">
-    <div>
+    <main>
+      <h1 class="mainTitle">CESHIS</h1>
       <div class="TopBarHeight"></div>
       <div class="BlogIndexContent">
         <div class="BlogFlex">
@@ -115,7 +116,7 @@
         </div>
       </div>
       <Heartfelt v-if="isDeskTop"></Heartfelt>
-    </div>
+    </main>
   </transition>
 </template>
 

@@ -1,9 +1,7 @@
 <template>
     <div class="my-scrollbar">
         <TopBar></TopBar>
-        <main role="main">
-          <router-view></router-view>
-        </main>
+        <router-view></router-view>
         <Footer></Footer>
         <Tips></Tips>
         <Loading></Loading>
