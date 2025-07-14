@@ -1,7 +1,7 @@
 <template>
   <transition name="Fade" mode="out-in">
     <main>
-      <h1 class="mainTitle">CESHIS</h1>
+      <h1 class="mainTitle">开发者共创的博客平台</h1>
       <div class="TopBarHeight"></div>
       <div class="BlogIndexContent">
         <div class="BlogFlex">

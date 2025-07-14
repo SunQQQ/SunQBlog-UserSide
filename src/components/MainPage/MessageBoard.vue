@@ -1,6 +1,7 @@
 <template>
   <transition name="Fade" mode="out-in">
-    <div style="position: relative">
+    <main style="position: relative">
+      <h1 class="mainTitle">开发者交流社区</h1>
       <div class="MessageBoardCover" @click="CloseMessageSubmit">
         <!-- <div :class="OpenMessageSubmitValue
             ? 'WriteMessageFrameFadeIn'
@@ -248,7 +249,7 @@
         </div>
       </div>
       <Emotion ref="EmotionB" @AppendInputValue="AppendMessageText"></Emotion>
-    </div>
+    </main>
   </transition>
 </template>
 

@@ -1,6 +1,7 @@
 <template>
   <transition name="Fade" mode="out-in">
-    <div>
+    <main>
+      <h1 class="mainTitle">关于这个开源项目</h1>
       <div class="FlexContent">
         <div class="LeftPart">
           <div class="BigBlock main-text">
@@ -155,7 +156,7 @@
         </div>
       </div>
       <Heartfelt></Heartfelt>
-    </div>
+    </main>
   </transition>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-    <div class="my-scrollbar">
+    <div id="app" class="my-scrollbar">
         <TopBar></TopBar>
         <router-view></router-view>
         <Footer></Footer>

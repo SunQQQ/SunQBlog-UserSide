@@ -1,6 +1,7 @@
 <template>
   <transition name="Fade" mode="out-in">
-    <article>
+    <main>
+      <h1 class="mainTitle">{{Article.title}}</h1>
       <div class="TopBarHeight"></div>
       <div class="ArticleDetailHeader">
         <div class="HeaderContent">
@@ -9,7 +10,7 @@
         </div>
       </div>
 
-      <div class="ArticleDetailContent">
+      <article class="ArticleDetailContent">
         <div class="ArticleDetailContentTab">
           <transition name="Fade" mode="out-in">
             <img src="../../static/img/BlogDetailSkele_PC.jpg" alt="留言页骨架屏" class="BlogDetailSkeletonScreenPC"
@@ -31,7 +32,7 @@
           <!-- eslint-disable-next-line vue/no-v-html -->
           <div class="markdown-body" v-html="Article.content"></div>
         </div>
-      </div>
+      </article>
       <div class="ArticleDetailContent" style="margin-top: 1rem" v-if="commentList.length > 0">
         <div class="ArticleDetailContentTab" style="padding: 1rem; min-height: unset">
           <div class="ArticleDetailComment">
@@ -119,7 +120,7 @@
       </section>
 
       <Emotion ref="EmotionB" @AppendInputValue="AppendMessageText"></Emotion>
-    </article>
+    </main>
   </transition>
 </template>
 
