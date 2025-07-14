@@ -35,15 +35,15 @@ const router = new Router({
       name: 'index',
       component: BlogIndex,
       meta: {
-        title: '首页 - Coding Life',
-        description: '首页 - 欢迎来到我们的博客平台，探索技术与生活的精彩内容。'
+        title: DEFAULT_TITLE,
+        description: DEFAULT_DESCRIPTION
       }
     },{
       path: '/blog-detail/:id',
       name: 'blog-detail',
       component: BlogDetail,
       meta: {
-        title: '博客详情 - 深入了解每篇文章',
+        title: '博客详情 | 文章详情 | Coding Life',
         description: '博客详情 - 深入了解每篇文章的内容和作者。'
       }
     }, {
@@ -51,29 +51,31 @@ const router = new Router({
       name: 'message-board',
       component: MessageBoard,
       meta: {
-        title: '留言板 - 与网站访问者交流和分享想法',
-        description: '留言板 - 与网站访问者交流和分享想法。'
+        title: '项目交流 | 使用反馈 | 优化建议 | Coding Life',
+        description: '与开发者实时交流技术问题，获取开源项目建议。你的每条留言都会得到认真回复！'
       }
     }, {
       path: '/time-line',
       name: 'time-line',
       component: TimeLine,
       meta: {
-        title: '时间线 - 查看博客的历史记录和重要事件',
-        description: '时间线 - 查看博客的历史记录和重要事件。'
+        title: '开源项目的历程 | 技术博客发展时间轴 | Coding Life',
+        description: '技术博客发展时间轴 | 记录Vue项目优化、Node.js后端开发等全栈技术演进历程'
       }
     }, {
       path: '/about-me',
       name: 'about-me',
       component: AboutMe,
       meta: {
-        description: '关于我 - 了解本网站和开发者。'
+        title: '网站背后的故事 | 开发者的自述 | 开源项目的初衷 | Coding Life',
+        description: '关于我 - 了解本网站和开发者的背景和故事。'
       }
     }, {
       path: '/analytics',
       name: 'analytics',
       component: analytics,
       meta: {
+        title: '技术博客数据分析 | 流量来源统计 | 用户行为追踪 | Coding Life',
         description: '分析 - 查看博客的访问数据和用户互动情况。'
       }
     }, {
@@ -81,7 +83,8 @@ const router = new Router({
       name: 'friend-url',
       component: FriendUrl,
       meta: {
-        description: '友情链接 - 访问其他开发者的博客和网站。'
+        title: '技术资源导航 | 优质开发工具推荐 | Coding Life',
+        description: '精选前端开发、后端架构、DevOps工具链等程序员必备资源导航，持续更新业界优质技术站点'
       }
     }
     
