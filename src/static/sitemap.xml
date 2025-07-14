@@ -189,4 +189,105 @@
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+
+  <!-- 欢迎页 -->
+  <url>
+    <loc>https://codinglife.online/admin</loc>
+    <lastmod>2025-06-22</lastmod> <!-- 最后修改日期 -->
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <!-- 文章管理 -->
+  <url>
+    <loc>https://codinglife.online/admin/article</loc>
+    <lastmod>2025-06-22</lastmod> <!-- 最后修改日期 -->
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <!-- 文章详情 -->
+  <url>
+    <loc>https://codinglife.online/admin/articleDetail</loc>
+    <lastmod>2025-06-22</lastmod> <!-- 最后修改日期 -->
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <!-- 写文章 -->
+  <url>
+    <loc>https://codinglife.online/admin/writeArticle</loc>
+    <lastmod>2025-06-22</lastmod> <!-- 最后修改日期 -->
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- 文章标签管理 -->
+  <url>
+    <loc>https://codinglife.online/admin/tagIndex</loc>
+    <lastmod>2025-06-22</lastmod> <!-- 最后修改日期 -->
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <!-- 登录页面 -->
+  <url>
+    <loc>https://codinglife.online/admin/loginPage</loc>
+    <lastmod>2025-06-22</lastmod> <!-- 最后修改日期 -->
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- 时间轴管理 -->
+  <url>
+    <loc>https://codinglife.online/admin/timeLine</loc>
+    <lastmod>2025-06-22</lastmod> <!-- 最后修改日期 -->
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- 心声管理 -->
+  <url>
+    <loc>https://codinglife.online/admin/heartfelt</loc>
+    <lastmod>2025-06-22</lastmod> <!-- 最后修改日期 -->
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- 友情链接管理 -->
+  <url>
+    <loc>https://codinglife.online/admin/friendUrlIndex</loc>
+    <lastmod>2025-06-22</lastmod> <!-- 最后修改日期 -->
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- 留言管理 -->
+  <url>
+    <loc>https://codinglife.online/admin/messageLeave</loc>
+    <lastmod>2025-06-22</lastmod> <!-- 最后修改日期 -->
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- 评论管理 -->
+  <url>
+    <loc>https://codinglife.online/admin/comment</loc>
+    <lastmod>2025-06-22</lastmod> <!-- 最后修改日期 -->
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- 蛇游戏成绩管理 -->
+  <url>
+    <loc>https://codinglife.online/admin/snakeScores</loc>
+    <lastmod>2025-06-22</lastmod> <!-- 最后修改日期 -->
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- 用户相关 -->
+  <url>
+    <loc>https://codinglife.online/admin/userManage</loc>
+    <lastmod>2025-06-22</lastmod> <!-- 最后修改日期 -->
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
 </urlset>
