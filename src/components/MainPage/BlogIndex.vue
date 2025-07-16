@@ -307,9 +307,9 @@ export default {
       this.buttonAnimate = status;
     },
     calculatePageSize() {
-      if (this.windowWidth < 1366) {
+      if (this.windowWidth < 1280) {
         this.perPageNum = 3 // 移动端和小屏设备
-      } else if (this.windowWidth >= 1366 && this.windowWidth < 1600) {
+      } else if (this.windowWidth >= 1280 && this.windowWidth < 1600) {
         this.perPageNum = 4 // 14寸笔记本
       } else if (this.windowWidth >= 1600 && this.windowWidth < 1920) {
         this.perPageNum = 5 // 15.6寸笔记本
