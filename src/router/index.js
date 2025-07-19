@@ -18,7 +18,7 @@ const AboutMe = () =>
   import(/* webpackChunkName:"simplePage" */ '@/components/MainPage/AboutMe');
 
 const DEFAULT_TITLE = '码语人生 | 开发者故事与技术社区 - CodingLife Online';
-const DEFAULT_DESCRIPTION = '​码语人生（CodingLife Online）​​是面向开发者的技术人文社区，我们记录代码背后的思考、分享技术人的成长故事，在代码中见人生。';
+const DEFAULT_DESCRIPTION = "码语人生（CodingLife Online）是面向开发者的技术人文社区，记录代码背后的思考、分享技术人的成长故事，在代码中见人生。";
     
 // import imageToPdf from '@/components/ExperimentalField/imageToPdf';
 // import ExperimentalField from '@/components/ExperimentalField/index';

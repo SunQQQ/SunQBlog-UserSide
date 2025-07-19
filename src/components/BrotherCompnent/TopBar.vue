@@ -20,7 +20,7 @@
       </div>
     </div>
     <div class="MobileTopBar">
-      <div class="MobileTopBarLogo" aria-label="网站名称" @click="ChangeRouter('index')">Coding Life</div>
+      <div class="MobileTopBarLogo" aria-label="网站名称" @click="ChangeRouter('index')">码语人生</div>
       <div class="MenuTopBarIcon" aria-expanded="false" aria-controls="mobile-menu" @click="OpenMenu()">
         <div class="MobileMenuSwitch">
           <span :class="OpenMobileMenu ? 'MenuButtonFirstGoOpen' : 'MenuButtonFirstGoClose'"></span>
