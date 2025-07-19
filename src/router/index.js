@@ -17,9 +17,9 @@ const TimeLine = () =>
 const AboutMe = () =>
   import(/* webpackChunkName:"simplePage" */ '@/components/MainPage/AboutMe');
 
-const DEFAULT_TITLE = 'Coding Life | 开发者共创的博客平台 | 分享你的代码与生活';
-const DEFAULT_DESCRIPTION = 'Coding Life 是一个源码开源的博客社区，用Markdown书写我们的技术与生活。开发者可自由注册发布技术文章或生活随笔，在这里你将遇到更多志趣相同的小伙伴。';
-
+const DEFAULT_TITLE = '码语人生 | 开发者故事与技术社区 - CodingLife Online';
+const DEFAULT_DESCRIPTION = '​码语人生（CodingLife Online）​​是面向开发者的技术人文社区，我们记录代码背后的思考、分享技术人的成长故事，在代码中见人生。';
+    
 // import imageToPdf from '@/components/ExperimentalField/imageToPdf';
 // import ExperimentalField from '@/components/ExperimentalField/index';
 // import student from '@/components/ExperimentalField/student';
@@ -43,48 +43,48 @@ const router = new Router({
       name: 'blog-detail',
       component: BlogDetail,
       meta: {
-        title: '博客详情 | 文章详情 | Coding Life',
-        description: '博客详情 - 深入了解每篇文章的内容和作者。'
+        title: '博客详情 | 技术文章深度解析 | 码语人生',
+        description: '阅读技术博客的完整内容与作者思考，了解代码背后的设计理念与实践经验。欢迎在评论区与开发者交流讨论！'
       }
-    }, {
+    },{
       path: '/message-board',
       name: 'message-board',
       component: MessageBoard,
       meta: {
-        title: '项目交流 | 使用反馈 | 优化建议 | Coding Life',
-        description: '与开发者实时交流技术问题，获取开源项目建议。你的每条留言都会得到认真回复！'
+        title: '开发者交流区 | 技术问题讨论 | 码语人生',
+        description: '与社区开发者实时交流技术难题、分享开源项目经验。你的每条留言都会得到认真回复，共同构建更好的技术社区。'
       }
-    }, {
+    },{
       path: '/time-line',
       name: 'time-line',
       component: TimeLine,
       meta: {
-        title: '开源项目的历程 | 技术博客发展时间轴 | Coding Life',
-        description: '技术博客发展时间轴 | 记录Vue项目优化、Node.js后端开发等全栈技术演进历程'
+        title: '技术历程 | 项目演进时间轴 | 码语人生',
+        description: '回顾码语人生的技术演进历程，包括Vue前端优化、Node.js后端迭代、全栈开发实践等关键节点与经验总结。'
       }
-    }, {
+    },{
       path: '/about-me',
       name: 'about-me',
       component: AboutMe,
       meta: {
-        title: '网站背后的故事 | 开发者的自述 | 开源项目的初衷 | Coding Life',
-        description: '关于我 - 了解本网站和开发者的背景和故事。'
+        title: '关于我们 | 社区背后的故事 | 码语人生',
+        description: '了解码语人生社区的创立初衷、开发者的技术背景，以及我们如何通过代码连接技术与人文。'
       }
-    }, {
+    },{
       path: '/analytics',
       name: 'analytics',
       component: analytics,
       meta: {
-        title: '技术博客数据分析 | 流量来源统计 | 用户行为追踪 | Coding Life',
-        description: '分析 - 查看博客的访问数据和用户互动情况。'
+        title: '数据看板 | 博客访问统计 | 码语人生',
+        description: '查看码语人生社区的访问数据、用户行为分析及内容热度排行，用数据驱动技术内容优化。'
       }
-    }, {
+    },{
       path: '/friend-url',
       name: 'friend-url',
       component: FriendUrl,
       meta: {
-        title: '技术资源导航 | 优质开发工具推荐 | Coding Life',
-        description: '精选前端开发、后端架构、DevOps工具链等程序员必备资源导航，持续更新业界优质技术站点'
+        title: '技术资源导航 | 开发工具推荐 | 码语人生',
+        description: '精选前端框架、后端架构、DevOps工具等程序员必备资源导航，持续更新业界优质技术站点与开源项目。'
       }
     }
     
