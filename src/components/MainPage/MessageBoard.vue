@@ -1,7 +1,7 @@
 <template>
   <transition name="Fade" mode="out-in">
     <main style="position: relative">
-      <h1 class="mainTitle">开发者交流社区</h1>
+      <h1 class="mainTitle">开发者交流区</h1>
       <div class="MessageBoardCover" @click="CloseMessageSubmit">
         <!-- <div :class="OpenMessageSubmitValue
             ? 'WriteMessageFrameFadeIn'

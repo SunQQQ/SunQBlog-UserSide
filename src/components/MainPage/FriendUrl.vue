@@ -1,7 +1,7 @@
 <template>
   <transition name="fade" mode="out-in">
     <main>
-      <h1 class="mainTitle">开发者资源导航</h1>
+      <h1 class="mainTitle">技术资源导航</h1>
       <div class="FriendUrlBac">
         <div class="FriendUrlTitle">
           <div class="FriendUrlTitleText">开源朋友圈</div>

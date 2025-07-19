@@ -1,7 +1,7 @@
 <template>
   <transition name="Fade" mode="out-in">
     <main>
-      <h1 class="mainTitle">关于这个开源项目</h1>
+      <h1 class="mainTitle">关于码语人生</h1>
       <div class="FlexContent">
         <div class="LeftPart">
           <div class="BigBlock main-text">

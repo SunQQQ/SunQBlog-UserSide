@@ -1,6 +1,6 @@
 <template>
   <main>
-    <h1 class="mainTitle">博客数据分析看板</h1>
+    <h1 class="mainTitle">社区数据看板</h1>
     <div class="content">
       <div class="block" style="margin-top: 0">
         <div class="quota-content">

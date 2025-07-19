@@ -1,7 +1,7 @@
 <template>
     <transition name="Fade" mode="out-in">
         <main>
-            <h1 class="mainTitle">我们的技术演进历程</h1>
+            <h1 class="mainTitle">技术演进历程</h1>
             <div class="TimeFixedBac">
                 <div class="flower">
                     <img src="../../static/img/flower.png" alt="背景图中花朵" />

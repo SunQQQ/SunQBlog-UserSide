@@ -3,7 +3,7 @@
     <div class="PcTopBar" role="banner">
       <div class="MediaIndexContent">
         <div class="MediaLeft" aria-label="网站名称" @click="ChangeRouter('index')">
-          <span alt="网站名称">Coding Life</span>
+          <span alt="网站名称">码语人生</span>
         </div>
         <nav class="MediaRight">
           <div :class="Active == 6 ? 'MenuItemActive' : 'MenuItem'" @click="openUrl()">开放式后台</div>
@@ -486,7 +486,7 @@ export default {
 
 .MediaLeft {
   width: 40%;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   cursor: pointer;
   font-weight: bolder;
 }
