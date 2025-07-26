@@ -486,9 +486,10 @@ export default {
 
 .MediaLeft {
   width: 40%;
-  font-size: 1.2rem;
+  font-size: 1rem;
   cursor: pointer;
-  font-weight: bolder;
+  // color: @ThemeColor;
+  color: @DefaultFontColor
 }
 
 .MediaRight {
