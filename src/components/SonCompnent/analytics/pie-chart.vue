@@ -242,7 +242,7 @@ export default {
 
                     that.pie3 = that.$echarts.init(document.getElementById('pie-chart3'));
                     that.pieChartOption.series[0].data = regularUserArray;
-                    that.pieChartOption.title.text = '菜单点击比例';
+                    that.pieChartOption.title.text = '各页面操作比例';
                     that.pieChartOption.series[0].name = '点击菜单';
                     that.pieChartOption.color = that.pieBackColor.reverse();
                     that.pieChartOption.series[0].clockwise = true;
