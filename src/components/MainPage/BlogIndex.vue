@@ -158,7 +158,7 @@ export default {
       this.SQFrontAjax({
         Url: '/api/getDictionaryList',
         UploadData: {
-          parentId: 1
+          parentId: [1]
         },
         Success: function (data) {
           That.Tags = data;
