@@ -54,7 +54,7 @@
               </transition> -->
               <div class="TagListHead">文章分类<span style="color: #aaa;font-size: 0.8rem">（点击筛选呦）</span></div>
               <div class="TagListTr">
-                <div :class="item.id != Tags.Active ? 'TagListTd' : 'TagListTdActive'" v-for="item in Tags"
+                <div :class="item.id != Tags.Active ? 'TagListTd' : 'TagListTdActive'" v-for="item in TagObjs"
                   :key="item.id" @click="GetArticle(item.id)">{{ item.name }}
                 </div>
               </div>
@@ -132,7 +132,8 @@ export default {
   },
   data: function () {
     return {
-      Tags: [],// 标签量
+      Tags: [],// 标签的id数组
+      TagObjs: [], // 标签对象数组
       ArticleList: [],// 文章列表        
       ArticleNum: 0,// 文章量     
       LeaveMessageNum: 0,// 留言量        
@@ -161,23 +162,32 @@ export default {
           parentId: [1]
         },
         Success: function (data) {
-          That.Tags = data;
+          console.log(1);
+          let tagIds = [];
+          data.forEach(function (item) {
+            tagIds.push(item.id);
+          });
+          That.Tags = tagIds;
+          That.TagObjs = data;
           That.Tags.Active = 0;
           That.DefaultGraph.ArticleTagPart = false;
+
+          That.GetArticle(0);
         }
       });
     },
     // 获取文章列表
     GetArticle: function (tagId) {
       var That = this;
-
+      console.log(2);
+      
       this.SQFrontAjax({
         Url: '/api/getUserBlogList',
         UploadData: {
           start: 0,
           size: That.perPageNum,
           // 0查询全部文章
-          tag: (tagId == That.Tags.Active) ? 0 : tagId
+          tag: (tagId == That.Tags.Active) ? That.Tags : [tagId]
         },
         Success: function (data) {
           // 选中后，高亮。且点击高亮标签时，取消选中
@@ -236,7 +246,8 @@ export default {
         UploadData: {
           start: SelectPage * That.perPageNum,
           size: That.perPageNum,
-          tag: That.Tags.Active
+          // 0查询全部文章，最终传递的tag是一个数组
+          tag: That.Tags.Active === 0 ? That.Tags : [That.Tags.Active]
         },
         Success: function (data) {
           data.list.forEach(function (Item) {
@@ -323,7 +334,6 @@ export default {
 
     Store.commit("ChangeActive", 0); // 切换Topbar高亮
 
-    this.GetArticle(0);
     that.InitArticleTag(this);
     that.GetHotArticle(6);
 
