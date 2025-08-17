@@ -176,11 +176,15 @@ export default {
         }
       });
     },
-    // 获取文章列表
+    // 获取文章列表，供标签筛选调用
     GetArticle: function (tagId) {
       var That = this;
-      console.log(2);
-      
+
+      // 每次筛选标签时，重置AticleBottom状态
+      That.AticleBottom = false;
+      That.$refs.Pagi.reset();
+      Store.commit("changeFooter", false);
+
       this.SQFrontAjax({
         Url: '/api/getUserBlogList',
         UploadData: {
@@ -200,7 +204,6 @@ export default {
           data.list.forEach(function (Item) {
             Item.createTime = Item.createTime.slice(0, 10);
           });
-          That.DefaultGraph.ArticleListPart = false;// 隐藏骨架屏
           That.ArticleList = data.list;
           That.ArticleNum = data.total;
         }
