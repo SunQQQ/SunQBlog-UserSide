@@ -5,23 +5,44 @@
       <div class="FlexContent">
         <div class="LeftPart">
           <div class="BigBlock main-text">
-            <div class="TitleFontLine">博客特色</div>
+            <div class="TitleFontLine">关于你</div>
             <p>
-              <i class="iconfont icon-person AboutMeIcon" style="color: #49a9ee"></i>游客可管理自己的文章、心声等内容，深度体验且一键注册巨省心。
+              <i class="iconfont icon-person AboutMeIcon" style="color: #49a9ee"></i>因本网站代码完全开源，所以基于本套源码你可以做以下事情：
             </p>
             <p>
-              <i class="iconfont AboutMeIcon icon-github" style="color: #948aec"></i>博客对外开放管理后台、流量数据、所有源码等，分享技术，毫无保留。
+              <i class="iconfont AboutMeIcon icon-github" style="color: #948aec"></i>1、可快速改造为一个企业官网，0成本定制化你的企业门户。
             </p>
             <p>
               <i class="iconfont AboutMeIcon icon-fuwuqi"
-                style="color: #f78e3d"></i>博客用户端、管理后台、后端接口、UI设计、服务器部署全部由一人维护。持续优化，随时更新。
+                style="color: #f78e3d"></i>2、轻微调整样式即可变身为设计师或程序员的个人作品集，尽情挥洒展示自我，求职面试好助手。
             </p>
             <p>
               <i class="iconfont icon-tool AboutMeIcon"
-                style="color: #3db8c1"></i>已实现各种父子组件、数据缓存、防抖节流、用户轨迹、首屏优化、访问数据分析等功能。
+                style="color: #3db8c1"></i>3、初学者完美系统性练手项目，Html、Vue.js、Java、MySQL、Linux等技术一站式获得。
             </p>
             <p>
-              <i class="iconfont icon-aihao1 AboutMeIcon" style="color: #f46e65"></i>跪求Github一赞，点个星星将是对开源开发者的最大支持与鼓励！
+              <i class="iconfont icon-aihao1 AboutMeIcon" style="color: #f46e65"></i>4、大学生的完毕毕设大作业，具备管理后台、用户端、移动端适配，3人小课题轻松拿捏。
+            </p>
+          </div>
+
+          <div class="BigBlock AboutMeMarginTop main-text">
+            <div class="TitleFontLine">博客特色</div>
+            <p>
+              <i class="iconfont icon-person AboutMeIcon" style="color: #49a9ee"></i>游客可参与代码开发与内容创作，注册方便、管理后端开放，欢迎沉浸式体验。
+            </p>
+            <p>
+              <i class="iconfont AboutMeIcon icon-github" style="color: #948aec"></i>网站对外开放访问统计数据，所有源码开源，分享技术，共享乐趣。
+            </p>
+            <p>
+              <i class="iconfont AboutMeIcon icon-fuwuqi"
+                style="color: #f78e3d"></i>用户端/管理后台/后端接口/UI设计/服务器部署全部手搓，灵活发展，持续优化，随时更新。
+            </p>
+            <p>
+              <i class="iconfont icon-tool AboutMeIcon"
+                style="color: #3db8c1"></i>麻雀虽小五脏俱全，已实现防抖节流、首屏优化、天气预报、上拉刷新、数据分析统计等功能。
+            </p>
+            <p>
+              <i class="iconfont icon-aihao1 AboutMeIcon" style="color: #f46e65"></i>Github跪求一赞，点个星星将是对开源开发者的最大支持与鼓励！
             </p>
           </div>
 
@@ -29,7 +50,7 @@
             <div class="TitleFontLine">博客技术</div>
             <p>
               <i class="iconfont AboutMeIcon icon-wangzhanxinxi"
-                style="color: #f46e65"></i>本博客纯手工编写，未使用第三方建站或流量统计工具。代码开源，欢迎匡正
+                style="color: #f46e65"></i>本博客纯手搓，未使用第三方建站或流量统计工具。代码开源，欢迎匡正。
             </p>
             <p>
               <i class="iconfont AboutMeIcon icon-quanju_qianduanjiemian" style="color: #3dbd7d"></i>用户端手写的UI组件 +
@@ -37,10 +58,10 @@
             </p>
             <p>
               <i class="iconfont AboutMeIcon icon-fuwuqi"
-                style="color: #f78e3d"></i>服务端语言使用node.js、框架使用Express，博客部署在腾讯云、使用Linux服务器
+                style="color: #f78e3d"></i>服务端写了两版Express和SpringBoot，博客部署在阿里云，使用Linux与Nginx。
             </p>
             <p>
-              <i class="iconfont AboutMeIcon icon-dataBase" style="color: #49a9ee"></i>数据库使用MongoDB，可视化工具用的Robo 3T
+              <i class="iconfont AboutMeIcon icon-dataBase" style="color: #49a9ee"></i>数据库也用过两版MongoDB和MySQL，目前为MySQL
             </p>
             <p>
               <i class="iconfont AboutMeIcon icon-github" style="color: #948aec"></i>用户端/管理端/后端代码：<a
@@ -51,23 +72,23 @@
           <div class="BigBlock AboutMeMarginTop main-text">
             <div class="TitleFontLine">关于博主</div>
             <p>
-              <i class="iconfont icon-person AboutMeIcon" style="color: #49a9ee"></i>博主名字叫孙权，94年人，软件工程本科毕业，从事前端开发岗位。
+              <i class="iconfont icon-person AboutMeIcon" style="color: #49a9ee"></i>博主今年31岁，从前端开发干到项目经理，目前转行做项目管理与软件销售。
             </p>
             <p>
-              <i class="iconfont icon-aihao1 AboutMeIcon" style="color: #f46e65"></i>兴趣：编码、篮球、跑步、吉他。喜爱车评、历史记录片、交朋友
+              <i class="iconfont icon-aihao1 AboutMeIcon" style="color: #f46e65"></i>兴趣：31岁已不敢再谈兴趣，只想多挣钱给闺女买桶奶粉。
             </p>
             <p>
               <i class="iconfont icon-tool AboutMeIcon"
-                style="color: #3db8c1"></i>熟悉的技术有：Layui、ElementUI、Vue.js、Node.js、JavaScript
+                style="color: #3db8c1"></i>略懂的有：前端、后端、数据库、服务器部署运营、方案输出、产品设计、项目管理、软件售前
             </p>
             <p>
-              <i class="iconfont icon-biaoqian AboutMeIcon" style="color: #3dbd7d"></i>别人评价较多：阳光开朗、靠谱伙伴、待人亲切
+              <i class="iconfont icon-biaoqian AboutMeIcon" style="color: #3dbd7d"></i>别人评价较多：阳光开朗、靠谱伙伴、待人亲切、平和友善
             </p>
             <p>
               <i class="iconfont icon-xiazai20 AboutMeIcon" style="color: #948aec"></i>家庭住址：郑州市 二七区 南三环
             </p>
             <p>
-              <i class="iconfont icon-weixin AboutMeIcon" style="color: #f78e3d"></i>微信：13213074006，欢迎进前端分享群、商业合作等
+              <i class="iconfont icon-weixin AboutMeIcon" style="color: #f78e3d"></i>微信：13213074006，欢迎加入我的软件行业群、或与我商业合作等
             </p>
           </div>
 
