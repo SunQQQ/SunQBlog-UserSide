@@ -55,32 +55,6 @@
             <p class="num">{{ totalArticle }}</p>
           </div>
         </div>
-        <!-- <div class="quota-content">
-          <div class="quota-item">
-            <p>今日浏览量(PV)</p>
-            <p class="num">{{ todayVisit }}</p>
-          </div>
-          <div class="quota-item">
-            <p>今日IP</p>
-            <p class="num">{{ todayIpNum }}</p>
-          </div>
-          <div class="quota-item">
-            <p>昨日浏览量</p>
-            <p class="num">{{ yesterdayVisit }}</p>
-          </div>
-          <div class="quota-item">
-            <p>昨日IP</p>
-            <p class="num">{{ yesterdayIpNum }}</p>
-          </div>
-          <div class="quota-item">
-            <p>近{{ lineDateType }}天PV</p>
-            <p class="num">{{ dateVisit }}</p>
-          </div>
-          <div class="quota-item">
-            <p>近{{ lineDateType }}天IP</p>
-            <p class="num">{{ allVisitIp }}</p>
-          </div>
-        </div> -->
       </div>
       <lineChart v-on:getQuotaVal="getQuotaVal"></lineChart>
       <map-chart></map-chart>

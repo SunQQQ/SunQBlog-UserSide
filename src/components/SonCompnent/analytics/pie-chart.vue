@@ -15,10 +15,10 @@
             <div class="pie-item scal-right" id="pie-chart3"></div>
             <div class="pie-item scal-right" id="pie-chart1"></div>
         </div>
-        <!-- <div class="pie-content" style="padding-bottom: 20px">
+        <div class="pie-content" style="padding-bottom: 20px">
             <div class="pie-item scal-right" id="pie-chart4"></div>
-            <div class="pie-item scal-right" id="pie-chart2"></div>
-        </div> -->
+            <!-- <div class="pie-item scal-right" id="pie-chart2"></div> -->
+        </div>
     </section>
 </template>
 
@@ -76,7 +76,7 @@ export default {
             pieArray: [],
             // 饼图时间维度
             pieDateType: 0,
-            pieBackColor: ['#fac858','#91cc75','#5470c6','#ee6666', '#73c0de', '#3ba272', '#fc8452', '#9a60b4'],
+            pieBackColor: ['#fac858', '#91cc75', '#5470c6', '#ee6666', '#73c0de', '#3ba272', '#fc8452', '#9a60b4'],
         }
     },
     methods: {
@@ -141,7 +141,7 @@ export default {
                 pie3Array = [],
                 // 老用户占比
                 regularUserMap = {
-                    regularUser: '老用户',
+                    oldUser: '老用户',
                     newUser: '新用户'
                 },
                 regularUserArray = [];
@@ -254,42 +254,42 @@ export default {
             });
 
             // 老用户占比
-            // this.SQFrontAjax({
-            //     Url: '/api/regularUserByDay/foreend',
-            //     noLoading: init ? 'yes' : '',
-            //     UploadData: {
-            //         endTime: this.getSQTime().split(' ')[0],
-            //         dayNum: dayNum ? dayNum : 1
-            //     },
-            //     Success: function (data) {
-            //         // 转成饼图需要的数据格式
-            //         for (let key in data) {
-            //             regularUserArray.push({
-            //                 value: data[key],
-            //                 name: regularUserMap[key]
-            //             });
-            //         }
+            this.SQFrontAjax({
+                Url: "/api/old-users",
+                noLoading: init ? 'yes' : '',
+                UploadData: {
+                    days: dayNum
+                },
+                Success: function (data) {
+                    let oldUser = [];
+                    // 转成饼图需要的数据格式
+                    for (let key in data) {
+                        oldUser.push({
+                            value: data[key],
+                            name: regularUserMap[key]
+                        });
+                    }
 
-            //         that.pie4 = that.$echarts.init(document.getElementById('pie-chart4'));
-            //         that.pieChartOption.series[0].data = regularUserArray;
-            //         that.pieChartOption.title.text = '新老用户比例';
-            //         that.pieChartOption.series[0].name = '用户类型';
-            //         that.pieChartOption.color = ['#5470c6', '#ee6666'];
-            //         // that.pieChartOption.label.formatter = function(data){
-            //         //     return data.name;
-            //         // }; 
-            //         that.pie4.setOption(that.pieChartOption, true);
-            //     }
-            // });
+                    that.pie4 = that.$echarts.init(document.getElementById('pie-chart4'));
+                    that.pieChartOption.series[0].data = oldUser;
+                    that.pieChartOption.title.text = '新老用户比例';
+                    that.pieChartOption.series[0].name = '用户类型';
+                    that.pieChartOption.color = ['#5470c6', '#ee6666'];
+                    // that.pieChartOption.label.formatter = function(data){
+                    //     return data.name;
+                    // }; 
+                    that.pie4.setOption(that.pieChartOption, true);
+                }
+            });
         },
 
     },
     mounted: function () {
-        this.setPie(0,'init');
+        this.setPie(0, 'init');
     }
 }
 </script>
 
 <style scoped lang="less">
-  @import "../../../static/css/analytic";
+@import "../../../static/css/analytic";
 </style>
