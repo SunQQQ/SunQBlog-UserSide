@@ -17,7 +17,7 @@
         </div>
         <div class="pie-content" style="padding-bottom: 20px">
             <div class="pie-item scal-right" id="pie-chart4"></div>
-            <!-- <div class="pie-item scal-right" id="pie-chart2"></div> -->
+            <div class="pie-item scal-right" id="pie-chart2"></div>
         </div>
     </section>
 </template>
@@ -279,6 +279,34 @@ export default {
                     //     return data.name;
                     // }; 
                     that.pie4.setOption(that.pieChartOption, true);
+                }
+            });
+
+            this.SQFrontAjax({
+                Url: "/api/platform-ratio",
+                noLoading: init ? 'yes' : '',
+                UploadData: {
+                    days: dayNum
+                },
+                Success: function (data) {
+                    let result = [];
+                    // 转成饼图需要的数据格式
+                    for (let index = 0; index < data.length; index++) {
+                        const element = data[index];
+                        result.push({
+                            value: element['total'],
+                            name: element['platform']
+                        });
+                    }
+
+                    that.pie2 = that.$echarts.init(document.getElementById('pie-chart2'));
+                    that.pieChartOption.series[0].data = result;
+                    that.pieChartOption.title.text = '访问平台占比';
+                    that.pieChartOption.series[0].name = '测试';
+                    that.pieChartOption.label.fontSize = 10;
+                    that.pieChartOption.color = that.pieBackColor.reverse();
+                    // that.pieChartOption.series[0].clockwise = true;
+                    that.pie2.setOption(that.pieChartOption, true);
                 }
             });
         },
