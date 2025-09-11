@@ -3,7 +3,7 @@
     <h1 class="mainTitle">社区数据看板</h1>
     <div class="content">
       <div class="block" style="margin-top: 0">
-        <div class="module-title">数据概览</div>
+        <div class="module-title" style="margin-bottom: 1rem;">数据概览</div>
         <div class="quota-content">
           <div class="quota-item">
             <p class="num" style="color:#fac858">{{ totalIpNum }}</p>

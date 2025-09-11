@@ -1,7 +1,7 @@
 <template>
     <section class="block padding-bottom-10 block-nopadding">
         <div class="title-part padding-left-right">
-            <div class="module-title">数据占比</div>
+            <div class="module-title">分类占比</div>
             <div class="day-switch">
                 <div :class="pieDateType == '2' ? 'item active' : 'item'" @click="setPie(2)">昨天</div>
                 <div :class="pieDateType == '14' ? 'item active' : 'item'" @click="setPie(14)">最近14天</div>
