@@ -3,56 +3,57 @@
     <h1 class="mainTitle">社区数据看板</h1>
     <div class="content">
       <div class="block" style="margin-top: 0">
+        <div class="module-title">数据概览</div>
         <div class="quota-content">
           <div class="quota-item">
-            <p>今日IP</p>
-            <p class="num">{{ todayIpNum }}</p>
+            <p class="num" style="color:#fac858">{{ totalIpNum }}</p>
+            <p>累计IP</p>
           </div>
           <div class="quota-item">
-            <p>今日PV</p>
-            <p class="num">{{ todayVisit }}</p>
+            <p class="num" style="color:#91cc75">{{ totalVisit }}</p>
+            <p>累计PV</p>
           </div>
           <div class="quota-item">
-            <p>今日注册</p>
-            <p class="num">{{ todayRegist }}</p>
+            <p class="num" style="color:#5470c6">{{ totalRegist }}</p>
+            <p>累计注册</p>
           </div>
           <div class="quota-item">
-            <p>今日评论</p>
-            <p class="num">{{ todayComment }}</p>
+            <p class="num" style="color:#ee6666">{{ totalComment }}</p>
+            <p>累计评论</p>
           </div>
           <div class="quota-item">
-            <p>今日留言</p>
-            <p class="num">{{ todayLeaveMess }}</p>
+            <p class="num" style="color:#73c0de">{{ totalLeaveMess }}</p>
+            <p>累计留言</p>
           </div>
           <div class="quota-item">
-            <p>今日文章</p>
-            <p class="num">{{ todayArticle }}</p>
+            <p class="num" style="color:#3ba272">{{ totalArticle }}</p>
+            <p>累计文章</p>
           </div>
         </div>
         <div class="quota-content">
           <div class="quota-item">
-            <p>累计IP</p>
-            <p class="num">{{ totalIpNum }}</p>
+            <p class="num" style="color:#fac858">{{ todayIpNum }}</p>
+            <p>今日IP</p>
           </div>
           <div class="quota-item">
-            <p>累计PV</p>
-            <p class="num">{{ totalVisit }}</p>
+            <p class="num" style="color:#91cc75">{{ todayVisit }}</p>
+            <p>今日PV</p>
           </div>
           <div class="quota-item">
-            <p>累计注册</p>
-            <p class="num">{{ totalRegist }}</p>
+            <p class="num" style="color:#5470c6">{{ todayRegist }}</p>
+            <p>今日注册</p>
           </div>
           <div class="quota-item">
-            <p>累计评论</p>
-            <p class="num">{{ totalComment }}</p>
+            <p class="num" style="color:#ee6666">{{ todayComment }}</p>
+            <p>今日评论</p>
           </div>
           <div class="quota-item">
-            <p>累计留言</p>
-            <p class="num">{{ totalLeaveMess }}</p>
+            <p class="num" style="color:#73c0de">{{ todayLeaveMess }}</p>
+            <p>今日留言</p>
           </div>
           <div class="quota-item">
-            <p>累计文章</p>
-            <p class="num">{{ totalArticle }}</p>
+            <p class="num" style="color:#3ba272">{{ todayArticle }}</p>
+            <p>今日文章</p>
           </div>
         </div>
       </div>
@@ -91,7 +92,7 @@ export default {
       totalVisit: 0, // 累计浏览量
       todayIpNum: 0, // 今日IP数
       totalIpNum: 0, // 累计IP数
-      
+
       dateVisit: 0, // 近7/14/30天访问量
       yesterdayVisit: 0,
       yesterdayIpNum: 0,

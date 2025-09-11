@@ -14,16 +14,19 @@
   }
 
   .pie-item {
-    
+
     height: 250px;
   }
-  .scal-left{
+
+  .scal-left {
     flex: 40%;
   }
-  .scal-center{
+
+  .scal-center {
     flex: 25%;
   }
-  .scal-right{
+
+  .scal-right {
     flex: 35%;
   }
 }
@@ -60,11 +63,27 @@
 .quota-item {
   flex: 1;
   text-align: center;
+  position: relative;
+}
+
+.quota-item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 35%;
+  /* 控制边框起始位置（这里是高度的25%） */
+  right: 0;
+  width: 1px;
+  /* 边框宽度 */
+  height: 30%;
+  /* 边框高度（父元素的一半） */
+  background-color: #aeaeae9d;
+  /* 边框颜色 */
 }
 
 .quota-item .num {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   margin-bottom: 0;
+  font-weight: 520;
 }
 
 .block {
@@ -79,11 +98,11 @@
   border-bottom: 1px solid #f0f0f0;
 }
 
-.block-nopadding{
+.block-nopadding {
   padding: 0 !important
 }
 
-.padding-left-right{
+.padding-left-right {
   padding: 1.5rem;
 }
 
@@ -97,7 +116,20 @@
   font-weight: 500;
   height: 18px;
   line-height: 18px;
+  position: relative;
+  margin-left: 10px;
 }
+
+.module-title::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  left: -10px;
+  background-color: #aeaeae9d;
+}
+
 
 .list {
   border: 1px solid #e9e9e9;
@@ -210,7 +242,7 @@
   border: 1px solid FontColorPagNation;
 }
 
-.your-ip{
+.your-ip {
   color: @ThemeColor;
   padding-top: .2rem;
 }
@@ -219,6 +251,7 @@
   text-align: center;
   padding-right: 1rem;
 }
-.text-center{
+
+.text-center {
   text-align: center;
 }
