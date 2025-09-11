@@ -3,7 +3,7 @@
         <div class="title-part padding-left-right">
             <div class="module-title">分类占比</div>
             <div class="day-switch">
-                <div :class="pieDateType == '2' ? 'item active' : 'item'" @click="setPie(2)">昨天</div>
+                <div :class="pieDateType == '0' ? 'item active' : 'item'" @click="setPie(0)">今天</div>
                 <div :class="pieDateType == '14' ? 'item active' : 'item'" @click="setPie(14)">最近14天</div>
                 <div :class="pieDateType == '30' ? 'item active' : 'item'" @click="setPie(30)">最近30天</div>
                 <div :class="pieDateType == '60' ? 'item active' : 'item'" @click="setPie(60)">最近60天</div>
@@ -313,7 +313,7 @@ export default {
 
     },
     mounted: function () {
-        this.setPie(2, 'init');
+        this.setPie(0, 'init');
     }
 }
 </script>
