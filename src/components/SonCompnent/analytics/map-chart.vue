@@ -4,8 +4,8 @@
             <div class="module-title">访客来源</div>
             <div class="day-switch">
                 <div :class="mapDateType == '0' ? 'item active' : 'item'" @click="setMap(0)">今天</div>
-                <div :class="mapDateType == '30' ? 'item active' : 'item'" @click="setMap(30)">最近30天</div>
-                <div :class="mapDateType == '60' ? 'item active' : 'item'" @click="setMap(60)">最近60天</div>
+                <div :class="mapDateType == '30' ? 'item active' : 'item'" @click="setMap(30)">近30天</div>
+                <div :class="mapDateType == '60' ? 'item active' : 'item'" @click="setMap(60)">近60天</div>
                 <div :class="mapDateType == '1000' ? 'item active' : 'item'" @click="setMap(1000)">自古以来</div>
             </div>
             <div class="day-switch total-number give-up">国内城市：{{ chinaCityNum }}个，境外城市：{{ foreignCityNum }}个</div>

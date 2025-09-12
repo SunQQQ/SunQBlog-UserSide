@@ -29,6 +29,20 @@
   .scal-right {
     flex: 35%;
   }
+
+  .quota-item:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 35%;
+    /* 控制边框起始位置（这里是高度的25%） */
+    right: 0;
+    width: 1px;
+    /* 边框宽度 */
+    height: 30%;
+    /* 边框高度（父元素的一半） */
+    background-color: #aeaeae9d;
+    /* 边框颜色 */
+  }
 }
 
 /*mobile*/
@@ -53,6 +67,11 @@
   .action-padding {
     padding-right: 1rem;
   }
+
+  .mobile-hide {
+    display: none;
+  }
+
 }
 
 .quota-content {
@@ -64,24 +83,6 @@
   flex: 1;
   text-align: center;
   position: relative;
-}
-
-.mobile-hide{
-  display: none;
-}
-
-.quota-item:not(:last-child)::after {
-  content: "";
-  position: absolute;
-  top: 35%;
-  /* 控制边框起始位置（这里是高度的25%） */
-  right: 0;
-  width: 1px;
-  /* 边框宽度 */
-  height: 30%;
-  /* 边框高度（父元素的一半） */
-  background-color: #aeaeae9d;
-  /* 边框颜色 */
 }
 
 .quota-item .num {
