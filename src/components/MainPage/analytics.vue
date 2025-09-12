@@ -9,7 +9,7 @@
             <p class="num" style="color:#fac858">{{ totalIpNum }}</p>
             <p>累计IP</p>
           </div>
-          <div class="quota-item">
+          <div class="quota-item mobile-hide">
             <p class="num" style="color:#91cc75">{{ totalVisit }}</p>
             <p>累计PV</p>
           </div>
@@ -21,7 +21,7 @@
             <p class="num" style="color:#ee6666">{{ totalComment }}</p>
             <p>累计评论</p>
           </div>
-          <div class="quota-item">
+          <div class="quota-item mobile-hide">
             <p class="num" style="color:#73c0de">{{ totalLeaveMess }}</p>
             <p>累计留言</p>
           </div>
@@ -35,7 +35,7 @@
             <p class="num" style="color:#fac858">{{ todayIpNum }}</p>
             <p>今日IP</p>
           </div>
-          <div class="quota-item">
+          <div class="quota-item mobile-hide">
             <p class="num" style="color:#91cc75">{{ todayVisit }}</p>
             <p>今日PV</p>
           </div>
@@ -47,7 +47,7 @@
             <p class="num" style="color:#ee6666">{{ todayComment }}</p>
             <p>今日评论</p>
           </div>
-          <div class="quota-item">
+          <div class="quota-item mobile-hide">
             <p class="num" style="color:#73c0de">{{ todayLeaveMess }}</p>
             <p>今日留言</p>
           </div>

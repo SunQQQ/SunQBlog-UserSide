@@ -7,25 +7,25 @@
           :class="lineDateType == '7' ? 'item active' : 'item'"
           @click="setLineChart(7)"
         >
-          最近7天
+          近7天
         </div>
         <div
           :class="lineDateType == '14' ? 'item active' : 'item'"
           @click="setLineChart(14)"
         >
-          最近14天
+          近14天
         </div>
         <div
           :class="lineDateType == '30' ? 'item active' : 'item'"
           @click="setLineChart(30)"
         >
-          最近30天
+          近30天
         </div>
         <div
           :class="lineDateType == '60' ? 'item active' : 'item'"
           @click="setLineChart(60)"
         >
-          最近60天
+          近60天
         </div>
       </div>
     </div>
