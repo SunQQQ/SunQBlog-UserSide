@@ -302,7 +302,7 @@ export default {
                     that.pie2 = that.$echarts.init(document.getElementById('pie-chart2'));
                     that.pieChartOption.series[0].data = result;
                     that.pieChartOption.title.text = '访问平台占比';
-                    that.pieChartOption.series[0].name = '测试';
+                    that.pieChartOption.series[0].name = '访问平台';
                     that.pieChartOption.label.fontSize = 10;
                     that.pieChartOption.color = that.pieBackColor.reverse();
                     // that.pieChartOption.series[0].clockwise = true;
