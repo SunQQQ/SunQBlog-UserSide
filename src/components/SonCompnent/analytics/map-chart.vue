@@ -3,7 +3,7 @@
         <div class="title-part">
             <div class="module-title">访客来源</div>
             <div class="day-switch">
-                <div :class="mapDateType == '0' ? 'item active' : 'item'" @click="setMap(0)">今天</div>
+                <div :class="mapDateType == '1' ? 'item active' : 'item'" @click="setMap(1)">今天</div>
                 <div :class="mapDateType == '30' ? 'item active' : 'item'" @click="setMap(30)">近30天</div>
                 <div :class="mapDateType == '60' ? 'item active' : 'item'" @click="setMap(60)">近60天</div>
                 <div :class="mapDateType == '1000' ? 'item active' : 'item'" @click="setMap(1000)">自古以来</div>
@@ -126,7 +126,7 @@ export default {
                     that.foreignCityNum = data.length - that.chinaCityNum;
 
                     if (!that.map) that.map = that.$echarts.init(document.getElementById('map'));
-                    if (dayNum == 0) {
+                    if (dayNum == 1) {
                         that.mapOption.series[0].label.show = true;
                     } else {
                         that.mapOption.series[0].label.show = false;
@@ -139,7 +139,7 @@ export default {
         },
     },
     mounted: function () {
-        this.setMap(0, 'init');
+        this.setMap(1, 'init');
     }
 }
 </script>
