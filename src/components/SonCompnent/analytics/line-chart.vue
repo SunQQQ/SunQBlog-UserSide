@@ -4,10 +4,10 @@
       <div class="module-title">流量趋势</div>
       <div class="day-switch">
         <div
-          :class="lineDateType == '7' ? 'item active' : 'item'"
-          @click="setLineChart(7)"
+          :class="lineDateType == '8' ? 'item active' : 'item'"
+          @click="setLineChart(8)"
         >
-          近7天
+          近8天
         </div>
         <div
           :class="lineDateType == '14' ? 'item active' : 'item'"
@@ -41,7 +41,7 @@ export default {
   data: function () {
     return {
       // 折线图数据
-      lineDateType: "近7天",
+      lineDateType: "近8天",
       lineChartOption: {
         // title: {text: '数据趋势'},
         tooltip: {
@@ -105,7 +105,7 @@ export default {
   methods: {
     /**
      * 渲染折线图
-     * dayNum: 加载数据的周期 比如：1/7/14天
+     * dayNum: 加载数据的周期 比如：1/8/14天
      * init: 判断是初始化状态，或是时间周期的切换；  初始状态时只有折线图弹出loading，且不记录操作日志
      */
     setLineChart: function (dayNum, init) {
@@ -120,7 +120,7 @@ export default {
       this.SQFrontAjax({
         Url: "/api/ip-daily",
         UploadData: {
-          days: dayNum ? dayNum : 7,
+          days: dayNum ? dayNum : 8,
         },
         Success: function (data) {
           let dates = [],
@@ -133,7 +133,7 @@ export default {
           that.lineChart.setOption(that.lineChartOption);
 
           data.forEach(function (item) {
-            dates.push(item.day);
+            dates.push(item.visitDay);
             readings.push(item.pv);
             ipArray.push(item.ip);
             register.push(item.register);
@@ -154,7 +154,7 @@ export default {
     },
   },
   mounted: function () {
-    this.setLineChart(7, "init");
+    this.setLineChart(8, "init");
   },
 };
 </script>
