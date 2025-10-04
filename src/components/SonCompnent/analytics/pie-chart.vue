@@ -3,7 +3,7 @@
         <div class="title-part padding-left-right">
             <div class="module-title">分类占比</div>
             <div class="day-switch">
-                <div :class="pieDateType == '0' ? 'item active' : 'item'" @click="setPie(0)">今天</div>
+                <div :class="pieDateType == '1' ? 'item active' : 'item'" @click="setPie(1)">今天</div>
                 <div :class="pieDateType == '14' ? 'item active' : 'item'" @click="setPie(14)">近14天</div>
                 <div :class="pieDateType == '30' ? 'item active' : 'item'" @click="setPie(30)">近30天</div>
                 <div :class="pieDateType == '60' ? 'item active' : 'item'" @click="setPie(60)">近60天</div>
@@ -75,7 +75,7 @@ export default {
             // 饼图的数据
             pieArray: [],
             // 饼图时间维度
-            pieDateType: 0,
+            pieDateType: 1,
             pieBackColor: ['#fac858', '#91cc75', '#5470c6', '#ee6666', '#73c0de', '#3ba272', '#fc8452', '#9a60b4'],
         }
     },
@@ -91,54 +91,7 @@ export default {
                 // 统计移动用户、Pc用户、其他设备用户
                 mobileUser = 0,
                 pcUser = 0,
-                // 各种操作统计
-                pie2Object = {
-                    选择菜单: 0,
-                    下拉文章列表到: 0,
-                    切换折线图时间维度: 0,
-                    下拉留言列表到: 0,
-                    评论文章: 0,
-                    切换地图时间维度: 0,
-                    切换用户轨迹时间维度: 0,
-                    筛选文章分类: 0,
-                    留言: 0,
-                    查看源码: 0,
-                    点击联系途径: 0,
-                    切换数据占比时间维度: 0,
-                    浏览文章: 0,
-                    登录后台: 0,
-                    其他: 0      // 这里预防博客功能拓展，这里代码没有及时更新
-                },
-                // 库中存的用户操作，过于啰嗦，不利于前端展示。搞个映射，展示时使用另外一套
-                pie2ObjectMap = {
-                    选择菜单: '切换菜单',
-                    下拉文章列表到: '下拉文章',
-                    切换折线图时间维度: '切换折线',
-                    下拉留言列表到: '下拉留言',
-                    评论文章: '评论文章',
-                    切换地图时间维度: '切换地图',
-                    切换用户轨迹时间维度: '切换轨迹',
-                    筛选文章分类: '筛选文章',
-                    留言: '留言',
-                    查看源码: '查看源码',
-                    点击联系途径: '获取联系',
-                    切换数据占比时间维度: '切换饼图',
-                    浏览文章: '浏览文章',
-                    登录后台: '登录后台',
-                    其他: '其他'      // 这里预防博客功能拓展，这里代码没有及时更新
-                },
-                pie2Array = [],
-                // 菜单点击统计
-                pie3Object = {
-                    博文: 0,
-                    留言: 0,
-                    时间轴: 0,
-                    试验田: 0,
-                    关于: 0,
-                    访问统计: 0,
-                    管理后台: 0
-                },
-                pie3Array = [],
+                bothUser = 0,
                 // 老用户占比
                 regularUserMap = {
                     oldUser: '老用户',
@@ -158,12 +111,16 @@ export default {
                 Success: function (data) {
                     pcUser = data.pcNum;
                     mobileUser = data.mobileNum;
+                    bothUser = data.bothNum;
                     that.pieArray = [{
                         value: pcUser,
                         name: 'PC'
                     }, {
                         value: mobileUser,
                         name: '手机'
+                    }, {
+                        value: bothUser,
+                        name: '两者兼用'
                     }];
 
                     // 渲染设备占比饼图
@@ -171,7 +128,7 @@ export default {
                     that.pieChartOption.series[0].data = that.pieArray;
                     that.pieChartOption.title.text = '访问设备比例';
                     that.pieChartOption.series[0].name = '访问设备';
-                    that.pieChartOption.color = ['#91cc75', '#fc8452'];
+                    that.pieChartOption.color = ['#91cc75', '#fc8452','#01aaed'];
                     that.pieChartOption.series[0].clockwise = false;
                     that.pie1.setOption(that.pieChartOption, true);
                 }
@@ -313,7 +270,7 @@ export default {
 
     },
     mounted: function () {
-        this.setPie(0, 'init');
+        this.setPie(1, 'init');
     }
 }
 </script>
