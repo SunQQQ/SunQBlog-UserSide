@@ -3,7 +3,11 @@
     <h1 class="mainTitle">社区数据看板</h1>
     <div class="content">
       <div class="block" style="margin-top: 0">
-        <div class="module-title" style="margin-bottom: 1rem;">数据概览</div>
+        <div class="title-part">
+          <div class="module-title">数据概览</div>
+          <div class="day-switch total-number give-up">数据统计至：{{ latestCutoffTime }}</div>
+        </div>
+        <!-- <div class="module-title" style="margin-bottom: 1rem;">数据概览</div> -->
         <div class="quota-content">
           <div class="quota-item">
             <p class="num" style="color:#fac858">{{ totalIpNum }}</p>
@@ -106,7 +110,9 @@ export default {
       todayComment: 0, // 评论数据
       totalComment: 0,
       todayLeaveMess: 0, // 留言数据
-      totalLeaveMess: 0
+      totalLeaveMess: 0,
+
+      latestCutoffTime: 'XXXX-XX-XX: XX:XX' // 最新数据截止时间
     }
   },
   methods: {
@@ -153,6 +159,15 @@ export default {
           that.totalIpNum = data.totalIpCount;
         }
       });
+    },
+    getLatestCutoffTime() {
+      let that = this;
+      that.SQFrontAjax({
+        Url: "/api/getLatestCutoffTime",
+        Success: function (data) {
+          that.latestCutoffTime = data.latestCutoffTime;
+        }
+      });
     }
   },
   mounted: function () {
@@ -161,6 +176,7 @@ export default {
     Store.commit("changeFooter", true); // 展示footer 
 
     that.topNum();
+    that.getLatestCutoffTime();
   }
 }
 </script>
