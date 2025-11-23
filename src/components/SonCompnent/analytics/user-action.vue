@@ -13,9 +13,10 @@
             <div class="list-head">
                 <div class="list-td align">城市/IP/用户名</div>
                 <div class="list-td">操作内容</div>
-                <div class="list-td align give-up">访问设备</div>
+                <div class="list-td align give-up">访问设备/来源</div>
                 <div class="list-td align give-up">停留时间</div>
                 <div class="list-td align give-up">进入/离开时间</div>
+
             </div>
             <div :class="item.curIp ? 'list-tr single' : 'list-tr'" v-for="(item, i) in userActionData" v-bind:key="i">
                 <div class="list-td align text-center">
@@ -27,7 +28,9 @@
                         <li v-for="(item, i) in item.actions" v-bind:key="i" v-html="item"></li>
                     </ul>
                 </div>
-                <div class="list-td align line-heigh give-up" v-html="item.browser"></div>
+                <div class="list-td align text-center give-up">
+                    <div>{{ item.browser }}<br>{{ item.fromUrl }}</div>
+                </div>
                 <div class="list-td align give-up">{{ item.stayTime }}秒</div>
                 <div class="list-td align give-up">{{ item.entryTime }}<br>{{ item.leaveTime }}</div>
             </div>
