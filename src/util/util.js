@@ -385,7 +385,8 @@ CommonFunction.install = function (Vue) {
         page: log.page,
         action: log.action,
         actionObject: log.actionObject,
-        actionDesc: log.actionDesc
+        actionDesc: log.actionDesc,
+        fromUrl: getReferrer()
       },
       Success: function () {
       }
@@ -398,5 +399,17 @@ CommonFunction.install = function (Vue) {
       ".jpeg");
   };
 };
+
+// 获取访问来源
+function getReferrer() {
+  let referrer = document.referrer;
+  if (referrer) {
+    const url = new URL(referrer);
+    const hostname = url.hostname;
+    return hostname.replace(/^www\./, '');
+  } else {
+    return "";
+  }
+}
 
 export default CommonFunction;
