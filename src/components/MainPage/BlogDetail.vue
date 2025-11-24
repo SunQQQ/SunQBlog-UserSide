@@ -209,6 +209,13 @@ export default {
             "<pre class='hljs language-html'>"
           ); //Markdown格式字符串转html
           That.Article.content = Marked(That.Article.content);
+
+          That.createLog({
+            page: "文章详情页",
+            action: "阅读",
+            actionObject: "文章",
+            actionDesc: "："+That.Article.title
+          });
         },
       });
     },

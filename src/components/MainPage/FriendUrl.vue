@@ -164,6 +164,13 @@ export default {
           That.$refs.Pagi.SetUpdate(data.length === That.pageSize); // 如果数据满一页，允许继续加载
           That.AticleBottom = data.length < That.pageSize;
           Store.commit("changeFooter", data.length < That.pageSize);
+
+          That.createLog({
+            page: "朋友圈",
+            action: "打开",
+            actionObject: "朋友圈页面",
+            actionDesc: ""
+          });
         }
       });
     },

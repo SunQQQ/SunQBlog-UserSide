@@ -59,7 +59,8 @@
                 </div>
               </div>
             </section>
-            <section v-if="isDeskTop" class="Module" style="padding: 0 0 0.5rem" @mouseenter="enter(true)" @mouseleave="enter(false)">
+            <section v-if="isDeskTop" class="Module" style="padding: 0 0 0.5rem" @mouseenter="enter(true)"
+              @mouseleave="enter(false)">
               <div class="TopBack"></div>
               <div class="ZhihuIcon">
                 <img src="../../static/img/ZhihuIcon.jpg" alt="favicon">
@@ -206,6 +207,13 @@ export default {
           });
           That.ArticleList = data.list;
           That.ArticleNum = data.total;
+
+          That.createLog({
+            page: "博文",
+            action: "筛选",
+            actionObject: "博客列表",
+            actionDesc: "分类为：" + (tagId == 0 ? "全部" : That.TagObjs.find(item => item.id == tagId).name)
+          });
         }
       });
     },
@@ -270,6 +278,13 @@ export default {
             // 还有分页时，隐藏footer
             Store.commit("changeFooter", false);
           }
+
+          That.createLog({
+            page: "博文",
+            action: "下拉",
+            actionObject: "博客列表",
+            actionDesc: "到第" + (SelectPage + 1) + "页，分类为：" + (That.Tags.Active == 0 ? "全部" : That.TagObjs.find(item => item.id == That.Tags.Active).name)
+          });
         }
       });
     },
@@ -340,8 +355,8 @@ export default {
     that.InitArticleTag(this);
     that.GetHotArticle(6);
 
-    if(this.isDeskTop){
-      
+    if (this.isDeskTop) {
+
       //渲染留言个数
       this.GetLeaveMessageNum();
       this.GetCommentNum();
@@ -356,7 +371,7 @@ export default {
 
     Store.commit("changeFooter", false); // 初始化时隐藏footer
   },
-  created: function(){
+  created: function () {
     // 根据不同设备，动态设置每页文章数量
     this.calculatePageSize();
   }

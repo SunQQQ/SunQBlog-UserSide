@@ -393,6 +393,16 @@ export default {
             That.$refs.Pagi.SetUpdate(true);
             Store.commit("changeFooter", false); // 隐藏footer
           }
+
+          console.log("木屑",curPage);
+          
+
+          That.createLog({
+            page: "留言页",
+            action: "打开",
+            actionObject: "留言页",
+            actionDesc: ""
+          });
         },
       });
     },
@@ -460,6 +470,13 @@ export default {
             That.$refs.Pagi.SetUpdate(true);
             Store.commit("changeFooter", false); // 隐藏footer
           }
+
+          That.createLog({
+            page: "留言页",
+            action: "下拉",
+            actionObject: "留言页",
+            actionDesc: "到第" + (SelectPage + 1) + "页"
+          });
         },
       });
     },

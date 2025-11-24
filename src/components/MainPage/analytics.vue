@@ -157,6 +157,13 @@ export default {
           // IP数
           that.todayIpNum = data.todayIpCount;
           that.totalIpNum = data.totalIpCount;
+
+          that.createLog({
+            page: "访问统计",
+            action: "打开",
+            actionObject: "访问统计页",
+            actionDesc: ""
+          });
         }
       });
     },
