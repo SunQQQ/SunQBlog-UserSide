@@ -92,6 +92,9 @@ export default {
         require("@/static/img/default_headicon_2.jpeg"),
         require("@/static/img/default_headicon_3.jpeg"),
         require("@/static/img/default_headicon_4.jpeg"),
+        require("@/static/img/default_headicon_5.jpeg"),
+        require("@/static/img/default_headicon_6.jpeg"),
+        require("@/static/img/default_headicon_7.jpeg"),
       ],
       selectedAvatorIndex: 0,
     };
@@ -185,6 +188,8 @@ export default {
               Title: "注册成功，已自动登录",
             });
             Store.commit('ChangeLogin', false);
+             // 每次登录成功后，都设置登录状态
+            Store.commit('SetLoginSuccess', Date.now());
 
             // 注册成功后，填充留言页面的用户名
             Store.commit('ChangeMessageLeaveName', data.userInfo.name);
@@ -211,7 +216,7 @@ export default {
                 }
               });
             }
-
+           
             That.createLog({
               page: "登录注册页",
               action: "注册",
