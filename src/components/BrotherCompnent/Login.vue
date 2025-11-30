@@ -34,6 +34,14 @@
         <!-- 注册表单 -->
         <form v-else @submit.prevent="regist">
           <div class="form-group">
+            <label for="username">头像</label>
+            <el-carousel :autoplay="false" :arrow="always" type="card" @change="onCarouselChange">
+              <el-carousel-item v-for="(item, i) in avatorList" :key="i">
+                <img :src=item>
+              </el-carousel-item>
+            </el-carousel>
+          </div>
+          <div class="form-group">
             <label for="username">账号</label>
             <input type="text" id="username" v-model="username" placeholder="请输入账号" required />
             <button type="button" class="generate-button" @click="generateUsername">
@@ -78,6 +86,14 @@ export default {
       password: "", // 密码
       nameId: 0, // 随机用户名在表中的id
       isLoginForm: true, // 是否显示登录表单
+      avatorList: [
+        require("@/static/img/default_headicon_0.jpeg"),
+        require("@/static/img/default_headicon_1.jpeg"),
+        require("@/static/img/default_headicon_2.jpeg"),
+        require("@/static/img/default_headicon_3.jpeg"),
+        require("@/static/img/default_headicon_4.jpeg"),
+      ],
+      selectedAvatorIndex: 0,
     };
   },
   computed: {
@@ -121,7 +137,7 @@ export default {
               Show: true,
               Title: "登录成功",
             });
-            
+
             // 登录成功后，填充留言页面的用户名
             Store.commit('ChangeMessageLeaveName', data.userInfo.name);
 
@@ -160,7 +176,8 @@ export default {
           Url: "/api/regist",
           UploadData: {
             username: That.username,
-            password: That.password
+            password: That.password,
+            avator: That.selectedAvatorIndex
           },
           Success: function (data) {
             Store.commit("ChangeTip", {
@@ -218,12 +235,16 @@ export default {
     // 关闭登录框
     closeLogin() {
       Store.commit('ChangeLogin', false);
-    }
+    },
+    onCarouselChange(index) {
+      this.selectedAvatorIndex = index;
+      console.log("Selected avatar index:", index);
+    },
   },
 };
 </script>
 
-<style scoped>
+<style scoped lang="less">
 /*pc端*/
 @media only screen and (min-device-width: 768px) {
   .container-width {
@@ -316,6 +337,11 @@ export default {
   background-color: white !important;
 }
 
+.form-group img {
+  width: 50px;
+  height: 50px;
+}
+
 .form-group input:focus {
   border-color: #007bff;
 }
@@ -369,5 +395,31 @@ export default {
   color: #01aaed;
   top: 40px;
   background-color: white;
+}
+/deep/ .el-carousel{
+  width: 150px;
+  margin: 0 auto;
+}
+/deep/ .el-carousel__container{
+  width: 100%;
+  height: 75px !important;
+}
+.el-carousel__item{
+  width: 75px;
+  height: 75px;
+}
+.el-carousel__item img{
+  width: 100%;
+  height: 100%;
+  /* border-radius: 50%; */
+}
+/deep/ .el-carousel__indicators--outside{
+  display: none;
+}
+/deep/ .el-carousel__arrow{
+  display: block !important;
+  height: 12px;
+  width: 12px;
+  background-color: #adadab8a;
 }
 </style>

@@ -12,11 +12,14 @@ import * as echarts from 'echarts/core';
 import { LineChart, PieChart, ScatterChart } from 'echarts/charts';
 import { TitleComponent, LegendComponent, TooltipComponent, GridComponent,GeoComponent } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 
 Vue.use(VueParticles);
 Vue.config.productionTip = false;
 Vue.use(CommonFunction);
 Vue.prototype.bus = new Vue;
+Vue.use(ElementUI);
 
 // 按需注册组件
 echarts.use([
