@@ -2,10 +2,15 @@
   <main>
     <h1 class="mainTitle">社区数据看板</h1>
     <div class="content">
-      <div class="block" style="margin-top: 0">
+    </div>
+    <div class="content">
+      <div class="block" style="color:#999;padding: 0.75rem 1rem;">
+        <i class="iconfont icon-tonggao AboutMeIcon" style="color: #49a9ee;font-size: 1.2rem;"></i>本页数据每10分钟更新一次，最新数据更新至：{{ latestCutoffTime }}  
+      </div>
+      <div class="block">
         <div class="title-part">
           <div class="module-title">数据概览</div>
-          <div class="day-switch total-number give-up">数据统计至：{{ latestCutoffTime }}</div>
+          <!-- <div class="day-switch total-number give-up">数据统计至：{{ latestCutoffTime }}</div> -->
         </div>
         <!-- <div class="module-title" style="margin-bottom: 1rem;">数据概览</div> -->
         <div class="quota-content">
