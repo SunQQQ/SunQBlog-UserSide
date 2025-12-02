@@ -72,6 +72,7 @@ export default {
                 Success: function (data) {
                     // let curCompleteIp = data.yourIp; // 当前访客的IP
                     // // let curCompleteIp = "36.48.127.8"; // 当前访客的IP
+                    that.totalAction = 0;
                     
                     userActionObject = data;
                     that.totalIp = userActionObject.length;

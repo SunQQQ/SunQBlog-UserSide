@@ -339,11 +339,11 @@ export default {
       if (this.windowWidth < 1280) {
         this.perPageNum = 3 // 移动端和小屏设备
       } else if (this.windowWidth >= 1280 && this.windowWidth < 1600) {
-        this.perPageNum = 4 // 14寸笔记本
+        this.perPageNum = 5 // 14寸笔记本
       } else if (this.windowWidth >= 1600 && this.windowWidth < 1920) {
-        this.perPageNum = 5 // 15.6寸笔记本
+        this.perPageNum = 6 // 15.6寸笔记本
       } else {
-        this.perPageNum = 8 // 大屏幕
+        this.perPageNum = 9 // 大屏幕
       }
     }
   },
