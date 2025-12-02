@@ -133,17 +133,17 @@
                 target="_blank" @click="readCode()">博客源码</a>
               <div class="BlogStatistic">
                 <div class="BlogStatisticItem">
-                  <div class="BlogStatisticItemNum">49</div>
+                  <div class="BlogStatisticItemNum">98</div>
                   <div class="BlogStatisticItemText AboutMeGitData">
                     Followers
                   </div>
                 </div>
                 <div class="BlogStatisticItem">
-                  <div class="BlogStatisticItemNum">280</div>
+                  <div class="BlogStatisticItemNum">304</div>
                   <div class="BlogStatisticItemText AboutMeGitData">Star</div>
                 </div>
                 <div class="BlogStatisticItem">
-                  <div class="BlogStatisticItemNum">17</div>
+                  <div class="BlogStatisticItemNum">18</div>
                   <div class="BlogStatisticItemText AboutMeGitData">
                     Repositories
                   </div>
