@@ -13,7 +13,7 @@
 
 网站用户端基于Vue2.0开发，使用媒体查询适配PC端和移动端。具备博客、留言板、数据统计、开放式后台等功能，整体设计风格清新简约，功能较为完善。
 
-网站分为用户端/[管理后台](https://github.com/SunQQQ/CodingLife-AdminSide)/[服务端](https://github.com/SunQQQ/CodingLife-ServerSide)三个项目仓库组成，此套代码为用户端部分。用户端使用ElementUI，并封装了天气预报、表情包、定位、上拉刷新、日志埋点、弹框、Tip、导航栏、footer/header、回到顶部、心声等组件。整体架构如下：
+网站分为用户端/[管理后台](https://github.com/SunQQQ/CodingLife-AdminSide)/[服务端](https://github.com/SunQQQ/CodingLife-ServerSide)三套代码组成，此套代码为用户端部分。用户端使用ElementUI，并封装了天气预报、表情包、定位、上拉刷新、日志埋点、弹框、Tip、导航栏、footer/header、回到顶部、心声等组件。整体架构如下：
 
 ![整体架构](https://i-blog.csdnimg.cn/direct/afa19d825a2b4871a8aece4c0f887768.png)
 
