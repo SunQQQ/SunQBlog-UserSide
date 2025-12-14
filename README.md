@@ -6,25 +6,26 @@
  * @FilePath: \SunQBlog-UserSide\README.md
  * @Description: 文件描述
 -->
-## SunQuan's Blog
->此项目为孙权的个人网站，演示地址 https://codinglife.online
+## 🎪 CodingLife.online
+>此项目为码语人生（CodingLife Online）开源网站的用户端源码，网站地址为：https://codinglife.online
 
-本博客基于Vue2.0开发，使用媒体查询适配PC端和移动端。具备博客、留言板、用户轨迹分析、开放式后台等功能，整体设计风格清新简约，动画效果俏皮可爱，功能较为完善。
+码语人生（CodingLife Online）是面向开发者的技术人文社区，记录代码背后的思考、分享技术人的成长故事，在代码中见人生。
 
-博客整体分为用户端/管理后台/接口三部分组成，此套代码为用户端部分。用户端未使用UI框架，自己封装了天气预报、表情包、定位、页面懒加载、日志埋点、弹框、Tip、导航栏、footer/header、回到顶部、心声等组件。
+网站用户端基于Vue2.0开发，使用媒体查询适配PC端和移动端。具备博客、留言板、数据统计、开放式后台等功能，整体设计风格清新简约，功能较为完善。
 
-代码涉及一些Vue的基本用法，包括组件、路由、vuex、首屏优化等，代码难度较低，整体风格清新，欢迎大家访问。
-## 版本说明
-用户端代码分为v1.0和v2.0两个版本，分别对应管理后台和服务端的v1.0和v2.0两个版本。
+网站分为用户端/管理后台/服务端三个项目仓库组成，此套代码为用户端部分。用户端使用ElementUI，并封装了天气预报、表情包、定位、上拉刷新、日志埋点、弹框、Tip、导航栏、footer/header、回到顶部、心声等组件。整体架构如下：
 
-各端代码都分为v1.0和v2.0两个分支，v1版本已定版，v2版本还在持续迭代优化中。
+![整体架构](https://i-blog.csdnimg.cn/direct/afa19d825a2b4871a8aece4c0f887768.png)
 
-本地部署时请注意三端的分支需一致
-``` bash
-1、用户端v1.0版本无账号体系，博文只有博主可新增，访客无法管理自己的留言、评论等内容。
-2、用户端v2.0版本添加账号体系，所有访客皆可新增管理自己的博文/留言/心声等。
-```
-## Build Setup
+## 🔀 Branches
+
+master (production)
+
+├── v1.0 (老版本，技术栈为Vue+Node.js+MongoDB)
+
+├── v2.0 (当前版本的测试环境)
+
+## 🚀 Quick Start
 ``` bash
 Node.js需使用v14.21.3
 
@@ -36,23 +37,19 @@ yarn run serve
 
 # Compiles and minifies for production
 yarn run build
-
-# Lints and fixes files
-yarn run lint
 ```
 
 
-## About Star
-个人开源项目维护不易，最后请您给俺点个小星星![star.png](https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/21.gif)，您的鼓励是俺不断更新的动力![fighting.png](https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/100.gif)，
-手动笔芯![Rose.png](https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/63.gif)![Kiss.png](https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/65.gif)![Heart.png](https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/66.gif)
+## 🌿 About Me
+如果有吐槽或者建议、可在博客留言板联系我。也可通过添加微信13213074006，进入开发交流群，与众多同行分享代码与人生。
 
-## About Me
-如果有吐槽或者建议、或者技术上的交流，可在博客留言板联系我。
-
-我的邮箱地址：1585437938@qq.com，也欢迎交流。
+个人开源项目维护不易，跪求一个点赞✨ !，您的鼓励是俺不断更新的动力![fighting.png](https://res.wx.qq.com/mpres/htmledition/images/icon/emotion/100.gif)，
+手动比心!
 
 我还用原生JS写了一个贪吃蛇小游戏，欢迎来玩：https://codinglife.online/snake
-## 博客预览
+
+
+## 🖥️ Website Preview
 ![index](https://github.com/SunQQQ/SunQBlog-UserSide/blob/master/static/readme_img/index.png)
 
 ![leaveMessage](https://github.com/SunQQQ/SunQBlog-UserSide/blob/master/static/readme_img/leaveMessage.png)
