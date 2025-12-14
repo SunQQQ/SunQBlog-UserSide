@@ -31,7 +31,7 @@
                 <div class="list-td align text-center give-up">
                     <div>{{ item.browser }}<br>{{ item.fromUrl }}</div>
                 </div>
-                <div class="list-td align give-up">{{ item.stayTime }}秒</div>
+                <div class="list-td align give-up">{{ item.formatStayTime }}</div>
                 <div class="list-td align give-up">{{ item.entryTime }}<br>{{ item.leaveTime }}</div>
             </div>
             <div class="list-item"></div>
