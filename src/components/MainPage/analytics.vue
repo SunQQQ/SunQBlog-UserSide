@@ -4,8 +4,11 @@
     <div class="content">
     </div>
     <div class="content">
-      <div class="block" style="color:#999;padding: 0.75rem 1rem;">
+      <div class="block update-time update-pc">
         <i class="iconfont icon-tonggao AboutMeIcon" style="color: #49a9ee;font-size: 1.2rem;"></i>本页数据每10分钟更新一次，最新数据更新至：{{ latestCutoffTime }}  
+      </div>
+      <div class="block update-time update-mobile">
+        <i class="iconfont icon-tonggao AboutMeIcon" style="color: #49a9ee;font-size: 1.2rem;"></i>本页数据更新至：{{ latestCutoffTime }}  
       </div>
       <div class="block">
         <div class="title-part">
